@@ -11,6 +11,10 @@ public class OrganisationEntityConfiguration: IEntityTypeConfiguration<Organisat
         builder.HasMany(a => a.CommitteeMembers)
             .WithOne(b => b.Organisation)
             .OnDelete(DeleteBehavior.Cascade);
+        
+        builder.HasMany(a => a.Sponsors)
+            .WithOne(b => b.Organisation)
+            .OnDelete(DeleteBehavior.Cascade);
 
         builder.HasIndex(o => o.Year).IsUnique();
     }

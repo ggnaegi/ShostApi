@@ -11,5 +11,5 @@ public class Concert
     [MaxLength(255)] public string? City { get; set; }
     [MaxLength(255)] public string? Tickets { get; set; }
     
-    public virtual Entities.Session.Session? Session { get; set; }
+    public virtual Session? Session { get; set; }
 }

@@ -11,6 +11,6 @@ public class Conductor
     [MaxLength(4000)] public string? Presentation { get; set; }
     [MaxLength(255)] public string? Picture { get; set; }
     
-    public virtual Entities.Session.Session? Session { get; set; }
+    public virtual Session? Session { get; set; }
     public int SessionId { get; set; }
 }

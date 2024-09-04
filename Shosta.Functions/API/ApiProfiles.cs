@@ -18,5 +18,6 @@ public class ApiProfiles : Profile
         CreateMap<Concert, ConcertDto>().ReverseMap();
         CreateMap<CommitteeMember, CommitteeMemberDto>().ReverseMap();
         CreateMap<Organisation, OrganisationDto>().ReverseMap();
+        CreateMap<Sponsor, SponsorDto>().ReverseMap();
     }
 }
