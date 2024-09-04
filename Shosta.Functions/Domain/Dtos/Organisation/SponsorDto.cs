@@ -1,14 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Shosta.Functions.Domain.Entities.Organisation;
+namespace Shosta.Functions.Domain.Dtos.Organisation;
 
-public class Sponsor
+public class SponsorDto
 {
-    public int Id { get; set; }
-    
     [MaxLength(100)] public string? Name { get; set; }
     [MaxLength(255)] public string? Picture { get; set; }
     [MaxLength(255)] public string? Website { get; set; }
-    
-    public virtual Organisation? Organisation { get; set; }
 }

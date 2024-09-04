@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Shosta.Functions.Infrastructure;
 
@@ -11,9 +12,11 @@ using Shosta.Functions.Infrastructure;
 namespace Shosta.Functions.Migrations
 {
     [DbContext(typeof(ShostaDbContext))]
-    partial class ShostaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240904212734_UpdatingAccess")]
+    partial class UpdatingAccess
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -145,40 +148,7 @@ namespace Shosta.Functions.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Year")
-                        .IsUnique();
-
                     b.ToTable("Organisations");
-                });
-
-            modelBuilder.Entity("Shosta.Functions.Domain.Entities.Organisation.Sponsor", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<int?>("OrganisationId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Picture")
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
-
-                    b.Property<string>("Website")
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("OrganisationId");
-
-                    b.ToTable("Sponsor");
                 });
 
             modelBuilder.Entity("Shosta.Functions.Domain.Entities.Session.Concert", b =>
@@ -364,18 +334,7 @@ namespace Shosta.Functions.Migrations
                 {
                     b.HasOne("Shosta.Functions.Domain.Entities.Organisation.Organisation", "Organisation")
                         .WithMany("CommitteeMembers")
-                        .HasForeignKey("OrganisationId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.Navigation("Organisation");
-                });
-
-            modelBuilder.Entity("Shosta.Functions.Domain.Entities.Organisation.Sponsor", b =>
-                {
-                    b.HasOne("Shosta.Functions.Domain.Entities.Organisation.Organisation", "Organisation")
-                        .WithMany("Sponsors")
-                        .HasForeignKey("OrganisationId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("OrganisationId");
 
                     b.Navigation("Organisation");
                 });
@@ -424,8 +383,6 @@ namespace Shosta.Functions.Migrations
             modelBuilder.Entity("Shosta.Functions.Domain.Entities.Organisation.Organisation", b =>
                 {
                     b.Navigation("CommitteeMembers");
-
-                    b.Navigation("Sponsors");
                 });
 
             modelBuilder.Entity("Shosta.Functions.Domain.Entities.Session.Session", b =>

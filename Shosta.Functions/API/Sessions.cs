@@ -16,9 +16,10 @@ public class Sessions(ILoggerFactory loggerFactory, IMapper mapper, ShostaDbCont
 {
     private readonly ILogger _logger = loggerFactory.CreateLogger<Sessions>();
 
-    [Function("sessions-builder")]
-    public async Task<ActionResult> UploadSession(
-        [HttpTrigger(AuthorizationLevel.Anonymous, "post")] HttpRequestData req,
+    [Function(nameof(UploadSession))]
+    public async Task<IActionResult> UploadSession(
+        [HttpTrigger(AuthorizationLevel.Function, "post", Route = "sessions")]
+        HttpRequestData req,
         FunctionContext executionContext)
     {
         var requestBody = await new StreamReader(req.Body).ReadToEndAsync();
@@ -45,15 +46,16 @@ public class Sessions(ILoggerFactory loggerFactory, IMapper mapper, ShostaDbCont
         }
 
         var sessionObject = mapper.Map<SessionDto, Session>(sessionData);
-        
+
         dbContext.Sessions.Add(sessionObject);
         await dbContext.SaveChangesAsync();
-        
+
         return new ObjectResult(HttpStatusCode.Created);
     }
 
-    [Function("sessions")]
-    public async Task<ActionResult> GetSessions([HttpTrigger(AuthorizationLevel.Anonymous, "get")] HttpRequestData req,
+    [Function(nameof(GetSessions))]
+    public async Task<IActionResult> GetSessions(
+        [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "sessions")] HttpRequestData req,
         FunctionContext executionContext)
     {
         var yearString = req.Query["year"];

@@ -24,7 +24,7 @@ public class ShostaDbContext: DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfiguration(new SessionEntityConfiguration());
-        modelBuilder.ApplyConfiguration(new SessionEntityConfiguration());
+        modelBuilder.ApplyConfiguration(new OrganisationEntityConfiguration());
         modelBuilder.ApplyConfiguration(new MediaCollectionEntityConfiguration());
     }
 }
