@@ -1,0 +1,130 @@
+<ng-container *ngIf="sessionData">
+
+  <div fxLayout="row" fxLayout.lt-md="column">
+
+  </div>
+  <div class="main-content-wrapper" fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="start stretch" fxFlexFill>
+    <!-- left -->
+    <div fxFlex="20" fxFlex.lt-md="100" class="left-column">
+
+      <!-- flyer -->
+      <mat-card appearance="raised" class="left-column-card">
+        <mat-card-header></mat-card-header>
+        <mat-card-content>
+          <img [src]="'assets/'+sessionData.Picture" alt="" class="responsive-image">
+        </mat-card-content>
+      </mat-card>
+      <mat-card appearance="raised" class="left-column-card">
+        <mat-card-header>
+          <mat-card-title></mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div style="font-family: Montserrat, sans-serif; line-height: 1.6; color: #333;">
+            <div *ngFor="let concert of sessionData.Concerts">
+              <h3>{{ concert.Venue }}</h3>
+              <ul class="concert-details">
+                <li>
+                  <fa-icon [icon]="faCalendarAlt"></fa-icon> {{ concert.Date | date:'dd.MM.yyyy' }} <!-- Date with Icon -->
+                </li>
+                <li>
+                  <fa-icon [icon]="faMapMarkerAlt"></fa-icon> {{ concert.City }} <!-- City with Icon -->
+                </li>
+                <li>
+                  <a [href]="concert.Tickets" target="_blank">
+                    <button mat-raised-button color="primary" class="ticket-button">
+                      <fa-icon [icon]="faTicket"></fa-icon> Billets <!-- Button with icon and caption -->
+                    </button>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <div fxFlex="1" fxFlex.lt-md="0"></div>
+
+    <!-- center -->
+    <div fxFlex="52" fxFlex.lt-md="100" class="center-column">
+      <!-- concept -->
+      <mat-card id="concept" appearance="raised" class="center-column-card">
+        <mat-card-header>
+          <mat-card-title>Concept</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div style="font-family: Montserrat, sans-serif; line-height: 1.6; color: #333;">
+            <div [innerHTML]="sessionData.Presentation"></div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+      <!-- conductor -->
+      <mat-card id="conductor" appearance="raised" class="center-column-card">
+        <mat-card-header>
+          <img [src]="'assets/'+sessionData.Conductor?.Picture"
+               [alt]="sessionData.Conductor?.FirstName + ' ' + sessionData.Conductor?.LastName" class="conductor-photo">
+          <mat-card-title>{{ sessionData.Conductor?.FirstName + ' ' + sessionData.Conductor?.LastName }}</mat-card-title>
+          <mat-card-subtitle>Directeur</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <div style="font-family: Montserrat, sans-serif; line-height: 1.6; color: #333;">
+            <div [innerHTML]="sessionData.Conductor?.Presentation"></div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+      <!-- soloists -->
+      <div id="soloists" *ngFor="let soloist of sessionData.Soloists">
+        <mat-card appearance="raised" class="center-column-card">
+          <mat-card-header>
+            <img [src]="'assets/'+soloist.Picture" [alt]="soloist.FirstName + ' ' + soloist.LastName"
+                 class="conductor-photo">
+            <mat-card-title>{{ soloist.FirstName + ' ' + soloist.LastName }}</mat-card-title>
+            <mat-card-subtitle>{{ soloist.Instrument }}</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <div style="font-family: Montserrat, sans-serif; line-height: 1.6; color: #333;">
+              <div [innerHTML]="soloist.Presentation"></div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+
+    <div fxFlex="1" fxFlex.lt-md="0"></div>
+
+    <!-- right -->
+    <div fxFlex="26" fxFlex.lt-md="100" class="right-column">
+      <!-- program -->
+      <mat-card id="program" appearance="raised" class="right-column-card">
+        <mat-card-header>
+          <mat-card-title>Programme</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div style="font-family: Montserrat, sans-serif; line-height: 1.6; color: #333;">
+            <div [innerHTML]="sessionData.Program"></div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+      <!-- musicians -->
+      <mat-card id="musicians" appearance="raised" class="right-column-card">
+        <mat-card-header>
+          <mat-card-title>Musiciens</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div style="font-family: Montserrat, sans-serif; line-height: 1.6; color: #333;">
+            <div *ngFor="let register of getRegisters()">
+              <h3>{{ register.RegisterName }}</h3>
+              <ul>
+                <li *ngFor="let musician of register.RegisterMusicians">
+                  {{ musician.FirstName + ' ' + musician.LastName }}
+                </li>
+              </ul>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+  </div>
+
+</ng-container>

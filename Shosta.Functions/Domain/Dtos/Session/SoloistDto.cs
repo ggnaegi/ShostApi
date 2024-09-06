@@ -8,4 +8,5 @@ public class SoloistDto
     [MaxLength(100)] public string? LastName { get; set; }
     [MaxLength(100)] public string? Instrument { get; set; }
     [MaxLength(4000)] public string? Presentation { get; set; }
+    [MaxLength(255)] public string? Picture { get; set; }
 }

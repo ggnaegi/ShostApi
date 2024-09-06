@@ -1,0 +1,152 @@
+/* Styling for the top menu */
+.top-menu {
+  background-color: #f0f0f0;
+  padding: 15px 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: Add some shadow */
+}
+
+.top-menu ul {
+  list-style: none;
+  display: flex;
+  justify-content: space-around; /* Horizontal layout for menu items */
+  padding: 0;
+  margin: 0;
+}
+
+.top-menu ul li {
+  margin-right: 20px;
+}
+
+.top-menu ul li a {
+  text-decoration: none;
+  color: #333;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.top-menu ul li a:hover {
+  color: #007bff; /* Change color on hover */
+}
+
+.top-menu ul li fa-icon {
+  font-size: 18px;
+}
+
+/* Main content wrapper */
+.main-content-wrapper {
+  margin: 0;
+}
+
+.left-column-card, .center-column-card, .right-column-card {
+  margin-bottom: 16px; /* Ensure spacing between cards */
+}
+
+/* Column styling */
+.right-column {
+  margin-left: 16px;
+}
+
+.center-column {
+  margin-left: 16px;
+}
+
+.left-column {
+  margin-right: 16px;
+}
+
+/* Specific card and layout styles */
+.center-column-card {
+  width: 100%;
+  opacity: 0.9;
+}
+
+.right-column-card {
+  margin: 0 -16px 16px 16px;
+  border-radius: 0; /* Remove rounded corners */
+}
+
+.left-column-card {
+  margin: 16px;
+  border-right: #ead4d7 2px solid;
+  border-radius: 0; /* Remove rounded corners */
+}
+
+mat-card {
+  border-radius: 0 !important;
+}
+
+mat-card-header {
+  border-radius: 0 !important;
+}
+
+h3 {
+  margin-top: 16px;
+  color: #333;
+}
+
+ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+li {
+  margin-bottom: 8px;
+}
+
+.concert-details {
+  list-style: none;
+  padding: 0;
+  margin: 8px 0;
+}
+
+.concert-details li {
+  display: flex;
+  align-items: center;
+  margin: 8px 0;
+}
+
+.concert-details fa-icon {
+  margin-right: 8px; /* Space between icon and text */
+  color: #007bff; /* Primary color for icons */
+}
+
+.ticket-link {
+  display: inline-block;
+  padding: 8px;
+  background-color: #007bff;
+  color: white;
+  border-radius: 4px;
+  transition: all 0.3s ease; /* Smooth hover transition */
+  text-decoration: none;
+}
+
+.ticket-link:hover {
+  background-color: #0056b3; /* Darken color on hover */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Add hover effect */
+}
+
+/* Responsive image for the flyer */
+.responsive-image {
+  width: 100%; /* Make the image fit the width of the mat-card-content */
+  height: auto; /* Maintain the aspect ratio */
+  max-height: 100%; /* Ensure it does not exceed the height of the card */
+  object-fit: contain; /* Ensure the entire image fits within the container */
+}
+
+/* Conductor and soloist images */
+.conductor-photo {
+  width: 120px; /* Size of the image */
+  height: auto; /* Keep aspect ratio */
+  position: absolute;
+  top: -10px; /* Slightly above the card */
+  left: -120px; /* Slightly outside to the left of the card */
+  border: 5px solid white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: Shadow effect for image */
+}
