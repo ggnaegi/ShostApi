@@ -1,0 +1,57 @@
+<!-- Top Bar with Logo, Social Icons, and Mobile Menu Button -->
+<mat-toolbar color="primary" class="top-bar" fxLayout="row" fxLayoutAlign="space-between center">
+  <!-- Left Side Logo -->
+  <div fxLayout="row" fxLayoutAlign="start center" class="logo-container">
+    <img src="../assets/shosta_logo.png" alt="Brand Logo" class="logo-image" /> <!-- Replace with your logo image -->
+  </div>
+
+  <!-- Right Side Social Icons and Mobile Menu Button -->
+  <div fxLayout="row" fxLayoutAlign="end center" class="right-section">
+    <button mat-icon-button>
+      <i class="fa-brands fa-facebook"></i> <!-- Facebook Icon -->
+    </button>
+    <button mat-icon-button>
+      <i class="fa-brands fa-instagram"></i> <!-- Instagram Icon -->
+    </button>
+    <button mat-icon-button>
+      <i class="fa-brands fa-youtube"></i> <!-- YouTube Icon -->
+    </button>
+
+    <!-- Mobile Menu Button, shown only when width < 768px -->
+    <button mat-icon-button (click)="sidenav.toggle()" class="menu-toggle-button" fxShow.lt-md>
+      <mat-icon>menu</mat-icon>
+    </button>
+  </div>
+</mat-toolbar>
+
+<!-- Navbar with Logo and Menu Items (hidden on mobile) -->
+<mat-toolbar color="white" class="navbar" fxLayout="row" fxLayoutAlign="end center" fxHide.lt-md>
+  <div class="menu-items" fxLayout="row" fxLayoutAlign="end center">
+    <a mat-button routerLink="/" routerLinkActive="active-link">Accueil</a>
+    <a mat-button routerLink="/about" routerLinkActive="active-link">A Propos</a>
+    <a mat-button routerLink="/concerts" routerLinkActive="active-link">Concerts</a>
+    <a mat-button routerLink="/medias" routerLinkActive="active-link">Médias</a>
+    <a mat-button routerLink="/contact" routerLinkActive="active-link">Contact</a>
+    <a mat-button routerLink="/sponsors" routerLinkActive="active-link">Sponsors</a>
+  </div>
+</mat-toolbar>
+
+<!-- Sidenav for Mobile -->
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #sidenav mode="side" position="end" fxHide fxShow.lt-md class="mobile-sidenav">
+    <mat-nav-list>
+      <a mat-list-item routerLink="/" routerLinkActive="active-link" (click)="sidenav.close()">Accueil</a>
+      <a mat-list-item routerLink="/about" routerLinkActive="active-link" (click)="sidenav.close()">A Propos</a>
+      <a mat-list-item routerLink="/concerts" routerLinkActive="active-link" (click)="sidenav.close()">Concerts</a>
+      <a mat-list-item routerLink="/medias" routerLinkActive="active-link" (click)="sidenav.close()">Médias</a>
+      <a mat-list-item routerLink="/contact" routerLinkActive="active-link" (click)="sidenav.close()">Contact</a>
+      <a mat-list-item routerLink="/sponsors" routerLinkActive="active-link" (click)="sidenav.close()">Sponsors</a>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <div class="content background-image-wrapper" fxLayout="column" fxLayoutAlign="start stretch">
+      <app-session-container [year]="2024"></app-session-container>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

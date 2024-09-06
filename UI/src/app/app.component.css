@@ -1,0 +1,222 @@
+/* General Styling */
+.sidenav-container {
+  height: 100%;
+}
+
+.top-bar {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #b8707b; /* Updated color for the top bar */
+  color: #fff; /* White text for contrast */
+}
+
+.logo-container {
+  margin-left: 16px; /* Add margin to the left of the logo */
+}
+
+.logo-image {
+  height: 40px; /* Adjust the height of the logo as needed */
+  margin-right: 16px; /* Space between logo and the next element */
+}
+
+.right-section button {
+  margin: 0 8px;
+  font-size: 14px;
+}
+
+.mat-icon-button {
+  border-radius: 0; /* Remove rounded corners from buttons */
+}
+
+.navbar {
+  background-color: white;
+  padding: 0; /* Remove padding to eliminate space */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for separation */
+  margin: 0; /* Remove any margin */
+}
+
+.menu-items {
+  display: flex;
+  align-items: center;
+  position: relative; /* Needed for pseudo-element positioning */
+  padding: 0; /* Remove padding */
+  margin: 0; /* Remove margin */
+  height: 100%; /* Ensure it takes full height of navbar */
+}
+
+.menu-items::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: #ead4d7; /* Light color for the baseline under all items */
+}
+
+.menu-items a {
+  font-size: 16px;
+  color: #333;
+  text-decoration: none;
+  margin: 0 12px;
+  border-radius: 0; /* Remove rounded corners */
+  position: relative; /* Needed for pseudo-element positioning */
+  transition: all 0.3s ease; /* Smooth transition for hover effect */
+  z-index: 1; /* Ensure menu items are above the base line */
+  height: 100%; /* Make sure the menu items are vertically centered */
+  display: flex;
+  align-items: center; /* Align menu items vertically */
+}
+
+.menu-items a::after {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: transparent; /* Initially transparent */
+  position: absolute;
+  bottom: 0; /* Align directly on top of the baseline */
+  left: 0;
+  transition: all 0.3s ease; /* Smooth transition for hover and active effects */
+}
+
+.menu-items a:hover::after,
+.menu-items a.active-link::after {
+  background-color: #be3d59; /* Darker color for hover and active states */
+}
+
+.menu-toggle-button {
+  display: none; /* Hidden by default */
+}
+
+.menu-toggle-button i {
+  font-size: 24px; /* Adjust icon size */
+  color: #000; /* Black color for the hamburger icon */
+}
+
+.content {
+  padding-left: 10px;
+  padding-right: 16px;
+  background-color: white; /* White background for content */
+}
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.example-card {
+  width: 200px;
+  border-radius: 0; /* Remove rounded corners for cards */
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    display: none; /* Hide the horizontal menu on small screens */
+  }
+
+  .menu-toggle-button {
+    display: block; /* Show the mobile menu button on small screens */
+  }
+}
+
+/* Sidenav full height styling */
+.mobile-sidenav {
+  height: 100%; /* Make sure the sidenav takes full height */
+  box-shadow: none; /* Remove any box shadow */
+  overflow: hidden; /* Disable scroll bar */
+  border-left: none; /* No border on the left side */
+  background-color: black; /* Black background for the mobile menu */
+}
+
+.mobile-sidenav .mat-nav-list a {
+  color: white; /* White text color for menu items */
+}
+
+.right-section button i {
+  font-size: 24px; /* Adjust icon size */
+  color: #000; /* Icon color to match your theme */
+}
+
+.background-image-wrapper {
+  position: relative;
+  width: 100%; /* Cover the full width of the content */
+  min-height: calc(100vh - 64px); /* Adjust height to ensure it covers the full viewport minus the toolbar height */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 0; /* Ensure it is behind other content */
+}
+
+.background-image-wrapper::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #fbe9e7;
+  opacity: 0.1; /* Make the background very faint */
+  z-index: -1; /* Ensure it is behind the content */
+  pointer-events: none; /* Make sure the background doesn't interfere with clicks */
+}
+
+/* Ensure no padding or margin in the main content wrapper */
+.main-content-wrapper {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.main-content-wrapper fxLayout.lt-md {
+  flex-direction: column;
+}
+
+.center-column {
+  padding: 0;
+  margin: 0;
+  width: 80%; /* Default width */
+}
+
+.right-column {
+  padding: 0;
+  margin: 0;
+  width: 20%; /* Default width for larger screens */
+}
+
+@media (max-width: 768px) {
+  .main-content-wrapper {
+    flex-direction: column;
+  }
+
+  .center-column, .right-column {
+    width: 100%; /* Ensure both columns take 100% width in mobile */
+  }
+}
+
+/* General styling cleanup */
+html, body, mat-toolbar {
+  margin: 0;
+  padding: 0;
+}
+
+.mat-toolbar {
+  box-sizing: border-box;
+}
+
+.menu-items {
+  padding: 0;
+  margin: 0;
+}
+
+.center-column, .right-column {
+  box-sizing: border-box;
+}
