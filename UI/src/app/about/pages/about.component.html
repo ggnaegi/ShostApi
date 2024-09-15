@@ -1,0 +1,157 @@
+<ng-container *ngIf="organisation">
+  <div id="medias-section">
+    <app-gallery-container></app-gallery-container>
+  </div>
+
+  <div id="about-section" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-around start" fxLayoutGap="16px">
+    <!-- First Card -->
+    <mat-card fxFlex="70%" fxFlex.xs="100" class="custom-card">
+      <mat-card-header>
+        <mat-card-title>{{organisation.BandTitle}}</mat-card-title>
+      </mat-card-header>
+      <img mat-card-image [src]="'assets/'+organisation.BandPicture" alt="About Us Image">
+      <mat-card-content>
+        <div style="font-family: Montserrat, sans-serif; line-height: 1.6; color: #333;">
+          <div [innerHTML]="organisation.BandPresentation"></div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Second Card -->
+    <mat-card fxFlex="30%" fxFlex.xs="100" class="custom-card">
+      <mat-card-header>
+        <mat-card-title>{{organisation.CommitteeTitle}}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div style="font-family: Montserrat, sans-serif; line-height: 1.6; color: #333;">
+          <p [innerHTML]="organisation.CommitteePresentation"></p>
+        </div>
+        <div fxLayout="row wrap" style="font-family: Montserrat, sans-serif; line-height: 1.6; color: #333;">
+          <div fxFlex="100%" *ngFor="let member of organisation.CommitteeMembers">
+            <div style="padding: 10px; box-sizing: border-box;">
+              <strong>{{ member.Function }}</strong><br>
+              <span>{{ member.FirstName }} {{ member.LastName }}</span>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div id="sponsors-section" style="margin: 20px;">
+    <!-- Introduction for Sponsors -->
+    <div style="margin-bottom: 20px;">
+      <h2>Sponsors</h2>
+      <p>Nous remercions infiniment nos sponsors pour leur soutien en 2024 et vous les recommandons vivement !</p>
+    </div>
+
+    <div fxLayout="row wrap" fxLayoutGap="10px" fxLayoutAlign="start center">
+      <mat-card class="sponsor-card" fxFlex="20%" fxFlex.gt-xs="200px" fxLayoutAlign="center center">
+        <mat-card-header>
+          <img mat-card-image src="assets/2024/sponsors/2mo.jpg" alt="2mo Sponsor Logo">
+        </mat-card-header>
+      </mat-card>
+      <mat-card class="sponsor-card" fxFlex="20%" fxFlex.gt-xs="200px" fxLayoutAlign="center center">
+        <mat-card-header>
+          <img mat-card-image src="assets/2024/sponsors/AFRY.png" alt="AFRY Sponsor Logo">
+        </mat-card-header>
+      </mat-card>
+      <mat-card class="sponsor-card" fxFlex="20%" fxFlex.gt-xs="200px" fxLayoutAlign="center center">
+        <mat-card-header>
+          <img mat-card-image src="assets/2024/sponsors/Bart%20électricité.jpg" alt="">
+        </mat-card-header>
+      </mat-card>
+      <mat-card class="sponsor-card" fxFlex="20%" fxFlex.gt-xs="200px" fxLayoutAlign="center center">
+        <mat-card-header>
+          <img mat-card-image src="assets/2024/sponsors/BIOTEC.jpg" alt="">
+        </mat-card-header>
+      </mat-card>
+      <mat-card class="sponsor-card" fxFlex="20%" fxFlex.gt-xs="200px" fxLayoutAlign="center center">
+        <mat-card-header>
+          <img mat-card-image src="assets/2024/sponsors/blackwood.png" alt="">
+        </mat-card-header>
+      </mat-card>
+      <mat-card class="sponsor-card" fxFlex="20%" fxFlex.gt-xs="200px" fxLayoutAlign="center center">
+        <mat-card-header>
+          <img mat-card-image src="assets/2024/sponsors/boldairsport.png" alt="">
+        </mat-card-header>
+      </mat-card>
+      <mat-card class="sponsor-card" fxFlex="20%" fxFlex.gt-xs="200px" fxLayoutAlign="center center">
+        <mat-card-header>
+          <img mat-card-image src="assets/2024/sponsors/Cuttat%20sa.png" alt="">
+        </mat-card-header>
+      </mat-card>
+      <mat-card class="sponsor-card" fxFlex="20%" fxFlex.gt-xs="200px" fxLayoutAlign="center center">
+        <mat-card-header>
+          <img mat-card-image src="assets/2024/sponsors/decovi.png" alt="">
+        </mat-card-header>
+      </mat-card>
+      <mat-card class="sponsor-card" fxFlex="20%" fxFlex.gt-xs="200px" fxLayoutAlign="center center">
+        <mat-card-header>
+          <img mat-card-image src="assets/2024/sponsors/Eco6therm%20Sàrl%20112x83mm.jpg" alt="">
+        </mat-card-header>
+      </mat-card>
+      <mat-card class="sponsor-card" fxFlex="20%" fxFlex.gt-xs="200px" fxLayoutAlign="center center">
+        <mat-card-header>
+          <img mat-card-image src="assets/2024/sponsors/garage%20willemin.png" alt="">
+        </mat-card-header>
+      </mat-card>
+      <mat-card class="sponsor-card" fxFlex="20%" fxFlex.gt-xs="200px" fxLayoutAlign="center center">
+        <mat-card-header>
+          <img mat-card-image src="assets/2024/sponsors/Garage%20Montavon.jpg" alt="">
+        </mat-card-header>
+      </mat-card>
+    </div>
+  </div>
+
+  <div id="contact-section" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-around start" fxLayoutGap="16px">
+    <!-- Contact Form -->
+    <mat-card fxFlex="50%" class="custom-card">
+      <mat-card-header>
+        <mat-card-title>Contact</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div style="font-family: Montserrat, sans-serif; line-height: 1.6; color: #333;">
+          <form style="display: flex; flex-direction: column; gap: 16px;">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Prénom</mat-label>
+              <input matInput placeholder="Veuillez saisir votre prénom">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Nom</mat-label>
+              <input matInput placeholder="Veuillez saisir votre nom">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Courriel</mat-label>
+              <input matInput type="email" placeholder="Veuillez saisir votre courriel">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Téléphone</mat-label>
+              <input matInput type="tel" placeholder="Veuillez saisir votre numéro de téléphone">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Message</mat-label>
+              <textarea matInput rows="6"></textarea>
+            </mat-form-field>
+            <!-- Add Captcha Here -->
+            <button mat-raised-button color="primary" type="submit">Envoyer</button>
+          </form>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Committee President Contact Info -->
+    <mat-card fxFlex="50%" class="custom-card">
+      <mat-card-header>
+        <mat-card-title>Président du comité</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div style="padding: 10px; box-sizing: border-box;">
+          <!--<strong>{{ organisation.CommitteeMembers.Function }}</strong><br>
+          <span>{{ organisation.CommitteeMembers?.[0].FirstName }} {{ organisation.CommitteeMembers?.[0].LastName }}</span>-->
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</ng-container>
+
