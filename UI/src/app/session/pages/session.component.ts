@@ -1,12 +1,15 @@
-import {Component, Input} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
 import {Session} from "../api/session-element";
 import {DatePipe, NgForOf, NgIf} from "@angular/common";
-import {FlexModule} from "@angular/flex-layout";
+import {ExtendedModule, FlexModule} from "@angular/flex-layout";
 import {Register, RegisterMusician} from "../api/parsed-session-element";
 import {MatCard, MatCardContent, MatCardHeader, MatCardSubtitle, MatCardTitle} from "@angular/material/card";
 import {FaIconComponent, FontAwesomeModule} from "@fortawesome/angular-fontawesome";
-import { faTicket, faCalendarAlt, faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
-import {MatButton} from "@angular/material/button";
+import {faCalendarAlt, faMapMarkerAlt, faTicket, faBuilding} from '@fortawesome/free-solid-svg-icons';
+import {MatAnchor, MatButton, MatIconButton} from "@angular/material/button";
+import {MatIcon} from "@angular/material/icon";
+import {MatToolbar} from "@angular/material/toolbar";
+import {RouterLink} from "@angular/router";
 
 
 @Component({
@@ -24,10 +27,17 @@ import {MatButton} from "@angular/material/button";
     FaIconComponent,
     DatePipe,
     FontAwesomeModule,
-    MatButton
+    MatButton,
+    ExtendedModule,
+    MatIcon,
+    MatIconButton,
+    MatToolbar,
+    MatAnchor,
+    RouterLink
   ],
   templateUrl: './session.component.html',
-  styleUrl: './session.component.css'
+  styleUrl: './session.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SessionComponent {
   @Input()
@@ -36,6 +46,7 @@ export class SessionComponent {
   faTicket = faTicket;
   faCalendarAlt = faCalendarAlt;
   faMapMarkerAlt = faMapMarkerAlt;
+  faBuilding = faBuilding;
 
   /**
    * Retrieving registers,

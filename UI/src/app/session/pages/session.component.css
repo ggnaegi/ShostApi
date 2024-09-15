@@ -50,30 +50,39 @@
 
 /* Column styling */
 .right-column {
+  margin-top: 16px;
   margin-left: 16px;
 }
 
 .center-column {
+  margin-top: 16px;
   margin-left: 16px;
 }
 
 .left-column {
-  margin-right: 16px;
+  margin: 16px;
 }
 
 /* Specific card and layout styles */
 .center-column-card {
   width: 100%;
   opacity: 0.9;
+  border-top: 0 !important;
+  border-left: 0 !important;
+  border-right: 0 !important;
+  border-bottom: 1px solid #f0f0f0;
+  box-shadow: none; /* Remove shadow */
 }
 
 .right-column-card {
-  margin: 0 -16px 16px 16px;
+  border-top: 0 !important;
+  border-left: 0 !important;
+  border-right: 0 !important;
+  border-bottom: 1px solid #f0f0f0;
   border-radius: 0; /* Remove rounded corners */
 }
 
 .left-column-card {
-  margin: 16px;
   border-right: #ead4d7 2px solid;
   border-radius: 0; /* Remove rounded corners */
 }
@@ -144,9 +153,106 @@ li {
 .conductor-photo {
   width: 120px; /* Size of the image */
   height: auto; /* Keep aspect ratio */
-  position: absolute;
-  top: -10px; /* Slightly above the card */
-  left: -120px; /* Slightly outside to the left of the card */
+  margin-right: 10px;
   border: 5px solid white;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: Shadow effect for image */
+}
+
+/* The floating menu container */
+.floating-menu {
+  position: fixed;
+  top: 50%; /* Center vertically */
+  right: 0;
+  transform: translateY(-50%);
+  background-color: #803357;
+  padding: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Slight shadow for floating effect */
+  z-index: 1000;
+  display: flex;
+  flex-direction: column; /* Stack the icons vertically */
+  align-items: center;
+  transition: all 0.3s ease-in-out;
+  border-radius: 10px 0 0 10px; /* Rounded corners: top-left, top-right, bottom-right, bottom-left */
+}
+
+/* Individual menu items */
+.menu-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: Montserrat;
+  margin-bottom: 16px;
+  text-decoration: none;
+  color: white;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.menu-item:last-child {
+  margin-bottom: 0;
+}
+
+/* Icon styling */
+.menu-icon {
+  color: white;
+  font-size: 24px;
+}
+
+/* Hover effect for the icons and text */
+.menu-item:hover {
+  color: #000000; /* Change text color on hover */
+}
+
+.menu-item:hover .menu-icon {
+  color: #000000; /* Change icon color on hover */
+}
+
+/* Floating effect for the menu when scrolling */
+.floating-menu.scrolled {
+  right: 10px;
+  opacity: 0.9;
+}
+
+/* On mobile screens (less than 768px) */
+@media (max-width: 768px) {
+  .floating-menu {
+    position: relative; /* Place it inside the flow of the document */
+    top: auto;
+    right: auto;
+    transform: none;
+    width: 100%; /* Take full width */
+    flex-direction: row; /* Horizontal layout */
+    justify-content: space-around; /* Distribute icons evenly */
+    padding: 10px 0; /* Adjust padding */
+    box-shadow: none; /* Remove the floating shadow effect */
+  }
+
+  .menu-item {
+    flex-direction: column; /* Keep icons and text vertically aligned */
+    margin-bottom: 0; /* Remove bottom margin */
+    padding: 0 10px; /* Add some horizontal padding */
+  }
+
+  .menu-icon {
+    font-size: 18px; /* Adjust icon size for mobile */
+  }
+}
+
+.tickets-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.ticket-card {
+  padding: 10px;
+  box-shadow: none;
+  border-radius: 0;
+  border: 1px solid #ddd;
+}
+
+.ticket-card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
 }

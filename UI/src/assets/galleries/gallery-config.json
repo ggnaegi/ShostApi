@@ -1,0 +1,2249 @@
+{
+  "logos": [
+    {
+      "year": 2011,
+      "url": "assets/flyers/2011.jpg",
+      "alt": "logo-2011"
+    },
+    {
+      "year": 2013,
+      "url": "assets/flyers/2013.jpg",
+      "alt": "logo-2013"
+    },
+    {
+      "year": 2014,
+      "url": "assets/flyers/2014.jpg",
+      "alt": "logo-2014"
+    },
+    {
+      "year": 2015,
+      "url": "assets/flyers/2015.png",
+      "alt": "logo-2015"
+    },
+    {
+      "year": 2016,
+      "url": "assets/flyers/2016.jpg",
+      "alt": "logo-2016"
+    },
+    {
+      "year": 2017,
+      "url": "assets/flyers/2017.jpg",
+      "alt": "logo-2017"
+    },
+    {
+      "year": 2018,
+      "url": "assets/flyers/2018.jpg",
+      "alt": "logo-2018"
+    },
+    {
+      "year": 2019,
+      "url": "assets/flyers/2019.jpg",
+      "alt": "logo-2019"
+    },
+    {
+      "year": 2020,
+      "url": "assets/flyers/2020.jpg",
+      "alt": "logo-2020"
+    },
+    {
+      "year": 2022,
+      "url": "assets/flyers/2022.jpg",
+      "alt": "logo-2022"
+    },
+    {
+      "year": 2023,
+      "url": "assets/flyers/2023.jpg",
+      "alt": "logo-2023"
+    },
+    {
+      "year": 2024,
+      "url": "assets/flyers/2024.jpg",
+      "alt": "logo-2024"
+    }
+  ],
+  "galleries": [
+    {
+      "images": [
+        {
+          "url": "assets/galleries/2011/1.jpg",
+          "alt": "shosta-2011-1"
+        },
+        {
+          "url": "assets/galleries/2011/2.jpg",
+          "alt": "shosta-2011-2"
+        },
+        {
+          "url": "assets/galleries/2011/3.jpg",
+          "alt": "shosta-2011-3"
+        },
+        {
+          "url": "assets/galleries/2011/4.jpg",
+          "alt": "shosta-2011-4"
+        },
+        {
+          "url": "assets/galleries/2011/5.jpg",
+          "alt": "shosta-2011-5"
+        },
+        {
+          "url": "assets/galleries/2011/6.jpg",
+          "alt": "shosta-2011-6"
+        },
+        {
+          "url": "assets/galleries/2011/7.jpg",
+          "alt": "shosta-2011-7"
+        },
+        {
+          "url": "assets/galleries/2011/8.jpg",
+          "alt": "shosta-2011-8"
+        },
+        {
+          "url": "assets/galleries/2011/9.jpg",
+          "alt": "shosta-2011-9"
+        },
+        {
+          "url": "assets/galleries/2011/10.jpg",
+          "alt": "shosta-2011-10"
+        },
+        {
+          "url": "assets/galleries/2011/11.jpg",
+          "alt": "shosta-2011-11"
+        },
+        {
+          "url": "assets/galleries/2011/12.jpg",
+          "alt": "shosta-2011-12"
+        },
+        {
+          "url": "assets/galleries/2011/13.jpg",
+          "alt": "shosta-2011-13"
+        },
+        {
+          "url": "assets/galleries/2011/14.jpg",
+          "alt": "shosta-2011-14"
+        },
+        {
+          "url": "assets/galleries/2011/15.jpg",
+          "alt": "shosta-2011-15"
+        },
+        {
+          "url": "assets/galleries/2011/16.jpg",
+          "alt": "shosta-2011-16"
+        },
+        {
+          "url": "assets/galleries/2011/17.jpg",
+          "alt": "shosta-2011-17"
+        },
+        {
+          "url": "assets/galleries/2011/18.jpg",
+          "alt": "shosta-2011-18"
+        },
+        {
+          "url": "assets/galleries/2011/19.jpg",
+          "alt": "shosta-2011-19"
+        },
+        {
+          "url": "assets/galleries/2011/20.jpg",
+          "alt": "shosta-2011-20"
+        },
+        {
+          "url": "assets/galleries/2011/21.jpg",
+          "alt": "shosta-2011-21"
+        },
+        {
+          "url": "assets/galleries/2011/22.jpg",
+          "alt": "shosta-2011-22"
+        },
+        {
+          "url": "assets/galleries/2011/23.jpg",
+          "alt": "shosta-2011-23"
+        },
+        {
+          "url": "assets/galleries/2011/24.jpg",
+          "alt": "shosta-2011-24"
+        },
+        {
+          "url": "assets/galleries/2011/25.jpg",
+          "alt": "shosta-2011-25"
+        },
+        {
+          "url": "assets/galleries/2011/26.jpg",
+          "alt": "shosta-2011-26"
+        },
+        {
+          "url": "assets/galleries/2011/27.jpg",
+          "alt": "shosta-2011-27"
+        },
+        {
+          "url": "assets/galleries/2011/28.jpg",
+          "alt": "shosta-2011-28"
+        },
+        {
+          "url": "assets/galleries/2011/29.jpg",
+          "alt": "shosta-2011-29"
+        },
+        {
+          "url": "assets/galleries/2011/30.jpg",
+          "alt": "shosta-2011-30"
+        },
+        {
+          "url": "assets/galleries/2011/31.jpg",
+          "alt": "shosta-2011-31"
+        },
+        {
+          "url": "assets/galleries/2011/32.jpg",
+          "alt": "shosta-2011-32"
+        },
+        {
+          "url": "assets/galleries/2011/33.jpg",
+          "alt": "shosta-2011-33"
+        },
+        {
+          "url": "assets/galleries/2011/34.jpg",
+          "alt": "shosta-2011-34"
+        },
+        {
+          "url": "assets/galleries/2011/35.jpg",
+          "alt": "shosta-2011-35"
+        },
+        {
+          "url": "assets/galleries/2011/36.jpg",
+          "alt": "shosta-2011-36"
+        },
+        {
+          "url": "assets/galleries/2011/37.jpg",
+          "alt": "shosta-2011-37"
+        },
+        {
+          "url": "assets/galleries/2011/38.jpg",
+          "alt": "shosta-2011-38"
+        },
+        {
+          "url": "assets/galleries/2011/39.jpg",
+          "alt": "shosta-2011-39"
+        },
+        {
+          "url": "assets/galleries/2011/40.jpg",
+          "alt": "shosta-2011-40"
+        },
+        {
+          "url": "assets/galleries/2011/41.jpg",
+          "alt": "shosta-2011-41"
+        },
+        {
+          "url": "assets/galleries/2011/42.jpg",
+          "alt": "shosta-2011-42"
+        },
+        {
+          "url": "assets/galleries/2011/43.jpg",
+          "alt": "shosta-2011-43"
+        },
+        {
+          "url": "assets/galleries/2011/44.jpg",
+          "alt": "shosta-2011-44"
+        },
+        {
+          "url": "assets/galleries/2011/45.jpg",
+          "alt": "shosta-2011-45"
+        },
+        {
+          "url": "assets/galleries/2011/46.jpg",
+          "alt": "shosta-2011-46"
+        },
+        {
+          "url": "assets/galleries/2011/47.jpg",
+          "alt": "shosta-2011-47"
+        },
+        {
+          "url": "assets/galleries/2011/48.jpg",
+          "alt": "shosta-2011-48"
+        },
+        {
+          "url": "assets/galleries/2011/49.jpg",
+          "alt": "shosta-2011-49"
+        },
+        {
+          "url": "assets/galleries/2011/50.jpg",
+          "alt": "shosta-2011-50"
+        },
+        {
+          "url": "assets/galleries/2011/51.jpg",
+          "alt": "shosta-2011-51"
+        },
+        {
+          "url": "assets/galleries/2011/52.jpg",
+          "alt": "shosta-2011-52"
+        },
+        {
+          "url": "assets/galleries/2011/53.jpg",
+          "alt": "shosta-2011-53"
+        },
+        {
+          "url": "assets/galleries/2011/54.jpg",
+          "alt": "shosta-2011-54"
+        },
+        {
+          "url": "assets/galleries/2011/55.jpg",
+          "alt": "shosta-2011-55"
+        },
+        {
+          "url": "assets/galleries/2011/56.jpg",
+          "alt": "shosta-2011-56"
+        },
+        {
+          "url": "assets/galleries/2011/57.jpg",
+          "alt": "shosta-2011-57"
+        },
+        {
+          "url": "assets/galleries/2011/58.jpg",
+          "alt": "shosta-2011-58"
+        },
+        {
+          "url": "assets/galleries/2011/59.jpg",
+          "alt": "shosta-2011-59"
+        },
+        {
+          "url": "assets/galleries/2011/60.jpg",
+          "alt": "shosta-2011-60"
+        },
+        {
+          "url": "assets/galleries/2011/61.jpg",
+          "alt": "shosta-2011-61"
+        },
+        {
+          "url": "assets/galleries/2011/62.jpg",
+          "alt": "shosta-2011-62"
+        },
+        {
+          "url": "assets/galleries/2011/63.jpg",
+          "alt": "shosta-2011-63"
+        },
+        {
+          "url": "assets/galleries/2011/64.jpg",
+          "alt": "shosta-2011-64"
+        },
+        {
+          "url": "assets/galleries/2011/65.jpg",
+          "alt": "shosta-2011-65"
+        },
+        {
+          "url": "assets/galleries/2011/66.jpg",
+          "alt": "shosta-2011-66"
+        },
+        {
+          "url": "assets/galleries/2011/67.jpg",
+          "alt": "shosta-2011-67"
+        }
+      ],
+      "year": 2011
+    },
+    {
+      "images": [
+        {
+          "url": "assets/galleries/2013/1.jpg",
+          "alt": "shosta-2013-1"
+        },
+        {
+          "url": "assets/galleries/2013/2.jpg",
+          "alt": "shosta-2013-2"
+        },
+        {
+          "url": "assets/galleries/2013/3.jpg",
+          "alt": "shosta-2013-3"
+        },
+        {
+          "url": "assets/galleries/2013/4.jpg",
+          "alt": "shosta-2013-4"
+        },
+        {
+          "url": "assets/galleries/2013/5.jpg",
+          "alt": "shosta-2013-5"
+        },
+        {
+          "url": "assets/galleries/2013/6.jpg",
+          "alt": "shosta-2013-6"
+        },
+        {
+          "url": "assets/galleries/2013/7.jpg",
+          "alt": "shosta-2013-7"
+        },
+        {
+          "url": "assets/galleries/2013/8.jpg",
+          "alt": "shosta-2013-8"
+        },
+        {
+          "url": "assets/galleries/2013/9.jpg",
+          "alt": "shosta-2013-9"
+        },
+        {
+          "url": "assets/galleries/2013/10.jpg",
+          "alt": "shosta-2013-10"
+        },
+        {
+          "url": "assets/galleries/2013/11.jpg",
+          "alt": "shosta-2013-11"
+        },
+        {
+          "url": "assets/galleries/2013/12.jpg",
+          "alt": "shosta-2013-12"
+        },
+        {
+          "url": "assets/galleries/2013/13.jpg",
+          "alt": "shosta-2013-13"
+        },
+        {
+          "url": "assets/galleries/2013/14.jpg",
+          "alt": "shosta-2013-14"
+        },
+        {
+          "url": "assets/galleries/2013/15.jpg",
+          "alt": "shosta-2013-15"
+        },
+        {
+          "url": "assets/galleries/2013/16.jpg",
+          "alt": "shosta-2013-16"
+        },
+        {
+          "url": "assets/galleries/2013/17.jpg",
+          "alt": "shosta-2013-17"
+        },
+        {
+          "url": "assets/galleries/2013/18.jpg",
+          "alt": "shosta-2013-18"
+        },
+        {
+          "url": "assets/galleries/2013/19.jpg",
+          "alt": "shosta-2013-19"
+        },
+        {
+          "url": "assets/galleries/2013/20.jpg",
+          "alt": "shosta-2013-20"
+        },
+        {
+          "url": "assets/galleries/2013/21.jpg",
+          "alt": "shosta-2013-21"
+        },
+        {
+          "url": "assets/galleries/2013/22.jpg",
+          "alt": "shosta-2013-22"
+        },
+        {
+          "url": "assets/galleries/2013/23.jpg",
+          "alt": "shosta-2013-23"
+        },
+        {
+          "url": "assets/galleries/2013/24.jpg",
+          "alt": "shosta-2013-24"
+        },
+        {
+          "url": "assets/galleries/2013/25.jpg",
+          "alt": "shosta-2013-25"
+        },
+        {
+          "url": "assets/galleries/2013/26.jpg",
+          "alt": "shosta-2013-26"
+        },
+        {
+          "url": "assets/galleries/2013/27.jpg",
+          "alt": "shosta-2013-27"
+        },
+        {
+          "url": "assets/galleries/2013/28.jpg",
+          "alt": "shosta-2013-28"
+        },
+        {
+          "url": "assets/galleries/2013/29.jpg",
+          "alt": "shosta-2013-29"
+        },
+        {
+          "url": "assets/galleries/2013/30.jpg",
+          "alt": "shosta-2013-30"
+        },
+        {
+          "url": "assets/galleries/2013/31.jpg",
+          "alt": "shosta-2013-31"
+        },
+        {
+          "url": "assets/galleries/2013/32.jpg",
+          "alt": "shosta-2013-32"
+        }
+      ],
+      "year": 2013
+    },
+    {
+      "images": [
+        {
+          "url": "assets/galleries/2014/1.jpg",
+          "alt": "shosta-2014-1"
+        },
+        {
+          "url": "assets/galleries/2014/2.jpg",
+          "alt": "shosta-2014-2"
+        },
+        {
+          "url": "assets/galleries/2014/3.jpg",
+          "alt": "shosta-2014-3"
+        },
+        {
+          "url": "assets/galleries/2014/4.jpg",
+          "alt": "shosta-2014-4"
+        },
+        {
+          "url": "assets/galleries/2014/5.jpg",
+          "alt": "shosta-2014-5"
+        },
+        {
+          "url": "assets/galleries/2014/6.jpg",
+          "alt": "shosta-2014-6"
+        },
+        {
+          "url": "assets/galleries/2014/7.jpg",
+          "alt": "shosta-2014-7"
+        },
+        {
+          "url": "assets/galleries/2014/8.jpg",
+          "alt": "shosta-2014-8"
+        },
+        {
+          "url": "assets/galleries/2014/9.jpg",
+          "alt": "shosta-2014-9"
+        },
+        {
+          "url": "assets/galleries/2014/10.jpg",
+          "alt": "shosta-2014-10"
+        },
+        {
+          "url": "assets/galleries/2014/11.jpg",
+          "alt": "shosta-2014-11"
+        },
+        {
+          "url": "assets/galleries/2014/12.jpg",
+          "alt": "shosta-2014-12"
+        },
+        {
+          "url": "assets/galleries/2014/13.jpg",
+          "alt": "shosta-2014-13"
+        },
+        {
+          "url": "assets/galleries/2014/14.jpg",
+          "alt": "shosta-2014-14"
+        }
+      ],
+      "year": 2014
+    },
+    {
+      "images": [
+        {
+          "url": "assets/galleries/2015/1.jpg",
+          "alt": "shosta-2015-1"
+        },
+        {
+          "url": "assets/galleries/2015/2.jpg",
+          "alt": "shosta-2015-2"
+        },
+        {
+          "url": "assets/galleries/2015/3.jpg",
+          "alt": "shosta-2015-3"
+        },
+        {
+          "url": "assets/galleries/2015/4.jpg",
+          "alt": "shosta-2015-4"
+        },
+        {
+          "url": "assets/galleries/2015/5.jpg",
+          "alt": "shosta-2015-5"
+        },
+        {
+          "url": "assets/galleries/2015/6.jpg",
+          "alt": "shosta-2015-6"
+        },
+        {
+          "url": "assets/galleries/2015/7.jpg",
+          "alt": "shosta-2015-7"
+        },
+        {
+          "url": "assets/galleries/2015/8.jpg",
+          "alt": "shosta-2015-8"
+        },
+        {
+          "url": "assets/galleries/2015/9.jpg",
+          "alt": "shosta-2015-9"
+        },
+        {
+          "url": "assets/galleries/2015/10.jpg",
+          "alt": "shosta-2015-10"
+        },
+        {
+          "url": "assets/galleries/2015/11.jpg",
+          "alt": "shosta-2015-11"
+        },
+        {
+          "url": "assets/galleries/2015/12.jpg",
+          "alt": "shosta-2015-12"
+        },
+        {
+          "url": "assets/galleries/2015/13.jpg",
+          "alt": "shosta-2015-13"
+        },
+        {
+          "url": "assets/galleries/2015/14.jpg",
+          "alt": "shosta-2015-14"
+        },
+        {
+          "url": "assets/galleries/2015/15.jpg",
+          "alt": "shosta-2015-15"
+        },
+        {
+          "url": "assets/galleries/2015/16.jpg",
+          "alt": "shosta-2015-16"
+        },
+        {
+          "url": "assets/galleries/2015/17.jpg",
+          "alt": "shosta-2015-17"
+        },
+        {
+          "url": "assets/galleries/2015/18.jpg",
+          "alt": "shosta-2015-18"
+        },
+        {
+          "url": "assets/galleries/2015/19.jpg",
+          "alt": "shosta-2015-19"
+        },
+        {
+          "url": "assets/galleries/2015/20.jpg",
+          "alt": "shosta-2015-20"
+        },
+        {
+          "url": "assets/galleries/2015/21.jpg",
+          "alt": "shosta-2015-21"
+        },
+        {
+          "url": "assets/galleries/2015/22.jpg",
+          "alt": "shosta-2015-22"
+        },
+        {
+          "url": "assets/galleries/2015/23.jpg",
+          "alt": "shosta-2015-23"
+        },
+        {
+          "url": "assets/galleries/2015/24.jpg",
+          "alt": "shosta-2015-24"
+        },
+        {
+          "url": "assets/galleries/2015/25.jpg",
+          "alt": "shosta-2015-25"
+        },
+        {
+          "url": "assets/galleries/2015/26.jpg",
+          "alt": "shosta-2015-26"
+        },
+        {
+          "url": "assets/galleries/2015/27.jpg",
+          "alt": "shosta-2015-27"
+        },
+        {
+          "url": "assets/galleries/2015/28.jpg",
+          "alt": "shosta-2015-28"
+        },
+        {
+          "url": "assets/galleries/2015/29.jpg",
+          "alt": "shosta-2015-29"
+        },
+        {
+          "url": "assets/galleries/2015/30.jpg",
+          "alt": "shosta-2015-30"
+        },
+        {
+          "url": "assets/galleries/2015/31.jpg",
+          "alt": "shosta-2015-31"
+        },
+        {
+          "url": "assets/galleries/2015/32.jpg",
+          "alt": "shosta-2015-32"
+        },
+        {
+          "url": "assets/galleries/2015/33.jpg",
+          "alt": "shosta-2015-33"
+        },
+        {
+          "url": "assets/galleries/2015/34.jpg",
+          "alt": "shosta-2015-34"
+        },
+        {
+          "url": "assets/galleries/2015/35.jpg",
+          "alt": "shosta-2015-35"
+        },
+        {
+          "url": "assets/galleries/2015/36.jpg",
+          "alt": "shosta-2015-36"
+        },
+        {
+          "url": "assets/galleries/2015/37.jpg",
+          "alt": "shosta-2015-37"
+        },
+        {
+          "url": "assets/galleries/2015/38.jpg",
+          "alt": "shosta-2015-38"
+        },
+        {
+          "url": "assets/galleries/2015/39.jpg",
+          "alt": "shosta-2015-39"
+        },
+        {
+          "url": "assets/galleries/2015/40.jpg",
+          "alt": "shosta-2015-40"
+        },
+        {
+          "url": "assets/galleries/2015/41.jpg",
+          "alt": "shosta-2015-41"
+        },
+        {
+          "url": "assets/galleries/2015/42.jpg",
+          "alt": "shosta-2015-42"
+        },
+        {
+          "url": "assets/galleries/2015/43.jpg",
+          "alt": "shosta-2015-43"
+        },
+        {
+          "url": "assets/galleries/2015/44.jpg",
+          "alt": "shosta-2015-44"
+        },
+        {
+          "url": "assets/galleries/2015/45.jpg",
+          "alt": "shosta-2015-45"
+        },
+        {
+          "url": "assets/galleries/2015/46.jpg",
+          "alt": "shosta-2015-46"
+        }
+      ],
+      "year": 2015
+    },
+    {
+      "images": [
+        {
+          "url": "assets/galleries/2016/1.jpg",
+          "alt": "shosta-2016-1"
+        },
+        {
+          "url": "assets/galleries/2016/2.jpg",
+          "alt": "shosta-2016-2"
+        },
+        {
+          "url": "assets/galleries/2016/3.jpg",
+          "alt": "shosta-2016-3"
+        },
+        {
+          "url": "assets/galleries/2016/4.jpg",
+          "alt": "shosta-2016-4"
+        },
+        {
+          "url": "assets/galleries/2016/5.jpg",
+          "alt": "shosta-2016-5"
+        },
+        {
+          "url": "assets/galleries/2016/6.jpg",
+          "alt": "shosta-2016-6"
+        },
+        {
+          "url": "assets/galleries/2016/7.jpg",
+          "alt": "shosta-2016-7"
+        },
+        {
+          "url": "assets/galleries/2016/8.jpg",
+          "alt": "shosta-2016-8"
+        },
+        {
+          "url": "assets/galleries/2016/9.jpg",
+          "alt": "shosta-2016-9"
+        },
+        {
+          "url": "assets/galleries/2016/10.jpg",
+          "alt": "shosta-2016-10"
+        },
+        {
+          "url": "assets/galleries/2016/11.jpg",
+          "alt": "shosta-2016-11"
+        },
+        {
+          "url": "assets/galleries/2016/12.jpg",
+          "alt": "shosta-2016-12"
+        },
+        {
+          "url": "assets/galleries/2016/13.jpg",
+          "alt": "shosta-2016-13"
+        },
+        {
+          "url": "assets/galleries/2016/14.jpg",
+          "alt": "shosta-2016-14"
+        },
+        {
+          "url": "assets/galleries/2016/15.jpg",
+          "alt": "shosta-2016-15"
+        },
+        {
+          "url": "assets/galleries/2016/16.jpg",
+          "alt": "shosta-2016-16"
+        },
+        {
+          "url": "assets/galleries/2016/17.jpg",
+          "alt": "shosta-2016-17"
+        },
+        {
+          "url": "assets/galleries/2016/18.jpg",
+          "alt": "shosta-2016-18"
+        },
+        {
+          "url": "assets/galleries/2016/19.jpg",
+          "alt": "shosta-2016-19"
+        },
+        {
+          "url": "assets/galleries/2016/20.jpg",
+          "alt": "shosta-2016-20"
+        },
+        {
+          "url": "assets/galleries/2016/21.jpg",
+          "alt": "shosta-2016-21"
+        },
+        {
+          "url": "assets/galleries/2016/22.jpg",
+          "alt": "shosta-2016-22"
+        },
+        {
+          "url": "assets/galleries/2016/23.jpg",
+          "alt": "shosta-2016-23"
+        },
+        {
+          "url": "assets/galleries/2016/24.jpg",
+          "alt": "shosta-2016-24"
+        },
+        {
+          "url": "assets/galleries/2016/25.jpg",
+          "alt": "shosta-2016-25"
+        },
+        {
+          "url": "assets/galleries/2016/26.jpg",
+          "alt": "shosta-2016-26"
+        },
+        {
+          "url": "assets/galleries/2016/27.jpg",
+          "alt": "shosta-2016-27"
+        },
+        {
+          "url": "assets/galleries/2016/28.jpg",
+          "alt": "shosta-2016-28"
+        },
+        {
+          "url": "assets/galleries/2016/29.jpg",
+          "alt": "shosta-2016-29"
+        },
+        {
+          "url": "assets/galleries/2016/30.jpg",
+          "alt": "shosta-2016-30"
+        },
+        {
+          "url": "assets/galleries/2016/31.jpg",
+          "alt": "shosta-2016-31"
+        },
+        {
+          "url": "assets/galleries/2016/32.jpg",
+          "alt": "shosta-2016-32"
+        },
+        {
+          "url": "assets/galleries/2016/33.jpg",
+          "alt": "shosta-2016-33"
+        },
+        {
+          "url": "assets/galleries/2016/34.jpg",
+          "alt": "shosta-2016-34"
+        },
+        {
+          "url": "assets/galleries/2016/35.jpg",
+          "alt": "shosta-2016-35"
+        },
+        {
+          "url": "assets/galleries/2016/36.jpg",
+          "alt": "shosta-2016-36"
+        },
+        {
+          "url": "assets/galleries/2016/37.jpg",
+          "alt": "shosta-2016-37"
+        },
+        {
+          "url": "assets/galleries/2016/38.jpg",
+          "alt": "shosta-2016-38"
+        },
+        {
+          "url": "assets/galleries/2016/39.jpg",
+          "alt": "shosta-2016-39"
+        },
+        {
+          "url": "assets/galleries/2016/40.jpg",
+          "alt": "shosta-2016-40"
+        },
+        {
+          "url": "assets/galleries/2016/41.jpg",
+          "alt": "shosta-2016-41"
+        },
+        {
+          "url": "assets/galleries/2016/42.jpg",
+          "alt": "shosta-2016-42"
+        },
+        {
+          "url": "assets/galleries/2016/43.jpg",
+          "alt": "shosta-2016-43"
+        },
+        {
+          "url": "assets/galleries/2016/44.jpg",
+          "alt": "shosta-2016-44"
+        },
+        {
+          "url": "assets/galleries/2016/45.jpg",
+          "alt": "shosta-2016-45"
+        },
+        {
+          "url": "assets/galleries/2016/46.jpg",
+          "alt": "shosta-2016-46"
+        },
+        {
+          "url": "assets/galleries/2016/47.jpg",
+          "alt": "shosta-2016-47"
+        },
+        {
+          "url": "assets/galleries/2016/48.jpg",
+          "alt": "shosta-2016-48"
+        },
+        {
+          "url": "assets/galleries/2016/49.jpg",
+          "alt": "shosta-2016-49"
+        },
+        {
+          "url": "assets/galleries/2016/50.jpg",
+          "alt": "shosta-2016-50"
+        },
+        {
+          "url": "assets/galleries/2016/51.jpg",
+          "alt": "shosta-2016-51"
+        },
+        {
+          "url": "assets/galleries/2016/52.jpg",
+          "alt": "shosta-2016-52"
+        },
+        {
+          "url": "assets/galleries/2016/53.jpg",
+          "alt": "shosta-2016-53"
+        },
+        {
+          "url": "assets/galleries/2016/54.jpg",
+          "alt": "shosta-2016-54"
+        },
+        {
+          "url": "assets/galleries/2016/55.jpg",
+          "alt": "shosta-2016-55"
+        }
+      ],
+      "year": 2016
+    },
+    {
+      "images": [
+        {
+          "url": "assets/galleries/2017/1.jpg",
+          "alt": "shosta-2017-1"
+        },
+        {
+          "url": "assets/galleries/2017/2.jpg",
+          "alt": "shosta-2017-2"
+        },
+        {
+          "url": "assets/galleries/2017/3.jpg",
+          "alt": "shosta-2017-3"
+        },
+        {
+          "url": "assets/galleries/2017/4.jpg",
+          "alt": "shosta-2017-4"
+        },
+        {
+          "url": "assets/galleries/2017/5.jpg",
+          "alt": "shosta-2017-5"
+        },
+        {
+          "url": "assets/galleries/2017/6.jpg",
+          "alt": "shosta-2017-6"
+        },
+        {
+          "url": "assets/galleries/2017/7.jpg",
+          "alt": "shosta-2017-7"
+        },
+        {
+          "url": "assets/galleries/2017/8.jpg",
+          "alt": "shosta-2017-8"
+        },
+        {
+          "url": "assets/galleries/2017/9.jpg",
+          "alt": "shosta-2017-9"
+        },
+        {
+          "url": "assets/galleries/2017/10.jpg",
+          "alt": "shosta-2017-10"
+        },
+        {
+          "url": "assets/galleries/2017/11.jpg",
+          "alt": "shosta-2017-11"
+        },
+        {
+          "url": "assets/galleries/2017/12.jpg",
+          "alt": "shosta-2017-12"
+        },
+        {
+          "url": "assets/galleries/2017/13.jpg",
+          "alt": "shosta-2017-13"
+        },
+        {
+          "url": "assets/galleries/2017/14.jpg",
+          "alt": "shosta-2017-14"
+        },
+        {
+          "url": "assets/galleries/2017/15.jpg",
+          "alt": "shosta-2017-15"
+        },
+        {
+          "url": "assets/galleries/2017/16.jpg",
+          "alt": "shosta-2017-16"
+        },
+        {
+          "url": "assets/galleries/2017/17.jpg",
+          "alt": "shosta-2017-17"
+        },
+        {
+          "url": "assets/galleries/2017/18.jpg",
+          "alt": "shosta-2017-18"
+        },
+        {
+          "url": "assets/galleries/2017/19.jpg",
+          "alt": "shosta-2017-19"
+        },
+        {
+          "url": "assets/galleries/2017/20.jpg",
+          "alt": "shosta-2017-20"
+        },
+        {
+          "url": "assets/galleries/2017/21.jpg",
+          "alt": "shosta-2017-21"
+        },
+        {
+          "url": "assets/galleries/2017/22.jpg",
+          "alt": "shosta-2017-22"
+        },
+        {
+          "url": "assets/galleries/2017/23.jpg",
+          "alt": "shosta-2017-23"
+        },
+        {
+          "url": "assets/galleries/2017/24.jpg",
+          "alt": "shosta-2017-24"
+        },
+        {
+          "url": "assets/galleries/2017/25.jpg",
+          "alt": "shosta-2017-25"
+        },
+        {
+          "url": "assets/galleries/2017/26.jpg",
+          "alt": "shosta-2017-26"
+        },
+        {
+          "url": "assets/galleries/2017/27.jpg",
+          "alt": "shosta-2017-27"
+        },
+        {
+          "url": "assets/galleries/2017/28.jpg",
+          "alt": "shosta-2017-28"
+        },
+        {
+          "url": "assets/galleries/2017/29.jpg",
+          "alt": "shosta-2017-29"
+        },
+        {
+          "url": "assets/galleries/2017/30.jpg",
+          "alt": "shosta-2017-30"
+        },
+        {
+          "url": "assets/galleries/2017/31.jpg",
+          "alt": "shosta-2017-31"
+        },
+        {
+          "url": "assets/galleries/2017/32.jpg",
+          "alt": "shosta-2017-32"
+        }
+      ],
+      "year": 2017
+    },
+    {
+      "images": [
+        {
+          "url": "assets/galleries/2018/1.jpg",
+          "alt": "shosta-2018-1"
+        },
+        {
+          "url": "assets/galleries/2018/2.jpg",
+          "alt": "shosta-2018-2"
+        },
+        {
+          "url": "assets/galleries/2018/3.jpg",
+          "alt": "shosta-2018-3"
+        },
+        {
+          "url": "assets/galleries/2018/4.jpg",
+          "alt": "shosta-2018-4"
+        },
+        {
+          "url": "assets/galleries/2018/5.jpg",
+          "alt": "shosta-2018-5"
+        },
+        {
+          "url": "assets/galleries/2018/6.jpg",
+          "alt": "shosta-2018-6"
+        },
+        {
+          "url": "assets/galleries/2018/7.jpg",
+          "alt": "shosta-2018-7"
+        },
+        {
+          "url": "assets/galleries/2018/8.jpg",
+          "alt": "shosta-2018-8"
+        },
+        {
+          "url": "assets/galleries/2018/9.jpg",
+          "alt": "shosta-2018-9"
+        },
+        {
+          "url": "assets/galleries/2018/10.jpg",
+          "alt": "shosta-2018-10"
+        },
+        {
+          "url": "assets/galleries/2018/11.jpg",
+          "alt": "shosta-2018-11"
+        },
+        {
+          "url": "assets/galleries/2018/12.jpg",
+          "alt": "shosta-2018-12"
+        },
+        {
+          "url": "assets/galleries/2018/13.jpg",
+          "alt": "shosta-2018-13"
+        },
+        {
+          "url": "assets/galleries/2018/14.jpg",
+          "alt": "shosta-2018-14"
+        },
+        {
+          "url": "assets/galleries/2018/15.jpg",
+          "alt": "shosta-2018-15"
+        },
+        {
+          "url": "assets/galleries/2018/16.jpg",
+          "alt": "shosta-2018-16"
+        },
+        {
+          "url": "assets/galleries/2018/17.jpg",
+          "alt": "shosta-2018-17"
+        },
+        {
+          "url": "assets/galleries/2018/18.jpg",
+          "alt": "shosta-2018-18"
+        },
+        {
+          "url": "assets/galleries/2018/19.jpg",
+          "alt": "shosta-2018-19"
+        },
+        {
+          "url": "assets/galleries/2018/20.jpg",
+          "alt": "shosta-2018-20"
+        },
+        {
+          "url": "assets/galleries/2018/21.jpg",
+          "alt": "shosta-2018-21"
+        },
+        {
+          "url": "assets/galleries/2018/22.jpg",
+          "alt": "shosta-2018-22"
+        },
+        {
+          "url": "assets/galleries/2018/23.jpg",
+          "alt": "shosta-2018-23"
+        },
+        {
+          "url": "assets/galleries/2018/24.jpg",
+          "alt": "shosta-2018-24"
+        },
+        {
+          "url": "assets/galleries/2018/25.jpg",
+          "alt": "shosta-2018-25"
+        }
+      ],
+      "year": 2018
+    },
+    {
+      "images": [
+        {
+          "url": "assets/galleries/2019/1.jpg",
+          "alt": "shosta-2019-1"
+        },
+        {
+          "url": "assets/galleries/2019/2.jpg",
+          "alt": "shosta-2019-2"
+        },
+        {
+          "url": "assets/galleries/2019/3.jpg",
+          "alt": "shosta-2019-3"
+        },
+        {
+          "url": "assets/galleries/2019/4.jpg",
+          "alt": "shosta-2019-4"
+        },
+        {
+          "url": "assets/galleries/2019/5.jpg",
+          "alt": "shosta-2019-5"
+        },
+        {
+          "url": "assets/galleries/2019/6.jpg",
+          "alt": "shosta-2019-6"
+        },
+        {
+          "url": "assets/galleries/2019/7.jpg",
+          "alt": "shosta-2019-7"
+        },
+        {
+          "url": "assets/galleries/2019/8.jpg",
+          "alt": "shosta-2019-8"
+        },
+        {
+          "url": "assets/galleries/2019/9.jpg",
+          "alt": "shosta-2019-9"
+        },
+        {
+          "url": "assets/galleries/2019/10.jpg",
+          "alt": "shosta-2019-10"
+        },
+        {
+          "url": "assets/galleries/2019/11.jpg",
+          "alt": "shosta-2019-11"
+        },
+        {
+          "url": "assets/galleries/2019/12.jpg",
+          "alt": "shosta-2019-12"
+        },
+        {
+          "url": "assets/galleries/2019/13.jpg",
+          "alt": "shosta-2019-13"
+        },
+        {
+          "url": "assets/galleries/2019/14.jpg",
+          "alt": "shosta-2019-14"
+        },
+        {
+          "url": "assets/galleries/2019/15.jpg",
+          "alt": "shosta-2019-15"
+        },
+        {
+          "url": "assets/galleries/2019/16.jpg",
+          "alt": "shosta-2019-16"
+        },
+        {
+          "url": "assets/galleries/2019/17.jpg",
+          "alt": "shosta-2019-17"
+        },
+        {
+          "url": "assets/galleries/2019/18.jpg",
+          "alt": "shosta-2019-18"
+        },
+        {
+          "url": "assets/galleries/2019/19.jpg",
+          "alt": "shosta-2019-19"
+        },
+        {
+          "url": "assets/galleries/2019/20.jpg",
+          "alt": "shosta-2019-20"
+        },
+        {
+          "url": "assets/galleries/2019/21.jpg",
+          "alt": "shosta-2019-21"
+        },
+        {
+          "url": "assets/galleries/2019/22.jpg",
+          "alt": "shosta-2019-22"
+        },
+        {
+          "url": "assets/galleries/2019/23.jpg",
+          "alt": "shosta-2019-23"
+        },
+        {
+          "url": "assets/galleries/2019/24.jpg",
+          "alt": "shosta-2019-24"
+        },
+        {
+          "url": "assets/galleries/2019/25.jpg",
+          "alt": "shosta-2019-25"
+        },
+        {
+          "url": "assets/galleries/2019/26.jpg",
+          "alt": "shosta-2019-26"
+        },
+        {
+          "url": "assets/galleries/2019/27.jpg",
+          "alt": "shosta-2019-27"
+        },
+        {
+          "url": "assets/galleries/2019/28.jpg",
+          "alt": "shosta-2019-28"
+        },
+        {
+          "url": "assets/galleries/2019/29.jpg",
+          "alt": "shosta-2019-29"
+        },
+        {
+          "url": "assets/galleries/2019/30.jpg",
+          "alt": "shosta-2019-30"
+        },
+        {
+          "url": "assets/galleries/2019/31.jpg",
+          "alt": "shosta-2019-31"
+        },
+        {
+          "url": "assets/galleries/2019/32.jpg",
+          "alt": "shosta-2019-32"
+        },
+        {
+          "url": "assets/galleries/2019/33.jpg",
+          "alt": "shosta-2019-33"
+        },
+        {
+          "url": "assets/galleries/2019/34.jpg",
+          "alt": "shosta-2019-34"
+        },
+        {
+          "url": "assets/galleries/2019/35.jpg",
+          "alt": "shosta-2019-35"
+        },
+        {
+          "url": "assets/galleries/2019/36.jpg",
+          "alt": "shosta-2019-36"
+        },
+        {
+          "url": "assets/galleries/2019/37.jpg",
+          "alt": "shosta-2019-37"
+        },
+        {
+          "url": "assets/galleries/2019/38.jpg",
+          "alt": "shosta-2019-38"
+        },
+        {
+          "url": "assets/galleries/2019/39.jpg",
+          "alt": "shosta-2019-39"
+        },
+        {
+          "url": "assets/galleries/2019/40.jpg",
+          "alt": "shosta-2019-40"
+        },
+        {
+          "url": "assets/galleries/2019/41.jpg",
+          "alt": "shosta-2019-41"
+        },
+        {
+          "url": "assets/galleries/2019/42.jpg",
+          "alt": "shosta-2019-42"
+        },
+        {
+          "url": "assets/galleries/2019/43.jpg",
+          "alt": "shosta-2019-43"
+        },
+        {
+          "url": "assets/galleries/2019/44.jpg",
+          "alt": "shosta-2019-44"
+        },
+        {
+          "url": "assets/galleries/2019/45.jpg",
+          "alt": "shosta-2019-45"
+        },
+        {
+          "url": "assets/galleries/2019/46.jpg",
+          "alt": "shosta-2019-46"
+        },
+        {
+          "url": "assets/galleries/2019/47.jpg",
+          "alt": "shosta-2019-47"
+        },
+        {
+          "url": "assets/galleries/2019/48.jpg",
+          "alt": "shosta-2019-48"
+        },
+        {
+          "url": "assets/galleries/2019/49.jpg",
+          "alt": "shosta-2019-49"
+        },
+        {
+          "url": "assets/galleries/2019/50.jpg",
+          "alt": "shosta-2019-50"
+        },
+        {
+          "url": "assets/galleries/2019/51.jpg",
+          "alt": "shosta-2019-51"
+        },
+        {
+          "url": "assets/galleries/2019/52.jpg",
+          "alt": "shosta-2019-52"
+        },
+        {
+          "url": "assets/galleries/2019/53.jpg",
+          "alt": "shosta-2019-53"
+        },
+        {
+          "url": "assets/galleries/2019/54.jpg",
+          "alt": "shosta-2019-54"
+        },
+        {
+          "url": "assets/galleries/2019/55.jpg",
+          "alt": "shosta-2019-55"
+        },
+        {
+          "url": "assets/galleries/2019/56.jpg",
+          "alt": "shosta-2019-56"
+        },
+        {
+          "url": "assets/galleries/2019/57.jpg",
+          "alt": "shosta-2019-57"
+        },
+        {
+          "url": "assets/galleries/2019/58.jpg",
+          "alt": "shosta-2019-58"
+        },
+        {
+          "url": "assets/galleries/2019/59.jpg",
+          "alt": "shosta-2019-59"
+        },
+        {
+          "url": "assets/galleries/2019/60.jpg",
+          "alt": "shosta-2019-60"
+        },
+        {
+          "url": "assets/galleries/2019/61.jpg",
+          "alt": "shosta-2019-61"
+        },
+        {
+          "url": "assets/galleries/2019/62.jpg",
+          "alt": "shosta-2019-62"
+        }
+      ],
+      "year": 2019
+    },
+    {
+      "images": [
+        {
+          "url": "assets/galleries/2020/1.jpg",
+          "alt": "shosta-2020-1"
+        },
+        {
+          "url": "assets/galleries/2020/2.jpg",
+          "alt": "shosta-2020-2"
+        },
+        {
+          "url": "assets/galleries/2020/3.jpg",
+          "alt": "shosta-2020-3"
+        },
+        {
+          "url": "assets/galleries/2020/4.jpg",
+          "alt": "shosta-2020-4"
+        },
+        {
+          "url": "assets/galleries/2020/5.jpg",
+          "alt": "shosta-2020-5"
+        },
+        {
+          "url": "assets/galleries/2020/6.jpg",
+          "alt": "shosta-2020-6"
+        },
+        {
+          "url": "assets/galleries/2020/7.jpg",
+          "alt": "shosta-2020-7"
+        },
+        {
+          "url": "assets/galleries/2020/8.jpg",
+          "alt": "shosta-2020-8"
+        },
+        {
+          "url": "assets/galleries/2020/9.jpg",
+          "alt": "shosta-2020-9"
+        },
+        {
+          "url": "assets/galleries/2020/10.jpg",
+          "alt": "shosta-2020-10"
+        },
+        {
+          "url": "assets/galleries/2020/11.jpg",
+          "alt": "shosta-2020-11"
+        },
+        {
+          "url": "assets/galleries/2020/12.jpg",
+          "alt": "shosta-2020-12"
+        },
+        {
+          "url": "assets/galleries/2020/13.jpg",
+          "alt": "shosta-2020-13"
+        },
+        {
+          "url": "assets/galleries/2020/14.jpg",
+          "alt": "shosta-2020-14"
+        },
+        {
+          "url": "assets/galleries/2020/15.jpg",
+          "alt": "shosta-2020-15"
+        },
+        {
+          "url": "assets/galleries/2020/16.jpg",
+          "alt": "shosta-2020-16"
+        },
+        {
+          "url": "assets/galleries/2020/17.jpg",
+          "alt": "shosta-2020-17"
+        },
+        {
+          "url": "assets/galleries/2020/18.jpg",
+          "alt": "shosta-2020-18"
+        },
+        {
+          "url": "assets/galleries/2020/19.jpg",
+          "alt": "shosta-2020-19"
+        },
+        {
+          "url": "assets/galleries/2020/20.jpg",
+          "alt": "shosta-2020-20"
+        },
+        {
+          "url": "assets/galleries/2020/21.jpg",
+          "alt": "shosta-2020-21"
+        },
+        {
+          "url": "assets/galleries/2020/22.jpg",
+          "alt": "shosta-2020-22"
+        },
+        {
+          "url": "assets/galleries/2020/23.jpg",
+          "alt": "shosta-2020-23"
+        },
+        {
+          "url": "assets/galleries/2020/24.jpg",
+          "alt": "shosta-2020-24"
+        },
+        {
+          "url": "assets/galleries/2020/25.jpg",
+          "alt": "shosta-2020-25"
+        },
+        {
+          "url": "assets/galleries/2020/26.jpg",
+          "alt": "shosta-2020-26"
+        },
+        {
+          "url": "assets/galleries/2020/27.jpg",
+          "alt": "shosta-2020-27"
+        },
+        {
+          "url": "assets/galleries/2020/28.jpg",
+          "alt": "shosta-2020-28"
+        },
+        {
+          "url": "assets/galleries/2020/29.jpg",
+          "alt": "shosta-2020-29"
+        },
+        {
+          "url": "assets/galleries/2020/30.jpg",
+          "alt": "shosta-2020-30"
+        },
+        {
+          "url": "assets/galleries/2020/31.jpg",
+          "alt": "shosta-2020-31"
+        },
+        {
+          "url": "assets/galleries/2020/32.jpg",
+          "alt": "shosta-2020-32"
+        },
+        {
+          "url": "assets/galleries/2020/33.jpg",
+          "alt": "shosta-2020-33"
+        },
+        {
+          "url": "assets/galleries/2020/34.jpg",
+          "alt": "shosta-2020-34"
+        },
+        {
+          "url": "assets/galleries/2020/35.jpg",
+          "alt": "shosta-2020-35"
+        },
+        {
+          "url": "assets/galleries/2020/36.jpg",
+          "alt": "shosta-2020-36"
+        },
+        {
+          "url": "assets/galleries/2020/37.jpg",
+          "alt": "shosta-2020-37"
+        },
+        {
+          "url": "assets/galleries/2020/38.jpg",
+          "alt": "shosta-2020-38"
+        },
+        {
+          "url": "assets/galleries/2020/39.jpg",
+          "alt": "shosta-2020-39"
+        },
+        {
+          "url": "assets/galleries/2020/40.jpg",
+          "alt": "shosta-2020-40"
+        },
+        {
+          "url": "assets/galleries/2020/41.jpg",
+          "alt": "shosta-2020-41"
+        },
+        {
+          "url": "assets/galleries/2020/42.jpg",
+          "alt": "shosta-2020-42"
+        },
+        {
+          "url": "assets/galleries/2020/43.jpg",
+          "alt": "shosta-2020-43"
+        },
+        {
+          "url": "assets/galleries/2020/44.jpg",
+          "alt": "shosta-2020-44"
+        },
+        {
+          "url": "assets/galleries/2020/45.jpg",
+          "alt": "shosta-2020-45"
+        },
+        {
+          "url": "assets/galleries/2020/46.jpg",
+          "alt": "shosta-2020-46"
+        },
+        {
+          "url": "assets/galleries/2020/47.jpg",
+          "alt": "shosta-2020-47"
+        },
+        {
+          "url": "assets/galleries/2020/48.jpg",
+          "alt": "shosta-2020-48"
+        }
+      ],
+      "year": 2020
+    },
+    {
+      "images": [
+        {
+          "url": "assets/galleries/2022/1.jpg",
+          "alt": "shosta-2022-1"
+        },
+        {
+          "url": "assets/galleries/2022/2.jpg",
+          "alt": "shosta-2022-2"
+        },
+        {
+          "url": "assets/galleries/2022/3.jpg",
+          "alt": "shosta-2022-3"
+        },
+        {
+          "url": "assets/galleries/2022/4.jpg",
+          "alt": "shosta-2022-4"
+        },
+        {
+          "url": "assets/galleries/2022/5.jpg",
+          "alt": "shosta-2022-5"
+        },
+        {
+          "url": "assets/galleries/2022/6.jpg",
+          "alt": "shosta-2022-6"
+        },
+        {
+          "url": "assets/galleries/2022/7.jpg",
+          "alt": "shosta-2022-7"
+        },
+        {
+          "url": "assets/galleries/2022/8.jpg",
+          "alt": "shosta-2022-8"
+        },
+        {
+          "url": "assets/galleries/2022/9.jpg",
+          "alt": "shosta-2022-9"
+        },
+        {
+          "url": "assets/galleries/2022/10.jpg",
+          "alt": "shosta-2022-10"
+        },
+        {
+          "url": "assets/galleries/2022/11.jpg",
+          "alt": "shosta-2022-11"
+        },
+        {
+          "url": "assets/galleries/2022/12.jpg",
+          "alt": "shosta-2022-12"
+        },
+        {
+          "url": "assets/galleries/2022/13.jpg",
+          "alt": "shosta-2022-13"
+        },
+        {
+          "url": "assets/galleries/2022/14.jpg",
+          "alt": "shosta-2022-14"
+        },
+        {
+          "url": "assets/galleries/2022/15.jpg",
+          "alt": "shosta-2022-15"
+        },
+        {
+          "url": "assets/galleries/2022/16.jpg",
+          "alt": "shosta-2022-16"
+        },
+        {
+          "url": "assets/galleries/2022/17.jpg",
+          "alt": "shosta-2022-17"
+        },
+        {
+          "url": "assets/galleries/2022/18.jpg",
+          "alt": "shosta-2022-18"
+        },
+        {
+          "url": "assets/galleries/2022/19.jpg",
+          "alt": "shosta-2022-19"
+        },
+        {
+          "url": "assets/galleries/2022/20.jpg",
+          "alt": "shosta-2022-20"
+        },
+        {
+          "url": "assets/galleries/2022/21.jpg",
+          "alt": "shosta-2022-21"
+        },
+        {
+          "url": "assets/galleries/2022/22.jpg",
+          "alt": "shosta-2022-22"
+        },
+        {
+          "url": "assets/galleries/2022/23.jpg",
+          "alt": "shosta-2022-23"
+        },
+        {
+          "url": "assets/galleries/2022/24.jpg",
+          "alt": "shosta-2022-24"
+        },
+        {
+          "url": "assets/galleries/2022/25.jpg",
+          "alt": "shosta-2022-25"
+        },
+        {
+          "url": "assets/galleries/2022/26.jpg",
+          "alt": "shosta-2022-26"
+        },
+        {
+          "url": "assets/galleries/2022/27.jpg",
+          "alt": "shosta-2022-27"
+        },
+        {
+          "url": "assets/galleries/2022/28.jpg",
+          "alt": "shosta-2022-28"
+        },
+        {
+          "url": "assets/galleries/2022/29.jpg",
+          "alt": "shosta-2022-29"
+        },
+        {
+          "url": "assets/galleries/2022/30.jpg",
+          "alt": "shosta-2022-30"
+        },
+        {
+          "url": "assets/galleries/2022/31.jpg",
+          "alt": "shosta-2022-31"
+        },
+        {
+          "url": "assets/galleries/2022/32.jpg",
+          "alt": "shosta-2022-32"
+        },
+        {
+          "url": "assets/galleries/2022/33.jpg",
+          "alt": "shosta-2022-33"
+        },
+        {
+          "url": "assets/galleries/2022/34.jpg",
+          "alt": "shosta-2022-34"
+        },
+        {
+          "url": "assets/galleries/2022/35.jpg",
+          "alt": "shosta-2022-35"
+        },
+        {
+          "url": "assets/galleries/2022/36.jpg",
+          "alt": "shosta-2022-36"
+        },
+        {
+          "url": "assets/galleries/2022/37.jpg",
+          "alt": "shosta-2022-37"
+        },
+        {
+          "url": "assets/galleries/2022/38.jpg",
+          "alt": "shosta-2022-38"
+        }
+      ],
+      "year": 2022
+    },
+    {
+      "images": [
+        {
+          "url": "assets/galleries/2023/1.jpg",
+          "alt": "shosta-2023-1"
+        },
+        {
+          "url": "assets/galleries/2023/2.jpg",
+          "alt": "shosta-2023-2"
+        },
+        {
+          "url": "assets/galleries/2023/3.jpg",
+          "alt": "shosta-2023-3"
+        },
+        {
+          "url": "assets/galleries/2023/4.jpg",
+          "alt": "shosta-2023-4"
+        },
+        {
+          "url": "assets/galleries/2023/5.jpg",
+          "alt": "shosta-2023-5"
+        },
+        {
+          "url": "assets/galleries/2023/6.jpg",
+          "alt": "shosta-2023-6"
+        },
+        {
+          "url": "assets/galleries/2023/7.jpg",
+          "alt": "shosta-2023-7"
+        },
+        {
+          "url": "assets/galleries/2023/8.jpg",
+          "alt": "shosta-2023-8"
+        },
+        {
+          "url": "assets/galleries/2023/9.jpg",
+          "alt": "shosta-2023-9"
+        },
+        {
+          "url": "assets/galleries/2023/10.jpg",
+          "alt": "shosta-2023-10"
+        },
+        {
+          "url": "assets/galleries/2023/11.jpg",
+          "alt": "shosta-2023-11"
+        },
+        {
+          "url": "assets/galleries/2023/12.jpg",
+          "alt": "shosta-2023-12"
+        },
+        {
+          "url": "assets/galleries/2023/13.jpg",
+          "alt": "shosta-2023-13"
+        },
+        {
+          "url": "assets/galleries/2023/14.jpg",
+          "alt": "shosta-2023-14"
+        },
+        {
+          "url": "assets/galleries/2023/15.jpg",
+          "alt": "shosta-2023-15"
+        },
+        {
+          "url": "assets/galleries/2023/16.jpg",
+          "alt": "shosta-2023-16"
+        },
+        {
+          "url": "assets/galleries/2023/17.jpg",
+          "alt": "shosta-2023-17"
+        },
+        {
+          "url": "assets/galleries/2023/18.jpg",
+          "alt": "shosta-2023-18"
+        },
+        {
+          "url": "assets/galleries/2023/19.jpg",
+          "alt": "shosta-2023-19"
+        },
+        {
+          "url": "assets/galleries/2023/20.jpg",
+          "alt": "shosta-2023-20"
+        },
+        {
+          "url": "assets/galleries/2023/21.jpg",
+          "alt": "shosta-2023-21"
+        },
+        {
+          "url": "assets/galleries/2023/22.jpg",
+          "alt": "shosta-2023-22"
+        },
+        {
+          "url": "assets/galleries/2023/23.jpg",
+          "alt": "shosta-2023-23"
+        },
+        {
+          "url": "assets/galleries/2023/24.jpg",
+          "alt": "shosta-2023-24"
+        },
+        {
+          "url": "assets/galleries/2023/25.jpg",
+          "alt": "shosta-2023-25"
+        },
+        {
+          "url": "assets/galleries/2023/26.jpg",
+          "alt": "shosta-2023-26"
+        },
+        {
+          "url": "assets/galleries/2023/27.jpg",
+          "alt": "shosta-2023-27"
+        },
+        {
+          "url": "assets/galleries/2023/28.jpg",
+          "alt": "shosta-2023-28"
+        },
+        {
+          "url": "assets/galleries/2023/29.jpg",
+          "alt": "shosta-2023-29"
+        },
+        {
+          "url": "assets/galleries/2023/30.jpg",
+          "alt": "shosta-2023-30"
+        },
+        {
+          "url": "assets/galleries/2023/31.jpg",
+          "alt": "shosta-2023-31"
+        },
+        {
+          "url": "assets/galleries/2023/32.jpg",
+          "alt": "shosta-2023-32"
+        },
+        {
+          "url": "assets/galleries/2023/33.jpg",
+          "alt": "shosta-2023-33"
+        },
+        {
+          "url": "assets/galleries/2023/34.jpg",
+          "alt": "shosta-2023-34"
+        },
+        {
+          "url": "assets/galleries/2023/35.jpg",
+          "alt": "shosta-2023-35"
+        },
+        {
+          "url": "assets/galleries/2023/36.jpg",
+          "alt": "shosta-2023-36"
+        },
+        {
+          "url": "assets/galleries/2023/37.jpg",
+          "alt": "shosta-2023-37"
+        },
+        {
+          "url": "assets/galleries/2023/38.jpg",
+          "alt": "shosta-2023-38"
+        },
+        {
+          "url": "assets/galleries/2023/39.jpg",
+          "alt": "shosta-2023-39"
+        },
+        {
+          "url": "assets/galleries/2023/40.jpg",
+          "alt": "shosta-2023-40"
+        },
+        {
+          "url": "assets/galleries/2023/41.jpg",
+          "alt": "shosta-2023-41"
+        },
+        {
+          "url": "assets/galleries/2023/42.jpg",
+          "alt": "shosta-2023-42"
+        },
+        {
+          "url": "assets/galleries/2023/43.jpg",
+          "alt": "shosta-2023-43"
+        },
+        {
+          "url": "assets/galleries/2023/44.jpg",
+          "alt": "shosta-2023-44"
+        },
+        {
+          "url": "assets/galleries/2023/45.jpg",
+          "alt": "shosta-2023-45"
+        },
+        {
+          "url": "assets/galleries/2023/46.jpg",
+          "alt": "shosta-2023-46"
+        },
+        {
+          "url": "assets/galleries/2023/47.jpg",
+          "alt": "shosta-2023-47"
+        },
+        {
+          "url": "assets/galleries/2023/48.jpg",
+          "alt": "shosta-2023-48"
+        },
+        {
+          "url": "assets/galleries/2023/49.jpg",
+          "alt": "shosta-2023-49"
+        },
+        {
+          "url": "assets/galleries/2023/50.jpg",
+          "alt": "shosta-2023-50"
+        },
+        {
+          "url": "assets/galleries/2023/51.jpg",
+          "alt": "shosta-2023-51"
+        },
+        {
+          "url": "assets/galleries/2023/52.jpg",
+          "alt": "shosta-2023-52"
+        },
+        {
+          "url": "assets/galleries/2023/53.jpg",
+          "alt": "shosta-2023-53"
+        },
+        {
+          "url": "assets/galleries/2023/54.jpg",
+          "alt": "shosta-2023-54"
+        },
+        {
+          "url": "assets/galleries/2023/55.jpg",
+          "alt": "shosta-2023-55"
+        },
+        {
+          "url": "assets/galleries/2023/56.jpg",
+          "alt": "shosta-2023-56"
+        },
+        {
+          "url": "assets/galleries/2023/57.jpg",
+          "alt": "shosta-2023-57"
+        },
+        {
+          "url": "assets/galleries/2023/58.jpg",
+          "alt": "shosta-2023-58"
+        },
+        {
+          "url": "assets/galleries/2023/59.jpg",
+          "alt": "shosta-2023-59"
+        },
+        {
+          "url": "assets/galleries/2023/60.jpg",
+          "alt": "shosta-2023-60"
+        },
+        {
+          "url": "assets/galleries/2023/61.jpg",
+          "alt": "shosta-2023-61"
+        },
+        {
+          "url": "assets/galleries/2023/62.jpg",
+          "alt": "shosta-2023-62"
+        },
+        {
+          "url": "assets/galleries/2023/63.jpg",
+          "alt": "shosta-2023-63"
+        },
+        {
+          "url": "assets/galleries/2023/64.jpg",
+          "alt": "shosta-2023-64"
+        },
+        {
+          "url": "assets/galleries/2023/65.jpg",
+          "alt": "shosta-2023-65"
+        },
+        {
+          "url": "assets/galleries/2023/66.jpg",
+          "alt": "shosta-2023-66"
+        },
+        {
+          "url": "assets/galleries/2023/67.jpg",
+          "alt": "shosta-2023-67"
+        },
+        {
+          "url": "assets/galleries/2023/68.jpg",
+          "alt": "shosta-2023-68"
+        },
+        {
+          "url": "assets/galleries/2023/69.jpg",
+          "alt": "shosta-2023-69"
+        },
+        {
+          "url": "assets/galleries/2023/70.jpg",
+          "alt": "shosta-2023-70"
+        },
+        {
+          "url": "assets/galleries/2023/71.jpg",
+          "alt": "shosta-2023-71"
+        },
+        {
+          "url": "assets/galleries/2023/72.jpg",
+          "alt": "shosta-2023-72"
+        },
+        {
+          "url": "assets/galleries/2023/73.jpg",
+          "alt": "shosta-2023-73"
+        },
+        {
+          "url": "assets/galleries/2023/74.jpg",
+          "alt": "shosta-2023-74"
+        },
+        {
+          "url": "assets/galleries/2023/75.jpg",
+          "alt": "shosta-2023-75"
+        },
+        {
+          "url": "assets/galleries/2023/76.jpg",
+          "alt": "shosta-2023-76"
+        },
+        {
+          "url": "assets/galleries/2023/77.jpg",
+          "alt": "shosta-2023-77"
+        },
+        {
+          "url": "assets/galleries/2023/78.jpg",
+          "alt": "shosta-2023-78"
+        },
+        {
+          "url": "assets/galleries/2023/79.jpg",
+          "alt": "shosta-2023-79"
+        },
+        {
+          "url": "assets/galleries/2023/80.jpg",
+          "alt": "shosta-2023-80"
+        },
+        {
+          "url": "assets/galleries/2023/81.jpg",
+          "alt": "shosta-2023-81"
+        },
+        {
+          "url": "assets/galleries/2023/82.jpg",
+          "alt": "shosta-2023-82"
+        },
+        {
+          "url": "assets/galleries/2023/83.jpg",
+          "alt": "shosta-2023-83"
+        },
+        {
+          "url": "assets/galleries/2023/84.jpg",
+          "alt": "shosta-2023-84"
+        },
+        {
+          "url": "assets/galleries/2023/85.jpg",
+          "alt": "shosta-2023-85"
+        },
+        {
+          "url": "assets/galleries/2023/86.jpg",
+          "alt": "shosta-2023-86"
+        },
+        {
+          "url": "assets/galleries/2023/87.jpg",
+          "alt": "shosta-2023-87"
+        },
+        {
+          "url": "assets/galleries/2023/88.jpg",
+          "alt": "shosta-2023-88"
+        },
+        {
+          "url": "assets/galleries/2023/89.jpg",
+          "alt": "shosta-2023-89"
+        },
+        {
+          "url": "assets/galleries/2023/90.jpg",
+          "alt": "shosta-2023-90"
+        },
+        {
+          "url": "assets/galleries/2023/91.jpg",
+          "alt": "shosta-2023-91"
+        },
+        {
+          "url": "assets/galleries/2023/92.jpg",
+          "alt": "shosta-2023-92"
+        },
+        {
+          "url": "assets/galleries/2023/93.jpg",
+          "alt": "shosta-2023-93"
+        },
+        {
+          "url": "assets/galleries/2023/94.jpg",
+          "alt": "shosta-2023-94"
+        },
+        {
+          "url": "assets/galleries/2023/95.jpg",
+          "alt": "shosta-2023-95"
+        },
+        {
+          "url": "assets/galleries/2023/96.jpg",
+          "alt": "shosta-2023-96"
+        },
+        {
+          "url": "assets/galleries/2023/97.jpg",
+          "alt": "shosta-2023-97"
+        },
+        {
+          "url": "assets/galleries/2023/98.jpg",
+          "alt": "shosta-2023-98"
+        },
+        {
+          "url": "assets/galleries/2023/99.jpg",
+          "alt": "shosta-2023-99"
+        },
+        {
+          "url": "assets/galleries/2023/100.jpg",
+          "alt": "shosta-2023-100"
+        },
+        {
+          "url": "assets/galleries/2023/101.jpg",
+          "alt": "shosta-2023-101"
+        },
+        {
+          "url": "assets/galleries/2023/102.jpg",
+          "alt": "shosta-2023-102"
+        },
+        {
+          "url": "assets/galleries/2023/103.jpg",
+          "alt": "shosta-2023-103"
+        },
+        {
+          "url": "assets/galleries/2023/104.jpg",
+          "alt": "shosta-2023-104"
+        },
+        {
+          "url": "assets/galleries/2023/105.jpg",
+          "alt": "shosta-2023-105"
+        },
+        {
+          "url": "assets/galleries/2023/106.jpg",
+          "alt": "shosta-2023-106"
+        },
+        {
+          "url": "assets/galleries/2023/107.jpg",
+          "alt": "shosta-2023-107"
+        },
+        {
+          "url": "assets/galleries/2023/108.jpg",
+          "alt": "shosta-2023-108"
+        },
+        {
+          "url": "assets/galleries/2023/109.jpg",
+          "alt": "shosta-2023-109"
+        },
+        {
+          "url": "assets/galleries/2023/110.jpg",
+          "alt": "shosta-2023-110"
+        },
+        {
+          "url": "assets/galleries/2023/111.jpg",
+          "alt": "shosta-2023-111"
+        },
+        {
+          "url": "assets/galleries/2023/112.jpg",
+          "alt": "shosta-2023-112"
+        }
+      ],
+      "year": 2023
+    },
+    {
+      "images": [],
+      "year": 2024
+    }
+  ]
+}
