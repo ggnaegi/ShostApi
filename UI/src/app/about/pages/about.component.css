@@ -1,0 +1,112 @@
+.mat-card-image {
+  width: 100%; /* Ensure images take full width of the card */
+  object-fit: cover; /* Adjust fit of image within its frame */
+}
+
+.custom-card {
+  margin-top: 10px;
+  cursor: pointer;
+  transition: transform 0.2s;
+  border-radius: 0; /* Remove rounded corners */
+  box-shadow: none; /* Optional: remove box shadow */
+}
+
+.custom-card .mat-card-content {
+  font-family: Montserrat;
+  line-height: 1.6;
+  color: #333;
+}
+
+.custom-card .mat-card-content p {
+  margin-bottom: 20px; /* Adds space between the text and the member listings */
+}
+
+.custom-card .member-item {
+  padding: 10px;
+  box-sizing: border-box; /* Includes padding and border in the element's total width and height */
+}
+
+.custom-card .member-item strong {
+  color: #555; /* Styling for the function */
+}
+
+.custom-card .member-item span {
+  display: block; /* Ensure name is on its own line */
+  margin-top: 5px;
+}
+
+#medias-section {
+  display: flex;
+  justify-content: center; /* Center horizontally */
+}
+
+.custom-card {
+  margin: 16px; /* Adds margin around each card for better spacing */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: Adds shadow for better visibility */
+}
+
+.mat-card img {
+  width: 100%; /* Ensures the image is responsive and fills the card width */
+  height: auto; /* Keeps the aspect ratio intact */
+  max-height: 200px; /* Limits the image height; adjust as needed */
+  object-fit: cover; /* Ensures the image covers the area without distorting */
+}
+
+/* Adjust overall layout padding */
+#about-section {
+  padding: 0 30px; /* Adds horizontal padding */
+}
+
+#contact-section {
+  padding: 0 30px;
+}
+
+/* Stylesheet for your component */
+@media (max-width: 767px) {
+  .custom-card {
+    border: none; /* Removes borders */
+    box-shadow: none; /* Removes shadows if any */
+  }
+
+  #about-section {
+    padding: 0; /* Optionally removes padding if needed */
+  }
+}
+
+.full-width {
+  width: 100%;
+}
+
+.sponsor-card {
+  max-width: 400px; /* Limit the card width */
+  width: 100%; /* Ensure the card uses the full width up to its max */
+  box-shadow: none; /* Optional: Remove shadow for a cleaner look */
+}
+
+.sponsor-card img {
+  width: 100%; /* Make the image expand to the full width of the card */
+  height: auto; /* Maintain aspect ratio */
+}
+
+#sponsors-section h2 {
+  color: #000; /* Adjust color to fit your design */
+  margin-bottom: 0.5em;
+  font-family: Montserrat;
+}
+
+#sponsors-section p {
+  color: #000;
+  font-family: Montserrat;
+  font-size: 16px;
+  max-width: 600px;
+}
+
+#sponsors-section h2 {
+  color: #333; /* Dark color for headings */
+}
+
+.sponsor-card img {
+  width: 100%; /* Make the image expand to the full width of the card */
+  height: auto; /* Maintain aspect ratio */
+  object-fit: cover; /* Ensures the image covers the designated area properly */
+}
