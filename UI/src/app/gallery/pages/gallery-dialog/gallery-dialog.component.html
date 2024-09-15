@@ -1,0 +1,19 @@
+<h2 mat-dialog-title>Galerie {{ data.year }}</h2>
+<mat-dialog-content class="custom-gallery-content">
+  <!-- Conditional display based on screen size -->
+  <div *ngIf="isMobile" class="gallery-slider">
+    <div class="gallery-image-wrapper" *ngIf="data.images[currentIndex]">
+      <img [src]="data.images[currentIndex].url" [alt]="data.images[currentIndex].alt" class="gallery-image" />
+    </div>
+  </div>
+
+  <div *ngIf="!isMobile" class="gallery-vertical">
+    <div class="gallery-image-wrapper" *ngIf="data.images[currentIndex]">
+      <img [src]="data.images[currentIndex].url" [alt]="data.images[currentIndex].alt" class="gallery-image" />
+    </div>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>Fermer</button>
+  <mat-paginator [hidePageSize]="true" [length]="data.images.length" [pageSize]="1" [pageSizeOptions]="[1]" showFirstLastButtons></mat-paginator>
+</mat-dialog-actions>

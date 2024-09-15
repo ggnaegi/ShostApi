@@ -8,17 +8,17 @@
   margin: 0;
   width: 100%;
   box-sizing: border-box;
-  background-color: #b8707b; /* Updated color for the top bar */
-  color: #fff; /* White text for contrast */
+  background-color: #000;
+  color: #fff;
 }
 
 .logo-container {
-  margin-left: 16px; /* Add margin to the left of the logo */
+  margin-left: 16px;
 }
 
 .logo-image {
-  height: 40px; /* Adjust the height of the logo as needed */
-  margin-right: 16px; /* Space between logo and the next element */
+  height: 40px;
+  margin-right: 16px;
 }
 
 .right-section button {
@@ -27,23 +27,23 @@
 }
 
 .mat-icon-button {
-  border-radius: 0; /* Remove rounded corners from buttons */
+  border-radius: 0;
 }
 
 .navbar {
   background-color: white;
-  padding: 0; /* Remove padding to eliminate space */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for separation */
-  margin: 0; /* Remove any margin */
+  padding: 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 0;
 }
 
 .menu-items {
   display: flex;
   align-items: center;
-  position: relative; /* Needed for pseudo-element positioning */
-  padding: 0; /* Remove padding */
-  margin: 0; /* Remove margin */
-  height: 100%; /* Ensure it takes full height of navbar */
+  position: relative;
+  padding: 0;
+  margin: 0;
+  height: 100%;
 }
 
 .menu-items::before {
@@ -53,53 +53,50 @@
   left: 0;
   width: 100%;
   height: 1px;
-  background-color: #ead4d7; /* Light color for the baseline under all items */
+  background-color: #ead4d7; /* Baseline under all items */
 }
 
 .menu-items a {
+  display: block; /* Ensure the entire anchor area is clickable */
   font-size: 16px;
   color: #333;
   text-decoration: none;
   margin: 0 12px;
-  border-radius: 0; /* Remove rounded corners */
-  position: relative; /* Needed for pseudo-element positioning */
-  transition: all 0.3s ease; /* Smooth transition for hover effect */
-  z-index: 1; /* Ensure menu items are above the base line */
-  height: 100%; /* Make sure the menu items are vertically centered */
-  display: flex;
-  align-items: center; /* Align menu items vertically */
+  padding: 15px 10px; /* Padding for a larger clickable area */
+  position: relative;
+  transition: all 0.3s ease;
+  z-index: 1; /* Ensure the anchor is above the baseline */
+  height: 100%;
 }
 
 .menu-items a::after {
   content: '';
-  display: block;
-  width: 100%;
+  width: 0;
   height: 2px;
-  background-color: transparent; /* Initially transparent */
+  background-color: transparent;
   position: absolute;
-  bottom: 0; /* Align directly on top of the baseline */
+  bottom: 0;
   left: 0;
-  transition: all 0.3s ease; /* Smooth transition for hover and active effects */
+  transition: all 0.3s ease;
 }
 
 .menu-items a:hover::after,
 .menu-items a.active-link::after {
-  background-color: #be3d59; /* Darker color for hover and active states */
+  background-color: #be3d59; /* Underline color for hover and active */
+  width: 100%; /* Full width underline */
 }
 
 .menu-toggle-button {
-  display: none; /* Hidden by default */
+  display: none;
 }
 
 .menu-toggle-button i {
-  font-size: 24px; /* Adjust icon size */
-  color: #000; /* Black color for the hamburger icon */
+  font-size: 24px;
+  color: #fff;
 }
 
 .content {
-  padding-left: 10px;
-  padding-right: 16px;
-  background-color: white; /* White background for content */
+  background-color: white;
 }
 
 .card-container {
@@ -110,46 +107,44 @@
 
 .example-card {
   width: 200px;
-  border-radius: 0; /* Remove rounded corners for cards */
+  border-radius: 0;
 }
 
 @media (max-width: 768px) {
   .navbar {
-    display: none; /* Hide the horizontal menu on small screens */
+    display: none;
   }
 
   .menu-toggle-button {
-    display: block; /* Show the mobile menu button on small screens */
+    display: block;
   }
 }
 
-/* Sidenav full height styling */
 .mobile-sidenav {
-  height: 100%; /* Make sure the sidenav takes full height */
-  box-shadow: none; /* Remove any box shadow */
-  overflow: hidden; /* Disable scroll bar */
-  border-left: none; /* No border on the left side */
-  background-color: black; /* Black background for the mobile menu */
+  box-shadow: none;
+  overflow: auto;
+  border-left: none;
+  background-color: white;
 }
 
 .mobile-sidenav .mat-nav-list a {
-  color: white; /* White text color for menu items */
+  color: white;
 }
 
 .right-section button i {
-  font-size: 24px; /* Adjust icon size */
-  color: #000; /* Icon color to match your theme */
+  font-size: 24px;
+  color: #fff;
 }
 
 .background-image-wrapper {
   position: relative;
-  width: 100%; /* Cover the full width of the content */
-  min-height: calc(100vh - 64px); /* Adjust height to ensure it covers the full viewport minus the toolbar height */
+  width: 100%;
+  min-height: calc(100vh - 64px);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  z-index: 0; /* Ensure it is behind other content */
+  z-index: 0;
 }
 
 .background-image-wrapper::before {
@@ -160,12 +155,10 @@
   width: 100%;
   height: 100%;
   background-color: #fbe9e7;
-  opacity: 0.1; /* Make the background very faint */
-  z-index: -1; /* Ensure it is behind the content */
-  pointer-events: none; /* Make sure the background doesn't interfere with clicks */
+  opacity: 0.1;
+  z-index: -1;
 }
 
-/* Ensure no padding or margin in the main content wrapper */
 .main-content-wrapper {
   padding: 0;
   margin: 0;
@@ -183,13 +176,13 @@
 .center-column {
   padding: 0;
   margin: 0;
-  width: 80%; /* Default width */
+  width: 80%;
 }
 
 .right-column {
   padding: 0;
   margin: 0;
-  width: 20%; /* Default width for larger screens */
+  width: 20%;
 }
 
 @media (max-width: 768px) {
@@ -197,13 +190,15 @@
     flex-direction: column;
   }
 
-  .center-column, .right-column {
-    width: 100%; /* Ensure both columns take 100% width in mobile */
+  .center-column,
+  .right-column {
+    width: 100%;
   }
 }
 
-/* General styling cleanup */
-html, body, mat-toolbar {
+html,
+body,
+mat-toolbar {
   margin: 0;
   padding: 0;
 }
@@ -212,11 +207,28 @@ html, body, mat-toolbar {
   box-sizing: border-box;
 }
 
-.menu-items {
-  padding: 0;
-  margin: 0;
-}
-
-.center-column, .right-column {
+.center-column,
+.right-column {
   box-sizing: border-box;
 }
+
+.footer {
+  position: page;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 5px 20px;
+  color: #fff;
+  background-color: #803357; /* Replace with your color scheme */
+  z-index: 1000; /* Ensures the footer stays on top of other content */
+}
+
+.footer-text {
+  font-size: 12px;
+}
+
+.fa-github {
+  font-size: 20px;
+}
+
+

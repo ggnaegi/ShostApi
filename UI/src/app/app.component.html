@@ -25,14 +25,14 @@
 </mat-toolbar>
 
 <!-- Navbar with Logo and Menu Items (hidden on mobile) -->
-<mat-toolbar color="white" class="navbar" fxLayout="row" fxLayoutAlign="end center" fxHide.lt-md>
-  <div class="menu-items" fxLayout="row" fxLayoutAlign="end center">
-    <a mat-button routerLink="/" routerLinkActive="active-link">Accueil</a>
-    <a mat-button routerLink="/about" routerLinkActive="active-link">A Propos</a>
-    <a mat-button routerLink="/concerts" routerLinkActive="active-link">Concerts</a>
-    <a mat-button routerLink="/medias" routerLinkActive="active-link">Médias</a>
-    <a mat-button routerLink="/contact" routerLinkActive="active-link">Contact</a>
-    <a mat-button routerLink="/sponsors" routerLinkActive="active-link">Sponsors</a>
+<mat-toolbar color="white" class="navbar" fxLayout="row" fxLayoutAlign="center" fxHide.lt-md>
+  <div class="menu-items" fxLayout="row" fxLayoutAlign="space-around stretch" fxFlexFill>
+    <a mat-button routerLink="/" routerLinkActive="active-link" class="menu-link">Accueil</a>
+    <a mat-button routerLink="/about" fragment="about-section" class="menu-link">A Propos</a>
+    <a mat-button routerLink="/concerts" routerLinkActive="active-link" class="menu-link">Concerts</a>
+    <a mat-button routerLink="/about" fragment="medias-section" class="menu-link">Médias</a>
+    <a mat-button routerLink="/about" fragment="contact-section" class="menu-link">Contact</a>
+    <a mat-button routerLink="/about" fragment="sponsors-section" class="menu-link">Sponsors</a>
   </div>
 </mat-toolbar>
 
@@ -41,17 +41,29 @@
   <mat-sidenav #sidenav mode="side" position="end" fxHide fxShow.lt-md class="mobile-sidenav">
     <mat-nav-list>
       <a mat-list-item routerLink="/" routerLinkActive="active-link" (click)="sidenav.close()">Accueil</a>
-      <a mat-list-item routerLink="/about" routerLinkActive="active-link" (click)="sidenav.close()">A Propos</a>
+      <a mat-list-item routerLink="/about" fragment="about-section" routerLinkActive="active-link" (click)="sidenav.close()">A Propos</a>
       <a mat-list-item routerLink="/concerts" routerLinkActive="active-link" (click)="sidenav.close()">Concerts</a>
-      <a mat-list-item routerLink="/medias" routerLinkActive="active-link" (click)="sidenav.close()">Médias</a>
-      <a mat-list-item routerLink="/contact" routerLinkActive="active-link" (click)="sidenav.close()">Contact</a>
-      <a mat-list-item routerLink="/sponsors" routerLinkActive="active-link" (click)="sidenav.close()">Sponsors</a>
+      <a mat-list-item routerLink="/about" fragment="medias-section" routerLinkActive="active-link" (click)="sidenav.close()">Médias</a>
+      <a mat-list-item routerLink="/about" fragment="contact-section" routerLinkActive="active-link" (click)="sidenav.close()">Contact</a>
+      <a mat-list-item routerLink="/about" fragment="sponsors-section" routerLinkActive="active-link" (click)="sidenav.close()">Sponsors</a>
     </mat-nav-list>
   </mat-sidenav>
 
   <mat-sidenav-content>
-    <div class="content background-image-wrapper" fxLayout="column" fxLayoutAlign="start stretch">
-      <app-session-container [year]="2024"></app-session-container>
+    <div class="content" fxLayout="column" fxLayoutAlign="start stretch">
+      <router-outlet></router-outlet>
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>
+
+<mat-toolbar color="secondary" class="footer">
+  <div fxLayout="row" fxLayoutAlign="space-between center" fxFlexFill>
+    <!-- Copyright Notice -->
+    <span class="footer-text">© 2024 Harmonie Shostakovich</span>
+
+    <!-- GitHub Link -->
+    <a href="https://github.com/ggnaegi/ShostApi" target="_blank" mat-icon-button aria-label="GitHub Repository">
+      <i class="fa-brands fa-github"></i>
+    </a>
+  </div>
+</mat-toolbar>

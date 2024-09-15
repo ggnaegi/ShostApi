@@ -56,21 +56,21 @@ public class Organisations(ILoggerFactory loggerFactory, IMapper mapper, ShostaD
 
     [Function(nameof(GetOrganisation))]
     public async Task<IActionResult> GetOrganisation(
-        [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "organisations/{year}")] HttpRequestData req,
-        int year,
+        [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "organisations")] HttpRequestData req,
         FunctionContext executionContext)
     {
         var organisation = await dbContext.Organisations
             .Include(i => i.CommitteeMembers)
             .AsNoTracking()
-            .SingleOrDefaultAsync(s => s.Year == year);
+            .OrderByDescending(o => o.Year) 
+            .FirstOrDefaultAsync(); 
 
         if (organisation != null)
         {
             return new OkObjectResult(mapper.Map<Organisation, OrganisationDto>(organisation));
         }
 
-        _logger.LogError("Organisation not found for year: {year}", year);
+        _logger.LogError("Organisation not found.");
         return new NotFoundObjectResult("Organisation not found.");
     }
 }

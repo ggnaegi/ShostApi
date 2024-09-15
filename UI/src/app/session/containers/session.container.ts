@@ -1,9 +1,10 @@
-import {Component, Input, OnChanges, SimpleChanges} from "@angular/core";
+import {Component, OnInit} from "@angular/core";
 import {AsyncPipe} from "@angular/common";
 import {SessionComponent} from "../pages/session.component";
 import {AbstractSessionService} from "../services/abstract.session.service";
 import {Observable} from "rxjs";
 import {Session} from "../api/session-element";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-session-container',
@@ -16,18 +17,17 @@ import {Session} from "../api/session-element";
     <app-session [sessionData]="sessionData$ | async"/>
   `
 })
-export class SessionContainerComponent implements OnChanges {
-  @Input()
+export class SessionContainerComponent implements OnInit {
   year: number = 2024;
 
   sessionData$!: Observable<Session>;
 
-  constructor(public sessionService: AbstractSessionService) {}
+  constructor(public sessionService: AbstractSessionService, private route: ActivatedRoute) {}
 
-  ngOnChanges(changes: SimpleChanges): void {
-    // If 'year' changes, re-fetch the session data
-    if (changes["year"]) {
+  ngOnInit(): void {
+    this.route.params.subscribe(params => {
+      this.year = +params['year']; // The '+' converts 'year' from string to number
       this.sessionData$ = this.sessionService.sessionData$(this.year);
-    }
+    });
   }
 }

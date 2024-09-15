@@ -1,0 +1,18 @@
+<ng-container *ngIf="galleriesDefinitions">
+  <div class="card-container">
+    <!-- Iterate over galleries, displaying a card for each year -->
+    <div class="year-card-wrapper" *ngFor="let gallery of galleriesDefinitions.galleries">
+      <mat-card *ngIf="gallery.year >= 2016" class="year-card" [routerLink]="['/session', gallery.year]">
+        <mat-card-header>
+          <mat-card-title>{{ gallery.year }}</mat-card-title>
+        </mat-card-header>
+        <img [src]="getLogoForYear(gallery.year)" alt="{{getAltForYear(gallery.year)}}" class="card-logo" />
+        <mat-card-actions>
+          <button mat-icon-button>
+            <mat-icon (click)="openGalleryDialog(gallery)">photo_library</mat-icon> <!-- Gallery Icon -->
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</ng-container>

@@ -7,7 +7,7 @@ import {MatSidenav, MatSidenavContainer, MatSidenavModule} from "@angular/materi
 import {MatListItem, MatNavList} from "@angular/material/list";
 import {MatCard} from "@angular/material/card";
 import {MatMenu, MatMenuItem, MatMenuTrigger} from "@angular/material/menu";
-import {MatAnchor, MatIconButton} from "@angular/material/button";
+import {MatAnchor, MatIconAnchor, MatIconButton} from "@angular/material/button";
 import {FlexLayoutModule} from "@angular/flex-layout";
 import {NgOptimizedImage} from "@angular/common";
 import {SessionContainerComponent} from "./session/containers/session.container";
@@ -15,7 +15,7 @@ import {SessionContainerComponent} from "./session/containers/session.container"
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, MatToolbar, MatIcon, MatSidenavContainer, MatNavList, MatCard, MatMenu, MatMenuItem, MatListItem, MatMenuTrigger, MatSidenav, MatToolbarModule, MatSidenavModule, MatAnchor, MatIconButton, FlexLayoutModule, RouterLink, RouterLinkActive, NgOptimizedImage, SessionContainerComponent],
+  imports: [RouterOutlet, MatToolbar, MatIcon, MatSidenavContainer, MatNavList, MatCard, MatMenu, MatMenuItem, MatListItem, MatMenuTrigger, MatSidenav, MatToolbarModule, MatSidenavModule, MatAnchor, MatIconButton, FlexLayoutModule, RouterLink, RouterLinkActive, NgOptimizedImage, SessionContainerComponent, MatIconAnchor],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
