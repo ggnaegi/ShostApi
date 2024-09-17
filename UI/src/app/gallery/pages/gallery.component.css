@@ -31,8 +31,33 @@
   box-shadow: none; /* Optional: remove box shadow */
 }
 
+.year-card img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: cover;
+}
+
 .year-card:hover {
   transform: scale(1.05);
+}
+
+/* Media query for screens smaller than 768px */
+@media (max-width: 768px) {
+  .card-container {
+    flex-direction: column; /* Stack cards vertically */
+    overflow-x: hidden; /* Remove horizontal scrolling */
+    overflow-y: auto; /* Enable vertical scrolling if necessary */
+    padding-bottom: 0; /* Remove padding at the bottom */
+  }
+
+  .year-card-wrapper {
+    margin-bottom: 16px; /* Add space between vertically stacked cards */
+    margin-right: 0; /* Remove horizontal margin */
+  }
+
+  .year-card {
+    max-width: 100%; /* Allow the card to take the full width on smaller screens */
+  }
 }
 
 .card-logo {
@@ -43,4 +68,127 @@
 
 mat-grid-tile {
   padding: 5px;
+}
+
+.custom-dialog-container {
+  max-width: 90vw;
+  max-height: 90vh;
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .content-wrapper {
+    flex-direction: column; /* Stack image on top and text below */
+    text-align: center; /* Center text and image for mobile */
+  }
+
+  .welcome-teaser {
+    padding-left: 0;
+    padding-top: 20px; /* Add spacing between the image and text */
+  }
+
+  .year-card-wrapper {
+    margin-bottom: 20px; /* Add space between the image and text */
+  }
+}
+
+#medias-section {
+  display: flex;
+  justify-content: center; /* Center the cards horizontally */
+  flex-wrap: wrap;
+  padding-bottom: 10px;
+  margin-bottom: 16px;
+}
+
+/* Main section styling */
+#welcome-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  font-family: Montserrat;
+}
+
+/* Wrapper for image and text */
+.content-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 100%;
+}
+
+/* Teaser text styling */
+.welcome-teaser {
+  max-width: 600px;
+}
+
+/* Button to toggle the overlay */
+.toggle-overlay-btn {
+  position: fixed;
+  top: 135px;
+  right: 0;
+  padding: 10px 15px;
+  background-color: #803357;
+  color: white;
+  border: none;
+  border-radius: 10px 0 0 10px;
+  cursor: pointer;
+  z-index: 11; /* Above the content */
+  display: flex;
+  align-items: center;
+  transition: right 0.3s ease-in-out; /* Smooth transition to move with overlay */
+}
+
+/* Move the button along with the overlay when it's active */
+.toggle-overlay-btn.active {
+  right: 300px; /* The same width as the overlay */
+}
+
+/* Adjust spacing between icon and text */
+.toggle-overlay-btn i {
+  font-size: 20px; /* FontAwesome icon size */
+  margin-right: 8px; /* Space between icon and text */
+}
+
+/* Facebook overlay (hidden by default) */
+.social-overlay {
+  position: fixed;
+  top: 160px;
+  right: -340px; /* Hidden outside of the viewport */
+  width: 300px;
+  background-color: transparent;
+  padding: 20px;
+  transition: right 0.3s ease-in-out; /* Smooth transition */
+  z-index: 10;
+}
+
+/* When overlay is active (open) */
+.social-overlay.active {
+  right: 0; /* Slide in when active */
+}
+
+/* Header inside the overlay with title and close button */
+.overlay-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.overlay-title {
+  font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+
+.close-overlay-btn {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  color: #333;
+}
+
+/* Facebook widget styling */
+.fb-page {
+  width: 100% !important;
 }

@@ -1,6 +1,5 @@
 @use '@angular/material' as mat;
 
-
 // Import Google Fonts
 @import 'https://fonts.googleapis.com/icon?family=Material+Icons+Outlined';
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap');
@@ -24,37 +23,36 @@ $typography: mat.m2-define-typography-config(
   $overline: mat.m2-define-typography-level(inherit, 1.125, 400, 'Montserrat', 1.5px)
 );
 
-// Define custom color palettes using the new M2 API
 $custom-primary-palette: mat.m2-define-palette(
     (
-      50: #f0e3e5,
-      100: #ead4d7,
-      200: #e0bfc4,
-      300: #d4a5ab,
-      400: #ca8f97,
-      500: #b8707b, // main
-      600: #a0535e,
-      700: #a0535e, // darker
-      800: #8e464d,
-      900: #7c3a41,
-      A100: #f4e8ea,
-      A200: #ead4d7,
-      A400: #d4a5ab,
-      A700: #8e464d,
+      50: #f4e6eb,
+      100: #e6bfd0,
+      200: #d693ab,
+      300: #c5648c,
+      400: #b74675,
+      500: #803357, // main primary color
+      600: #732f4f, // slightly darker version for active states
+      700: #662945,
+      800: #57223a,
+      900: #471a2e,
+      A100: #ffedf4,
+      A200: #ffd3e4,
+      A400: #ffaac7,
+      A700: #ff93b0,
       contrast: (
         50: rgba(0, 0, 0, 0.87),
         100: rgba(0, 0, 0, 0.87),
         200: rgba(0, 0, 0, 0.87),
         300: rgba(0, 0, 0, 0.87),
         400: rgba(0, 0, 0, 0.87),
-        500: rgba(0, 0, 0, 0.87),
+        500: #ffffff, // white text for better contrast on #803357
         600: #ffffff,
         700: #ffffff,
         800: #ffffff,
         900: #ffffff,
         A100: rgba(0, 0, 0, 0.87),
         A200: rgba(0, 0, 0, 0.87),
-        A400: #ffffff,
+        A400: rgba(0, 0, 0, 0.87),
         A700: #ffffff
       )
     )
@@ -212,3 +210,83 @@ $dark-theme: mat.m2-define-dark-theme((
 .mat-badge-content {
   font-family: 'Montserrat';
 }
+
+.cdk-overlay-container,.cdk-global-overlay-wrapper {
+  pointer-events: none;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%
+}
+
+.cdk-overlay-container {
+  position: fixed;
+  z-index: 1000
+}
+
+.cdk-overlay-container:empty {
+  display: none
+}
+
+.cdk-global-overlay-wrapper {
+  display: flex;
+  position: absolute;
+  z-index: 1000
+}
+
+.cdk-overlay-pane {
+  position: absolute;
+  pointer-events: auto;
+  box-sizing: border-box;
+  z-index: 1000;
+  display: flex;
+  max-width: 100%;
+  max-height: 100%
+}
+
+.cdk-overlay-backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 1000;
+  pointer-events: auto;
+  -webkit-tap-highlight-color: transparent;
+  transition: opacity .4s cubic-bezier(.25,.8,.25,1);
+  opacity: 0
+}
+
+.cdk-overlay-backdrop.cdk-overlay-backdrop-showing {
+  opacity: 1
+}
+
+.cdk-high-contrast-active .cdk-overlay-backdrop.cdk-overlay-backdrop-showing {
+  opacity: .6
+}
+
+.cdk-overlay-dark-backdrop {
+  background: #00000052
+}
+
+.cdk-overlay-transparent-backdrop {
+  transition: visibility 1ms linear,opacity 1ms linear;
+  visibility: hidden;
+  opacity: 1
+}
+
+.cdk-overlay-transparent-backdrop.cdk-overlay-backdrop-showing {
+  opacity: 0;
+  visibility: visible
+}
+
+.cdk-overlay-backdrop-noop-animation {
+  transition: none
+}
+
+.cdk-overlay-connected-position-bounding-box {
+  position: absolute;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  min-width: 1px;
+  min-height: 1px
+}
+

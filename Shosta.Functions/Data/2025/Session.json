@@ -1,0 +1,376 @@
+﻿{
+  "Year": 2025,
+  "Picture": "2025/Gallery/Session.jpg",
+  "Gallery": "2025/Gallery",
+  "Title": "Constellations",
+  "Musicians": [
+    {
+      "FirstName": "Célestine",
+      "LastName": "Crelier",
+      "Instrument": "Flûte / Piccolo"
+    },
+    {
+      "FirstName": "Mathilde",
+      "LastName": "Jaquier",
+      "Instrument": "Flûte / Piccolo"
+    },
+    {
+      "FirstName": "Mathilde",
+      "LastName": "Lehmann",
+      "Instrument": "Flûte / Piccolo"
+    },
+    {
+      "FirstName": "Nathalie",
+      "LastName": "Schüttel",
+      "Instrument": "Flûte / Piccolo"
+    },
+    {
+      "FirstName": "Natacha",
+      "LastName": "Wermeille",
+      "Instrument": "Flûte / Piccolo"
+    },
+    {
+      "FirstName": "Sandra",
+      "LastName": "Barbezat",
+      "Instrument": "Hautbois"
+    },
+    {
+      "FirstName": "Caroline",
+      "LastName": "Berthoud",
+      "Instrument": "Hautbois"
+    },
+    {
+      "FirstName": "Claire-Pascale",
+      "LastName": "Musard",
+      "Instrument": "Hautbois"
+    },
+    {
+      "FirstName": "Laetitia",
+      "LastName": "Bélet",
+      "Instrument": "Clarinette"
+    },
+    {
+      "FirstName": "Serge",
+      "LastName": "Beuret",
+      "Instrument": "Clarinette"
+    },
+    {
+      "FirstName": "Mireille",
+      "LastName": "Boillat",
+      "Instrument": "Clarinette"
+    },
+    {
+      "FirstName": "Maëlie",
+      "LastName": "Deleury",
+      "Instrument": "Clarinette"
+    },
+    {
+      "FirstName": "Anna",
+      "LastName": "Essig",
+      "Instrument": "Clarinette"
+    },
+    {
+      "FirstName": "Océa",
+      "LastName": "Etienne",
+      "Instrument": "Clarinette"
+    },
+    {
+      "FirstName": "Clément",
+      "LastName": "Gaignat",
+      "Instrument": "Clarinette"
+    },
+    {
+      "FirstName": "Fabien",
+      "LastName": "Gaudin",
+      "Instrument": "Clarinette"
+    },
+    {
+      "FirstName": "Hubert",
+      "LastName": "Jaquier",
+      "Instrument": "Clarinette"
+    },
+    {
+      "FirstName": "Julie",
+      "LastName": "Milotte",
+      "Instrument": "Clarinette"
+    },
+    {
+      "FirstName": "Simon",
+      "LastName": "Stettler",
+      "Instrument": "Clarinette"
+    },
+    {
+      "FirstName": "Milo",
+      "LastName": "Voisard",
+      "Instrument": "Clarinette"
+    },
+    {
+      "FirstName": "Christophe",
+      "LastName": "Godinat (basse)",
+      "Instrument": "Clarinette"
+    },
+    {
+      "FirstName": "Maxime",
+      "LastName": "Fauser (Alto)",
+      "Instrument": "Saxophone"
+    },
+    {
+      "FirstName": "Sylviane",
+      "LastName": "Liniger Odiet (Alto)",
+      "Instrument": "Saxophone"
+    },
+    {
+      "FirstName": "Roberto",
+      "LastName": "My (Alto)",
+      "Instrument": "Saxophone"
+    },
+    {
+      "FirstName": "Benjamin",
+      "LastName": "Odiet (Soprano & Alto)",
+      "Instrument": "Saxophone"
+    },
+    {
+      "FirstName": "Guillaume",
+      "LastName": "Harris (Ténor)",
+      "Instrument": "Saxophone"
+    },
+    {
+      "FirstName": "Lirong",
+      "LastName": "Yin (Baryton)",
+      "Instrument": "Saxophone"
+    },
+    {
+      "FirstName": "Kilian",
+      "LastName": "Geiser",
+      "Instrument": "Basson"
+    },
+    {
+      "FirstName": "André",
+      "LastName": "Honegger",
+      "Instrument": "Basson"
+    },
+    {
+      "FirstName": "Christian",
+      "LastName": "Marquis (Contrebasson)",
+      "Instrument": "Basson"
+    },
+    {
+      "FirstName": "Romain",
+      "LastName": "Cattin",
+      "Instrument": "Cor"
+    },
+    {
+      "FirstName": "Jonas",
+      "LastName": "Courtet",
+      "Instrument": "Cor"
+    },
+    {
+      "FirstName": "Sylvain",
+      "LastName": "Gaignat",
+      "Instrument": "Cor"
+    },
+    {
+      "FirstName": "Hervé",
+      "LastName": "Grélat",
+      "Instrument": "Cor"
+    },
+    {
+      "FirstName": "Jean-Marie",
+      "LastName": "Nussbaumer",
+      "Instrument": "Cor"
+    },
+    {
+      "FirstName": "Eva",
+      "LastName": "Spinetti",
+      "Instrument": "Cor"
+    },
+    {
+      "FirstName": "Julien",
+      "LastName": "Brahier",
+      "Instrument": "Trompette"
+    },
+    {
+      "FirstName": "Guillaume",
+      "LastName": "Gnaegi",
+      "Instrument": "Trompette"
+    },
+    {
+      "FirstName": "Sébastien",
+      "LastName": "Meyer",
+      "Instrument": "Trompette"
+    },
+    {
+      "FirstName": "Jacques-Edmond",
+      "LastName": "Nussbaumer",
+      "Instrument": "Trompette"
+    },
+    {
+      "FirstName": "Raphaël",
+      "LastName": "Ory",
+      "Instrument": "Trompette"
+    },
+    {
+      "FirstName": "Laurent",
+      "LastName": "Schüttel",
+      "Instrument": "Trompette"
+    },
+    {
+      "FirstName": "Diego",
+      "LastName": "Stornetta",
+      "Instrument": "Trompette"
+    },
+    {
+      "FirstName": "Elia",
+      "LastName": "Voisard",
+      "Instrument": "Trompette"
+    },
+    {
+      "FirstName": "Pascal",
+      "LastName": "Berberat",
+      "Instrument": "Trombone"
+    },
+    {
+      "FirstName": "Hervé",
+      "LastName": "Choulat",
+      "Instrument": "Trombone"
+    },
+    {
+      "FirstName": "Yannick",
+      "LastName": "Speisser",
+      "Instrument": "Trombone"
+    },
+    {
+      "FirstName": "Charlie",
+      "LastName": "Jobin (basse)",
+      "Instrument": "Trombone"
+    },
+    {
+      "FirstName": "Samuel",
+      "LastName": "Speisser (basse)",
+      "Instrument": "Trombone"
+    },
+    {
+      "FirstName": "Bastien",
+      "LastName": "Girard",
+      "Instrument": "Euphonium"
+    },
+    {
+      "FirstName": "Pierre",
+      "LastName": "Fleury",
+      "Instrument": "Euphonium"
+    },
+    {
+      "FirstName": "Jean-Louis",
+      "LastName": "Brahier",
+      "Instrument": "Basse"
+    },
+    {
+      "FirstName": "Nicolas",
+      "LastName": "Etique",
+      "Instrument": "Basse"
+    },
+    {
+      "FirstName": "Frédéric",
+      "LastName": "Monard",
+      "Instrument": "Basse"
+    },
+    {
+      "FirstName": "Claude",
+      "LastName": "Berdat",
+      "Instrument": "Percussion"
+    },
+    {
+      "FirstName": "Matthieu",
+      "LastName": "Casareale",
+      "Instrument": "Percussion"
+    },
+    {
+      "FirstName": "Célien",
+      "LastName": "Courtet",
+      "Instrument": "Percussion"
+    },
+    {
+      "FirstName": "Yannis",
+      "LastName": "Gerster",
+      "Instrument": "Percussion"
+    },
+    {
+      "FirstName": "Jan",
+      "LastName": "Grélat",
+      "Instrument": "Percussion"
+    },
+    {
+      "FirstName": "Nathan",
+      "LastName": "Klinger",
+      "Instrument": "Percussion"
+    },
+    {
+      "FirstName": "Marinel",
+      "LastName": "Mittemperger",
+      "Instrument": "Percussion"
+    },
+    {
+      "FirstName": "Vincent",
+      "LastName": "Munier",
+      "Instrument": "Percussion"
+    },
+    {
+      "FirstName": "Maxence",
+      "LastName": "Nappez",
+      "Instrument": "Percussion"
+    },
+    {
+      "FirstName": "Elise",
+      "LastName": "Frei",
+      "Instrument": "Contrebasse"
+    },
+    {
+      "FirstName": "Aude",
+      "LastName": "Wermeille",
+      "Instrument": "Harpe"
+    },
+    {
+      "FirstName": "Marie",
+      "LastName": "Guyot",
+      "Instrument": "Piano"
+    }
+  ],
+  "Program": "<p><em>Also Sprach Zarathustra</em><br>Richard Strauss<br>Arr. R. Longfield</p>\n\n<p><em>Journey Through the Stratosphere</em><br>Rossano Galante</p>\n\n<p><em>Concerto pour Piano, Percussion et Orchestre à Vent</em><br>David Gillingham<br>Arr. D.W. Fischer<br>Soliste : Marie Guyot</p>\n\n<p><em>Super Mario Galaxy Medley</em><br>Koji Kondo<br>Arr. G. Dupertuis</p>\n\n<p><em>Jupiter</em><br>Gustav Holst<br>Arr. Geert Schrijvers</p>\n\n<p><em>Music From Space (Extrait)</em><br>Otto Schwarz</p>\n\n<p><em>Orbital</em><br>Adrian B. Sims</p>\n\n<p><em>Spiritual Planet</em><br>Wataru Hokoyama</p>\n\n<p><em>Outro</em><br>Olivier Marquis</p>\n\n<p><em>Cantina Band</em><br>John Williams<br>Arr. D. Hveem</p>",
+  "Teaser": "<p>Plongez au cœur de l'univers avec <strong>Constellations</strong>, un concert qui vous transporte au-delà de notre planète. Sous la baguette du chef d'orchestre jurassien <strong>Emile Sanglard</strong>, explorez la stratosphère, les corps célestes, Jupiter et vivez une expérience inédite avec une mise en scène innovante et des jeux de lumières poétiques.</p>\n\n<p>L'astrophysicien <strong>Aurélien Barrau</strong> partagera ses réflexions fascinantes sur l'univers, tandis que la brillante pianiste jurassienne <strong>Marie Guyot</strong> sera à l'honneur en tant que soliste.</p>\n\n<p>L'<strong>Harmonie Shostakovich</strong> vous offre un voyage unique, où la musique rencontre la science pour illuminer l'infini, comme vous ne l'avez jamais expérimenté!</p>",
+  "Presentation": "<h1>Constellations</h1>\n\n<p>En 2025, l’Harmonie Shostakovich vous invite à explorer l’univers avec <strong>Constellations</strong>, une expérience musicale inspirée de la grandeur, la beauté et les mystères du cosmos. Ces concerts inédits vous embarqueront dans un voyage extraordinaire, avec des œuvres originales retraçant si bien la fascination et la contemplation, l’extravagance et la légèreté, l’infini et les limites de l’univers.</p>\n\n<p><strong>Les talents régionaux seront à l’honneur!</strong> La direction sera assumée par le brillant chef d’orchestre jurassien <em>Emile Sanglard</em>. De plus, <em>Marie Guyot</em>, pianiste professionnelle de Courgenay, interprétera le <em>Concerto pour Piano, Percussions, et Orchestre à vents</em> de <em>David R. Gillingham</em>.</p>\n\n<p>De la Terre à Jupiter (tirée des <em>Planètes</em> de <em>Holst</em>) et au-delà, nous aurons le privilège d’être accompagné d’<em>Aurélien Barrau</em>, astrophysicien et philosophe français de renom, qui enrichira cette expérience en modérant les concerts avec ses réflexions fascinantes sur le cosmos et les relations entre l’Homme et sa planète, dont s’est également inspiré le compositeur <em>W. Hokoyama</em> pour son œuvre <em>Spiritual Planet</em>.</p>\n\n<p>Pour une immersion totale, le concert sera sublimé par une mise en scène innovante et des jeux de lumières poétiques, renforçant cette odyssée sonore et visuelle. Chaque détail, de la scénographie aux arrangements musicaux, a été pensé pour vous offrir un voyage sensoriel inoubliable.</p>\n\n<p><strong>Constellations</strong> vous promet une expérience unique, où la musique et l’univers se rencontrent pour vous offrir un moment d’exception et illuminer l’infini, comme vous ne l’avez jamais vu, ni entendu!</p>",
+  "Concerts": [
+    {
+      "Date": "2025-02-08T20:00:00",
+      "Venue": "Théâtre du Jura",
+      "City": "Delémont",
+      "Tickets": "https://www.theatre-du-jura.ch/f/programme/detail/519-harmonie-shostakovich-constellations"
+    },
+    {
+      "Date": "2025-02-09T10:30:00",
+      "Venue": "Théâtre du Jura",
+      "City": "Delémont",
+      "Tickets": "https://www.theatre-du-jura.ch/f/programme/detail/519-harmonie-shostakovich-constellations"
+    },
+    {
+      "Date": "2025-02-09T17:00:00",
+      "Venue": "Théâtre du Jura",
+      "City": "Delémont",
+      "Tickets": "https://www.theatre-du-jura.ch/f/programme/detail/519-harmonie-shostakovich-constellations"
+    }
+  ],
+  "Conductor": {
+    "FirstName": "Emile",
+    "LastName": "Sanglard",
+    "Picture": "2025/Gallery/Conductor/Emile.jpg",
+    "Presentation": "<p>C’est après avoir décroché à trois reprises le titre de Champion Jurassien de la catégorie bois lors du Concours Jurassien pour Solistes et Ensemble (CJSE) en 2013, 2014 et 2015, puis avoir remporté le premier prix lors du Concours d’Exécution musicale du Lycée Cantonal de Porrentruy en 2015, qu’<strong>Emile Sanglard</strong> se décide à faire de sa passion sa profession.</p>\n\n<p>Il étudiera donc la clarinette à la <em>Haute École des Arts de Berne (HKB)</em> dans la classe d’Ernesto Molinari tout d’abord dans le cadre d’un Bachelor en musique classique (2015-18), puis d’un Master en pédagogie musicale (2018-20), couronnés tous deux d’une mention « Excellent ».</p>\n\n<p>En parallèle de ses études de clarinette, Emile s’initie à la direction grâce aux cours dispensés par Hervé Grélat dès 2016, puis approfondira cette branche à Berne dès 2017 avec Corsin Tuor et Rolf Schumacher dans le cadre d’un Minor, avant de finalement entamer un Master en direction d’ensemble à Vents à la <em>Haute École de Musique de Lausanne/Fribourg/Sion</em> dans la classe de Jean-Claude Kolly (2020-23). Ce diplôme sera accompagné d’un prix pour son remarquable parcours. Emile a pu profiter pour son master du soutien de la Bourse de perfectionnement dispensée par la FARB à Delémont.</p>\n\n<p>Actuellement, Emile est très investi dans l’enseignement, la promotion de la musique, et la direction d’ensemble. Il est actuellement directeur de la <em>Société de Musique d’Alle</em> et assistant chef d’orchestre de l’<em>Harmonie Nationale des Jeunes</em>. En plus de ces responsabilités, il est professeur de clarinette et saxophone pour diverses sociétés de musique et s’occupe des aspects musicaux de l’école de musique de Cornol, dont il dirige les deux ensembles formateurs.</p>\n\n<p>En parallèle, il dispense également les cours de consolidation musique pour la <em>Haute École Pédagogique BEJUNE</em> à Delémont et donne les cours de théorie musicale et de direction pour la <em>Fédération Jurassienne de Musique</em>, dont il est membre de la Commission de musique.</p>\n\n<p>Il est fréquemment engagé comme jury dans différents concours de solistes ou d’ensembles et dirige régulièrement des orchestres régionaux ainsi que différents projets avec des ensembles ad hoc.</p>\n\n<p>Entre les sociétés de musique, les élèves débutants ou avancés, les cours cantonaux et la HEP, Emile enseigne ainsi la musique à des publics variés et diversifiés en âge et expérience musicale.</p>\n"
+  },
+  "Soloists": [
+    {
+      "Instrument": "Piano",
+      "FirstName": "Marie",
+      "LastName": "Guyot",
+      "Picture": "2025/Gallery/Soloists/Marie.jpg",
+      "Presentation": "<p>Née en 1995 à Courgenay (JU), <strong>Marie Guyot</strong> commence le piano à l’âge de sept ans. En 2014, les rencontres avec les pianistes <em>Paul Coker</em> (Haute Ecole de Musique de Neuchâtel) et <em>Harold Stanese</em> (Jugendmusikschule Hamburg) l’incitent à entamer une formation musicale professionnelle. Elle entre en 2015 à la <em>Haute École de Musique de Lucerne</em>, dans la classe de <em>Florian Hoelscher</em>. Après l’obtention de son bachelor en 2018, elle rejoint la classe de <em>Hiroko Sakagami</em>, auprès de laquelle elle obtient un master en performance (2021) et en pédagogie (2023), tous deux avec mention « très bien ».</p>\n\n<p>En 2018, elle se produit avec le clarinettiste <strong>Emile Sanglard</strong> au festival « Piano à St-Ursanne » dans le cadre de la « Tribune Jeunes Artistes ». En 2021, c’est pour un récital en soliste qu’elle y est réinvitée.</p>\n\n<p>Marie fonde l’ensemble « Carnaval » en 2019. Avec le célèbre <em>Carnaval des animaux</em> de C. Saint-Saëns, les jeunes musiciens ont déjà pu enchanter plus de 700 enfants lors de concerts organisés dans leurs écoles. Depuis 2021, elle joue régulièrement dans une prison du canton de Soleure et y anime des ateliers de musique.</p>\n\n<p>La musique baroque la fascine tout particulièrement. Entre 2017 et 2023, elle prend des cours de basse continue et de clavecin avec <em>Bettina Seeliger</em>. Elle suit également la masterclasse « Bach au piano moderne » avec <em>Inge Rosar</em> à Saarbrücken (DE) en 2014 et 2017.</p>\n\n<p>Marie enseigne le piano dans les écoles de musique de <em>Küssnacht am Rigi</em>, <em>Region Malters</em> et en privé. Elle est aussi une accompagnatrice appréciée.</p>\n"
+    }
+  ]
+}

@@ -10,6 +10,9 @@
   box-sizing: border-box;
   background-color: #000;
   color: #fff;
+  top: 0;
+  position: fixed;
+  z-index: 1000;
 }
 
 .logo-container {
@@ -21,7 +24,7 @@
   margin-right: 16px;
 }
 
-.right-section button {
+.right-section a {
   margin: 0 8px;
   font-size: 14px;
 }
@@ -31,10 +34,20 @@
 }
 
 .navbar {
+  position: fixed;
+  top: 63px;
+  width: 100%;
+  z-index: 999;
   background-color: white;
-  padding: 0;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin: 0;
+}
+mat-sidenav-content {
+  padding-top: 128px; /* Adjust this based on the combined height of the top toolbar and navbar */
+}
+
+@media (max-width: 768px) {
+  mat-sidenav-content {
+    padding-top: 54px; /* Only account for the top toolbar when the navbar is hidden */
+  }
 }
 
 .menu-items {
@@ -121,17 +134,24 @@
 }
 
 .mobile-sidenav {
-  box-shadow: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a shadow to differentiate the overlay */
   overflow: auto;
   border-left: none;
   background-color: white;
+  z-index: 1000; /* Ensure it appears on top */
+  width: 250px; /* Set a fixed width for the sidenav */
 }
 
 .mobile-sidenav .mat-nav-list a {
-  color: white;
+  color: black; /* Ensure the links are visible with the white background */
 }
 
-.right-section button i {
+.mobile-sidenav .mat-nav-list a.active-link {
+  background-color: #803357; /* Highlight the active link */
+  color: white; /* Set the text color for the active link */
+}
+
+.right-section a i {
   font-size: 24px;
   color: #fff;
 }
@@ -156,7 +176,7 @@
   height: 100%;
   background-color: #fbe9e7;
   opacity: 0.1;
-  z-index: -1;
+  z-index: 0;
 }
 
 .main-content-wrapper {
@@ -213,14 +233,14 @@ mat-toolbar {
 }
 
 .footer {
-  position: page;
+  position: marker;
   bottom: 0;
   left: 0;
   width: 100%;
   padding: 5px 20px;
   color: #fff;
   background-color: #803357; /* Replace with your color scheme */
-  z-index: 1000; /* Ensures the footer stays on top of other content */
+  z-index: 10
 }
 
 .footer-text {
@@ -229,6 +249,38 @@ mat-toolbar {
 
 .fa-github {
   font-size: 20px;
+}
+
+.back-to-top {
+  position: fixed;
+  top: 50%; /* Center vertically */
+  left: 0;
+  transform: translateY(-50%);
+  background-color: #803357;
+  padding: 10px 20px 10px 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Slight shadow for floating effect */
+  z-index: 1000;
+  display: flex;
+  flex-direction: column; /* Stack the icons vertically */
+  align-items: center;
+  transition: all 0.3s ease-in-out;
+  border-radius: 0 10px 10px 0; /* Rounded corners: top-left, top-right, bottom-right, bottom-left */
+}
+
+.back-to-top i {
+  font-size: 24px; /* Bigger Font Awesome icon */
+  margin-right: 10px; /* Space between icon and text */
+  color: white;
+}
+
+.back-to-top.show {
+  opacity: 1;
+  visibility: visible; /* Show button when user scrolls down */
+}
+
+.back-to-top:hover {
+  transform: scale(1.2) translateY(-50%); /* Scale the element 20% bigger and keep it centered */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Larger shadow on hover */
 }
 
 

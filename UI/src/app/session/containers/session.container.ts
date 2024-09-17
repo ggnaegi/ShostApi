@@ -1,4 +1,4 @@
-import {Component, OnInit} from "@angular/core";
+import {ChangeDetectionStrategy, Component, OnInit} from "@angular/core";
 import {AsyncPipe} from "@angular/common";
 import {SessionComponent} from "../pages/session.component";
 import {AbstractSessionService} from "../services/abstract.session.service";
@@ -9,6 +9,7 @@ import {ActivatedRoute} from "@angular/router";
 @Component({
   selector: 'app-session-container',
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     SessionComponent,
     AsyncPipe

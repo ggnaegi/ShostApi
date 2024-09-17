@@ -12,6 +12,9 @@ export interface Logo {
   year: number;
   url: string;
   alt: string;
+  showGallery: boolean;
+  showPage: boolean;
+  teaser: string;
 }
 
 export interface GalleriesDefinition {

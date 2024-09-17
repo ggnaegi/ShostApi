@@ -1,64 +1,108 @@
 {
   "logos": [
     {
-      "year": 2011,
-      "url": "assets/flyers/2011.jpg",
-      "alt": "logo-2011"
-    },
-    {
-      "year": 2013,
-      "url": "assets/flyers/2013.jpg",
-      "alt": "logo-2013"
-    },
-    {
-      "year": 2014,
-      "url": "assets/flyers/2014.jpg",
-      "alt": "logo-2014"
-    },
-    {
-      "year": 2015,
-      "url": "assets/flyers/2015.png",
-      "alt": "logo-2015"
-    },
-    {
-      "year": 2016,
-      "url": "assets/flyers/2016.jpg",
-      "alt": "logo-2016"
-    },
-    {
-      "year": 2017,
-      "url": "assets/flyers/2017.jpg",
-      "alt": "logo-2017"
-    },
-    {
-      "year": 2018,
-      "url": "assets/flyers/2018.jpg",
-      "alt": "logo-2018"
-    },
-    {
-      "year": 2019,
-      "url": "assets/flyers/2019.jpg",
-      "alt": "logo-2019"
-    },
-    {
-      "year": 2020,
-      "url": "assets/flyers/2020.jpg",
-      "alt": "logo-2020"
-    },
-    {
-      "year": 2022,
-      "url": "assets/flyers/2022.jpg",
-      "alt": "logo-2022"
-    },
-    {
-      "year": 2023,
-      "url": "assets/flyers/2023.jpg",
-      "alt": "logo-2023"
+      "year": 2025,
+      "url": "assets/flyers/2025.jpg",
+      "alt": "logo-2025",
+      "showGallery": false,
+      "showPage": true,
+      "teaser": "<p>Plongez au coeur de l'univers avec <strong>Constellations</strong>, un concert qui vous transporte au-delà de notre planète. Sous la baguette du chef d'orchestre jurassien <strong>Emile Sanglard</strong>, explorez la stratosphère, les corps célestes, Jupiter et vivez une expérience inédite avec une mise en scène innovante et des jeux de lumières poétiques.</p>\n\n<p>L'astrophysicien <strong>Aurélien Barrau</strong> partagera ses réflexions fascinantes sur l'univers, tandis que la brillante pianiste jurassienne <strong>Marie Guyot</strong> sera à l'honneur en tant que soliste.</p>\n\n<p>L'<strong>Harmonie Shostakovich</strong> vous offre un voyage unique, où la musique rencontre la science pour illuminer l'infini, comme vous ne l'avez jamais expérimenté!</p>"
     },
     {
       "year": 2024,
       "url": "assets/flyers/2024.jpg",
-      "alt": "logo-2024"
+      "alt": "logo-2024",
+      "showGallery": false,
+      "showPage": true,
+      "teaser": ""
+    },
+    {
+      "year": 2023,
+      "url": "assets/flyers/2023.jpg",
+      "alt": "logo-2023",
+      "showGallery": true,
+      "showPage": false,
+      "teaser": ""
+    },
+    {
+      "year": 2022,
+      "url": "assets/flyers/2022.jpg",
+      "alt": "logo-2022",
+      "showGallery": true,
+      "showPage": false,
+      "teaser": ""
+    },
+    {
+      "year": 2020,
+      "url": "assets/flyers/2020.jpg",
+      "alt": "logo-2020",
+      "showGallery": true,
+      "showPage": false,
+      "teaser": ""
+    },
+    {
+      "year": 2019,
+      "url": "assets/flyers/2019.jpg",
+      "alt": "logo-2019",
+      "showGallery": true,
+      "showPage": false,
+      "teaser": ""
+    },
+    {
+      "year": 2018,
+      "url": "assets/flyers/2018.jpg",
+      "alt": "logo-2018",
+      "showGallery": true,
+      "showPage": false,
+      "teaser": ""
+    },
+    {
+      "year": 2017,
+      "url": "assets/flyers/2017.jpg",
+      "alt": "logo-2017",
+      "showGallery": true,
+      "showPage": false,
+      "teaser": ""
+    },
+    {
+      "year": 2016,
+      "url": "assets/flyers/2016.jpg",
+      "alt": "logo-2016",
+      "showGallery": true,
+      "showPage": false,
+      "teaser": ""
+    },
+    {
+      "year": 2015,
+      "url": "assets/flyers/2015.png",
+      "alt": "logo-2015",
+      "showGallery": true,
+      "showPage": false,
+      "teaser": ""
+    },
+    {
+      "year": 2014,
+      "url": "assets/flyers/2014.jpg",
+      "alt": "logo-2014",
+      "showGallery": true,
+      "showPage": false,
+      "teaser": ""
+    },
+    {
+      "year": 2013,
+      "url": "assets/flyers/2013.jpg",
+      "alt": "logo-2013",
+      "showGallery": true,
+      "showPage": false,
+      "teaser": ""
+    },
+    {
+      "year": 2011,
+      "url": "assets/flyers/2011.jpg",
+      "alt": "logo-2011",
+      "showGallery": true,
+      "showPage": false,
+      "teaser": ""
     }
   ],
   "galleries": [
