@@ -1,13 +1,20 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnChanges,
+  OnInit, SimpleChanges
+} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {GalleryContainerComponent} from "../../gallery/container/gallery.container.component";
 import {MatCard, MatCardContent, MatCardHeader, MatCardImage, MatCardTitle} from "@angular/material/card";
 import {FlexModule} from "@angular/flex-layout";
-import {Organisation} from "../api/organisation";
-import {NgForOf, NgIf} from "@angular/common";
+import {CommitteeMember, Organisation, Sponsor} from "../api/organisation";
+import {NgClass, NgForOf, NgIf} from "@angular/common";
 import {MatFormField, MatLabel} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
 import {MatButton} from "@angular/material/button";
+import {MatProgressSpinner} from "@angular/material/progress-spinner";
 
 @Component({
   selector: 'app-about',
@@ -25,15 +32,23 @@ import {MatButton} from "@angular/material/button";
     MatFormField,
     MatInput,
     MatButton,
-    MatLabel
+    MatLabel,
+    MatProgressSpinner,
+    NgClass
   ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './about.component.html',
   styleUrl: './about.component.css'
 })
-export class AboutComponent implements OnInit {
+export class AboutComponent implements OnInit, OnChanges {
 
   @Input()
   organisation: Organisation | null = null;
+
+  @Input()
+  sponsors: Sponsor[] | null = null;
+
+  president: CommitteeMember | undefined;
 
   constructor(private route: ActivatedRoute) {}
 
@@ -46,5 +61,17 @@ export class AboutComponent implements OnInit {
         }
       }
     });
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    this.setPresident();
+  }
+
+  private setPresident(): void {
+    if(!this.organisation?.CommitteeMembers){
+      return;
+    }
+
+    this.president = this.organisation.CommitteeMembers[0];
   }
 }

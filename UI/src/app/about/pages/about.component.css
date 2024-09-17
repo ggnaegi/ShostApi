@@ -60,12 +60,13 @@
 #contact-section {
   padding: 0 30px;
 }
-
 /* Stylesheet for your component */
 @media (max-width: 767px) {
   .custom-card {
+    margin: 0;
     border: none; /* Removes borders */
     box-shadow: none; /* Removes shadows if any */
+    width: 100%
   }
 
   #about-section {
@@ -109,4 +110,63 @@
   width: 100%; /* Make the image expand to the full width of the card */
   height: auto; /* Maintain aspect ratio */
   object-fit: cover; /* Ensures the image covers the designated area properly */
+}
+
+.sponsor-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for both movement and shadow */
+  cursor: pointer;
+}
+
+.sponsor-card:hover {
+  transform: translateY(-10px); /* Move the card up by 10px */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Add a larger shadow when hovering */
+}
+
+.president-info {
+  font-family: Montserrat;
+  font-size: 16px;
+  color: #000;
+}
+
+.president-info-title {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.welcome-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 32px; /* Larger font size */
+  font-weight: bold;
+  color: #333;
+  margin: 20px;
+  text-align: left;
+  position: relative; /* Needed for the underline effect */
+  line-height: 1.5;
+  animation: fadeIn 2s ease-in-out;
+}
+
+/* Underline with a custom color */
+.welcome-title::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -10px;
+  width: 100%;
+  height: 4px;
+  background-color: #803357; /* Custom underline color */
+  transform: scaleX(0);
+  transform-origin: bottom right;
+  transition: transform 0.4s ease;
+}
+
+/* Animation for the fade-in effect */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

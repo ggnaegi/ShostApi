@@ -12,7 +12,6 @@ export interface Organisation {
   CommitteeTitle?: string;
   CommitteePresentation?: string;
   CommitteeMembers?: CommitteeMember[];
-  Sponsors?: Sponsor[];
 }
 
 export interface CommitteeMember {
@@ -29,7 +28,6 @@ export interface CommitteeMember {
 }
 
 export interface Sponsor {
-  Name?: string;
-  Picture?: string;
-  Website?: string;
+  filename: string;
+  alt: string;
 }

@@ -175,6 +175,15 @@ li {
   border-radius: 10px 0 0 10px; /* Rounded corners: top-left, top-right, bottom-right, bottom-left */
 }
 
+@media (max-width: 768px) {
+  .floating-menu {
+    padding: 5px; /* Reduce padding */
+    transform: scale(0.8) translateY(-50%); /* Scale down the entire menu */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Adjust shadow for smaller size */
+    border-radius: 8px 0 0 8px; /* Adjust radius to match smaller size */
+  }
+}
+
 /* Individual menu items */
 .menu-item {
   display: flex;
@@ -211,31 +220,6 @@ li {
 .floating-menu.scrolled {
   right: 10px;
   opacity: 0.9;
-}
-
-/* On mobile screens (less than 768px) */
-@media (max-width: 768px) {
-  .floating-menu {
-    position: relative; /* Place it inside the flow of the document */
-    top: auto;
-    right: auto;
-    transform: none;
-    width: 100%; /* Take full width */
-    flex-direction: row; /* Horizontal layout */
-    justify-content: space-around; /* Distribute icons evenly */
-    padding: 10px 0; /* Adjust padding */
-    box-shadow: none; /* Remove the floating shadow effect */
-  }
-
-  .menu-item {
-    flex-direction: column; /* Keep icons and text vertically aligned */
-    margin-bottom: 0; /* Remove bottom margin */
-    padding: 0 10px; /* Add some horizontal padding */
-  }
-
-  .menu-icon {
-    font-size: 18px; /* Adjust icon size for mobile */
-  }
 }
 
 .tickets-grid {

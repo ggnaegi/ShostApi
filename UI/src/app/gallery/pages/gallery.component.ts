@@ -1,5 +1,11 @@
-import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
-import {Album, GalleriesDefinition, Logo} from "../api/gallery";
+import {
+  Component,
+  Input,
+  OnChanges,
+  SimpleChanges,
+  ViewContainerRef
+} from '@angular/core';
+import {GalleriesDefinition, Logo} from "../api/gallery";
 import {
   MatAccordion,
   MatExpansionPanel,
@@ -7,7 +13,7 @@ import {
   MatExpansionPanelTitle
 } from "@angular/material/expansion";
 import {MatGridList, MatGridTile} from "@angular/material/grid-list";
-import {NgForOf, NgIf, SlicePipe} from "@angular/common";
+import {NgClass, NgForOf, NgIf, SlicePipe} from "@angular/common";
 import {MatDialog} from "@angular/material/dialog";
 import {FlexModule} from "@angular/flex-layout";
 import {MatCard, MatCardActions, MatCardHeader, MatCardTitle} from "@angular/material/card";
@@ -36,7 +42,8 @@ import {GalleryDialogComponent} from "./gallery-dialog/gallery-dialog.component"
     RouterLink,
     MatCardActions,
     MatIcon,
-    MatIconButton
+    MatIconButton,
+    NgClass
   ],
   templateUrl: './gallery.component.html',
   styleUrl: './gallery.component.css'
@@ -44,38 +51,48 @@ import {GalleryDialogComponent} from "./gallery-dialog/gallery-dialog.component"
 export class GalleryComponent implements OnChanges {
   @Input()
   galleriesDefinitions: GalleriesDefinition | null = null;
+  starredLogo: Logo | undefined = undefined;
+  isOverlayOpen = false;
 
-  constructor(public dialog: MatDialog) {
+  constructor(public dialog: MatDialog, private viewContainerRef: ViewContainerRef) {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['galleriesDefinitions'] && this.galleriesDefinitions) {
-      if(!this.galleriesDefinitions) {
-        return;
-      }
+    this.setStarredGallery();
+  }
 
-      this.galleriesDefinitions.logos = this.galleriesDefinitions.logos.sort((a: Logo, b: Logo) => a.year - b.year)
-      this.galleriesDefinitions.galleries = this.galleriesDefinitions.galleries.sort((a: Album, b: Album) => a.year - b.year);
+  openGalleryDialog(year: number): void {
+    const gallery = this.galleriesDefinitions?.galleries.find(g => g.year === year);
+
+    if (!gallery) {
+      return;
     }
-  }
 
-  // Helper function to get the logo URL for the corresponding year
-  getLogoForYear(year: number): string {
-    const logo = this.galleriesDefinitions?.logos.find(l => l.year === year);
-    return logo ? logo.url : '';
-  }
-
-  // Helper function to get the alt text for the corresponding year
-  getAltForYear(year: number): string {
-    const logo = this.galleriesDefinitions?.logos.find(l => l.year === year);
-    return logo ? logo.alt : '';
-  }
-
-  openGalleryDialog(gallery: Album): void {
     this.dialog.open(GalleryDialogComponent, {
+      viewContainerRef: this.viewContainerRef,
       data: gallery,
-      width: '90vw',
-      height: '90vh'
+      position: {
+        top: '70px',
+        left: '10%' // Center the dialog horizontally with 10% margin
+      },
+      panelClass: 'custom-dialog-container',
+      disableClose: false,
+      autoFocus: false // Prevent autofocus issues when sizing to content
     });
+  }
+
+  // Toggle the Facebook overlay
+  toggleOverlay() {
+    this.isOverlayOpen = !this.isOverlayOpen;
+  }
+
+  private setStarredGallery(): void {
+    if (!this.galleriesDefinitions?.logos) {
+      return;
+    }
+
+    this.starredLogo = this.galleriesDefinitions?.logos.reduce((prev, current) =>
+      (prev.year > current.year) ? prev : current
+    );
   }
 }

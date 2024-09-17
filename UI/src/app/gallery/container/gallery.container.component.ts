@@ -1,4 +1,4 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, EventEmitter, OnInit, Output} from "@angular/core";
 import {AsyncPipe} from "@angular/common";
 import {Observable} from "rxjs";
 import {GalleryComponent} from "../pages/gallery.component";
@@ -17,6 +17,8 @@ import {GalleriesDefinition} from "../api/gallery";
   `
 })
 export class GalleryContainerComponent implements OnInit {
+  @Output() galleryDataLoaded = new EventEmitter<boolean>();
+
   galleryDefinitionData$!: Observable<GalleriesDefinition>;
 
   constructor(public galleryService: AbstractGalleryService) {

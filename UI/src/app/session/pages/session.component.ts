@@ -10,31 +10,33 @@ import {MatAnchor, MatButton, MatIconButton} from "@angular/material/button";
 import {MatIcon} from "@angular/material/icon";
 import {MatToolbar} from "@angular/material/toolbar";
 import {RouterLink} from "@angular/router";
+import {MatProgressSpinner} from "@angular/material/progress-spinner";
 
 
 @Component({
   selector: 'app-session',
   standalone: true,
-  imports: [
-    NgIf,
-    FlexModule,
-    MatCard,
-    MatCardContent,
-    MatCardHeader,
-    MatCardSubtitle,
-    MatCardTitle,
-    NgForOf,
-    FaIconComponent,
-    DatePipe,
-    FontAwesomeModule,
-    MatButton,
-    ExtendedModule,
-    MatIcon,
-    MatIconButton,
-    MatToolbar,
-    MatAnchor,
-    RouterLink
-  ],
+    imports: [
+        NgIf,
+        FlexModule,
+        MatCard,
+        MatCardContent,
+        MatCardHeader,
+        MatCardSubtitle,
+        MatCardTitle,
+        NgForOf,
+        FaIconComponent,
+        DatePipe,
+        FontAwesomeModule,
+        MatButton,
+        ExtendedModule,
+        MatIcon,
+        MatIconButton,
+        MatToolbar,
+        MatAnchor,
+        RouterLink,
+        MatProgressSpinner
+    ],
   templateUrl: './session.component.html',
   styleUrl: './session.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush
