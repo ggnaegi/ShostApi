@@ -1,14 +1,14 @@
 .mat-card-image {
-  width: 100%; /* Ensure images take full width of the card */
-  object-fit: cover; /* Adjust fit of image within its frame */
+  width: 100%;
+  object-fit: cover;
 }
 
 .custom-card {
   margin-top: 10px;
   cursor: pointer;
   transition: transform 0.2s;
-  border-radius: 0; /* Remove rounded corners */
-  box-shadow: none; /* Optional: remove box shadow */
+  border-radius: 0;
+  box-shadow: none;
 }
 
 .custom-card .mat-card-content {
@@ -66,7 +66,7 @@
     margin: 0;
     border: none; /* Removes borders */
     box-shadow: none; /* Removes shadows if any */
-    width: 100%
+    width: 100%;
   }
 
   #about-section {
@@ -74,7 +74,7 @@
   }
 
   .welcome-title {
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     font-size: 32px; /* Larger font size */
     font-weight: bold;
     color: #333;
@@ -92,9 +92,10 @@
 }
 
 .sponsor-card {
-  max-width: 400px; /* Limit the card width */
-  width: 100%; /* Ensure the card uses the full width up to its max */
-  box-shadow: none; /* Optional: Remove shadow for a cleaner look */
+  max-width: 600px;
+  min-width: 200px;
+  width: 100%;
+  box-shadow: none;
 }
 
 .sponsor-card img {
@@ -126,7 +127,9 @@
 }
 
 .sponsor-card {
-  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for both movement and shadow */
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease; /* Smooth transition for both movement and shadow */
   cursor: pointer;
 }
 
@@ -147,7 +150,7 @@
 }
 
 .welcome-title {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 32px; /* Larger font size */
   font-weight: bold;
   color: #333;
@@ -161,7 +164,7 @@
 
 /* Underline with a custom color */
 .welcome-title::after {
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
   bottom: -10px;

@@ -6,7 +6,8 @@
   z-index: 1500 !important;
 }
 
-.gallery-slider, .gallery-vertical {
+.gallery-slider,
+.gallery-vertical {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -15,7 +16,8 @@
 }
 
 @media (max-width: 960px) {
-  .gallery-slider, .gallery-vertical {
+  .gallery-slider,
+  .gallery-vertical {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -45,7 +47,9 @@
   padding: 10px 0; /* Add some padding around the paginator */
 }
 
-.mat-paginator-range-label, .mat-paginator-page-size, .mat-paginator-page-size-label {
+.mat-paginator-range-label,
+.mat-paginator-page-size,
+.mat-paginator-page-size-label {
   display: none; /* Hide unwanted paginator elements */
 }
 
@@ -56,16 +60,4 @@
 
 button.mat-button {
   margin: 10px;
-}
-
-.mat-paginator-range-label {
-  display: none;
-}
-
-.mat-paginator-page-size {
-  display: none;
-}
-
-.mat-paginator-page-size-select {
-  display: none;
 }

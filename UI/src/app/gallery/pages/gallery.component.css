@@ -46,19 +46,24 @@
 /* Media query for screens smaller than 768px */
 @media (max-width: 768px) {
   .card-container {
-    flex-direction: column; /* Stack cards vertically */
-    overflow-x: hidden; /* Remove horizontal scrolling */
-    overflow-y: auto; /* Enable vertical scrolling if necessary */
-    padding-bottom: 0; /* Remove padding at the bottom */
+    flex-direction: column;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding-bottom: 0;
+    align-items: center;
   }
 
   .year-card-wrapper {
-    margin-bottom: 16px; /* Add space between vertically stacked cards */
-    margin-right: 0; /* Remove horizontal margin */
+    margin-bottom: 16px;
+    margin-right: 0;
+    display: flex;
+    justify-content: center;
+    width: 100%;
   }
 
   .year-card {
-    max-width: 100%; /* Allow the card to take the full width on smaller screens */
+    max-width: 80%;
+    margin: 0 auto;
   }
 }
 
@@ -87,17 +92,24 @@ mat-grid-tile {
 
 @media (max-width: 768px) {
   .content-wrapper {
-    flex-direction: column; /* Stack image on top and text below */
-    text-align: center; /* Center text and image for mobile */
+    flex-direction: column;
+    text-align: justify;
   }
 
   .welcome-teaser {
+    margin-left: 5px;
+    margin-right: 5px;
     padding-left: 0;
-    padding-top: 20px; /* Add spacing between the image and text */
+    padding-top: 20px;
   }
 
   .year-card-wrapper {
-    margin-bottom: 20px; /* Add space between the image and text */
+    margin-bottom: 20px;
+  }
+
+  .redirect-link {
+    margin-left: 5px;
+    padding-top: 20px;
   }
 }
 
@@ -148,15 +160,14 @@ mat-grid-tile {
   transition: right 0.3s ease-in-out; /* Smooth transition to move with overlay */
 }
 
-/* Move the button along with the overlay when it's active */
 .toggle-overlay-btn.active {
-  right: 300px; /* The same width as the overlay */
+  right: 300px;
 }
 
-/* Adjust spacing between icon and text */
+
 .toggle-overlay-btn i {
-  font-size: 20px; /* FontAwesome icon size */
-  margin-right: 8px; /* Space between icon and text */
+  font-size: 20px;
+  margin-right: 8px;
 }
 
 /* Facebook overlay (hidden by default) */
@@ -205,4 +216,52 @@ mat-grid-tile {
 .anchor-section {
   padding-top: 128px;
   margin-top: -128px;
+}
+
+.fullscreen-dialog .mat-dialog-container {
+  padding: 0;
+  margin: 0;
+  width: 100vw;
+  height: 100vh;
+  background: transparent;
+  box-shadow: none;
+  overflow: hidden;
+}
+
+.fullscreen-dialog .mat-dialog-container {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.redirect-link {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  cursor: pointer;
+  color: #803357;
+  font-weight: bold;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.redirect-link i {
+  margin-right: 8px;
+  font-size: 16px;
+}
+
+.redirect-link:hover {
+  color: #be3d59;
+}
+
+.redirect-link:hover i {
+  transform: translateX(5px);
+  transition: transform 0.2s ease;
 }

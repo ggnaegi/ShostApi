@@ -61,7 +61,7 @@ mat-sidenav-content {
 }
 
 .menu-items::before {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 0;
   left: 0;
@@ -84,7 +84,7 @@ mat-sidenav-content {
 }
 
 .menu-items a::after {
-  content: '';
+  content: "";
   width: 0;
   height: 2px;
   background-color: transparent;
@@ -117,11 +117,6 @@ mat-sidenav-content {
   display: flex;
   flex-wrap: wrap;
   gap: 16px;
-}
-
-.example-card {
-  width: 200px;
-  border-radius: 0;
 }
 
 @media (max-width: 768px) {
@@ -242,7 +237,7 @@ mat-toolbar {
   padding: 5px 20px;
   color: #fff;
   background-color: #803357; /* Replace with your color scheme */
-  z-index: 10
+  z-index: 10;
 }
 
 .footer-text {
@@ -284,5 +279,3 @@ mat-toolbar {
   transform: scale(1.2) translateY(-50%); /* Scale the element 20% bigger and keep it centered */
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Larger shadow on hover */
 }
-
-

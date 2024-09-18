@@ -1,65 +1,198 @@
 <app-spinner-overlay></app-spinner-overlay>
 <!-- Top Bar with Logo, Social Icons, and Mobile Menu Button -->
-<mat-toolbar color="primary" class="top-bar" fxLayout="row" fxLayoutAlign="space-between center">
+<mat-toolbar
+  color="primary"
+  class="top-bar"
+  fxLayout="row"
+  fxLayoutAlign="space-between center"
+>
   <!-- Left Side Logo -->
   <div fxLayout="row" fxLayoutAlign="start center" class="logo-container">
-    <img src="../assets/shosta_logo.png" alt="Brand Logo" class="logo-image"/> <!-- Replace with your logo image -->
+    <img src="../assets/shosta_logo.png" alt="Brand Logo" class="logo-image" />
+    <!-- Replace with your logo image -->
   </div>
 
   <!-- Right Side Social Icons and Mobile Menu Button -->
   <div fxLayout="row" fxLayoutAlign="end center" class="right-section">
-    <a mat-icon-button href="https://www.facebook.com/harmonieshosta" target="_blank">
-      <i class="fa-brands fa-facebook"></i> <!-- Facebook Icon -->
+    <a
+      mat-icon-button
+      href="https://www.facebook.com/harmonieshosta"
+      target="_blank"
+    >
+      <i class="fa-brands fa-facebook"></i>
+      <!-- Facebook Icon -->
     </a>
-    <a mat-icon-button href="https://www.instagram.com/harmonie_shostakovich/?igsh=OGQ5ZDc2ODk2ZA" target="_blank" fxHide.lt-md>
-      <i class="fa-brands fa-instagram"></i> <!-- Instagram Icon -->
+    <a
+      mat-icon-button
+      href="https://www.instagram.com/harmonie_shostakovich/?igsh=OGQ5ZDc2ODk2ZA"
+      target="_blank"
+      fxHide.lt-md
+    >
+      <i class="fa-brands fa-instagram"></i>
+      <!-- Instagram Icon -->
     </a>
-    <a mat-icon-button href="https://m.youtube.com/@harmonieshostakovich8006" target="_blank" fxHide.lt-sm>
-      <i class="fa-brands fa-youtube"></i> <!-- YouTube Icon -->
+    <a
+      mat-icon-button
+      href="https://m.youtube.com/@harmonieshostakovich8006"
+      target="_blank"
+      fxHide.lt-sm
+    >
+      <i class="fa-brands fa-youtube"></i>
+      <!-- YouTube Icon -->
     </a>
 
     <!-- Mobile Menu Button, shown only when width < 768px -->
-    <button mat-icon-button (click)="sidenav.toggle()" class="menu-toggle-button" fxShow.lt-md>
+    <button
+      mat-icon-button
+      (click)="sidenav.toggle()"
+      class="menu-toggle-button"
+      fxShow.lt-md
+    >
       <mat-icon>menu</mat-icon>
     </button>
   </div>
 </mat-toolbar>
 <!-- Navbar with Logo and Menu Items (hidden on mobile) -->
-<mat-toolbar color="white" class="navbar" fxLayout="row" fxLayoutAlign="center" fxHide.lt-md>
-  <div class="menu-items" fxLayout="row" fxLayoutAlign="space-around stretch" fxFlexFill>
-    <a mat-button routerLink="/about" routerLinkActive="active-link" [routerLinkActiveOptions]=linkActiveOptions
-       class="menu-link" fragment="welcome-section">Accueil</a>
-    <a mat-button routerLink="/about" [routerLinkActiveOptions]=linkActiveOptions
-       routerLinkActive="active-link" fragment="about-section" class="menu-link">A Propos</a>
-    <a mat-button routerLink="/about" [routerLinkActiveOptions]=linkActiveOptions
-       routerLinkActive="active-link" fragment="medias-section" class="menu-link">Concerts</a>
-    <a mat-button routerLink="/about" [routerLinkActiveOptions]=linkActiveOptions
-       routerLinkActive="active-link" fragment="contact-section" class="menu-link">Contact</a>
-    <a mat-button routerLink="/about" [routerLinkActiveOptions]=linkActiveOptions
-       routerLinkActive="active-link" fragment="sponsors-section" class="menu-link">Sponsors</a>
-    <a *ngIf="currentYear" mat-button [routerLink]="['/session', currentYear]"
-       routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }"
-       class="menu-link">Concerts {{ currentYear }}</a>
+<mat-toolbar
+  color="white"
+  class="navbar"
+  fxLayout="row"
+  fxLayoutAlign="center"
+  fxHide.lt-md
+>
+  <div
+    class="menu-items"
+    fxLayout="row"
+    fxLayoutAlign="space-around stretch"
+    fxFlexFill
+  >
+    <a
+      mat-button
+      routerLink="/about"
+      routerLinkActive="active-link"
+      [routerLinkActiveOptions]="linkActiveOptions"
+      class="menu-link"
+      fragment="welcome-section"
+      >Accueil</a
+    >
+    <a
+      mat-button
+      routerLink="/about"
+      [routerLinkActiveOptions]="linkActiveOptions"
+      routerLinkActive="active-link"
+      fragment="about-section"
+      class="menu-link"
+      >A Propos</a
+    >
+    <a
+      mat-button
+      routerLink="/about"
+      [routerLinkActiveOptions]="linkActiveOptions"
+      routerLinkActive="active-link"
+      fragment="medias-section"
+      class="menu-link"
+      >Concerts</a
+    >
+    <a
+      mat-button
+      routerLink="/about"
+      [routerLinkActiveOptions]="linkActiveOptions"
+      routerLinkActive="active-link"
+      fragment="contact-section"
+      class="menu-link"
+      >Contact</a
+    >
+    <a
+      mat-button
+      routerLink="/about"
+      [routerLinkActiveOptions]="linkActiveOptions"
+      routerLinkActive="active-link"
+      fragment="sponsors-section"
+      class="menu-link"
+      >Sponsors</a
+    >
+    <a
+      *ngIf="currentYear"
+      mat-button
+      [routerLink]="['/session', currentYear]"
+      routerLinkActive="active-link"
+      [routerLinkActiveOptions]="{ exact: true }"
+      class="menu-link"
+      >Concerts {{ currentYear }}</a
+    >
   </div>
 </mat-toolbar>
 
 <!-- Sidenav for Mobile -->
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #sidenav mode="over" position="end" fxShow.lt-md class="mobile-sidenav">
+  <mat-sidenav
+    #sidenav
+    mode="over"
+    position="end"
+    fxShow.lt-md
+    class="mobile-sidenav"
+  >
     <mat-nav-list>
-      <a mat-list-item routerLink="/about" routerLinkActive="active-link" [routerLinkActiveOptions]="linkActiveOptions"
-         class="menu-link" fragment="welcome-section" (click)="sidenav.close()">Accueil</a>
-      <a mat-list-item routerLink="/about" routerLinkActive="active-link" [routerLinkActiveOptions]="linkActiveOptions"
-         fragment="about-section" class="menu-link" (click)="sidenav.close()">A Propos</a>
-      <a mat-list-item routerLink="/about" routerLinkActive="active-link" [routerLinkActiveOptions]="linkActiveOptions"
-         fragment="medias-section" class="menu-link" (click)="sidenav.close()">Concerts</a>
-      <a mat-list-item routerLink="/about" routerLinkActive="active-link" [routerLinkActiveOptions]="linkActiveOptions"
-         fragment="contact-section" class="menu-link" (click)="sidenav.close()">Contact</a>
-      <a mat-list-item routerLink="/about" routerLinkActive="active-link" [routerLinkActiveOptions]="linkActiveOptions"
-         fragment="sponsors-section" class="menu-link" (click)="sidenav.close()">Sponsors</a>
-      <a *ngIf="currentYear" mat-list-item [routerLink]="['/session', currentYear]"
-         routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }"
-         class="menu-link" (click)="sidenav.close()">Concerts {{ currentYear }}</a>
+      <a
+        mat-list-item
+        routerLink="/about"
+        routerLinkActive="active-link"
+        [routerLinkActiveOptions]="linkActiveOptions"
+        class="menu-link"
+        fragment="welcome-section"
+        (click)="sidenav.close()"
+        >Accueil</a
+      >
+      <a
+        mat-list-item
+        routerLink="/about"
+        routerLinkActive="active-link"
+        [routerLinkActiveOptions]="linkActiveOptions"
+        fragment="about-section"
+        class="menu-link"
+        (click)="sidenav.close()"
+        >A Propos</a
+      >
+      <a
+        mat-list-item
+        routerLink="/about"
+        routerLinkActive="active-link"
+        [routerLinkActiveOptions]="linkActiveOptions"
+        fragment="medias-section"
+        class="menu-link"
+        (click)="sidenav.close()"
+        >Concerts</a
+      >
+      <a
+        mat-list-item
+        routerLink="/about"
+        routerLinkActive="active-link"
+        [routerLinkActiveOptions]="linkActiveOptions"
+        fragment="contact-section"
+        class="menu-link"
+        (click)="sidenav.close()"
+        >Contact</a
+      >
+      <a
+        mat-list-item
+        routerLink="/about"
+        routerLinkActive="active-link"
+        [routerLinkActiveOptions]="linkActiveOptions"
+        fragment="sponsors-section"
+        class="menu-link"
+        (click)="sidenav.close()"
+        >Sponsors</a
+      >
+      <a
+        *ngIf="currentYear"
+        mat-list-item
+        [routerLink]="['/session', currentYear]"
+        routerLinkActive="active-link"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="menu-link"
+        (click)="sidenav.close()"
+        >Concerts {{ currentYear }}</a
+      >
     </mat-nav-list>
   </mat-sidenav>
 
@@ -81,7 +214,12 @@
     <span class="footer-text">© 2024 Harmonie Shostakovich</span>
 
     <!-- GitHub Link -->
-    <a href="https://github.com/ggnaegi/ShostApi" target="_blank" mat-icon-button aria-label="GitHub Repository">
+    <a
+      href="https://github.com/ggnaegi/ShostApi"
+      target="_blank"
+      mat-icon-button
+      aria-label="GitHub Repository"
+    >
       <i class="fa-brands fa-github"></i>
     </a>
   </div>

@@ -1,7 +1,6 @@
-import {Injectable} from "@angular/core";
-import {Observable} from "rxjs";
-import {Organisation, Sponsor} from "../api/organisation";
-
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Organisation, Sponsor } from '../api/organisation';
 
 @Injectable()
 export abstract class AbstractAboutService {

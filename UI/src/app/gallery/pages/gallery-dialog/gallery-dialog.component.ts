@@ -1,16 +1,21 @@
-import {Component, Inject, HostListener, ViewChild, AfterViewInit} from '@angular/core';
+import {
+  Component,
+  Inject,
+  HostListener,
+  ViewChild,
+  AfterViewInit,
+} from '@angular/core';
 import {
   MAT_DIALOG_DATA,
   MatDialogActions,
   MatDialogClose,
   MatDialogContent,
-  MatDialogTitle
+  MatDialogTitle,
 } from '@angular/material/dialog';
-import {Album} from "../../api/gallery";
-import {NgForOf, NgIf} from "@angular/common";
-import {MatButton} from "@angular/material/button";
-import {MatPaginator} from "@angular/material/paginator";
-
+import { Album } from '../../api/gallery';
+import { NgForOf, NgIf } from '@angular/common';
+import { MatButton } from '@angular/material/button';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-gallery-dialog',
@@ -24,9 +29,9 @@ import {MatPaginator} from "@angular/material/paginator";
     NgForOf,
     MatButton,
     MatDialogClose,
-    MatPaginator
+    MatPaginator,
   ],
-  styleUrls: ['./gallery-dialog.component.css']
+  styleUrls: ['./gallery-dialog.component.css'],
 })
 export class GalleryDialogComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator | null = null;
@@ -37,14 +42,14 @@ export class GalleryDialogComponent implements AfterViewInit {
     this.checkScreenWidth();
   }
   ngAfterViewInit() {
-    if(!this.paginator){
+    if (!this.paginator) {
       return;
     }
 
     this.paginator.page.subscribe({
       next: () => {
         this.currentIndex = this.paginator ? this.paginator.pageIndex : 0; // Update the current index on page change
-      }
+      },
     });
   }
 

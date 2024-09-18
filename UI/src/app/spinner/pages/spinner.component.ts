@@ -1,7 +1,7 @@
-import {Component} from '@angular/core';
-import {MatProgressSpinner} from "@angular/material/progress-spinner";
-import {AsyncPipe, NgIf} from "@angular/common";
-import {SpinnerService} from "../services/spinner.service"; // Adjust the path as necessary
+import { Component } from '@angular/core';
+import { MatProgressSpinner } from '@angular/material/progress-spinner';
+import { AsyncPipe, NgIf } from '@angular/common';
+import { SpinnerService } from '../services/spinner.service'; // Adjust the path as necessary
 
 @Component({
   selector: 'app-spinner-overlay',
@@ -11,14 +11,9 @@ import {SpinnerService} from "../services/spinner.service"; // Adjust the path a
       <mat-spinner></mat-spinner>
     </div>
   `,
-  imports: [
-    MatProgressSpinner,
-    NgIf,
-    AsyncPipe
-  ],
-  styleUrls: ['./spinner.component.css']
+  imports: [MatProgressSpinner, NgIf, AsyncPipe],
+  styleUrls: ['./spinner.component.css'],
 })
 export class SpinnerComponent {
-  constructor(public spinnerService: SpinnerService) {
-  }
+  constructor(public spinnerService: SpinnerService) {}
 }
