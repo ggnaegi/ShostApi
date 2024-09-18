@@ -12,7 +12,7 @@
 }
 
 .custom-card .mat-card-content {
-  font-family: Montserrat;
+  font-family: Montserrat, serif;
   line-height: 1.6;
   color: #333;
 }
@@ -72,6 +72,19 @@
   #about-section {
     padding: 0; /* Optionally removes padding if needed */
   }
+
+  .welcome-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 32px; /* Larger font size */
+    font-weight: bold;
+    color: #333;
+    text-align: left;
+    position: relative; /* Needed for the underline effect */
+    line-height: 1.5;
+    animation: fadeIn 2s ease-in-out;
+    padding-top: 54px;
+    margin: -54px 20px 20px;
+  }
 }
 
 .full-width {
@@ -92,12 +105,12 @@
 #sponsors-section h2 {
   color: #000; /* Adjust color to fit your design */
   margin-bottom: 0.5em;
-  font-family: Montserrat;
+  font-family: Montserrat, serif;
 }
 
 #sponsors-section p {
   color: #000;
-  font-family: Montserrat;
+  font-family: Montserrat, serif;
   font-size: 16px;
   max-width: 600px;
 }
@@ -123,7 +136,7 @@
 }
 
 .president-info {
-  font-family: Montserrat;
+  font-family: Montserrat, serif;
   font-size: 16px;
   color: #000;
 }
@@ -138,11 +151,12 @@
   font-size: 32px; /* Larger font size */
   font-weight: bold;
   color: #333;
-  margin: 20px;
   text-align: left;
   position: relative; /* Needed for the underline effect */
   line-height: 1.5;
   animation: fadeIn 2s ease-in-out;
+  padding-top: 128px;
+  margin: -128px 20px 20px;
 }
 
 /* Underline with a custom color */

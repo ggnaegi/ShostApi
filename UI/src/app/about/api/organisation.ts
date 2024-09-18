@@ -5,6 +5,8 @@ export interface OrganisationContainer {
 
 export interface Organisation {
   Year: number;
+  WelcomeText: string;
+  ContactPersonText: string;
   BandPicture?: string;
   BandTitle?: string;
   BandPresentation?: string;
@@ -25,6 +27,7 @@ export interface CommitteeMember {
   Email?: string;
   Presentation?: string;
   Picture?: string;
+  IsContactPerson: boolean;
 }
 
 export interface Sponsor {

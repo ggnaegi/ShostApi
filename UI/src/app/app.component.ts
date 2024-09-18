@@ -1,6 +1,6 @@
-import {AfterViewInit, ChangeDetectionStrategy, Component, HostListener} from '@angular/core';
+import {AfterViewInit, ChangeDetectionStrategy, Component, HostListener, OnInit} from '@angular/core';
 import {
-  IsActiveMatchOptions,
+  IsActiveMatchOptions, NavigationEnd, Router,
   RouterLink,
   RouterLinkActive,
   RouterOutlet
@@ -18,6 +18,7 @@ import {NgIf, NgOptimizedImage} from "@angular/common";
 import {SessionContainerComponent} from "./session/containers/session.container";
 import {MatProgressSpinner} from "@angular/material/progress-spinner";
 import {SpinnerComponent} from "./spinner/pages/spinner.component";
+import {filter} from "rxjs";
 
 @Component({
   selector: 'app-root',
@@ -27,7 +28,7 @@ import {SpinnerComponent} from "./spinner/pages/spinner.component";
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent implements AfterViewInit {
+export class AppComponent implements OnInit, AfterViewInit {
   title = "Site de l'harmonie Shostakovich";
 
   public linkActiveOptions: IsActiveMatchOptions = {
@@ -37,24 +38,39 @@ export class AppComponent implements AfterViewInit {
     fragment: 'exact',
   };
 
-  constructor() {
+  constructor(private router: Router) {
   }
 
   isButtonVisible = false;
+  currentYear: string | null = null;
 
   @HostListener('window:scroll', [])
   onWindowScroll() {
     const scrollTop = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
-    this.isButtonVisible = scrollTop > 300; // Show button when scrolled 300px down
+    this.isButtonVisible = scrollTop > 300;
   }
 
   ngAfterViewInit() {
-    // Use a delay to ensure the Facebook SDK has loaded
     setTimeout(() => {
       if (window['FB' as any]) {
         (window['FB' as any] as any).XFBML.parse();
       }
-    }, 1000);  // A 1-second delay should be sufficient
+    }, 1000);
+  }
+
+  ngOnInit(): void {
+    this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe(() => {
+        const url = this.router.url;
+
+        const sessionRouteMatch = url.match(/^\/session\/(\d{4})$/);
+        if (sessionRouteMatch) {
+          this.currentYear = sessionRouteMatch[1];
+        } else {
+          this.currentYear = null;
+        }
+      });
   }
 
   scrollToTop(): void {

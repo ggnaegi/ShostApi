@@ -1,8 +1,8 @@
 import {Injectable} from "@angular/core";
-import {map, Observable, shareReplay} from "rxjs";
+import {Observable, shareReplay} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {AbstractAboutService} from "./abstract.about.service";
-import {Organisation, OrganisationContainer, Sponsor} from "../api/organisation";
+import {Organisation, Sponsor} from "../api/organisation";
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +10,7 @@ import {Organisation, OrganisationContainer, Sponsor} from "../api/organisation"
 export class AboutService implements AbstractAboutService {
 
   private sponsors = 'assets/sponsors/sponsors_config.json';
+  private organisation = 'assets/organisation.json';
 
   constructor(private http: HttpClient) {
   }
@@ -19,9 +20,7 @@ export class AboutService implements AbstractAboutService {
   }
 
   getAboutDefinition$(): Observable<Organisation> {
-    return this.http.get<OrganisationContainer>(`http://localhost:7227/api/organisations`)
-      .pipe(
-        map(result => result.Value),
-        shareReplay())
+    return this.http.get<Organisation>(this.organisation)
+      .pipe(shareReplay())
   }
 }

@@ -72,6 +72,6 @@ export class AboutComponent implements OnInit, OnChanges {
       return;
     }
 
-    this.president = this.organisation.CommitteeMembers[0];
+    this.president = this.organisation.CommitteeMembers.find(x => x.IsContactPerson)
   }
 }

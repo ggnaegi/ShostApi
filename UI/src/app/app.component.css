@@ -40,6 +40,7 @@
   z-index: 999;
   background-color: white;
 }
+
 mat-sidenav-content {
   padding-top: 128px; /* Adjust this based on the combined height of the top toolbar and navbar */
 }
@@ -140,6 +141,7 @@ mat-sidenav-content {
   background-color: white;
   z-index: 1000; /* Ensure it appears on top */
   width: 250px; /* Set a fixed width for the sidenav */
+  padding-top: 53px;
 }
 
 .mobile-sidenav .mat-nav-list a {
