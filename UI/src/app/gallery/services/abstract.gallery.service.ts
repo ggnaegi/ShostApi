@@ -1,7 +1,6 @@
-import {Injectable} from "@angular/core";
-import {Observable} from "rxjs";
-import {GalleriesDefinition} from "../api/gallery";
-
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { GalleriesDefinition } from '../api/gallery';
 
 @Injectable()
 export abstract class AbstractGalleryService {

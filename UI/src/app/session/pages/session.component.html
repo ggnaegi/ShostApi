@@ -1,38 +1,50 @@
 <ng-container *ngIf="sessionData">
-
   <div class="floating-menu">
     <a routerLink="." fragment="concept" class="menu-item">
-      <i class="fa-solid fa-lightbulb menu-icon"></i> <!-- Concept Icon -->
+      <i class="fa-solid fa-lightbulb menu-icon"></i>
+      <!-- Concept Icon -->
       <span>Concept</span>
     </a>
     <a routerLink="." fragment="conductor" class="menu-item">
-      <i class="fa-solid fa-user-tie menu-icon"></i> <!-- Conductor Icon -->
+      <i class="fa-solid fa-user-tie menu-icon"></i>
+      <!-- Conductor Icon -->
       <span>Directeur</span>
     </a>
     <a routerLink="." fragment="soloists" class="menu-item">
-      <i class="fa-solid fa-microphone menu-icon"></i> <!-- Soloists Icon -->
+      <i class="fa-solid fa-microphone menu-icon"></i>
+      <!-- Soloists Icon -->
       <span>Solistes</span>
     </a>
     <a routerLink="." fragment="program" class="menu-item">
-      <i class="fa-solid fa-list menu-icon"></i> <!-- Program Icon -->
+      <i class="fa-solid fa-list menu-icon"></i>
+      <!-- Program Icon -->
       <span>Programme</span>
     </a>
     <a routerLink="." fragment="musicians" class="menu-item">
-      <i class="fa-solid fa-music menu-icon"></i> <!-- Musicians Icon -->
+      <i class="fa-solid fa-music menu-icon"></i>
+      <!-- Musicians Icon -->
       <span>Musiciens</span>
     </a>
   </div>
 
-
-  <div class="main-content-wrapper" fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="start stretch" fxFlexFill>
+  <div
+    class="main-content-wrapper"
+    fxLayout="row"
+    fxLayout.lt-md="column"
+    fxLayoutAlign="start stretch"
+    fxFlexFill
+  >
     <!-- left -->
     <div fxFlex="20" fxFlex.lt-md="100" class="left-column">
-
       <!-- flyer -->
       <mat-card appearance="raised" class="left-column-card">
         <mat-card-header></mat-card-header>
         <mat-card-content>
-          <img [src]="'assets/'+sessionData.Picture" alt="" class="responsive-image">
+          <img
+            [src]="'assets/' + sessionData.Picture"
+            alt=""
+            class="responsive-image"
+          />
         </mat-card-content>
       </mat-card>
       <mat-card appearance="outlined" class="right-column-card">
@@ -40,24 +52,43 @@
           <mat-card-title>Représentations</mat-card-title>
         </mat-card-header>
         <mat-card-content>
-          <div style="font-family: Montserrat, sans-serif; line-height: 1.6; color: #333;">
+          <div
+            style="
+              font-family: Montserrat, sans-serif;
+              line-height: 1.6;
+              color: #333;
+            "
+          >
             <div *ngFor="let concert of sessionData.Concerts">
-              <h3><fa-icon [icon]="faCalendarAlt"></fa-icon>
-                {{ concert.Date | date:'dd.MM.yyyy HH:mm' }}</h3>
+              <h3>
+                <fa-icon [icon]="faCalendarAlt"></fa-icon>
+                {{ concert.Date | date: "dd.MM.yyyy HH:mm" }}
+              </h3>
               <ul class="concert-details">
                 <li>
-                   <fa-icon [icon]="faBuilding"></fa-icon>
-                    {{ concert.Venue }}
+                  <fa-icon [icon]="faBuilding"></fa-icon>
+                  {{ concert.Venue }}
                 </li>
                 <li>
                   <fa-icon [icon]="faMapMarkerAlt"></fa-icon>
-                  {{ concert.City }} <!-- City with Icon -->
+                  {{ concert.City }}
+                  <!-- City with Icon -->
                 </li>
-                <li style="width: 100%;">
-                  <a [href]="concert.Tickets" target="_blank" style="width: 100%; color: white;">
-                    <button mat-raised-button color="primary" class="ticket-button" style="width: 100%;">
-                      <fa-icon [icon]="faTicket" style="color: white;"></fa-icon>
-                      Billets <!-- Button with icon and caption -->
+                <li style="width: 100%">
+                  <a
+                    [href]="concert.Tickets"
+                    target="_blank"
+                    style="width: 100%; color: white"
+                  >
+                    <button
+                      mat-raised-button
+                      color="primary"
+                      class="ticket-button"
+                      style="width: 100%"
+                    >
+                      <fa-icon [icon]="faTicket" style="color: white"></fa-icon>
+                      Billets
+                      <!-- Button with icon and caption -->
                     </button>
                   </a>
                 </li>
@@ -76,7 +107,13 @@
           <mat-card-title>Concept</mat-card-title>
         </mat-card-header>
         <mat-card-content>
-          <div style="font-family: Montserrat, sans-serif; line-height: 1.6; color: #333;">
+          <div
+            style="
+              font-family: Montserrat, sans-serif;
+              line-height: 1.6;
+              color: #333;
+            "
+          >
             <div [innerHTML]="sessionData.Presentation"></div>
           </div>
         </mat-card-content>
@@ -84,14 +121,32 @@
       <!-- conductor -->
       <mat-card id="conductor" appearance="raised" class="center-column-card">
         <mat-card-header>
-          <div mat-card-avatar><img [src]="'assets/'+sessionData.Conductor?.Picture"
-                                    [alt]="sessionData.Conductor?.FirstName + ' ' + sessionData.Conductor?.LastName"
-                                    class="conductor-photo"></div>
-          <mat-card-title>{{ sessionData.Conductor?.FirstName + ' ' + sessionData.Conductor?.LastName }}</mat-card-title>
+          <div mat-card-avatar>
+            <img
+              [src]="'assets/' + sessionData.Conductor?.Picture"
+              [alt]="
+                sessionData.Conductor?.FirstName +
+                ' ' +
+                sessionData.Conductor?.LastName
+              "
+              class="conductor-photo"
+            />
+          </div>
+          <mat-card-title>{{
+            sessionData.Conductor?.FirstName +
+              " " +
+              sessionData.Conductor?.LastName
+          }}</mat-card-title>
           <mat-card-subtitle>Directeur</mat-card-subtitle>
         </mat-card-header>
         <mat-card-content>
-          <div style="font-family: Montserrat, sans-serif; line-height: 1.6; color: #333;">
+          <div
+            style="
+              font-family: Montserrat, sans-serif;
+              line-height: 1.6;
+              color: #333;
+            "
+          >
             <div [innerHTML]="sessionData.Conductor?.Presentation"></div>
           </div>
         </mat-card-content>
@@ -100,14 +155,26 @@
       <div id="soloists" *ngFor="let soloist of sessionData.Soloists">
         <mat-card appearance="raised" class="center-column-card">
           <mat-card-header>
-            <div mat-card-avatar><img [src]="'assets/'+soloist.Picture"
-                                      [alt]="soloist.FirstName + ' ' + soloist.LastName"
-                                      class="conductor-photo"></div>
-            <mat-card-title>{{ soloist.FirstName + ' ' + soloist.LastName }}</mat-card-title>
+            <div mat-card-avatar>
+              <img
+                [src]="'assets/' + soloist.Picture"
+                [alt]="soloist.FirstName + ' ' + soloist.LastName"
+                class="conductor-photo"
+              />
+            </div>
+            <mat-card-title>{{
+              soloist.FirstName + " " + soloist.LastName
+            }}</mat-card-title>
             <mat-card-subtitle>{{ soloist.Instrument }}</mat-card-subtitle>
           </mat-card-header>
           <mat-card-content>
-            <div style="font-family: Montserrat, sans-serif; line-height: 1.6; color: #333;">
+            <div
+              style="
+                font-family: Montserrat, sans-serif;
+                line-height: 1.6;
+                color: #333;
+              "
+            >
               <div [innerHTML]="soloist.Presentation"></div>
             </div>
           </mat-card-content>
@@ -123,7 +190,13 @@
           <mat-card-title>Programme</mat-card-title>
         </mat-card-header>
         <mat-card-content>
-          <div style="font-family: Montserrat, sans-serif; line-height: 1.6; color: #333;">
+          <div
+            style="
+              font-family: Montserrat, sans-serif;
+              line-height: 1.6;
+              color: #333;
+            "
+          >
             <div [innerHTML]="sessionData.Program"></div>
           </div>
         </mat-card-content>
@@ -134,12 +207,18 @@
           <mat-card-title>Musiciens</mat-card-title>
         </mat-card-header>
         <mat-card-content>
-          <div style="font-family: Montserrat, sans-serif; line-height: 1.6; color: #333;">
+          <div
+            style="
+              font-family: Montserrat, sans-serif;
+              line-height: 1.6;
+              color: #333;
+            "
+          >
             <div *ngFor="let register of getRegisters()">
               <h3>{{ register.RegisterName }}</h3>
               <ul>
                 <li *ngFor="let musician of register.RegisterMusicians">
-                  {{ musician.FirstName + ' ' + musician.LastName }}
+                  {{ musician.FirstName + " " + musician.LastName }}
                 </li>
               </ul>
             </div>
@@ -147,7 +226,5 @@
         </mat-card-content>
       </mat-card>
     </div>
-
   </div>
-
 </ng-container>

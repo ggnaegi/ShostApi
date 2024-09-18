@@ -1,185 +1,210 @@
-@use '@angular/material' as mat;
+@use "@angular/material" as mat;
 
 // Import Google Fonts
-@import 'https://fonts.googleapis.com/icon?family=Material+Icons+Outlined';
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap');
+@import "https://fonts.googleapis.com/icon?family=Material+Icons+Outlined";
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap");
 
-$base-font-family: 'Montserrat';
+$base-font-family: "Montserrat";
 
 // Define typography levels using the new API for M2
 $typography: mat.m2-define-typography-config(
-  $headline-1: mat.m2-define-typography-level(112px, 112px, 300, 'Montserrat', -0.0134em),
-  $headline-2: mat.m2-define-typography-level(56px, 56px, 400, 'Montserrat', -0.0089em),
-  $headline-3: mat.m2-define-typography-level(45px, 48px, 400, 'Montserrat', 0.0000em),
-  $headline-4: mat.m2-define-typography-level(34px, 40px, 400, 'Montserrat', 0.0074em),
-  $headline-5: mat.m2-define-typography-level(24px, 32px, 400, 'Montserrat', 0.0000em),
-  $headline-6: mat.m2-define-typography-level(20px, 32px, 500, 'Montserrat', 0.0075em),
-  $subtitle-2: mat.m2-define-typography-level(16px, 28px, 400, 'Montserrat', 0.0094em),
-  $subtitle-1: mat.m2-define-typography-level(15px, 24px, 500, 'Montserrat', 0.0067em),
-  $body-2: mat.m2-define-typography-level(14px, 24px, 500, 'Montserrat', 0.0179em),
-  $body-1: mat.m2-define-typography-level(14px, 20px, 400, 'Montserrat', 0.0179em),
-  $button: mat.m2-define-typography-level(14px, 14px, 500, 'Montserrat', 0.0893em),
-  $caption: mat.m2-define-typography-level(12px, 20px, 400, 'Montserrat', 0.0333em),
-  $overline: mat.m2-define-typography-level(inherit, 1.125, 400, 'Montserrat', 1.5px)
+  $headline-1:
+    mat.m2-define-typography-level(112px, 112px, 300, "Montserrat", -0.0134em),
+  $headline-2:
+    mat.m2-define-typography-level(56px, 56px, 400, "Montserrat", -0.0089em),
+  $headline-3:
+    mat.m2-define-typography-level(45px, 48px, 400, "Montserrat", 0em),
+  $headline-4:
+    mat.m2-define-typography-level(34px, 40px, 400, "Montserrat", 0.0074em),
+  $headline-5:
+    mat.m2-define-typography-level(24px, 32px, 400, "Montserrat", 0em),
+  $headline-6:
+    mat.m2-define-typography-level(20px, 32px, 500, "Montserrat", 0.0075em),
+  $subtitle-2:
+    mat.m2-define-typography-level(16px, 28px, 400, "Montserrat", 0.0094em),
+  $subtitle-1:
+    mat.m2-define-typography-level(15px, 24px, 500, "Montserrat", 0.0067em),
+  $body-2:
+    mat.m2-define-typography-level(14px, 24px, 500, "Montserrat", 0.0179em),
+  $body-1:
+    mat.m2-define-typography-level(14px, 20px, 400, "Montserrat", 0.0179em),
+  $button:
+    mat.m2-define-typography-level(14px, 14px, 500, "Montserrat", 0.0893em),
+  $caption:
+    mat.m2-define-typography-level(12px, 20px, 400, "Montserrat", 0.0333em),
+  $overline:
+    mat.m2-define-typography-level(inherit, 1.125, 400, "Montserrat", 1.5px),
 );
 
 $custom-primary-palette: mat.m2-define-palette(
-    (
-      50: #f4e6eb,
-      100: #e6bfd0,
-      200: #d693ab,
-      300: #c5648c,
-      400: #b74675,
-      500: #803357, // main primary color
-      600: #732f4f, // slightly darker version for active states
-      700: #662945,
-      800: #57223a,
-      900: #471a2e,
-      A100: #ffedf4,
-      A200: #ffd3e4,
-      A400: #ffaac7,
-      A700: #ff93b0,
-      contrast: (
-        50: rgba(0, 0, 0, 0.87),
-        100: rgba(0, 0, 0, 0.87),
-        200: rgba(0, 0, 0, 0.87),
-        300: rgba(0, 0, 0, 0.87),
-        400: rgba(0, 0, 0, 0.87),
-        500: #ffffff, // white text for better contrast on #803357
-        600: #ffffff,
-        700: #ffffff,
-        800: #ffffff,
-        900: #ffffff,
-        A100: rgba(0, 0, 0, 0.87),
-        A200: rgba(0, 0, 0, 0.87),
-        A400: rgba(0, 0, 0, 0.87),
-        A700: #ffffff
-      )
-    )
+  (
+    50: #f4e6eb,
+    100: #e6bfd0,
+    200: #d693ab,
+    300: #c5648c,
+    400: #b74675,
+    500: #803357,
+    // main primary color
+    600: #732f4f,
+    // slightly darker version for active states
+    700: #662945,
+    800: #57223a,
+    900: #471a2e,
+    A100: #ffedf4,
+    A200: #ffd3e4,
+    A400: #ffaac7,
+    A700: #ff93b0,
+    contrast: (
+      50: rgba(0, 0, 0, 0.87),
+      100: rgba(0, 0, 0, 0.87),
+      200: rgba(0, 0, 0, 0.87),
+      300: rgba(0, 0, 0, 0.87),
+      400: rgba(0, 0, 0, 0.87),
+      500: #ffffff,
+      // white text for better contrast on #803357
+      600: #ffffff,
+      700: #ffffff,
+      800: #ffffff,
+      900: #ffffff,
+      A100: rgba(0, 0, 0, 0.87),
+      A200: rgba(0, 0, 0, 0.87),
+      A400: rgba(0, 0, 0, 0.87),
+      A700: #ffffff,
+    ),
+  )
 );
 
 $custom-accent-palette: mat.m2-define-palette(
-    (
-      50: #f5f2f3,
-      100: #f0edee,
-      200: #e8e3e4,
-      300: #e0d9da,
-      400: #dbd2d3,
-      500: #ccc3c5, // main
-      600: #b9aeb0,
-      700: #b9aeb0, // darker
-      800: #a59a9c,
-      900: #928788,
-      A100: #f8f6f7,
-      A200: #f0edee,
-      A400: #e0d9da,
-      A700: #a59a9c,
-      contrast: (
-        50: rgba(0, 0, 0, 0.87),
-        100: rgba(0, 0, 0, 0.87),
-        200: rgba(0, 0, 0, 0.87),
-        300: rgba(0, 0, 0, 0.87),
-        400: rgba(0, 0, 0, 0.87),
-        500: rgba(0, 0, 0, 0.87),
-        600: rgba(0, 0, 0, 0.87),
-        700: rgba(0, 0, 0, 0.87),
-        800: rgba(0, 0, 0, 0.87),
-        900: rgba(0, 0, 0, 0.87),
-        A100: rgba(0, 0, 0, 0.87),
-        A200: rgba(0, 0, 0, 0.87),
-        A400: rgba(0, 0, 0, 0.87),
-        A700: rgba(0, 0, 0, 0.87)
-      )
-    )
+  (
+    50: #f5f2f3,
+    100: #f0edee,
+    200: #e8e3e4,
+    300: #e0d9da,
+    400: #dbd2d3,
+    500: #ccc3c5,
+    // main
+    600: #b9aeb0,
+    700: #b9aeb0,
+    // darker
+    800: #a59a9c,
+    900: #928788,
+    A100: #f8f6f7,
+    A200: #f0edee,
+    A400: #e0d9da,
+    A700: #a59a9c,
+    contrast: (
+      50: rgba(0, 0, 0, 0.87),
+      100: rgba(0, 0, 0, 0.87),
+      200: rgba(0, 0, 0, 0.87),
+      300: rgba(0, 0, 0, 0.87),
+      400: rgba(0, 0, 0, 0.87),
+      500: rgba(0, 0, 0, 0.87),
+      600: rgba(0, 0, 0, 0.87),
+      700: rgba(0, 0, 0, 0.87),
+      800: rgba(0, 0, 0, 0.87),
+      900: rgba(0, 0, 0, 0.87),
+      A100: rgba(0, 0, 0, 0.87),
+      A200: rgba(0, 0, 0, 0.87),
+      A400: rgba(0, 0, 0, 0.87),
+      A700: rgba(0, 0, 0, 0.87),
+    ),
+  )
 );
 
 $custom-warn-palette: mat.m2-define-palette(
-    (
-      50: #fbe9e7,
-      100: #f8d7d3,
-      200: #f5cdd0, // lighter
-      300: #f4a7ab,
-      400: #f28a8e,
-      500: #dc5962, // main
-      600: #ce3e46,
-      700: #ce3e46, // darker
-      800: #b3393f,
-      900: #983237,
-      A100: #f9e7e8,
-      A200: #f5cdd0,
-      A400: #f28a8e,
-      A700: #b3393f,
-      contrast: (
-        50: rgba(0, 0, 0, 0.87),
-        100: rgba(0, 0, 0, 0.87),
-        200: rgba(0, 0, 0, 0.87),
-        300: rgba(0, 0, 0, 0.87),
-        400: rgba(0, 0, 0, 0.87),
-        500: rgba(0, 0, 0, 0.87),
-        600: #ffffff,
-        700: #ffffff,
-        800: #ffffff,
-        900: #ffffff,
-        A100: rgba(0, 0, 0, 0.87),
-        A200: rgba(0, 0, 0, 0.87),
-        A400: #ffffff,
-        A700: #ffffff
-      )
-    )
+  (
+    50: #fbe9e7,
+    100: #f8d7d3,
+    200: #f5cdd0,
+    // lighter
+    300: #f4a7ab,
+    400: #f28a8e,
+    500: #dc5962,
+    // main
+    600: #ce3e46,
+    700: #ce3e46,
+    // darker
+    800: #b3393f,
+    900: #983237,
+    A100: #f9e7e8,
+    A200: #f5cdd0,
+    A400: #f28a8e,
+    A700: #b3393f,
+    contrast: (
+      50: rgba(0, 0, 0, 0.87),
+      100: rgba(0, 0, 0, 0.87),
+      200: rgba(0, 0, 0, 0.87),
+      300: rgba(0, 0, 0, 0.87),
+      400: rgba(0, 0, 0, 0.87),
+      500: rgba(0, 0, 0, 0.87),
+      600: #ffffff,
+      700: #ffffff,
+      800: #ffffff,
+      900: #ffffff,
+      A100: rgba(0, 0, 0, 0.87),
+      A200: rgba(0, 0, 0, 0.87),
+      A400: #ffffff,
+      A700: #ffffff,
+    ),
+  )
 );
 
 // Create a light theme using the custom palettes
-$light-theme: mat.m2-define-light-theme((
-  color: (
-    primary: $custom-primary-palette,
-    accent: $custom-accent-palette,
-    warn: $custom-warn-palette,
-  ),
-  typography: $typography,
-  background: (
-    background: #fafafa,
-    status-bar: darken(#fafafa, 10%),
-    app-bar: darken(#fafafa, 5%),
-    card: lighten(#fafafa, 5%),
-    dialog: lighten(#fafafa, 5%),
-    hover: rgba(#000, 0.04),
-    disabled-button: rgba(#000, 0.12),
-    raised-button: lighten(#fafafa, 5%),
-    focused-button: rgba(#000, 0.12),
-    selected-button: darken(#fafafa, 10%),
-    selected-disabled-button: darken(#fafafa, 30%),
-    unselected-chip: darken(#fafafa, 10%),
-    disabled-list-option: darken(#fafafa, 10%)
-  ),
-  foreground: (
-    base: black,
-    divider: rgba(0, 0, 0, 0.12),
-    dividers: rgba(0, 0, 0, 0.12),
-    disabled: rgba(0, 0, 0, 0.38),
-    disabled-button: rgba(0, 0, 0, 0.26),
-    disabled-text: rgba(0, 0, 0, 0.38),
-    elevation: black,
-    secondary-text: rgba(0, 0, 0, 0.54),
-    hint-text: rgba(0, 0, 0, 0.38),
-    accent-text: rgba(0, 0, 0, 0.54),
-    icon: rgba(0, 0, 0, 0.54),
-    icons: rgba(0, 0, 0, 0.54),
-    text: rgba(0, 0, 0, 0.87),
-    slider-min: rgba(0, 0, 0, 0.87),
-    slider-off: rgba(0, 0, 0, 0.26),
-    slider-off-active: rgba(0, 0, 0, 0.38)
+$light-theme: mat.m2-define-light-theme(
+  (
+    color: (
+      primary: $custom-primary-palette,
+      accent: $custom-accent-palette,
+      warn: $custom-warn-palette,
+    ),
+    typography: $typography,
+    background: (
+      background: #fafafa,
+      status-bar: darken(#fafafa, 10%),
+      app-bar: darken(#fafafa, 5%),
+      card: lighten(#fafafa, 5%),
+      dialog: lighten(#fafafa, 5%),
+      hover: rgba(#000, 0.04),
+      disabled-button: rgba(#000, 0.12),
+      raised-button: lighten(#fafafa, 5%),
+      focused-button: rgba(#000, 0.12),
+      selected-button: darken(#fafafa, 10%),
+      selected-disabled-button: darken(#fafafa, 30%),
+      unselected-chip: darken(#fafafa, 10%),
+      disabled-list-option: darken(#fafafa, 10%),
+    ),
+    foreground: (
+      base: black,
+      divider: rgba(0, 0, 0, 0.12),
+      dividers: rgba(0, 0, 0, 0.12),
+      disabled: rgba(0, 0, 0, 0.38),
+      disabled-button: rgba(0, 0, 0, 0.26),
+      disabled-text: rgba(0, 0, 0, 0.38),
+      elevation: black,
+      secondary-text: rgba(0, 0, 0, 0.54),
+      hint-text: rgba(0, 0, 0, 0.38),
+      accent-text: rgba(0, 0, 0, 0.54),
+      icon: rgba(0, 0, 0, 0.54),
+      icons: rgba(0, 0, 0, 0.54),
+      text: rgba(0, 0, 0, 0.87),
+      slider-min: rgba(0, 0, 0, 0.87),
+      slider-off: rgba(0, 0, 0, 0.26),
+      slider-off-active: rgba(0, 0, 0, 0.38),
+    ),
   )
-));
+);
 
 // Create a dark theme using the custom palettes
-$dark-theme: mat.m2-define-dark-theme((
-  color: (
-    primary: $custom-primary-palette,
-    accent: $custom-accent-palette,
-    warn: $custom-warn-palette,
-  ),
-  typography: $typography,
-));
+$dark-theme: mat.m2-define-dark-theme(
+  (
+    color: (
+      primary: $custom-primary-palette,
+      accent: $custom-accent-palette,
+      warn: $custom-warn-palette,
+    ),
+    typography: $typography,
+  )
+);
 
 // Include the core styles and component themes for the light theme
 @include mat.all-component-themes($light-theme);
@@ -190,48 +215,51 @@ $dark-theme: mat.m2-define-dark-theme((
 }
 
 // Override specific component styles, if needed
-.mat-raised-button, .mat-stroked-button, .mat-flat-button {
+.mat-raised-button,
+.mat-stroked-button,
+.mat-flat-button {
   padding: 0 1.15em;
-  margin: 0 .65em;
+  margin: 0 0.65em;
   min-width: 3em;
   line-height: 36.4px;
 }
 
 .mat-standard-chip {
-  padding: .5em .85em;
+  padding: 0.5em 0.85em;
   min-height: 2.5em;
 }
 
 .material-icons {
   font-size: 24px;
-  font-family: 'Material Icons Outlined', 'Material Icons';
+  font-family: "Material Icons Outlined", "Material Icons";
 }
 
 .mat-badge-content {
-  font-family: 'Montserrat';
+  font-family: "Montserrat";
 }
 
-.cdk-overlay-container,.cdk-global-overlay-wrapper {
+.cdk-overlay-container,
+.cdk-global-overlay-wrapper {
   pointer-events: none;
   top: 0;
   left: 0;
   height: 100%;
-  width: 100%
+  width: 100%;
 }
 
 .cdk-overlay-container {
   position: fixed;
-  z-index: 1000
+  z-index: 1000;
 }
 
 .cdk-overlay-container:empty {
-  display: none
+  display: none;
 }
 
 .cdk-global-overlay-wrapper {
   display: flex;
   position: absolute;
-  z-index: 1000
+  z-index: 1000;
 }
 
 .cdk-overlay-pane {
@@ -241,7 +269,7 @@ $dark-theme: mat.m2-define-dark-theme((
   z-index: 1000;
   display: flex;
   max-width: 100%;
-  max-height: 100%
+  max-height: 100%;
 }
 
 .cdk-overlay-backdrop {
@@ -250,35 +278,37 @@ $dark-theme: mat.m2-define-dark-theme((
   z-index: 1000;
   pointer-events: auto;
   -webkit-tap-highlight-color: transparent;
-  transition: opacity .4s cubic-bezier(.25,.8,.25,1);
-  opacity: 0
+  transition: opacity 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  opacity: 0;
 }
 
 .cdk-overlay-backdrop.cdk-overlay-backdrop-showing {
-  opacity: 1
+  opacity: 1;
 }
 
 .cdk-high-contrast-active .cdk-overlay-backdrop.cdk-overlay-backdrop-showing {
-  opacity: .6
+  opacity: 0.6;
 }
 
 .cdk-overlay-dark-backdrop {
-  background: #00000052
+  background: #00000052;
 }
 
 .cdk-overlay-transparent-backdrop {
-  transition: visibility 1ms linear,opacity 1ms linear;
+  transition:
+    visibility 1ms linear,
+    opacity 1ms linear;
   visibility: hidden;
-  opacity: 1
+  opacity: 1;
 }
 
 .cdk-overlay-transparent-backdrop.cdk-overlay-backdrop-showing {
   opacity: 0;
-  visibility: visible
+  visibility: visible;
 }
 
 .cdk-overlay-backdrop-noop-animation {
-  transition: none
+  transition: none;
 }
 
 .cdk-overlay-connected-position-bounding-box {
@@ -287,6 +317,13 @@ $dark-theme: mat.m2-define-dark-theme((
   display: flex;
   flex-direction: column;
   min-width: 1px;
-  min-height: 1px
+  min-height: 1px;
 }
 
+.mat-mdc-paginator-range-label {
+  display: none !important;
+}
+
+.mat-mdc-nav-list .mat-mdc-list-item {
+  border-radius: 0 !important;
+}

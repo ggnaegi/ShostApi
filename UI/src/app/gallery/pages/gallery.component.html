@@ -2,53 +2,55 @@
   <div class="card-container" *ngIf="starredLogo" id="welcome-sub-section">
     <div class="content-wrapper">
       <div class="year-card-wrapper">
-        <mat-card class="year-card" [routerLink]="['/session', starredLogo.year]">
+        <mat-card
+          class="year-card"
+          [routerLink]="['/session', starredLogo.year]"
+        >
           <mat-card-header>
             <mat-card-title>{{ starredLogo.year }}</mat-card-title>
           </mat-card-header>
-          <img [src]="starredLogo.url" alt="{{ starredLogo.alt }}" class="card-logo" />
+          <img
+            [src]="starredLogo.url"
+            alt="{{ starredLogo.alt }}"
+            class="card-logo"
+          />
         </mat-card>
       </div>
 
-      <div class="welcome-teaser" [innerHTML]="starredLogo.teaser"></div>
+      <div class="welcome-teaser">
+        <div [innerHTML]="starredLogo.teaser"></div>
+        <div class="redirect-link" [routerLink]="['/session', starredLogo.year]">
+          <i class="fa fa-arrow-right"></i>
+          <span>C'est par ici !</span>
+        </div>
+      </div>
     </div>
-
-    <!-- Button to open the Facebook overlay -->
-    <!-- <button class="toggle-overlay-btn" (click)="toggleOverlay()">
-      <i class="fas" [ngClass]="isOverlayOpen ? 'fa-times' : 'fa-bars'"></i>Infos des réseaux
-    </button>-->
-
-    <!-- Social Media Overlay (hidden by default) -->
-    <!-- <div class="social-overlay" [class.active]="isOverlayOpen">
-      <div class="overlay-header">
-      </div>
-      <div class="fb-page"
-           data-href="https://www.facebook.com/harmonieshosta"
-           data-tabs="timeline"
-           data-width="300"
-           data-height=""
-           data-small-header="false"
-           data-adapt-container-width="true"
-           data-hide-cover="false"
-           data-show-facepile="true">
-        <blockquote cite="https://www.facebook.com/harmonieshosta" class="fb-xfbml-parse-ignore">
-          <a href="https://www.facebook.com/harmonieshosta">Harmonie Shostakovich</a>
-        </blockquote>
-      </div>
-    </div>-->
   </div>
   <div class="card-container" id="medias-section">
     <!-- Iterate over galleries, displaying a card for each year -->
-    <div class="year-card-wrapper" *ngFor="let logo of galleriesDefinitions.logos">
-      <mat-card *ngIf="logo.year >= 2016 && logo !== starredLogo" class="year-card"
-                [routerLink]="logo.showPage ? ['/session', logo.year] : ['/about#concerts-section']">
+    <div
+      class="year-card-wrapper"
+      *ngFor="let logo of galleriesDefinitions.logos"
+    >
+      <mat-card
+        *ngIf="logo.year >= 2016 && logo !== starredLogo"
+        class="year-card"
+        [routerLink]="
+          logo.showPage ? ['/session', logo.year] : ['/about']
+        "
+        [fragment]="logo.showPage ? undefined : 'concerts-section'"
+      >
         <mat-card-header>
           <mat-card-title>{{ logo.year }}</mat-card-title>
         </mat-card-header>
-        <img [src]="logo.url" alt="{{ logo.alt }}" class="card-logo"/>
+        <img [src]="logo.url" alt="{{ logo.alt }}" class="card-logo" />
         <mat-card-actions *ngIf="logo.showGallery">
-          <button mat-icon-button (click)="$event.stopPropagation(); openGalleryDialog(logo.year)">
-            <mat-icon>photo_library</mat-icon> <!-- Gallery Icon -->
+          <button
+            mat-icon-button
+            (click)="$event.stopPropagation(); openGalleryDialog(logo.year)"
+          >
+            <mat-icon>photo_library</mat-icon>
+            <!-- Gallery Icon -->
           </button>
         </mat-card-actions>
       </mat-card>

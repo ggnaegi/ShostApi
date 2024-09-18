@@ -44,7 +44,9 @@
   margin: 0;
 }
 
-.left-column-card, .center-column-card, .right-column-card {
+.left-column-card,
+.center-column-card,
+.right-column-card {
   margin-bottom: 16px; /* Ensure spacing between cards */
 }
 
