@@ -71,13 +71,10 @@ export class GalleryComponent implements OnChanges {
     this.dialog.open(GalleryDialogComponent, {
       viewContainerRef: this.viewContainerRef,
       data: gallery,
-      position: {
-        top: '70px',
-        left: '10%' // Center the dialog horizontally with 10% margin
-      },
       panelClass: 'custom-dialog-container',
       disableClose: false,
-      autoFocus: false // Prevent autofocus issues when sizing to content
+      autoFocus: false,
+      position: { top: '70px', left: '10%' },  // Optional if you still want custom positioning
     });
   }
 

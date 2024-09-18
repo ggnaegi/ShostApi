@@ -1,5 +1,5 @@
 <ng-container *ngIf="galleriesDefinitions">
-  <div class="card-container" id="welcome-section" *ngIf="starredLogo">
+  <div class="card-container" *ngIf="starredLogo" id="welcome-sub-section">
     <div class="content-wrapper">
       <div class="year-card-wrapper">
         <mat-card class="year-card" [routerLink]="['/session', starredLogo.year]">
@@ -14,12 +14,12 @@
     </div>
 
     <!-- Button to open the Facebook overlay -->
-    <button class="toggle-overlay-btn" (click)="toggleOverlay()">
+    <!-- <button class="toggle-overlay-btn" (click)="toggleOverlay()">
       <i class="fas" [ngClass]="isOverlayOpen ? 'fa-times' : 'fa-bars'"></i>Infos des réseaux
-    </button>
+    </button>-->
 
     <!-- Social Media Overlay (hidden by default) -->
-    <div class="social-overlay" [class.active]="isOverlayOpen">
+    <!-- <div class="social-overlay" [class.active]="isOverlayOpen">
       <div class="overlay-header">
       </div>
       <div class="fb-page"
@@ -35,7 +35,7 @@
           <a href="https://www.facebook.com/harmonieshosta">Harmonie Shostakovich</a>
         </blockquote>
       </div>
-    </div>
+    </div>-->
   </div>
   <div class="card-container" id="medias-section">
     <!-- Iterate over galleries, displaying a card for each year -->

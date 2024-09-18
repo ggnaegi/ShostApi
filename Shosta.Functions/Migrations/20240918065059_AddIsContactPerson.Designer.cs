@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Shosta.Functions.Infrastructure;
 
@@ -11,9 +12,11 @@ using Shosta.Functions.Infrastructure;
 namespace Shosta.Functions.Migrations
 {
     [DbContext(typeof(ShostaDbContext))]
-    partial class ShostaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240918065059_AddIsContactPerson")]
+    partial class AddIsContactPerson
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -142,14 +145,6 @@ namespace Shosta.Functions.Migrations
                     b.Property<string>("CommitteeTitle")
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
-
-                    b.Property<string>("ContactPersonText")
-                        .HasMaxLength(1000)
-                        .HasColumnType("nvarchar(1000)");
-
-                    b.Property<string>("WelcomeText")
-                        .HasMaxLength(1000)
-                        .HasColumnType("nvarchar(1000)");
 
                     b.Property<int>("Year")
                         .HasColumnType("int");

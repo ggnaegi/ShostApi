@@ -5,6 +5,8 @@
   overflow-x: auto;
   padding-bottom: 10px; /* Optional: space below for scroll visibility */
   margin-bottom: 16px; /* Space at the bottom */
+  padding-top: 128px;
+  margin-top: -128px;
 }
 
 .card-container::-webkit-scrollbar {
@@ -71,9 +73,16 @@ mat-grid-tile {
 }
 
 .custom-dialog-container {
-  max-width: 90vw;
-  max-height: 90vh;
-  overflow: hidden;
+  width: auto;
+  height: auto;
+  overflow: hidden; /* Prevent any unwanted scrollbars */
+  padding: 0; /* Remove padding to allow the dialog to be sized exactly to the image */
+}
+
+.custom-dialog-container img {
+  display: block;
+  max-width: 100%;
+  height: auto;
 }
 
 @media (max-width: 768px) {
@@ -101,12 +110,12 @@ mat-grid-tile {
 }
 
 /* Main section styling */
-#welcome-section {
+#welcome-sub-section {
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
-  font-family: Montserrat;
+  font-family: Montserrat, serif;
 }
 
 /* Wrapper for image and text */
@@ -191,4 +200,9 @@ mat-grid-tile {
 /* Facebook widget styling */
 .fb-page {
   width: 100% !important;
+}
+
+.anchor-section {
+  padding-top: 128px;
+  margin-top: -128px;
 }

@@ -1,9 +1,6 @@
 <ng-container *ngIf="organisation && sponsors">
 
-  <div class="welcome-title">
-    Bonjour ami Shostakovien!<br/>
-    Cette année, nous aurons la tête dans les étoiles!
-  </div>
+  <div class="welcome-title" [innerHtml]="organisation.WelcomeText" id="welcome-section"></div>
 
   <app-gallery-container></app-gallery-container>
 
@@ -94,7 +91,7 @@
           <!-- Committee President Info -->
           <div class="president-info" fxFlex="30%" *ngIf="president">
             <div class="president-info-title">
-              Personne de contact
+              {{ organisation.ContactPersonText }}
             </div>
             <div style="display: flex; flex-direction: column; gap: 8px;">
               <div>

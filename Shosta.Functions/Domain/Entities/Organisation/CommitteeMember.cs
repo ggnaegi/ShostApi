@@ -15,6 +15,8 @@ public class CommitteeMember
     [MaxLength(100)] public string? Email { get; set; }
     [MaxLength(2000)] public string? Presentation { get; set; }
     [MaxLength(255)] public string? Picture { get; set; }
+
+    public bool IsContactPerson { get; set; } = false;
     
     public virtual Organisation? Organisation { get; set; }
 }
