@@ -1,9 +1,7 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { AsyncPipe } from '@angular/common';
-import { Observable } from 'rxjs';
 import { AboutComponent } from '../pages/about.component';
 import { AbstractAboutService } from '../services/abstract.about.service';
-import { Organisation, Sponsor } from '../api/organisation';
 
 @Component({
   selector: 'app-gallery-container',
@@ -12,19 +10,11 @@ import { Organisation, Sponsor } from '../api/organisation';
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <app-about
-      [organisation]="organisation$ | async"
-      [sponsors]="sponsors$ | async"
+      [organisation]="aboutService.getAboutDefinition$() | async"
+      [sponsors]="aboutService.getSponsors$() | async"
     />
   `,
 })
-export class AboutContainerComponent implements OnInit {
-  organisation$!: Observable<Organisation>;
-  sponsors$!: Observable<Sponsor[]>;
-
-  constructor(public aboutService: AbstractAboutService) {}
-
-  ngOnInit(): void {
-    this.organisation$ = this.aboutService.getAboutDefinition$();
-    this.sponsors$ = this.aboutService.getSponsors$();
-  }
+export class AboutContainerComponent {
+  constructor(public readonly aboutService: AbstractAboutService) {}
 }

@@ -8,11 +8,23 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root',
 })
 export class SessionService implements AbstractSessionService {
+  private dataCache: Map<number, Observable<Session>> | undefined;
   public constructor(private http: HttpClient) {}
 
+
   sessionData$(year: number): Observable<Session> {
-    return this.http
-      .get<Session>(`assets/${year}/session.json`)
-      .pipe(shareReplay());
+    if (!this.dataCache) {
+      this.dataCache = new Map<number, Observable<Session>>();
+    }
+
+    if (!this.dataCache.has(year)) {
+      const request$ = this.http
+        .get<Session>(`assets/${year}/session.json`)
+        .pipe(shareReplay(1));
+
+      this.dataCache.set(year, request$);
+    }
+
+    return this.dataCache.get(year)!;
   }
 }

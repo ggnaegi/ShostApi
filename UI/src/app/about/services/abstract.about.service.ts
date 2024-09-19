@@ -5,5 +5,5 @@ import { Organisation, Sponsor } from '../api/organisation';
 @Injectable()
 export abstract class AbstractAboutService {
   abstract getAboutDefinition$(): Observable<Organisation>;
-  abstract getSponsors$(): Observable<Sponsor[]>;
+  abstract getSponsors$(): Observable<Sponsor[]> | undefined;
 }
