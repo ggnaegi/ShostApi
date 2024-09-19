@@ -4,3 +4,7 @@ media/
 /packages/
 riderModule.iml
 /_ReSharper.Caches/
+/.vs/Shosta.Functions
+/.idea/.idea.Shosta.Functions/.idea
+/UI/.vscode
+*.user

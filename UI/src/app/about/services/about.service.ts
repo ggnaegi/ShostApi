@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { Observable, shareReplay } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { AbstractAboutService } from './abstract.about.service';
-import { Organisation, Sponsor } from '../api/organisation';
+import { EmailData, Organisation, Sponsor } from '../api/organisation';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -16,6 +17,10 @@ export class AboutService implements AbstractAboutService {
 
 
   constructor(private http: HttpClient) {}
+
+  sendEmail$(email: EmailData): Observable<any> {
+    return this.http.post(environment.sendMessageEndpointUrl, email);
+  }
 
   getSponsors$(): Observable<Sponsor[]> | undefined {
     if(!this.sponsors$) {

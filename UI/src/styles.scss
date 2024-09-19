@@ -327,3 +327,7 @@ $dark-theme: mat.m2-define-dark-theme(
 .mat-mdc-nav-list .mat-mdc-list-item {
   border-radius: 0 !important;
 }
+
+.grecaptcha-badge {
+  z-index: 1600;
+}

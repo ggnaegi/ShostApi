@@ -20,6 +20,7 @@ import { AbstractAboutService } from './about/services/abstract.about.service';
 import { AboutService } from './about/services/about.service';
 import { SpinnerInterceptor } from './spinner/interceptors/spinner.interceptor';
 import { SpinnerService } from './spinner/services/spinner.service';
+import { RecaptchaService } from './about/services/recaptcha.service';
 
 const scrollConfig: InMemoryScrollingOptions = {
   scrollPositionRestoration: 'top',
@@ -52,6 +53,7 @@ export const appConfig: ApplicationConfig = {
       useClass: SpinnerInterceptor,
       multi: true,
     },
+    RecaptchaService,
     provideHttpClient(withInterceptorsFromDi()),
   ],
 };
