@@ -34,3 +34,17 @@ export interface Sponsor {
   filename: string;
   alt: string;
 }
+
+export interface EmailData {
+  RecaptchaResponse?: string;
+  FirstName?: string;
+  LastName?: string;
+  Email?: string;
+  Phone?: string;
+  Message?: string;
+}
+
+export interface EmailSendResult {
+  success: boolean;
+  message?: string;
+}

@@ -1,9 +1,9 @@
 import {
   ChangeDetectionStrategy,
-  Component,
+  Component, EventEmitter,
   Input,
   OnChanges,
-  OnInit,
+  OnInit, Output,
   SimpleChanges,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
@@ -16,12 +16,13 @@ import {
   MatCardTitle,
 } from '@angular/material/card';
 import { FlexModule } from '@angular/flex-layout';
-import { CommitteeMember, Organisation, Sponsor } from '../api/organisation';
+import { CommitteeMember, EmailData, Organisation, Sponsor } from '../api/organisation';
 import { NgClass, NgForOf, NgIf } from '@angular/common';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
 import { MatButton } from '@angular/material/button';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
+import { FormsModule, NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-about',
@@ -42,6 +43,7 @@ import { MatProgressSpinner } from '@angular/material/progress-spinner';
     MatLabel,
     MatProgressSpinner,
     NgClass,
+    FormsModule,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './about.component.html',
@@ -53,6 +55,9 @@ export class AboutComponent implements OnInit, OnChanges {
 
   @Input()
   sponsors: Sponsor[] | null = null;
+
+  @Output()
+  formSubmitted = new EventEmitter<EmailData>();
 
   president: CommitteeMember | undefined;
 
@@ -71,6 +76,20 @@ export class AboutComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     this.setPresident();
+  }
+
+  submitForm(contactForm: NgForm): void {
+    if (contactForm.valid) {
+      let emailData = {} as EmailData;
+      emailData.FirstName = contactForm.value.firstName;
+      emailData.LastName = contactForm.value.lastName;
+      emailData.Email = contactForm.value.email;
+      emailData.Phone = contactForm.value.phone;
+      emailData.Message = contactForm.value.message;
+      emailData.RecaptchaResponse = '';
+
+      this.formSubmitted.emit(emailData);
+    }
   }
 
   private setPresident(): void {
