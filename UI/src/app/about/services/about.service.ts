@@ -8,16 +8,26 @@ import { Organisation, Sponsor } from '../api/organisation';
   providedIn: 'root',
 })
 export class AboutService implements AbstractAboutService {
-  private sponsors = 'assets/sponsors/sponsors_config.json';
+  private sponsors = 'assets/sponsors/sponsors-config.json';
   private organisation = 'assets/organisation.json';
+
+  private sponsors$: Observable<Sponsor[]> | undefined;
+  private organisation$: Observable<Organisation> | undefined;
+
 
   constructor(private http: HttpClient) {}
 
-  getSponsors$(): Observable<Sponsor[]> {
-    return this.http.get<Sponsor[]>(this.sponsors);
+  getSponsors$(): Observable<Sponsor[]> | undefined {
+    if(!this.sponsors$) {
+      this.sponsors$ = this.http.get<Sponsor[]>(this.sponsors).pipe(shareReplay());
+    }
+    return this.sponsors$;
   }
 
   getAboutDefinition$(): Observable<Organisation> {
-    return this.http.get<Organisation>(this.organisation).pipe(shareReplay());
+    if(!this.organisation$){
+      this.organisation$ = this.http.get<Organisation>(this.organisation).pipe(shareReplay());
+    }
+    return this.organisation$;
   }
 }

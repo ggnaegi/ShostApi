@@ -2,14 +2,11 @@ import {
   ChangeDetectionStrategy,
   Component,
   EventEmitter,
-  OnInit,
   Output,
 } from '@angular/core';
 import { AsyncPipe } from '@angular/common';
-import { Observable } from 'rxjs';
 import { GalleryComponent } from '../pages/gallery.component';
 import { AbstractGalleryService } from '../services/abstract.gallery.service';
-import { GalleriesDefinition } from '../api/gallery';
 
 @Component({
   selector: 'app-gallery-container',
@@ -17,17 +14,10 @@ import { GalleriesDefinition } from '../api/gallery';
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [GalleryComponent, AsyncPipe],
   template: `
-    <app-gallery [galleriesDefinitions]="galleryDefinitionData$ | async" />
+    <app-gallery [galleriesDefinitions]="galleryService.getGalleryDefinition$() | async" />
   `,
 })
-export class GalleryContainerComponent implements OnInit {
+export class GalleryContainerComponent {
   @Output() galleryDataLoaded = new EventEmitter<boolean>();
-
-  galleryDefinitionData$!: Observable<GalleriesDefinition>;
-
-  constructor(public galleryService: AbstractGalleryService) {}
-
-  ngOnInit(): void {
-    this.galleryDefinitionData$ = this.galleryService.getGalleryDefinition$();
-  }
+  constructor(public readonly galleryService: AbstractGalleryService) {}
 }
