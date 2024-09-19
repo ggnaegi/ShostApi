@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Extensions.Configuration;
@@ -11,7 +10,7 @@ using Shosta.Functions.Domain.SendMail;
 
 namespace Shosta.Functions.API;
 
-public class SendMail(IConfiguration configuration, ISendGridClient sendGridClient, ILoggerFactory loggerFactory, IMapper mapper, IHttpClientFactory httpClientFactory)
+public class SendMail(IConfiguration configuration, ISendGridClient sendGridClient, ILoggerFactory loggerFactory, IHttpClientFactory httpClientFactory)
 {
     private readonly ILogger _logger = loggerFactory.CreateLogger<Organisations>();
     [Function(nameof(SendContactMail))]
