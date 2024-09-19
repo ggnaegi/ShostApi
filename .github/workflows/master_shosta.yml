@@ -38,6 +38,6 @@ jobs:
         id: fa
         with:
           app-name: 'shosta'
-          slot-name: 'Production'
+          slot-name: 'shosta-test'
           package: '${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/output'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_5C0CC5FA19D741468B3F8A15427AC513 }}
