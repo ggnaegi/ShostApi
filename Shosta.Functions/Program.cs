@@ -6,7 +6,6 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using SendGrid.Extensions.DependencyInjection;
 using Shosta.Functions.Infrastructure;
-using Shosta.Functions.Infrastructure.Extensions;
 
 var host = new HostBuilder()
     .ConfigureFunctionsWorkerDefaults()
@@ -25,6 +24,6 @@ var host = new HostBuilder()
     })
     .Build();
 
-host.Services.UpdateDatabase<ShostaDbContext>();
+// host.Services.UpdateDatabase<ShostaDbContext>();
 
 host.Run();
