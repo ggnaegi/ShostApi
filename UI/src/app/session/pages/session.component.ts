@@ -72,9 +72,9 @@ export class SessionComponent {
       return [];
     }
 
-    const registerMap: { [key: string]: RegisterMusician[] } = {};
+    const registerMap: Record<string, RegisterMusician[]> = {};
 
-    this.sessionData.Musicians.forEach((musician) => {
+    this.sessionData.Musicians.forEach(musician => {
       const { Instrument, FirstName, LastName } = musician;
       if (Instrument) {
         if (!registerMap[Instrument]) {
@@ -84,7 +84,7 @@ export class SessionComponent {
       }
     });
 
-    return Object.keys(registerMap).map((instrument) => ({
+    return Object.keys(registerMap).map(instrument => ({
       RegisterName: instrument,
       RegisterMusicians: registerMap[instrument],
     }));

@@ -2,8 +2,7 @@
   <div
     class="welcome-title"
     [innerHtml]="organisation.WelcomeText"
-    id="welcome-section"
-  ></div>
+    id="welcome-section"></div>
 
   <app-gallery-container></app-gallery-container>
 
@@ -12,8 +11,7 @@
     fxLayout="row"
     fxLayout.lt-lg="column"
     fxLayoutAlign="space-around start"
-    fxLayoutGap="16px"
-  >
+    fxLayoutGap="16px">
     <!-- First Card -->
     <mat-card fxFlex="70%" fxFlex.lt-lg="100" class="custom-card">
       <mat-card-header>
@@ -26,8 +24,7 @@
             font-family: Montserrat, sans-serif;
             line-height: 1.6;
             color: #333;
-          "
-        >
+          ">
           <div [innerHTML]="organisation.BandPresentation"></div>
         </div>
       </mat-card-content>
@@ -44,8 +41,7 @@
             font-family: Montserrat, sans-serif;
             line-height: 1.6;
             color: #333;
-          "
-        >
+          ">
           <p [innerHTML]="organisation.CommitteePresentation"></p>
         </div>
         <div
@@ -54,12 +50,10 @@
             font-family: Montserrat, sans-serif;
             line-height: 1.6;
             color: #333;
-          "
-        >
+          ">
           <div
             fxFlex="100%"
-            *ngFor="let member of organisation.CommitteeMembers"
-          >
+            *ngFor="let member of organisation.CommitteeMembers">
             <div style="padding: 10px; box-sizing: border-box">
               <strong>{{ member.Function }}</strong
               ><br />
@@ -87,14 +81,12 @@
         class="sponsor-card"
         fxFlex="20%"
         fxFlex.gt-xs="200px"
-        fxLayoutAlign="center center"
-      >
+        fxLayoutAlign="center center">
         <mat-card-header>
           <img
             mat-card-image
             [src]="'/assets/sponsors/' + sponsor.filename"
-            alt="{{ sponsor.alt }}"
-          />
+            alt="{{ sponsor.alt }}" />
         </mat-card-header>
       </mat-card>
     </div>
@@ -104,8 +96,7 @@
     id="contact-section"
     fxLayout="row"
     fxLayoutAlign="space-around start"
-    fxLayoutGap="16px"
-  >
+    fxLayoutGap="16px">
     <mat-card fxFlex="60%" fxFlex.xs="100%" class="custom-card">
       <mat-card-header>
         <mat-card-title>Contact</mat-card-title>
@@ -114,33 +105,68 @@
         <div fxLayout="row" fxLayout.lt-lg="column" fxLayoutGap="16px">
           <!-- Contact Form -->
           <div class="contact-form" fxFlex="60%">
-            <form #contactForm="ngForm" (ngSubmit)="submitForm(contactForm)"
-                  style="display: flex; flex-direction: column; gap: 16px">
+            <form
+              #contactForm="ngForm"
+              (ngSubmit)="submitForm(contactForm)"
+              style="display: flex; flex-direction: column; gap: 16px">
               <mat-form-field appearance="outline" class="full-width">
                 <mat-label>Prénom</mat-label>
-                <input matInput placeholder="Veuillez saisir votre prénom" name="firstName" ngModel required />
+                <input
+                  matInput
+                  placeholder="Veuillez saisir votre prénom"
+                  name="firstName"
+                  ngModel
+                  required />
               </mat-form-field>
               <mat-form-field appearance="outline" class="full-width">
                 <mat-label>Nom</mat-label>
-                <input matInput placeholder="Veuillez saisir votre nom" name="lastName" ngModel required />
+                <input
+                  matInput
+                  placeholder="Veuillez saisir votre nom"
+                  name="lastName"
+                  ngModel
+                  required />
               </mat-form-field>
               <mat-form-field appearance="outline" class="full-width">
                 <mat-label>Courriel</mat-label>
-                <input [required]="true" matInput type="email" placeholder="Veuillez saisir votre courriel" name="email"
-                       ngModel required
-                       email />
+                <input
+                  [required]="true"
+                  matInput
+                  type="email"
+                  placeholder="Veuillez saisir votre courriel"
+                  name="email"
+                  ngModel
+                  required
+                  email />
               </mat-form-field>
               <mat-form-field appearance="outline" class="full-width">
                 <mat-label>Téléphone</mat-label>
-                <input matInput type="tel" placeholder="Veuillez saisir votre numéro de téléphone" name="phone" ngModel
-                       required />
+                <input
+                  matInput
+                  type="tel"
+                  placeholder="Veuillez saisir votre numéro de téléphone"
+                  name="phone"
+                  ngModel
+                  required />
               </mat-form-field>
               <mat-form-field appearance="outline" class="full-width">
                 <mat-label>Message</mat-label>
-                <textarea [required]="true" matInput rows="6" name="message" ngModel required></textarea>
+                <textarea
+                  [required]="true"
+                  matInput
+                  rows="6"
+                  name="message"
+                  ngModel
+                  required></textarea>
               </mat-form-field>
               <div class="recaptcha-container" id="recaptcha"></div>
-              <button mat-raised-button color="primary" type="submit" [disabled]="contactForm.invalid">Envoyer</button>
+              <button
+                mat-raised-button
+                color="primary"
+                type="submit"
+                [disabled]="contactForm.invalid">
+                Envoyer
+              </button>
             </form>
           </div>
           <!-- Committee President Info -->
@@ -155,7 +181,10 @@
               <div>Rue: {{ president.Address }}</div>
               <div>Ville: {{ president.Zip }} {{ president.City }}</div>
               <div>Téléphone: {{ president.PhoneNumber }}</div>
-              <div>Courriel: <a href="mailto:{{ president.Email }}">{{ president.Email }}</a></div>
+              <div>
+                Courriel:
+                <a href="mailto:{{ president.Email }}">{{ president.Email }}</a>
+              </div>
             </div>
           </div>
         </div>

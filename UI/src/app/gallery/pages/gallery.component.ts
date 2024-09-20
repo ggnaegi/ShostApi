@@ -4,7 +4,6 @@ import {
   Input,
   OnChanges,
   SimpleChanges,
-  ViewContainerRef,
 } from '@angular/core';
 import { GalleriesDefinition, Logo } from '../api/gallery';
 import {
@@ -61,8 +60,7 @@ export class GalleryComponent implements OnChanges {
   starredLogo: Logo | undefined = undefined;
 
   constructor(
-    public dialog: MatDialog,
-    private viewContainerRef: ViewContainerRef,
+    public dialog: MatDialog
   ) {}
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -71,7 +69,7 @@ export class GalleryComponent implements OnChanges {
 
   openGalleryDialog(year: number): void {
     const gallery = this.galleriesDefinitions?.galleries.find(
-      (g) => g.year === year,
+      g => g.year === year
     );
 
     if (!gallery) {
@@ -92,7 +90,7 @@ export class GalleryComponent implements OnChanges {
     }
 
     this.starredLogo = this.galleriesDefinitions?.logos.reduce(
-      (prev, current) => (prev.year > current.year ? prev : current),
+      (prev, current) => (prev.year > current.year ? prev : current)
     );
   }
 }

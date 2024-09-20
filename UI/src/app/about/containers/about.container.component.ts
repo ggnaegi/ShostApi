@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { AsyncPipe, NgIf } from '@angular/common';
 import { AboutComponent } from '../pages/about.component';
 import { AbstractAboutService } from '../services/abstract.about.service';
@@ -9,7 +15,7 @@ import { EmailOverlayComponent } from '../pages/email.overlay.component';
 import { environment } from '../../../environments/environment';
 
 @Component({
-  selector: 'app-gallery-container',
+  selector: 'app-about-container',
   standalone: true,
   imports: [AboutComponent, AsyncPipe, NgIf, EmailOverlayComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -17,19 +23,22 @@ import { environment } from '../../../environments/environment';
     <app-about
       [organisation]="aboutService.getAboutDefinition$() | async"
       [sponsors]="aboutService.getSponsors$() | async"
-      (formSubmitted)="sendEmail($event)"
-    />
-    <app-email-overlay *ngIf="emailSendResult" [result]="emailSendResult"></app-email-overlay>
+      (formSubmitted)="sendEmail($event)" />
+    <app-email-overlay [result]="emailSendResult"></app-email-overlay>
   `,
 })
 export class AboutContainerComponent implements OnInit, OnDestroy {
   private sendEmailSubscription: Subscription | undefined;
-  public emailSendResult: EmailSendResult | undefined;
+  public emailSendResult: EmailSendResult | undefined = undefined;
 
-  constructor(public readonly aboutService: AbstractAboutService, private recaptchaService: RecaptchaService, private cdr: ChangeDetectorRef) {}
+  constructor(
+    public readonly aboutService: AbstractAboutService,
+    private recaptchaService: RecaptchaService,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   ngOnDestroy(): void {
-    if(this.sendEmailSubscription){
+    if (this.sendEmailSubscription) {
       this.sendEmailSubscription.unsubscribe();
     }
   }
@@ -44,24 +53,27 @@ export class AboutContainerComponent implements OnInit, OnDestroy {
     }
     this.recaptchaService.execute('sendEmail', result => {
       email.RecaptchaResponse = result;
-      this.sendEmailSubscription = this.aboutService.sendEmail$(email).subscribe({
-        next: () => {
-          this.emailSendResult = {
-            message: "Votre message a été transmis avec succès!",
-            success: true
-          } as EmailSendResult;
-          this.cdr.markForCheck();
-          this.hideOverlayAfterDelay();
-        },
-        error: () => {
-          this.emailSendResult = {
-            message: "Une erreur est survenue lors de l'envoi du message, veuillez réessayer plus tard.",
-            success: false
-          } as EmailSendResult;
-          this.cdr.markForCheck();
-          this.hideOverlayAfterDelay();
-        }
-      });
+      this.sendEmailSubscription = this.aboutService
+        .sendEmail$(email)
+        .subscribe({
+          next: () => {
+            this.emailSendResult = {
+              message: 'Votre message a été transmis avec succès!',
+              success: true,
+            } as EmailSendResult;
+            this.cdr.markForCheck();
+            this.hideOverlayAfterDelay();
+          },
+          error: () => {
+            this.emailSendResult = {
+              message:
+                "Une erreur est survenue lors de l'envoi du message, veuillez réessayer plus tard.",
+              success: false,
+            } as EmailSendResult;
+            this.cdr.markForCheck();
+            this.hideOverlayAfterDelay();
+          },
+        });
     });
   }
 

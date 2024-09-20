@@ -61,7 +61,7 @@ mat-sidenav-content {
 }
 
 .menu-items::before {
-  content: "";
+  content: '';
   position: absolute;
   bottom: 0;
   left: 0;
@@ -84,7 +84,7 @@ mat-sidenav-content {
 }
 
 .menu-items a::after {
-  content: "";
+  content: '';
   width: 0;
   height: 2px;
   background-color: transparent;
@@ -165,7 +165,7 @@ mat-sidenav-content {
 }
 
 .background-image-wrapper::before {
-  content: "";
+  content: '';
   position: absolute;
   top: 0;
   left: 0;

@@ -15,8 +15,10 @@ export class GalleryService implements AbstractGalleryService {
   constructor(private http: HttpClient) {}
 
   getGalleryDefinition$(): Observable<GalleriesDefinition> {
-    if(!this.galleriesDefinition$){
-      this.galleriesDefinition$ = this.http.get<GalleriesDefinition>(this.galleryConfigJson).pipe(shareReplay());
+    if (!this.galleriesDefinition$) {
+      this.galleriesDefinition$ = this.http
+        .get<GalleriesDefinition>(this.galleryConfigJson)
+        .pipe(shareReplay());
     }
     return this.galleriesDefinition$;
   }

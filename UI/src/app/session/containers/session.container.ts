@@ -9,18 +9,21 @@ import { ActivatedRoute } from '@angular/router';
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [SessionComponent, AsyncPipe],
-  template: ` <app-session [sessionData]="sessionService.sessionData$(this.year) | async" /> `,
+  template: `
+    <app-session
+      [sessionData]="sessionService.sessionData$(this.year) | async" />
+  `,
 })
 export class SessionContainerComponent implements OnInit {
-  year: number = 2024;
+  year = 2024;
 
   constructor(
     public readonly sessionService: AbstractSessionService,
-    private route: ActivatedRoute,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
-    this.route.params.subscribe((params) => {
+    this.route.params.subscribe(params => {
       this.year = +params['year'];
     });
   }
