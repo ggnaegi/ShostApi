@@ -7,7 +7,7 @@ env:
   AZURE_FUNCTIONAPP_NAME: shosta
   AZURE_FUNCTIONAPP_PACKAGE_PATH: Shosta.Functions/published
   CONFIGURATION: Release
-  DOTNET_CORE_VERSION: 9.0.x
+  DOTNET_CORE_VERSION: 8.0.x
   WORKING_DIRECTORY: Shosta.Functions
 jobs:
   build:
