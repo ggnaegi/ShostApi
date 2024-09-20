@@ -1,21 +1,20 @@
-import { DOCUMENT } from "@angular/common";
-import { Inject, Injectable } from "@angular/core";
+import { DOCUMENT } from '@angular/common';
+import { Inject, Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 
 declare var grecaptcha: any;
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class RecaptchaService {
   private siteKey: string | null = null;
   private loaded: boolean = false;
 
-  constructor(@Inject(DOCUMENT) private readonly document: Document) {
-  }
+  constructor(@Inject(DOCUMENT) private readonly document: Document) {}
 
   public load(siteKey: string): void {
-    if(this.loaded) {
+    if (this.loaded) {
       return;
     }
 
@@ -30,13 +29,12 @@ export class RecaptchaService {
   }
 
   public execute(action: string, callback: (token: string) => void): void {
-    if(!this.siteKey) {
+    if (!this.siteKey) {
       throw new Error('Recaptcha site key is not set.');
     }
 
     grecaptcha.ready(() => {
-      grecaptcha.execute(this.siteKey!, { action })
-        .then(callback);
+      grecaptcha.execute(this.siteKey!, { action }).then(callback);
     });
   }
 }

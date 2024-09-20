@@ -11,7 +11,6 @@ export class SessionService implements AbstractSessionService {
   private dataCache: Map<number, Observable<Session>> | undefined;
   public constructor(private http: HttpClient) {}
 
-
   sessionData$(year: number): Observable<Session> {
     if (!this.dataCache) {
       this.dataCache = new Map<number, Observable<Session>>();

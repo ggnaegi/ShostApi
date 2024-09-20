@@ -14,7 +14,8 @@ import { AbstractGalleryService } from '../services/abstract.gallery.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [GalleryComponent, AsyncPipe],
   template: `
-    <app-gallery [galleriesDefinitions]="galleryService.getGalleryDefinition$() | async" />
+    <app-gallery
+      [galleriesDefinitions]="galleryService.getGalleryDefinition$() | async" />
   `,
 })
 export class GalleryContainerComponent {

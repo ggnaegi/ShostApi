@@ -7,8 +7,7 @@
         <img
           [src]="data.images[currentIndex].url"
           [alt]="data.images[currentIndex].alt"
-          class="gallery-image"
-        />
+          class="gallery-image" />
       </div>
     </div>
 
@@ -17,8 +16,7 @@
         <img
           [src]="data.images[currentIndex].url"
           [alt]="data.images[currentIndex].alt"
-          class="gallery-image"
-        />
+          class="gallery-image" />
       </div>
     </div>
   </mat-dialog-content>
@@ -28,7 +26,6 @@
       [hidePageSize]="true"
       [length]="data.images.length"
       [pageSize]="1"
-      [showFirstLastButtons]="true"
-    ></mat-paginator>
+      [showFirstLastButtons]="true"></mat-paginator>
   </mat-dialog-actions>
 </div>

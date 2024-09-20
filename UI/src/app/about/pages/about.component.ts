@@ -1,9 +1,11 @@
 import {
   ChangeDetectionStrategy,
-  Component, EventEmitter,
+  Component,
+  EventEmitter,
   Input,
   OnChanges,
-  OnInit, Output,
+  OnInit,
+  Output,
   SimpleChanges,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
@@ -16,7 +18,12 @@ import {
   MatCardTitle,
 } from '@angular/material/card';
 import { FlexModule } from '@angular/flex-layout';
-import { CommitteeMember, EmailData, Organisation, Sponsor } from '../api/organisation';
+import {
+  CommitteeMember,
+  EmailData,
+  Organisation,
+  Sponsor,
+} from '../api/organisation';
 import { NgClass, NgForOf, NgIf } from '@angular/common';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
@@ -74,13 +81,14 @@ export class AboutComponent implements OnInit, OnChanges {
     });
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   ngOnChanges(changes: SimpleChanges) {
     this.setPresident();
   }
 
   submitForm(contactForm: NgForm): void {
     if (contactForm.valid) {
-      let emailData = {} as EmailData;
+      const emailData = {} as EmailData;
       emailData.FirstName = contactForm.value.firstName;
       emailData.LastName = contactForm.value.lastName;
       emailData.Email = contactForm.value.email;
@@ -98,7 +106,7 @@ export class AboutComponent implements OnInit, OnChanges {
     }
 
     this.president = this.organisation.CommitteeMembers.find(
-      (x) => x.IsContactPerson,
+      x => x.IsContactPerson
     );
   }
 }
