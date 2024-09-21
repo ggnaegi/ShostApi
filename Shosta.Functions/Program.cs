@@ -1,6 +1,7 @@
 using System.Reflection;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,6 +18,7 @@ var host = new HostBuilder()
             options => options.UseSqlServer(context.Configuration.GetConnectionString("ShostaDatabaseConnection"))
         );
         services.AddAutoMapper(Assembly.GetExecutingAssembly());
+        services.AddSingleton<IMemoryCache, MemoryCache>();
         services.AddSendGrid(options =>
         {
             options.ApiKey = context.Configuration.GetValue<string>("SendgridKey");
