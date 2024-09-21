@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 using Shosta.Functions.Domain.Dtos.Session;
 using Shosta.Functions.Domain.Entities.Session;
@@ -12,9 +13,10 @@ using Shosta.Functions.Infrastructure;
 
 namespace Shosta.Functions.API;
 
-public class Sessions(ILoggerFactory loggerFactory, IMapper mapper, ShostaDbContext dbContext)
+public class Sessions(ILoggerFactory loggerFactory, IMapper mapper, ShostaDbContext dbContext, IMemoryCache memoryCache)
 {
     private readonly ILogger _logger = loggerFactory.CreateLogger<Sessions>();
+    private static readonly SemaphoreSlim Semaphore = new(1, 1);
 
     [Function(nameof(UploadSession))]
     public async Task<IActionResult> UploadSession(
@@ -23,32 +25,42 @@ public class Sessions(ILoggerFactory loggerFactory, IMapper mapper, ShostaDbCont
         FunctionContext executionContext)
     {
         var requestBody = await new StreamReader(req.Body).ReadToEndAsync();
-        var sessionData = JsonSerializer.Deserialize<SessionDto>(requestBody);
+        var sessionDto = JsonSerializer.Deserialize<SessionDto>(requestBody);
 
-        if (sessionData == null)
+        if (sessionDto == null)
         {
             _logger.LogError("Invalid session data: {sessionData}", requestBody);
             return new BadRequestObjectResult("Invalid session data.");
         }
 
-        if (dbContext.Sessions.Any(s => s.Year == sessionData.Year))
+        if (dbContext.Sessions.Any(s => s.Year == sessionDto.Year))
         {
             if (bool.TryParse(req.Query["overwrite"], out var overwrite) && overwrite)
             {
-                _logger.LogInformation("Overwriting session for year: {year}", sessionData.Year);
-                dbContext.Sessions.RemoveRange(dbContext.Sessions.Where(s => s.Year == sessionData.Year));
+                _logger.LogInformation("Overwriting session for year: {year}", sessionDto.Year);
+                dbContext.Sessions.RemoveRange(dbContext.Sessions.Where(s => s.Year == sessionDto.Year));
             }
             else
             {
-                _logger.LogError("Session already exists for year: {year}", sessionData.Year);
+                _logger.LogError("Session already exists for year: {year}", sessionDto.Year);
                 return new ConflictObjectResult("Session already exists.");
             }
         }
 
-        var sessionObject = mapper.Map<SessionDto, Session>(sessionData);
+        var session = mapper.Map<SessionDto, Session>(sessionDto);
 
-        dbContext.Sessions.Add(sessionObject);
+        dbContext.Sessions.Add(session);
         await dbContext.SaveChangesAsync();
+        
+        await Semaphore.WaitAsync();
+        try
+        {
+            memoryCache.Set(session.Year, sessionDto, TimeSpan.FromHours(1));
+        }
+        finally
+        {
+            Semaphore.Release();
+        }
 
         return new ObjectResult(HttpStatusCode.Created);
     }
@@ -71,21 +83,36 @@ public class Sessions(ILoggerFactory loggerFactory, IMapper mapper, ShostaDbCont
             _logger.LogError("Invalid year: {year}", yearString);
             return new BadRequestObjectResult("Unable to parse year.");
         }
-
-        var session = await dbContext.Sessions
-            .Include(i => i.Conductor)
-            .Include(i => i.Soloists)
-            .Include(i => i.Musicians)
-            .Include(i => i.Concerts)
-            .AsNoTracking()
-            .SingleOrDefaultAsync(s => s.Year == year);
-
-        if (session != null)
+        
+        if (memoryCache.TryGetValue(year, out SessionDto? sessionDto) && sessionDto != null)
         {
-            return new OkObjectResult(mapper.Map<Session, SessionDto>(session));
+            return new OkObjectResult(sessionDto);
         }
+        
+        await Semaphore.WaitAsync();
+        try
+        {
+            var session = await dbContext.Sessions
+                .Include(i => i.Conductor)
+                .Include(i => i.Soloists)
+                .Include(i => i.Musicians)
+                .Include(i => i.Concerts)
+                .AsNoTracking()
+                .SingleOrDefaultAsync(s => s.Year == year);
 
-        _logger.LogError("Session not found for year: {year}", year);
-        return new NotFoundObjectResult("Session not found.");
+            if (session != null)
+            {
+                sessionDto = mapper.Map<Session, SessionDto>(session);
+                memoryCache.Set(year, sessionDto, TimeSpan.FromHours(1));
+                return new OkObjectResult(sessionDto);
+            }
+
+            _logger.LogError("Session not found for year: {year}", year);
+            return new NotFoundObjectResult("Session not found.");
+        }
+        finally
+        {
+            Semaphore.Release();
+        }
     }
 }

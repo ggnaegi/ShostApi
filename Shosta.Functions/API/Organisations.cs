@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 using Shosta.Functions.Domain.Dtos.Organisation;
 using Shosta.Functions.Domain.Entities.Organisation;
@@ -12,9 +13,10 @@ using Shosta.Functions.Infrastructure;
 
 namespace Shosta.Functions.API;
 
-public class Organisations(ILoggerFactory loggerFactory, IMapper mapper, ShostaDbContext dbContext)
+public class Organisations(ILoggerFactory loggerFactory, IMapper mapper, ShostaDbContext dbContext, IMemoryCache memoryCache)
 {
     private readonly ILogger _logger = loggerFactory.CreateLogger<Organisations>();
+    private static readonly SemaphoreSlim Semaphore = new(1, 1);
 
     [Function(nameof(UploadOrganisation))]
     public async Task<IActionResult> UploadOrganisation(
@@ -23,33 +25,43 @@ public class Organisations(ILoggerFactory loggerFactory, IMapper mapper, ShostaD
         FunctionContext executionContext)
     {
         var requestBody = await new StreamReader(req.Body).ReadToEndAsync();
-        var organisationData = JsonSerializer.Deserialize<OrganisationDto>(requestBody);
+        var organisationDto = JsonSerializer.Deserialize<OrganisationDto>(requestBody);
 
-        if (organisationData == null)
+        if (organisationDto == null)
         {
             _logger.LogError("Invalid organisation data: {sessionData}", requestBody);
             return new BadRequestObjectResult("Invalid organisation data.");
         }
 
-        if (dbContext.Organisations.Any(s => s.Year == organisationData.Year))
+        if (dbContext.Organisations.Any(s => s.Year == organisationDto.Year))
         {
             if (bool.TryParse(req.Query["overwrite"], out var overwrite) && overwrite)
             {
-                _logger.LogInformation("Overwriting organisation for year: {year}", organisationData.Year);
+                _logger.LogInformation("Overwriting organisation for year: {year}", organisationDto.Year);
                 dbContext.Organisations.RemoveRange(
-                    dbContext.Organisations.Where(s => s.Year == organisationData.Year));
+                    dbContext.Organisations.Where(s => s.Year == organisationDto.Year));
             }
             else
             {
-                _logger.LogError("Organisation already exists for year: {year}", organisationData.Year);
+                _logger.LogError("Organisation already exists for year: {year}", organisationDto.Year);
                 return new ConflictObjectResult("Session already exists.");
             }
         }
 
-        var organisationObject = mapper.Map<OrganisationDto, Organisation>(organisationData);
+        var organisation = mapper.Map<OrganisationDto, Organisation>(organisationDto);
 
-        dbContext.Organisations.Add(organisationObject);
+        dbContext.Organisations.Add(organisation);
         await dbContext.SaveChangesAsync();
+        
+        await Semaphore.WaitAsync();
+        try
+        {
+            memoryCache.Set("organisation", organisationDto, TimeSpan.FromHours(1));
+        }
+        finally
+        {
+            Semaphore.Release();
+        }
 
         return new ObjectResult(HttpStatusCode.Created);
     }
@@ -59,18 +71,39 @@ public class Organisations(ILoggerFactory loggerFactory, IMapper mapper, ShostaD
         [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "organisations")] HttpRequestData req,
         FunctionContext executionContext)
     {
-        var organisation = await dbContext.Organisations
-            .Include(i => i.CommitteeMembers)
-            .AsNoTracking()
-            .OrderByDescending(o => o.Year) 
-            .FirstOrDefaultAsync(); 
-
-        if (organisation != null)
+        if (memoryCache.TryGetValue("organisation", out OrganisationDto? organisationDto) && organisationDto != null)
         {
-            return new OkObjectResult(mapper.Map<Organisation, OrganisationDto>(organisation));
+            return new OkObjectResult(organisationDto);
         }
 
-        _logger.LogError("Organisation not found.");
-        return new NotFoundObjectResult("Organisation not found.");
+        await Semaphore.WaitAsync();
+        try
+        {
+            // Check cache again after acquiring the semaphore, in case it was populated by another thread
+            if (memoryCache.TryGetValue("organisation", out organisationDto) && organisationDto != null)
+            {
+                return new OkObjectResult(organisationDto);
+            }
+
+            var organisation = await dbContext.Organisations
+                .Include(i => i.CommitteeMembers)
+                .AsNoTracking()
+                .OrderByDescending(o => o.Year)
+                .FirstOrDefaultAsync();
+
+            if (organisation != null)
+            {
+                organisationDto = mapper.Map<Organisation, OrganisationDto>(organisation);
+                memoryCache.Set("organisation", organisationDto, TimeSpan.FromHours(1));
+                return new OkObjectResult(organisationDto);
+            }
+
+            _logger.LogError("Organisation not found.");
+            return new NotFoundObjectResult("Organisation not found.");
+        }
+        finally
+        {
+            Semaphore.Release();
+        }
     }
 }
