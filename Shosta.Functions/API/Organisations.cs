@@ -56,7 +56,7 @@ public class Organisations(ILoggerFactory loggerFactory, IMapper mapper, ShostaD
         await Semaphore.WaitAsync();
         try
         {
-            memoryCache.Set("organisation", organisationDto, TimeSpan.FromHours(1));
+            memoryCache.Set(nameof(Organisation), organisationDto, TimeSpan.FromHours(1));
         }
         finally
         {
@@ -71,7 +71,7 @@ public class Organisations(ILoggerFactory loggerFactory, IMapper mapper, ShostaD
         [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "organisations")] HttpRequestData req,
         FunctionContext executionContext)
     {
-        if (memoryCache.TryGetValue("organisation", out OrganisationDto? organisationDto) && organisationDto != null)
+        if (memoryCache.TryGetValue(nameof(Organisation), out OrganisationDto? organisationDto) && organisationDto != null)
         {
             return new OkObjectResult(organisationDto);
         }
@@ -80,7 +80,7 @@ public class Organisations(ILoggerFactory loggerFactory, IMapper mapper, ShostaD
         try
         {
             // Check cache again after acquiring the semaphore, in case it was populated by another thread
-            if (memoryCache.TryGetValue("organisation", out organisationDto) && organisationDto != null)
+            if (memoryCache.TryGetValue(nameof(Organisation), out organisationDto) && organisationDto != null)
             {
                 return new OkObjectResult(organisationDto);
             }
@@ -94,7 +94,7 @@ public class Organisations(ILoggerFactory loggerFactory, IMapper mapper, ShostaD
             if (organisation != null)
             {
                 organisationDto = mapper.Map<Organisation, OrganisationDto>(organisation);
-                memoryCache.Set("organisation", organisationDto, TimeSpan.FromHours(1));
+                memoryCache.Set(nameof(Organisation), organisationDto, TimeSpan.FromHours(1));
                 return new OkObjectResult(organisationDto);
             }
 
