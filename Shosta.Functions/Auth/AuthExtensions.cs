@@ -1,11 +1,9 @@
 ﻿using System.Security.Claims;
 using System.Text;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
-using JsonSerializerOptions = System.Text.Json.JsonSerializerOptions;
 
 namespace Shosta.Functions.Auth;
 
@@ -60,28 +58,17 @@ public static class AuthExtensions
         var json = Encoding.UTF8.GetString(decoded);
         
         logger.LogInformation("Deserializing ClientPrincipal from X-MS-CLIENT-PRINCIPAL header");
-        logger.LogInformation("ClientPrincipal: {clientPrincipal}", json);
-        
-        var settings = new JsonSerializerSettings
+        var principal = JsonSerializer.Deserialize<ClientPrincipal>(json, new JsonSerializerOptions
         {
-            // Set case insensitive property names
-            ContractResolver = new DefaultContractResolver
-            {
-                NamingStrategy = new CamelCaseNamingStrategy
-                {
-                    ProcessDictionaryKeys = true,
-                    OverrideSpecifiedNames = true
-                }
-            }
-        };
+            PropertyNameCaseInsensitive = true
+        });
         
-        var principal = JsonConvert.DeserializeObject<ClientPrincipal>(json, settings);
         if(principal == null)
         {
             logger.LogWarning("Failed to deserialize ClientPrincipal from X-MS-CLIENT-PRINCIPAL header");
             return null;
         }
-
+        
         var identity = new ClaimsIdentity(principal.IdentityProvider, principal.NameClaimType, principal.RoleClaimType);
 
         if (principal.Claims == null)
