@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Observable, shareReplay } from 'rxjs';
+import { map, Observable, shareReplay } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { AbstractAboutService } from './abstract.about.service';
-import { EmailData, Organisation, Sponsor } from '../api/organisation';
+import { EmailData, Organisation, OrganisationContainer, Sponsor } from '../api/organisation';
 import { environment } from '../../../environments/environment';
 
 @Injectable({
@@ -10,12 +10,38 @@ import { environment } from '../../../environments/environment';
 })
 export class AboutService implements AbstractAboutService {
   private sponsors = 'assets/sponsors/sponsors-config.json';
-  private organisation = 'assets/organisation.json';
 
   private sponsors$: Observable<Sponsor[]> | undefined;
   private organisation$: Observable<Organisation> | undefined;
+  private dataCache: Map<number, Observable<Organisation>> | undefined;
 
   constructor(private http: HttpClient) {}
+
+  getAboutDefinitionForYear$(year: number): Observable<Organisation> {
+    if (!this.dataCache) {
+      this.dataCache = new Map<number, Observable<Organisation>>();
+    }
+
+    if (!this.dataCache.has(year)) {
+      const request$ = this.http
+        .get<OrganisationContainer>(`${environment.organisationEndpointUrl}/${year}`)
+        .pipe(
+          map((container: OrganisationContainer) => container.Value),
+          shareReplay(1)
+        );
+
+      this.dataCache.set(year, request$);
+    }
+
+    return this.dataCache.get(year)!;
+  }
+
+  updateAbout$(organisation: Organisation): Observable<Organisation> {
+    return this.http.post<Organisation>(
+      `${environment.organisationEndpointUrl}?overwrite=true`,
+      organisation
+    );
+  }
 
   sendEmail$(email: EmailData): Observable<any> {
     return this.http.post(environment.sendMessageEndpointUrl, email);
@@ -33,8 +59,11 @@ export class AboutService implements AbstractAboutService {
   getAboutDefinition$(): Observable<Organisation> {
     if (!this.organisation$) {
       this.organisation$ = this.http
-        .get<Organisation>(this.organisation)
-        .pipe(shareReplay());
+        .get<OrganisationContainer>(environment.organisationEndpointUrl)
+        .pipe(
+          map((container: OrganisationContainer) => container.Value),
+          shareReplay(1)
+        );
     }
     return this.organisation$;
   }

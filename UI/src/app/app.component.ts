@@ -84,6 +84,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   isButtonVisible = false;
   currentYear: string | null = null;
+  showMenu = true;
 
   @HostListener('window:scroll', [])
   onWindowScroll() {
@@ -108,6 +109,8 @@ export class AppComponent implements OnInit, AfterViewInit {
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe(() => {
         const url = this.router.url;
+
+        this.showMenu = !url.includes('/admin');
 
         const sessionRouteMatch = url.match(/^\/session\/(\d{4})$/);
         if (sessionRouteMatch) {

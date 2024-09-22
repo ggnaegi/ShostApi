@@ -15,14 +15,19 @@ var host = new HostBuilder()
         services.AddApplicationInsightsTelemetryWorkerService();
         services.ConfigureFunctionsApplicationInsights();
         services.AddDbContext<ShostaDbContext>(
-            options => options.UseSqlServer(context.Configuration.GetConnectionString("ShostaDatabaseConnection"))
+            options => options.UseSqlServer(
+                context.Configuration.GetConnectionString("ShostaDatabaseConnection"),
+                sqlServerOptionsAction: sqlOptions =>
+                {
+                    sqlOptions.EnableRetryOnFailure(
+                        maxRetryCount: 5,
+                        maxRetryDelay: TimeSpan.FromSeconds(30),
+                        errorNumbersToAdd: null);
+                })
         );
         services.AddAutoMapper(Assembly.GetExecutingAssembly());
         services.AddSingleton<IMemoryCache, MemoryCache>();
-        services.AddSendGrid(options =>
-        {
-            options.ApiKey = context.Configuration.GetValue<string>("SendgridKey");
-        });
+        services.AddSendGrid(options => { options.ApiKey = context.Configuration.GetValue<string>("SendgridKey"); });
     })
     .Build();
 
