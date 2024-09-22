@@ -1,0 +1,242 @@
+<div class="form-container">
+  <form [formGroup]="sessionForm" (ngSubmit)="onSubmit()">
+    <!-- Year Dropdown and Title -->
+    <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="start stretch">
+      <mat-form-field appearance="outline" fxFlex="30">
+        <mat-label>Année</mat-label>
+        <mat-select
+          formControlName="Year"
+          required
+          (selectionChange)="updateYear($event)">
+          <mat-option *ngFor="let year of years" [value]="year">{{
+            year
+          }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" fxFlex="70">
+        <mat-label>Titre</mat-label>
+        <input matInput formControlName="Title" />
+      </mat-form-field>
+    </div>
+
+    <!-- Presentation -->
+    <div fxLayout="row" fxLayoutAlign="start stretch">
+      <mat-form-field appearance="outline" fxFlex>
+        <mat-label>Présentation</mat-label>
+        <textarea matInput formControlName="Presentation" rows="10"></textarea>
+      </mat-form-field>
+    </div>
+
+    <!-- Program -->
+    <div fxLayout="row" fxLayoutAlign="start stretch">
+      <mat-form-field appearance="outline" fxFlex>
+        <mat-label>Programme</mat-label>
+        <textarea matInput formControlName="Program" rows="10"></textarea>
+      </mat-form-field>
+    </div>
+
+    <!-- Teaser -->
+    <div fxLayout="row" fxLayoutAlign="start stretch">
+      <mat-form-field appearance="outline" fxFlex>
+        <mat-label>Teaser</mat-label>
+        <textarea matInput formControlName="Teaser" rows="5"></textarea>
+      </mat-form-field>
+    </div>
+
+    <!-- Conductor Information -->
+    <mat-expansion-panel class="form-expansion-panel">
+      <mat-expansion-panel-header>
+        <mat-panel-title> Directeur </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div
+        [formGroupName]="'Conductor'"
+        fxLayout="row"
+        fxLayoutGap="20px"
+        fxLayoutAlign="start stretch">
+        <mat-form-field appearance="outline" fxFlex="33">
+          <mat-label>Prénom</mat-label>
+          <input matInput formControlName="FirstName" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" fxFlex="33">
+          <mat-label>Nom de famille</mat-label>
+          <input matInput formControlName="LastName" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" fxFlex="34">
+          <mat-label>Lien portrait</mat-label>
+          <input matInput formControlName="Picture" />
+        </mat-form-field>
+      </div>
+
+      <div
+        [formGroupName]="'Conductor'"
+        fxLayout="row"
+        fxLayoutAlign="start stretch">
+        <mat-form-field appearance="outline" fxFlex>
+          <mat-label>Présentation</mat-label>
+          <textarea matInput formControlName="Presentation" rows="6"></textarea>
+        </mat-form-field>
+      </div>
+    </mat-expansion-panel>
+
+    <!-- Soloists Section -->
+    <mat-expansion-panel class="form-expansion-panel">
+      <mat-expansion-panel-header>
+        <mat-panel-title> Solistes </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div formArrayName="Soloists">
+        <div
+          *ngFor="let soloist of Soloists.controls; let i = index"
+          [formGroupName]="i">
+          <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="start stretch">
+            <mat-form-field appearance="outline" fxFlex="24">
+              <mat-label>Prénom</mat-label>
+              <input matInput formControlName="FirstName" />
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" fxFlex="24">
+              <mat-label>Nom de famille</mat-label>
+              <input matInput formControlName="LastName" />
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" fxFlex="24">
+              <mat-label>Instrument</mat-label>
+              <input matInput formControlName="Instrument" />
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" fxFlex="24">
+              <mat-label>Lien portrait</mat-label>
+              <input matInput formControlName="Picture" />
+            </mat-form-field>
+
+            <div fxFlex="2">
+              <button mat-icon-button color="warn" type="button" (click)="removeSoloist(i)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+          </div>
+
+          <div fxLayout="row" fxLayoutAlign="start stretch">
+            <mat-form-field appearance="outline" fxFlex>
+              <mat-label>Présentation</mat-label>
+              <textarea
+                matInput
+                formControlName="Presentation"
+                rows="4"></textarea>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+      <button
+        mat-raised-button
+        color="primary"
+        type="button"
+        (click)="addSoloist()">
+        Ajouter soliste
+      </button>
+    </mat-expansion-panel>
+
+    <!-- Musicians Section -->
+    <mat-expansion-panel class="form-expansion-panel">
+      <mat-expansion-panel-header>
+        <mat-panel-title> Musiciens </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div
+        formArrayName="Musicians"
+        style="overflow-y: auto; max-height: 400px">
+        <div
+          *ngFor="let musician of Musicians.controls; let i = index"
+          [formGroupName]="i"
+          style="margin: 10px">
+          <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start stretch">
+            <mat-form-field appearance="outline" fxFlex="30">
+              <mat-label>Prénom</mat-label>
+              <input matInput formControlName="FirstName" />
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" fxFlex="30">
+              <mat-label>Nom de famille</mat-label>
+              <input matInput formControlName="LastName" />
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" fxFlex="30">
+              <mat-label>Instrument</mat-label>
+              <input matInput formControlName="Instrument" />
+            </mat-form-field>
+
+            <div fxFlex="2">
+              <button mat-icon-button color="warn" type="button" (click)="removeMusician(i)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button
+        mat-raised-button
+        color="primary"
+        type="button"
+        (click)="addMusician()">
+        Ajouter musicien
+      </button>
+    </mat-expansion-panel>
+
+    <!-- Concerts Section -->
+    <mat-expansion-panel class="form-expansion-panel">
+      <mat-expansion-panel-header>
+        <mat-panel-title> Concerts </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div formArrayName="Concerts">
+        <div
+          *ngFor="let concert of Concerts.controls; let i = index"
+          [formGroupName]="i">
+          <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="start stretch">
+            <mat-form-field appearance="outline" fxFlex="30">
+              <mat-label>Lieu</mat-label>
+              <input matInput formControlName="Date" />
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" fxFlex="38">
+              <mat-label>Lieu</mat-label>
+              <input matInput formControlName="Venue" />
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" fxFlex="30">
+              <mat-label>Ville</mat-label>
+              <input matInput formControlName="City" />
+            </mat-form-field>
+
+            <div fxFlex="2">
+              <button mat-icon-button color="warn" type="button" (click)="removeConcert(i)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+          </div>
+
+          <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="start stretch">
+            <mat-form-field appearance="outline" fxFlex="100">
+              <mat-label>Lien Tickets</mat-label>
+              <input matInput formControlName="Tickets" />
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+      <button
+        mat-raised-button
+        color="primary"
+        type="button"
+        (click)="addConcert()">
+        Ajouter concert
+      </button>
+    </mat-expansion-panel>
+
+    <!-- Submit Button -->
+    <div fxLayout="row" fxLayoutAlign="start stretch">
+      <button mat-raised-button color="primary" type="submit">
+        Enregistrer
+      </button>
+    </div>
+  </form>
+</div>
