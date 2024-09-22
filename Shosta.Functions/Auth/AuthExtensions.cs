@@ -18,29 +18,15 @@ public static class AuthExtensions
     /// <returns></returns>
     public static (bool authenticated, bool authorized) IsAuthenticatedAndHasRole(this HttpRequestData req, string role, ILogger logger)
     {
-        try
-        {
-            logger.LogInformation("Checking if the request is authenticated and has the role: {role}", role);
-            var claimsPrincipal = req.GetClaimsPrincipalFromRequest(logger);
-        
-            logger.LogInformation("ClaimsPrincipal: {claimsPrincipal}", claimsPrincipal);
-            logger.LogInformation("IsAuthenticated: {IsAuthenticated}", claimsPrincipal?.Identity?.IsAuthenticated);
-            logger.LogInformation("IsAuthenticated: {IsAuthenticated}, IsInRole: {IsInRole}", claimsPrincipal?.Identity?.IsAuthenticated, claimsPrincipal?.IsInRole(role));
-
-            return claimsPrincipal?.Identity is not { IsAuthenticated: true }
-                ? (false, false)
-                : (true, claimsPrincipal.IsInRole(role));
-        }
-        catch (Exception e)
-        {
-            logger.LogError(e, "Error checking if the request is authenticated and has the role: {role}", role);
-            throw;
-        }
+        var claimsPrincipal = req.GetClaimsPrincipalFromRequest(logger);
+            
+        return claimsPrincipal?.Identity is not { IsAuthenticated: true }
+            ? (false, false)
+            : (true, claimsPrincipal.IsInRole(role));
     }
 
     private static ClaimsPrincipal? GetClaimsPrincipalFromRequest(this HttpRequestData req, ILogger logger)
     {
-        logger.LogInformation("Getting claims principal from request");
         if (!req.Headers.TryGetValues("X-MS-CLIENT-PRINCIPAL", out var header))
         {
             logger.LogWarning("X-MS-CLIENT-PRINCIPAL header not found in the request");
@@ -69,14 +55,13 @@ public static class AuthExtensions
             return null;
         }
         
-        var identity = new ClaimsIdentity(principal.IdentityProvider, principal.NameClaimType, principal.RoleClaimType);
-
         if (principal.Claims == null)
         {
             logger.LogWarning("Claims not found in ClientPrincipal");
             return null;
         }
         
+        var identity = new ClaimsIdentity(principal.IdentityProvider, principal.NameClaimType, principal.RoleClaimType);
         identity.AddClaims(principal.Claims.Select(c => new Claim(c.Type, c.Value)));
         
         return new ClaimsPrincipal(identity);
