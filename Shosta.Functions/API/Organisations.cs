@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using System.Net;
+using System.Text.Json;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.Functions.Worker;
@@ -33,13 +34,13 @@ public class Organisations(
         if (!authenticated)
         {
             _logger.LogError("Unauthorized request");
-            return new UnauthorizedResult();
+            return new ObjectResult("Unauthorized request") { StatusCode = (int?) HttpStatusCode.Unauthorized };
         }
-        
+            
         if(!authorized)
         {
             _logger.LogError("Forbidden request");
-            return new ForbidResult();
+            return new ObjectResult("Forbidden request") { StatusCode = (int?) HttpStatusCode.Forbidden };
         }
         
         var requestBody = await new StreamReader(req.Body).ReadToEndAsync();
@@ -137,17 +138,16 @@ public class Organisations(
         _logger.LogInformation("Getting organisation for year: {year}", year);
         var (authenticated, authorized) = req.IsAuthenticatedAndHasRole("shostadmin", _logger);
         
-        _logger.LogInformation("Authenticated: {authenticated}, Authorized: {authorized}", authenticated, authorized);
         if (!authenticated)
         {
             _logger.LogError("Unauthorized request");
-            return new UnauthorizedResult();
+            return new ObjectResult("Unauthorized request") { StatusCode = (int?) HttpStatusCode.Unauthorized };
         }
-        
+            
         if(!authorized)
         {
             _logger.LogError("Forbidden request");
-            return new ForbidResult();
+            return new ObjectResult("Forbidden request") { StatusCode = (int?) HttpStatusCode.Forbidden };
         }
         
         if (memoryCache.TryGetValue($"{nameof(Organisation)}-{year}", out OrganisationDto? organisationDto) && organisationDto != null)
