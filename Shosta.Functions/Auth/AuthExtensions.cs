@@ -1,8 +1,10 @@
 ﻿using System.Security.Claims;
 using System.Text;
+using System.Text.Json.Serialization;
 using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using JsonSerializerOptions = System.Text.Json.JsonSerializerOptions;
 
 namespace Shosta.Functions.Auth;
 
@@ -40,62 +42,59 @@ public static class AuthExtensions
     private static ClaimsPrincipal? GetClaimsPrincipalFromRequest(this HttpRequestData req, ILogger logger)
     {
         logger.LogInformation("Getting claims principal from request");
-        if (!req.Headers.TryGetValues("X-MS-CLIENT-PRINCIPAL", out var values))
+        if (!req.Headers.TryGetValues("X-MS-CLIENT-PRINCIPAL", out var header))
         {
+            logger.LogWarning("X-MS-CLIENT-PRINCIPAL header not found in the request");
+            return null;
+        }
+        
+        var data = header.FirstOrDefault();
+        if(string.IsNullOrEmpty(data))
+        {
+            logger.LogWarning("X-MS-CLIENT-PRINCIPAL header is empty");
+            return null;
+        }
+        
+        var decoded = Convert.FromBase64String(data);
+        var json = Encoding.UTF8.GetString(decoded);
+        var principal = JsonConvert.DeserializeObject<ClientPrincipal>(json);
+        
+        if(principal == null)
+        {
+            logger.LogWarning("Failed to deserialize ClientPrincipal from X-MS-CLIENT-PRINCIPAL header");
             return null;
         }
 
-        var principalData = values.FirstOrDefault();
-        if (principalData == null)
+        var identity = new ClaimsIdentity(principal.IdentityProvider, principal.NameClaimType, principal.RoleClaimType);
+
+        if (principal.Claims == null)
         {
+            logger.LogWarning("Claims not found in ClientPrincipal");
             return null;
         }
-
-        logger.LogInformation("Principal data: {principalData}", principalData);
-        // Decode the base64 string
-        var decodedPrincipal = Encoding.UTF8.GetString(Convert.FromBase64String(principalData));
-
-        logger.LogInformation("Decoded principal: {decodedPrincipal}", decodedPrincipal);
-        // Deserialize JSON into a ClaimsPrincipal-like structure
-        var principalInfo = JsonConvert.DeserializeObject<ClientPrincipal>(decodedPrincipal);
-        if (principalInfo == null)
-        {
-            logger.LogWarning("Failed to deserialize principal info");
-            return null;
-        }
-
-        logger.LogInformation("Principal info: {principalInfo}", principalInfo);
-
-        var claims = new List<Claim>();
-        foreach (var c in principalInfo.Claims)
-        {
-            if (string.IsNullOrEmpty(c.Type) || string.IsNullOrEmpty(c.Value))
-            {
-                logger.LogWarning($"Invalid claim data found: Type = '{c.Type}', Value = '{c.Value}'");
-                continue; // Skip this claim or handle it as needed
-            }
-            claims.Add(new Claim(c.Type, c.Value));
-        }
-
-        if (claims.Count == 0)
-        {
-            logger.LogError("No valid claims could be processed.");
-            return null;
-        }
-
-        var identity = new ClaimsIdentity(claims, principalInfo.AuthenticationType);
+        
+        identity.AddClaims(principal.Claims.Select(c => new Claim(c.Type, c.Value)));
+        
         return new ClaimsPrincipal(identity);
     }
 }
 
-public class ClientPrincipal
+public class ClientPrincipalClaim
 {
-    public string AuthenticationType { get; set; }
-    public List<ClientClaim> Claims { get; set; }
+    [JsonPropertyName("typ")]
+    public string? Type { get; set; }
+    [JsonPropertyName("val")]
+    public string? Value { get; set; }
 }
 
-public class ClientClaim
+public class ClientPrincipal
 {
-    public string Type { get; set; }
-    public string Value { get; set; }
+    [JsonPropertyName("auth_typ")]
+    public string? IdentityProvider { get; set; }
+    [JsonPropertyName("name_typ")]
+    public string? NameClaimType { get; set; }
+    [JsonPropertyName("role_typ")]
+    public string? RoleClaimType { get; set; }
+    [JsonPropertyName("claims")]
+    public IEnumerable<ClientPrincipalClaim>? Claims { get; set; }
 }
