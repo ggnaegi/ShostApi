@@ -16,7 +16,7 @@ import { firstValueFrom } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <app-session-admin
-      [sessionData]="sessionService.sessionData$(year) | async"
+      [sessionData]="sessionService.sessionData$(year, true) | async"
       (yearChanged)="updateYear($event)"
       (sessionSubmitted)="updateSessionAsync($event)"></app-session-admin>
   `,

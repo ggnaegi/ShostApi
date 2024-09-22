@@ -6,6 +6,7 @@ using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
+using Shosta.Functions.Auth;
 using Shosta.Functions.Domain.Dtos.Organisation;
 using Shosta.Functions.Domain.Entities.Organisation;
 using Shosta.Functions.Infrastructure;
@@ -23,10 +24,24 @@ public class Organisations(
 
     [Function(nameof(UploadOrganisation))]
     public async Task<IActionResult> UploadOrganisation(
-        [HttpTrigger(AuthorizationLevel.Function, "post", Route = "organisations")]
+        [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "organisations")]
         HttpRequestData req,
         FunctionContext executionContext)
     {
+        var (authenticated, authorized) = req.IsAuthenticatedAndHasRole("shostadmin");
+        
+        if (!authenticated)
+        {
+            _logger.LogError("Unauthorized request");
+            return new UnauthorizedResult();
+        }
+        
+        if(!authorized)
+        {
+            _logger.LogError("Forbidden request");
+            return new ForbidResult();
+        }
+        
         var requestBody = await new StreamReader(req.Body).ReadToEndAsync();
         var organisationDto = JsonSerializer.Deserialize<OrganisationDto>(requestBody);
 
@@ -119,6 +134,20 @@ public class Organisations(
         int year,
         FunctionContext executionContext)
     {
+        var (authenticated, authorized) = req.IsAuthenticatedAndHasRole("shostadmin");
+        
+        if (!authenticated)
+        {
+            _logger.LogError("Unauthorized request");
+            return new UnauthorizedResult();
+        }
+        
+        if(!authorized)
+        {
+            _logger.LogError("Forbidden request");
+            return new ForbidResult();
+        }
+        
         if (memoryCache.TryGetValue($"{nameof(Organisation)}-{year}", out OrganisationDto? organisationDto) && organisationDto != null)
         {
             return new OkObjectResult(organisationDto);

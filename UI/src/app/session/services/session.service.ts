@@ -13,17 +13,22 @@ export class SessionService implements AbstractSessionService {
   public constructor(private http: HttpClient) {}
 
   updateSession$(session: Session): Observable<Session> {
-    return this.http.post<Session>(`${environment.sessionEndpointUrl}?overwrite=true`, session);
+    return this.http.post<Session>(
+      `${environment.sessionEndpointUrl}?overwrite=true`,
+      session
+    );
   }
 
-  sessionData$(year: number): Observable<Session> {
+  sessionData$(year: number, adminRoute: boolean): Observable<Session> {
     if (!this.dataCache) {
       this.dataCache = new Map<number, Observable<Session>>();
     }
 
     if (!this.dataCache.has(year)) {
       const request$ = this.http
-        .get<SessionContainer>(`${environment.sessionEndpointUrl}?year=${year}`)
+        .get<SessionContainer>(
+          `${environment.sessionEndpointUrl}${adminRoute ? '/admin' : '/user'}?year=${year}`
+        )
         .pipe(
           map((container: SessionContainer) => container.Value),
           shareReplay(1)
