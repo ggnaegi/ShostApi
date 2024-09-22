@@ -1,0 +1,159 @@
+<div class="form-container">
+  <form [formGroup]="bandForm" (ngSubmit)="onSubmit()">
+    <!-- Flex container for 3 elements per row -->
+    <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="start stretch">
+      <!-- Year Field -->
+      <mat-form-field appearance="outline" fxFlex="30">
+        <mat-label>Année</mat-label>
+        <mat-select formControlName="Year" required (selectionChange)="updateYear($event)">
+          <mat-option *ngFor="let year of years" [value]="year">{{ year }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <!-- Welcome Text -->
+      <mat-form-field appearance="outline" fxFlex="70">
+        <mat-label>Texte d'accueil</mat-label>
+        <input matInput formControlName="WelcomeText" />
+      </mat-form-field>
+    </div>
+
+    <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="start stretch">
+      <!-- Band Picture -->
+      <mat-form-field appearance="outline" fxFlex="33">
+        <mat-label>Photo d'ensemble</mat-label>
+        <input matInput formControlName="BandPicture" />
+      </mat-form-field>
+
+      <!-- Band Title -->
+      <mat-form-field appearance="outline" fxFlex="67">
+        <mat-label>Titre ensemble</mat-label>
+        <input matInput formControlName="BandTitle" />
+      </mat-form-field>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="start stretch">
+      <mat-form-field appearance="outline" fxFlex>
+        <mat-label>Présentation ensemble</mat-label>
+        <textarea
+          matInput
+          formControlName="BandPresentation"
+          rows="10"></textarea>
+      </mat-form-field>
+    </div>
+
+    <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="start stretch">
+      <mat-form-field appearance="outline" fxFlex="33">
+        <mat-label>Photo comité</mat-label>
+        <input matInput formControlName="CommitteePicture" />
+      </mat-form-field>
+      <mat-form-field appearance="outline" fxFlex="67">
+        <mat-label>Titre comité</mat-label>
+        <input matInput formControlName="CommitteeTitle" />
+      </mat-form-field>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="start stretch">
+      <mat-form-field appearance="outline" fxFlex>
+        <mat-label>Présentation du comité</mat-label>
+        <textarea
+          matInput
+          formControlName="CommitteePresentation"
+          rows="6"></textarea>
+      </mat-form-field>
+    </div>
+
+    <mat-expansion-panel class="form-expansion-panel">
+      <mat-expansion-panel-header>
+        <mat-panel-title>Membres du comité</mat-panel-title>
+      </mat-expansion-panel-header>
+      <div formArrayName="CommitteeMembers" style="overflow-y: auto; max-height: 400px;">
+        <div
+          *ngFor="let member of CommitteeMembers.controls; let i = index"
+          [formGroupName]="i" style="margin: 10px">
+          <!-- Form Fields for each Committee Member -->
+          <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start stretch">
+            <!-- Function -->
+            <mat-form-field appearance="outline" fxFlex="31">
+              <mat-label>Fonction</mat-label>
+              <input matInput formControlName="Function" />
+            </mat-form-field>
+
+            <!-- First Name -->
+            <mat-form-field appearance="outline" fxFlex="31">
+              <mat-label>Prénom</mat-label>
+              <input matInput formControlName="FirstName" />
+            </mat-form-field>
+
+            <!-- Last Name -->
+            <mat-form-field appearance="outline" fxFlex="31">
+              <mat-label>Nom</mat-label>
+              <input matInput formControlName="LastName" />
+            </mat-form-field>
+
+            <div fxFlex="1">
+              <button mat-icon-button type="button" color="warn" (click)="removeCommitteeMember(i)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+          </div>
+
+          <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start stretch">
+            <!-- Address -->
+            <mat-form-field appearance="outline" fxFlex="31">
+              <mat-label>Adresse</mat-label>
+              <input matInput formControlName="Address" />
+            </mat-form-field>
+
+            <!-- Zip -->
+            <mat-form-field appearance="outline" fxFlex="31">
+              <mat-label>Code postal</mat-label>
+              <input matInput formControlName="Zip" />
+            </mat-form-field>
+
+            <!-- City -->
+            <mat-form-field appearance="outline" fxFlex="31">
+              <mat-label>Ville</mat-label>
+              <input matInput formControlName="City" />
+            </mat-form-field>
+          </div>
+
+          <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start stretch">
+            <!-- Phone Number -->
+            <mat-form-field appearance="outline" fxFlex="31">
+              <mat-label>Phone Number</mat-label>
+              <input matInput formControlName="PhoneNumber" />
+            </mat-form-field>
+
+            <!-- Email -->
+            <mat-form-field appearance="outline" fxFlex="31">
+              <mat-label>Email</mat-label>
+              <input matInput formControlName="Email" />
+            </mat-form-field>
+
+            <!-- Picture -->
+            <mat-form-field appearance="outline" fxFlex="31">
+              <mat-label>Lien portrait</mat-label>
+              <input matInput formControlName="Picture" />
+            </mat-form-field>
+          </div>
+
+          <div fxLayout="row" fxLayoutAlign="start stretch">
+            <mat-checkbox formControlName="IsContactPerson" fxFlex
+              >Est une personne de contact</mat-checkbox
+            >
+          </div>
+        </div>
+      </div>
+      <button
+        mat-raised-button
+        color="primary"
+        type="button"
+        (click)="addCommitteeMember()">
+        Ajouter membre du comité
+      </button>
+    </mat-expansion-panel>
+
+    <!-- Submit Button -->
+    <button mat-raised-button color="primary" type="submit">Enregistrer</button>
+  </form>
+</div>
