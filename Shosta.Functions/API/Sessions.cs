@@ -24,7 +24,7 @@ public class Sessions(ILoggerFactory loggerFactory, IMapper mapper, ShostaDbCont
         HttpRequestData req,
         FunctionContext executionContext)
     {
-        var (authenticated, authorized) = req.IsAuthenticatedAndHasRole("shostadmin");
+        var (authenticated, authorized) = req.IsAuthenticatedAndHasRole("shostadmin", _logger);
         
         if (!authenticated)
         {
@@ -87,7 +87,7 @@ public class Sessions(ILoggerFactory loggerFactory, IMapper mapper, ShostaDbCont
     {
         if(adminOrUser is "admin")
         {
-            var (authenticated, authorized) = req.IsAuthenticatedAndHasRole("shostadmin");
+            var (authenticated, authorized) = req.IsAuthenticatedAndHasRole("shostadmin", _logger);
         
             if (!authenticated)
             {
