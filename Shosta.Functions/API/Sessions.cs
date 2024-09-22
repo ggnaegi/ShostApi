@@ -6,6 +6,7 @@ using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
+using Shosta.Functions.Auth;
 using Shosta.Functions.Domain.Dtos.Session;
 using Shosta.Functions.Domain.Entities.Session;
 using Shosta.Functions.Infrastructure;
@@ -19,10 +20,24 @@ public class Sessions(ILoggerFactory loggerFactory, IMapper mapper, ShostaDbCont
 
     [Function(nameof(UploadSession))]
     public async Task<IActionResult> UploadSession(
-        [HttpTrigger(AuthorizationLevel.Function, "post", Route = "sessions")]
+        [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "sessions")]
         HttpRequestData req,
         FunctionContext executionContext)
     {
+        var (authenticated, authorized) = req.IsAuthenticatedAndHasRole("shostadmin");
+        
+        if (!authenticated)
+        {
+            _logger.LogError("Unauthorized request");
+            return new UnauthorizedResult();
+        }
+        
+        if(!authorized)
+        {
+            _logger.LogError("Forbidden request");
+            return new ForbidResult();
+        }
+        
         var requestBody = await new StreamReader(req.Body).ReadToEndAsync();
         var sessionDto = JsonSerializer.Deserialize<SessionDto>(requestBody);
 
@@ -66,9 +81,27 @@ public class Sessions(ILoggerFactory loggerFactory, IMapper mapper, ShostaDbCont
 
     [Function(nameof(GetSessions))]
     public async Task<IActionResult> GetSessions(
-        [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "sessions")] HttpRequestData req,
+        [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "sessions/{adminOrUser}")] HttpRequestData req,
+        string? adminOrUser,
         FunctionContext executionContext)
     {
+        if(adminOrUser is "admin")
+        {
+            var (authenticated, authorized) = req.IsAuthenticatedAndHasRole("shostadmin");
+        
+            if (!authenticated)
+            {
+                _logger.LogError("Unauthorized request");
+                return new UnauthorizedResult();
+            }
+            
+            if(!authorized)
+            {
+                _logger.LogError("Forbidden request");
+                return new ForbidResult();
+            }
+        }
+        
         var yearString = req.Query["year"];
 
         if (yearString == null)

@@ -11,7 +11,7 @@ import { ActivatedRoute } from '@angular/router';
   imports: [SessionComponent, AsyncPipe],
   template: `
     <app-session
-      [sessionData]="sessionService.sessionData$(this.year) | async" />
+      [sessionData]="sessionService.sessionData$(this.year, false) | async" />
   `,
 })
 export class SessionContainerComponent implements OnInit {
