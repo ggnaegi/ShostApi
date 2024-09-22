@@ -65,17 +65,26 @@ public static class AuthExtensions
         }
 
         logger.LogInformation("Principal info: {principalInfo}", principalInfo);
-        try
+
+        var claims = new List<Claim>();
+        foreach (var c in principalInfo.Claims)
         {
-            var claims = principalInfo.Claims.Select(c => new Claim(c.Type, c.Value)).ToList();
-            var identity = new ClaimsIdentity(claims, principalInfo.AuthenticationType);
-            return new ClaimsPrincipal(identity);
+            if (string.IsNullOrEmpty(c.Type) || string.IsNullOrEmpty(c.Value))
+            {
+                logger.LogWarning($"Invalid claim data found: Type = '{c.Type}', Value = '{c.Value}'");
+                continue; // Skip this claim or handle it as needed
+            }
+            claims.Add(new Claim(c.Type, c.Value));
         }
-        catch (Exception ex)
+
+        if (claims.Count == 0)
         {
-            logger.LogError($"Error creating ClaimsPrincipal: {ex.Message}");
+            logger.LogError("No valid claims could be processed.");
             return null;
         }
+
+        var identity = new ClaimsIdentity(claims, principalInfo.AuthenticationType);
+        return new ClaimsPrincipal(identity);
     }
 }
 
