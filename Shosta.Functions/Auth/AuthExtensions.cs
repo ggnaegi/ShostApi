@@ -43,7 +43,6 @@ public static class AuthExtensions
         var decoded = Convert.FromBase64String(data);
         var json = Encoding.UTF8.GetString(decoded);
         
-        logger.LogInformation("Deserializing ClientPrincipal from X-MS-CLIENT-PRINCIPAL header");
         var principal = JsonSerializer.Deserialize<ClientPrincipal>(json, new JsonSerializerOptions
         {
             PropertyNameCaseInsensitive = true
