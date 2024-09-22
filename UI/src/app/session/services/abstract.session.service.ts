@@ -5,4 +5,5 @@ import { Session } from '../api/session-element';
 @Injectable()
 export abstract class AbstractSessionService {
   abstract sessionData$(year: number): Observable<Session>;
+  abstract updateSession$(session: Session): Observable<Session>;
 }

@@ -5,6 +5,8 @@ import { EmailData, Organisation, Sponsor } from '../api/organisation';
 @Injectable()
 export abstract class AbstractAboutService {
   abstract getAboutDefinition$(): Observable<Organisation>;
+  abstract getAboutDefinitionForYear$(year: number): Observable<Organisation>;
+  abstract updateAbout$(Organisation: Organisation): Observable<Organisation>;
   abstract getSponsors$(): Observable<Sponsor[]> | undefined;
   abstract sendEmail$(email: EmailData): Observable<any>;
 }

@@ -56,6 +56,39 @@
   fxHide.lt-md>
   <div
     class="menu-items"
+    *ngIf="!showMenu"
+    fxLayout="row"
+    fxLayoutAlign="space-around stretch"
+    fxFlexFill>
+    <a
+      mat-button
+      routerLink="/about"
+      routerLinkActive="active-link"
+      [routerLinkActiveOptions]="linkActiveOptions"
+      class="menu-link"
+      fragment="welcome-section"
+    >Accueil</a
+    >
+    <a
+      mat-button
+      routerLink="/admin/sessions"
+      routerLinkActive="active-link"
+      [routerLinkActiveOptions]="linkActiveOptions"
+      class="menu-link"
+    >Sessions</a
+    >
+    <a
+      mat-button
+      routerLink="/admin/organisation"
+      routerLinkActive="active-link"
+      [routerLinkActiveOptions]="linkActiveOptions"
+      class="menu-link"
+    >Organisation</a
+    >
+  </div>
+  <div
+    class="menu-items"
+    *ngIf="showMenu"
     fxLayout="row"
     fxLayoutAlign="space-around stretch"
     fxFlexFill>
@@ -124,7 +157,37 @@
     position="end"
     fxShow.lt-md
     class="mobile-sidenav">
-    <mat-nav-list>
+    <mat-nav-list *ngIf="!showMenu">
+      <a
+        mat-list-item
+        routerLink="/about"
+        routerLinkActive="active-link"
+        [routerLinkActiveOptions]="linkActiveOptions"
+        class="menu-link"
+        fragment="welcome-section"
+        (click)="sidenav.close()"
+      >Accueil</a
+      >
+      <a
+        mat-list-item
+        routerLink="/admin/sessions"
+        routerLinkActive="active-link"
+        [routerLinkActiveOptions]="linkActiveOptions"
+        class="menu-link"
+        (click)="sidenav.close()"
+      >Sessions</a
+      >
+      <a
+        mat-list-item
+        routerLink="/admin/organisation"
+        routerLinkActive="active-link"
+        [routerLinkActiveOptions]="linkActiveOptions"
+        class="menu-link"
+        (click)="sidenav.close()"
+      >Organisation</a
+      >
+    </mat-nav-list>
+    <mat-nav-list *ngIf="showMenu">
       <a
         mat-list-item
         routerLink="/about"

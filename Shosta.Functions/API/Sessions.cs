@@ -1,5 +1,4 @@
-﻿using System.Net;
-using System.Text.Json;
+﻿using System.Text.Json;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.Functions.Worker;
@@ -62,7 +61,7 @@ public class Sessions(ILoggerFactory loggerFactory, IMapper mapper, ShostaDbCont
             Semaphore.Release();
         }
 
-        return new ObjectResult(HttpStatusCode.Created);
+        return new OkObjectResult(sessionDto);
     }
 
     [Function(nameof(GetSessions))]
