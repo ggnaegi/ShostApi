@@ -135,7 +135,6 @@ public class Organisations(
         int year,
         FunctionContext executionContext)
     {
-        _logger.LogInformation("Getting organisation for year: {year}", year);
         var (authenticated, authorized) = req.IsAuthenticatedAndHasRole("shostadmin", _logger);
         
         if (!authenticated)
