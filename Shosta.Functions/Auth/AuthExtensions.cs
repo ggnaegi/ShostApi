@@ -60,15 +60,22 @@ public static class AuthExtensions
         var principalInfo = JsonConvert.DeserializeObject<ClientPrincipal>(decodedPrincipal);
         if (principalInfo == null)
         {
+            logger.LogWarning("Failed to deserialize principal info");
             return null;
         }
-        
-        logger.LogInformation("Principal info: {principalInfo}", principalInfo);
 
-        // Convert claims to a ClaimsPrincipal
-        var claims = principalInfo.Claims.Select(c => new Claim(c.Type, c.Value)).ToList();
-        var identity = new ClaimsIdentity(claims, principalInfo.AuthenticationType);
-        return new ClaimsPrincipal(identity);
+        logger.LogInformation("Principal info: {principalInfo}", principalInfo);
+        try
+        {
+            var claims = principalInfo.Claims.Select(c => new Claim(c.Type, c.Value)).ToList();
+            var identity = new ClaimsIdentity(claims, principalInfo.AuthenticationType);
+            return new ClaimsPrincipal(identity);
+        }
+        catch (Exception ex)
+        {
+            logger.LogError($"Error creating ClaimsPrincipal: {ex.Message}");
+            return null;
+        }
     }
 }
 
