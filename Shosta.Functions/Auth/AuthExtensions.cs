@@ -23,6 +23,8 @@ public static class AuthExtensions
             var claimsPrincipal = req.GetClaimsPrincipalFromRequest(logger);
         
             logger.LogInformation("ClaimsPrincipal: {claimsPrincipal}", claimsPrincipal);
+            logger.LogInformation("IsAuthenticated: {IsAuthenticated}", claimsPrincipal?.Identity?.IsAuthenticated);
+            logger.LogInformation("IsAuthenticated: {IsAuthenticated}, IsInRole: {IsInRole}", claimsPrincipal?.Identity?.IsAuthenticated, claimsPrincipal?.IsInRole(role));
 
             return claimsPrincipal?.Identity is not { IsAuthenticated: true }
                 ? (false, false)
