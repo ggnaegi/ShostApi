@@ -17,14 +17,22 @@ public static class AuthExtensions
     /// <returns></returns>
     public static (bool authenticated, bool authorized) IsAuthenticatedAndHasRole(this HttpRequestData req, string role, ILogger logger)
     {
-        logger.LogInformation("Checking if the request is authenticated and has the role: {role}", role);
-        var claimsPrincipal = req.GetClaimsPrincipalFromRequest(logger);
+        try
+        {
+            logger.LogInformation("Checking if the request is authenticated and has the role: {role}", role);
+            var claimsPrincipal = req.GetClaimsPrincipalFromRequest(logger);
         
-        logger.LogInformation("ClaimsPrincipal: {claimsPrincipal}", claimsPrincipal);
+            logger.LogInformation("ClaimsPrincipal: {claimsPrincipal}", claimsPrincipal);
 
-        return claimsPrincipal?.Identity is not { IsAuthenticated: true }
-            ? (false, false)
-            : (true, claimsPrincipal.IsInRole(role));
+            return claimsPrincipal?.Identity is not { IsAuthenticated: true }
+                ? (false, false)
+                : (true, claimsPrincipal.IsInRole(role));
+        }
+        catch (Exception e)
+        {
+            logger.LogError(e, "Error checking if the request is authenticated and has the role: {role}", role);
+            throw;
+        }
     }
 
     private static ClaimsPrincipal? GetClaimsPrincipalFromRequest(this HttpRequestData req, ILogger logger)
@@ -45,12 +53,15 @@ public static class AuthExtensions
         // Decode the base64 string
         var decodedPrincipal = Encoding.UTF8.GetString(Convert.FromBase64String(principalData));
 
+        logger.LogInformation("Decoded principal: {decodedPrincipal}", decodedPrincipal);
         // Deserialize JSON into a ClaimsPrincipal-like structure
         var principalInfo = JsonConvert.DeserializeObject<ClientPrincipal>(decodedPrincipal);
         if (principalInfo == null)
         {
             return null;
         }
+        
+        logger.LogInformation("Principal info: {principalInfo}", principalInfo);
 
         // Convert claims to a ClaimsPrincipal
         var claims = principalInfo.Claims.Select(c => new Claim(c.Type, c.Value)).ToList();
