@@ -28,7 +28,7 @@ public class Organisations(
         HttpRequestData req,
         FunctionContext executionContext)
     {
-        var (authenticated, authorized) = req.IsAuthenticatedAndHasRole("shostadmin");
+        var (authenticated, authorized) = req.IsAuthenticatedAndHasRole("shostadmin", _logger);
         
         if (!authenticated)
         {
@@ -134,7 +134,7 @@ public class Organisations(
         int year,
         FunctionContext executionContext)
     {
-        var (authenticated, authorized) = req.IsAuthenticatedAndHasRole("shostadmin");
+        var (authenticated, authorized) = req.IsAuthenticatedAndHasRole("shostadmin", _logger);
         
         if (!authenticated)
         {

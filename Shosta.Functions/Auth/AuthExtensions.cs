@@ -1,6 +1,7 @@
 ﻿using System.Security.Claims;
 using System.Text;
 using Microsoft.Azure.Functions.Worker.Http;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
 namespace Shosta.Functions.Auth;
@@ -12,18 +13,23 @@ public static class AuthExtensions
     /// </summary>
     /// <param name="req"></param>
     /// <param name="role"></param>
+    /// <param name="logger"></param>
     /// <returns></returns>
-    public static (bool authenticated, bool authorized) IsAuthenticatedAndHasRole(this HttpRequestData req, string role)
+    public static (bool authenticated, bool authorized) IsAuthenticatedAndHasRole(this HttpRequestData req, string role, ILogger logger)
     {
-        var claimsPrincipal = req.GetClaimsPrincipalFromRequest();
+        logger.LogInformation("Checking if the request is authenticated and has the role: {role}", role);
+        var claimsPrincipal = req.GetClaimsPrincipalFromRequest(logger);
+        
+        logger.LogInformation("ClaimsPrincipal: {claimsPrincipal}", claimsPrincipal);
 
         return claimsPrincipal?.Identity is not { IsAuthenticated: true }
             ? (false, false)
             : (true, claimsPrincipal.IsInRole(role));
     }
 
-    private static ClaimsPrincipal? GetClaimsPrincipalFromRequest(this HttpRequestData req)
+    private static ClaimsPrincipal? GetClaimsPrincipalFromRequest(this HttpRequestData req, ILogger logger)
     {
+        logger.LogInformation("Getting claims principal from request");
         if (!req.Headers.TryGetValues("X-MS-CLIENT-PRINCIPAL", out var values))
         {
             return null;
@@ -35,6 +41,7 @@ public static class AuthExtensions
             return null;
         }
 
+        logger.LogInformation("Principal data: {principalData}", principalData);
         // Decode the base64 string
         var decodedPrincipal = Encoding.UTF8.GetString(Convert.FromBase64String(principalData));
 
