@@ -32,7 +32,7 @@ public class Authorization(
         _logger.LogInformation("Generated JWT token: {token}", token);
 
         var response = req.CreateResponse(System.Net.HttpStatusCode.Redirect);
-        response.Headers.Add("Set-Cookie", $"auth_token={token}; HttpOnly; Secure; Path=/; SameSite=Strict");
+        response.Headers.Add("Set-Cookie", $"auth_token={token}; HttpOnly; Secure; Path=/; SameSite=None");
         _logger.LogInformation("Set auth_token cookie");
 
         var redirectUrl = IsAdminUser(claimsPrincipal)
@@ -61,11 +61,8 @@ public class Authorization(
 
     private bool IsAdminUser(ClaimsPrincipal claimsPrincipal)
     {
-        _logger.LogInformation("Checking if user is admin");
         var email = claimsPrincipal.FindFirst(ClaimTypes.Email)?.Value;
-        _logger.LogInformation("User email: {email}", email);
         var adminEmails = configuration.GetAdminEmails();
-        _logger.LogInformation("Admin emails: {adminEmails}", adminEmails);
         return adminEmails.Contains(email);
     }
 }
