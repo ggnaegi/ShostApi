@@ -1,5 +1,4 @@
 import { AsyncPipe } from '@angular/common';
-import { firstValueFrom } from 'rxjs';
 import { MatTab, MatTabGroup, MatTabLabel } from '@angular/material/tabs';
 import { SessionAdminComponent } from '../pages/session-admin/session-admin.component';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
@@ -19,14 +18,11 @@ import { OrganisationAdminComponent } from '../pages/organisation-admin/organisa
     OrganisationAdminComponent,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  template: `
-    <app-organisation-admin
-      [organisationData]="aboutService.getAboutDefinitionForYear$(year) | async"
-      (yearChanged)="updateYear($event)"
-      (organisationSubmitted)="
-        updateOrganisationAsync($event)
-      "></app-organisation-admin>
-  `,
+  template: ` <app-organisation-admin
+    [organisationData]="aboutService.getAboutDefinitionForYear$(year) | async"
+    (yearChanged)="updateYear($event)"
+    (organisationSubmitted)="updateOrganisation($event)">
+  </app-organisation-admin>`,
 })
 export class OrganisationAdminContainerComponent {
   year = 2025;
@@ -37,14 +33,7 @@ export class OrganisationAdminContainerComponent {
     this.year = year;
   }
 
-  async updateOrganisationAsync(organisation: Organisation) {
-    try {
-      const updateOrganisation = await firstValueFrom(
-        this.aboutService.updateAbout$(organisation)
-      );
-      console.log('Session updated successfully:', updateOrganisation);
-    } catch (error) {
-      console.error('Error updating session:', error);
-    }
+  async updateOrganisation(organisation: Organisation) {
+    this.aboutService.updateAbout(organisation);
   }
 }

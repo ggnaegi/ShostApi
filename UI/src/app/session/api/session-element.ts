@@ -1,6 +1,6 @@
 export interface SessionContainer {
   Value: Session;
-  StatusCode: string;
+  StatusCode: number;
 }
 
 export interface Session {

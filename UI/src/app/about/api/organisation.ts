@@ -1,6 +1,6 @@
 export interface OrganisationContainer {
   Value: Organisation;
-  StatusCode: string;
+  StatusCode: number;
 }
 
 export interface Organisation {

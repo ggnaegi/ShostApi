@@ -1,4 +1,4 @@
-<div class="form-container">
+<div class="form-container" *ngIf="sessionData">
   <form [formGroup]="sessionForm" (ngSubmit)="onSubmit()">
     <!-- Year Dropdown and Title -->
     <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="start stretch">
@@ -16,7 +16,7 @@
 
       <mat-form-field appearance="outline" fxFlex="70">
         <mat-label>Titre</mat-label>
-        <input matInput formControlName="Title" />
+        <input matInput formControlName="Title"  />
       </mat-form-field>
     </div>
 
@@ -24,7 +24,7 @@
     <div fxLayout="row" fxLayoutAlign="start stretch">
       <mat-form-field appearance="outline" fxFlex>
         <mat-label>Présentation</mat-label>
-        <textarea matInput formControlName="Presentation" rows="10"></textarea>
+        <textarea matInput formControlName="Presentation" rows="10"  ></textarea>
       </mat-form-field>
     </div>
 
@@ -32,7 +32,7 @@
     <div fxLayout="row" fxLayoutAlign="start stretch">
       <mat-form-field appearance="outline" fxFlex>
         <mat-label>Programme</mat-label>
-        <textarea matInput formControlName="Program" rows="10"></textarea>
+        <textarea matInput formControlName="Program" rows="10" ></textarea>
       </mat-form-field>
     </div>
 
@@ -40,7 +40,7 @@
     <div fxLayout="row" fxLayoutAlign="start stretch">
       <mat-form-field appearance="outline" fxFlex>
         <mat-label>Teaser</mat-label>
-        <textarea matInput formControlName="Teaser" rows="5"></textarea>
+        <textarea matInput formControlName="Teaser" rows="5" ></textarea>
       </mat-form-field>
     </div>
 
@@ -234,7 +234,7 @@
 
     <!-- Submit Button -->
     <div fxLayout="row" fxLayoutAlign="start stretch">
-      <button mat-raised-button color="primary" type="submit">
+      <button mat-raised-button color="primary" type="submit" [disabled]="!sessionForm.dirty">
         Enregistrer
       </button>
     </div>

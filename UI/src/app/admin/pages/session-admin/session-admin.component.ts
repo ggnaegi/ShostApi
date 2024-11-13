@@ -18,7 +18,7 @@ import {
 import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
 import { MatButton, MatIconButton } from '@angular/material/button';
-import { NgForOf } from '@angular/common';
+import { NgForOf, NgIf } from '@angular/common';
 import { MatIcon } from '@angular/material/icon';
 import {
   MatDatepicker,
@@ -63,6 +63,7 @@ import {
     MatExpansionPanel,
     MatExpansionPanelTitle,
     MatExpansionPanelHeader,
+    NgIf,
   ],
   templateUrl: './session-admin.component.html',
   styleUrl: './session-admin.component.css',
@@ -79,6 +80,7 @@ export class SessionAdminComponent implements OnInit, OnChanges {
 
   sessionForm!: FormGroup;
   years: number[] = [];
+  selectedYear?: number;
 
   constructor(private fb: FormBuilder) {}
 
@@ -90,10 +92,10 @@ export class SessionAdminComponent implements OnInit, OnChanges {
 
     this.sessionForm = this.fb.group({
       Year: ['', Validators.required],
-      Title: ['', [Validators.maxLength(100)]],
-      Presentation: ['', [Validators.maxLength(4000)]],
-      Program: ['', [Validators.maxLength(2000)]],
-      Teaser: ['', [Validators.maxLength(3000)]],
+      Title: ['', [Validators.required, Validators.maxLength(100)]],
+      Presentation: ['', [Validators.required, Validators.maxLength(4000)]],
+      Program: ['', [Validators.required, Validators.maxLength(2000)]],
+      Teaser: ['', [Validators.required, Validators.maxLength(3000)]],
       Picture: ['', [Validators.maxLength(255)]],
       Gallery: ['', [Validators.maxLength(255)]],
       Conductor: this.fb.group({
@@ -114,13 +116,18 @@ export class SessionAdminComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['sessionData'] && changes['sessionData'].currentValue) {
-      this.populateForm(changes['sessionData'].currentValue);
+      const currentValue = changes['sessionData'].currentValue;
+      this.populateForm(
+        currentValue === 'Session not found.'
+          ? ({ Year: this.selectedYear } as Session)
+          : (currentValue as Session)
+      );
     }
   }
 
   updateYear(event: MatSelectChange): void {
-    const selectedYear = event.value;
-    this.yearChanged.emit(selectedYear);
+    this.selectedYear = event.value;
+    this.yearChanged.emit(this.selectedYear);
   }
 
   public get Soloists() {
