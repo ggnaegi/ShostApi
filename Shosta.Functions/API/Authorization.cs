@@ -64,8 +64,8 @@ public class Authorization(
         _logger.LogInformation("Checking if user is admin");
         var email = claimsPrincipal.FindFirst(ClaimTypes.Email)?.Value;
         _logger.LogInformation("User email: {email}", email);
-        var adminEmails = configuration.GetSection("AdminEmails").Get<string[]>();
+        var adminEmails = configuration.GetAdminEmails();
         _logger.LogInformation("Admin emails: {adminEmails}", adminEmails);
-        return adminEmails?.Length > 0 && adminEmails.Contains(email);
+        return adminEmails.Contains(email);
     }
 }
