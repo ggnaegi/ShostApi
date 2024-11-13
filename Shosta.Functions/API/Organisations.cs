@@ -31,20 +31,21 @@ public class Organisations(
         HttpRequestData req,
         FunctionContext executionContext)
     {
-        var (authenticated, authorized) = req.IsAuthenticatedAndAuthorized(configuration.GetAdminEmails(), _logger);
-        
+        var (authenticated, authorized) = req.IsAuthenticatedAndAuthorized(configuration.GetAdminEmails(),
+            configuration.GetValue<string>("JwtSecretKey") ?? throw new InvalidOperationException(), _logger);
+
         if (!authenticated)
         {
             _logger.LogError("Unauthorized request");
-            return new ObjectResult("Unauthorized request") { StatusCode = (int?) HttpStatusCode.Unauthorized };
+            return new ObjectResult("Unauthorized request") { StatusCode = (int?)HttpStatusCode.Unauthorized };
         }
-            
-        if(!authorized)
+
+        if (!authorized)
         {
             _logger.LogError("Forbidden request");
-            return new ObjectResult("Forbidden request") { StatusCode = (int?) HttpStatusCode.Forbidden };
+            return new ObjectResult("Forbidden request") { StatusCode = (int?)HttpStatusCode.Forbidden };
         }
-        
+
         var requestBody = await new StreamReader(req.Body).ReadToEndAsync();
         var organisationDto = JsonSerializer.Deserialize<OrganisationDto>(requestBody);
 
@@ -137,21 +138,23 @@ public class Organisations(
         int year,
         FunctionContext executionContext)
     {
-        var (authenticated, authorized) = req.IsAuthenticatedAndAuthorized(configuration.GetAdminEmails(), _logger);
-        
+        var (authenticated, authorized) = req.IsAuthenticatedAndAuthorized(configuration.GetAdminEmails(),
+            configuration.GetValue<string>("JwtSecretKey") ?? throw new InvalidOperationException(), _logger);
+
         if (!authenticated)
         {
             _logger.LogError("Unauthorized request");
-            return new ObjectResult("Unauthorized request") { StatusCode = (int?) HttpStatusCode.Unauthorized };
+            return new ObjectResult("Unauthorized request") { StatusCode = (int?)HttpStatusCode.Unauthorized };
         }
-            
-        if(!authorized)
+
+        if (!authorized)
         {
             _logger.LogError("Forbidden request");
-            return new ObjectResult("Forbidden request") { StatusCode = (int?) HttpStatusCode.Forbidden };
+            return new ObjectResult("Forbidden request") { StatusCode = (int?)HttpStatusCode.Forbidden };
         }
-        
-        if (memoryCache.TryGetValue($"{nameof(Organisation)}-{year}", out OrganisationDto? organisationDto) && organisationDto != null)
+
+        if (memoryCache.TryGetValue($"{nameof(Organisation)}-{year}", out OrganisationDto? organisationDto) &&
+            organisationDto != null)
         {
             return new OkObjectResult(organisationDto);
         }
@@ -186,7 +189,7 @@ public class Organisations(
             Semaphore.Release();
         }
     }
-    
+
     private void SetOrganisationCache(OrganisationDto organisationDto)
     {
         // Cache the organisation by year

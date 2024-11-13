@@ -15,7 +15,12 @@ using Shosta.Functions.Infrastructure;
 
 namespace Shosta.Functions.API;
 
-public class Sessions(IConfiguration configuration, ILoggerFactory loggerFactory, IMapper mapper, ShostaDbContext dbContext, IMemoryCache memoryCache)
+public class Sessions(
+    IConfiguration configuration,
+    ILoggerFactory loggerFactory,
+    IMapper mapper,
+    ShostaDbContext dbContext,
+    IMemoryCache memoryCache)
 {
     private readonly ILogger _logger = loggerFactory.CreateLogger<Sessions>();
     private static readonly SemaphoreSlim Semaphore = new(1, 1);
@@ -26,20 +31,21 @@ public class Sessions(IConfiguration configuration, ILoggerFactory loggerFactory
         HttpRequestData req,
         FunctionContext executionContext)
     {
-        var (authenticated, authorized) = req.IsAuthenticatedAndAuthorized(configuration.GetAdminEmails(), _logger);
-        
+        var (authenticated, authorized) = req.IsAuthenticatedAndAuthorized(configuration.GetAdminEmails(),
+            configuration.GetValue<string>("JwtSecretKey") ?? throw new InvalidOperationException(), _logger);
+
         if (!authenticated)
         {
             _logger.LogError("Unauthorized request");
-            return new ObjectResult("Unauthorized request") { StatusCode = (int?) HttpStatusCode.Unauthorized };
+            return new ObjectResult("Unauthorized request") { StatusCode = (int?)HttpStatusCode.Unauthorized };
         }
-            
-        if(!authorized)
+
+        if (!authorized)
         {
             _logger.LogError("Forbidden request");
-            return new ObjectResult("Forbidden request") { StatusCode = (int?) HttpStatusCode.Forbidden };
+            return new ObjectResult("Forbidden request") { StatusCode = (int?)HttpStatusCode.Forbidden };
         }
-        
+
         var requestBody = await new StreamReader(req.Body).ReadToEndAsync();
         var sessionDto = JsonSerializer.Deserialize<SessionDto>(requestBody);
 
@@ -67,7 +73,7 @@ public class Sessions(IConfiguration configuration, ILoggerFactory loggerFactory
 
         dbContext.Sessions.Add(session);
         await dbContext.SaveChangesAsync();
-        
+
         await Semaphore.WaitAsync();
         try
         {
@@ -83,27 +89,29 @@ public class Sessions(IConfiguration configuration, ILoggerFactory loggerFactory
 
     [Function(nameof(GetSessions))]
     public async Task<IActionResult> GetSessions(
-        [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "sessions/{adminOrUser}")] HttpRequestData req,
+        [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "sessions/{adminOrUser}")]
+        HttpRequestData req,
         string? adminOrUser,
         FunctionContext executionContext)
     {
-        if(adminOrUser is "admin")
+        if (adminOrUser is "admin")
         {
-            var (authenticated, authorized) = req.IsAuthenticatedAndAuthorized(configuration.GetAdminEmails(), _logger);
-        
+            var (authenticated, authorized) = req.IsAuthenticatedAndAuthorized(configuration.GetAdminEmails(),
+                configuration.GetValue<string>("JwtSecretKey") ?? throw new InvalidOperationException(), _logger);
+
             if (!authenticated)
             {
                 _logger.LogError("Unauthorized request");
-                return new ObjectResult("Unauthorized request") { StatusCode = (int?) HttpStatusCode.Unauthorized };
+                return new ObjectResult("Unauthorized request") { StatusCode = (int?)HttpStatusCode.Unauthorized };
             }
-            
-            if(!authorized)
+
+            if (!authorized)
             {
                 _logger.LogError("Forbidden request");
-                return new ObjectResult("Forbidden request") { StatusCode = (int?) HttpStatusCode.Forbidden };
+                return new ObjectResult("Forbidden request") { StatusCode = (int?)HttpStatusCode.Forbidden };
             }
         }
-        
+
         var yearString = req.Query["year"];
 
         if (yearString == null)
@@ -117,12 +125,12 @@ public class Sessions(IConfiguration configuration, ILoggerFactory loggerFactory
             _logger.LogError("Invalid year: {year}", yearString);
             return new BadRequestObjectResult("Unable to parse year.");
         }
-        
+
         if (memoryCache.TryGetValue(year, out SessionDto? sessionDto) && sessionDto != null)
         {
             return new OkObjectResult(sessionDto);
         }
-        
+
         await Semaphore.WaitAsync();
         try
         {
