@@ -1,4 +1,5 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
+using System.Net;
 using System.Security.Claims;
 using System.Text;
 using Microsoft.Azure.Functions.Worker;
@@ -15,6 +16,18 @@ public class Authorization(
     ILoggerFactory loggerFactory)
 {
     private readonly ILogger _logger = loggerFactory.CreateLogger<Organisations>();
+
+    [Function(nameof(HandleOptions))]
+    public HttpResponseData HandleOptions(
+        [HttpTrigger(AuthorizationLevel.Anonymous, "options", Route = "{*any}")] HttpRequestData req)
+    {
+        var response = req.CreateResponse(HttpStatusCode.NoContent);
+        response.Headers.Add("Access-Control-Allow-Origin", "https://www.shosta.ch");
+        response.Headers.Add("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+        response.Headers.Add("Access-Control-Allow-Headers", "Content-Type, Authorization");
+        response.Headers.Add("Access-Control-Allow-Credentials", "true");
+        return response;
+    }
 
     [Function(nameof(AdminRedirect))]
     public async Task<HttpResponseData> AdminRedirect(
