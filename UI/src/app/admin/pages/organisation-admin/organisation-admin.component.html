@@ -1,12 +1,16 @@
-<div class="form-container">
+<div class="form-container" *ngIf="organisationData">
   <form [formGroup]="bandForm" (ngSubmit)="onSubmit()">
     <!-- Flex container for 3 elements per row -->
     <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="start stretch">
       <!-- Year Field -->
       <mat-form-field appearance="outline" fxFlex="30">
         <mat-label>Année</mat-label>
-        <mat-select formControlName="Year" required (selectionChange)="updateYear($event)">
-          <mat-option *ngFor="let year of years" [value]="year">{{ year }}</mat-option>
+        <mat-select
+          formControlName="Year"
+          (selectionChange)="updateYear($event)">
+          <mat-option *ngFor="let year of years" [value]="year">{{
+            year
+          }}</mat-option>
         </mat-select>
       </mat-form-field>
 
@@ -66,10 +70,13 @@
       <mat-expansion-panel-header>
         <mat-panel-title>Membres du comité</mat-panel-title>
       </mat-expansion-panel-header>
-      <div formArrayName="CommitteeMembers" style="overflow-y: auto; max-height: 400px;">
+      <div
+        formArrayName="CommitteeMembers"
+        style="overflow-y: auto; max-height: 400px">
         <div
           *ngFor="let member of CommitteeMembers.controls; let i = index"
-          [formGroupName]="i" style="margin: 10px">
+          [formGroupName]="i"
+          style="margin: 10px">
           <!-- Form Fields for each Committee Member -->
           <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start stretch">
             <!-- Function -->
@@ -91,7 +98,11 @@
             </mat-form-field>
 
             <div fxFlex="1">
-              <button mat-icon-button type="button" color="warn" (click)="removeCommitteeMember(i)">
+              <button
+                mat-icon-button
+                type="button"
+                color="warn"
+                (click)="removeCommitteeMember(i)">
                 <mat-icon>delete</mat-icon>
               </button>
             </div>
@@ -154,6 +165,12 @@
     </mat-expansion-panel>
 
     <!-- Submit Button -->
-    <button mat-raised-button color="primary" type="submit">Enregistrer</button>
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [disabled]="!bandForm.dirty">
+      Enregistrer
+    </button>
   </form>
 </div>

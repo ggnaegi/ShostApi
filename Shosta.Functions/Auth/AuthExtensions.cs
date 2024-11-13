@@ -13,16 +13,24 @@ public static class AuthExtensions
     /// Extension method to check if the request is authenticated and the user has a specific role
     /// </summary>
     /// <param name="req"></param>
-    /// <param name="role"></param>
+    /// <param name="adminEmails"></param>
     /// <param name="logger"></param>
     /// <returns></returns>
-    public static (bool authenticated, bool authorized) IsAuthenticatedAndHasRole(this HttpRequestData req, string role, ILogger logger)
+    public static (bool authenticated, bool authorized) IsAuthenticatedAndAuthorized(this HttpRequestData req, IList<string> adminEmails, ILogger logger)
     {
         var claimsPrincipal = req.GetClaimsPrincipalFromRequest(logger);
-            
-        return claimsPrincipal?.Identity is not { IsAuthenticated: true }
-            ? (false, false)
-            : (true, claimsPrincipal.IsInRole(role));
+        if (claimsPrincipal?.Identity is not { IsAuthenticated: true })
+        {
+             return (false, false);
+        }
+        var email = claimsPrincipal.FindFirst(ClaimTypes.Email)?.Value;
+        if (!string.IsNullOrEmpty(email))
+        {
+            return (true, adminEmails.Contains(email));
+        }
+
+        logger.LogWarning("Email claim not found in the request");
+        return (false, false);
     }
 
     private static ClaimsPrincipal? GetClaimsPrincipalFromRequest(this HttpRequestData req, ILogger logger)

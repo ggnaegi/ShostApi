@@ -6,6 +6,7 @@ using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Shosta.Functions.Auth;
 using Shosta.Functions.Domain.Dtos.Organisation;
@@ -15,6 +16,7 @@ using Shosta.Functions.Infrastructure;
 namespace Shosta.Functions.API;
 
 public class Organisations(
+    IConfiguration configuration,
     ILoggerFactory loggerFactory,
     IMapper mapper,
     ShostaDbContext dbContext,
@@ -29,7 +31,7 @@ public class Organisations(
         HttpRequestData req,
         FunctionContext executionContext)
     {
-        var (authenticated, authorized) = req.IsAuthenticatedAndHasRole("shostadmin", _logger);
+        var (authenticated, authorized) = req.IsAuthenticatedAndAuthorized(configuration.GetAdminEmails(), _logger);
         
         if (!authenticated)
         {
@@ -135,7 +137,7 @@ public class Organisations(
         int year,
         FunctionContext executionContext)
     {
-        var (authenticated, authorized) = req.IsAuthenticatedAndHasRole("shostadmin", _logger);
+        var (authenticated, authorized) = req.IsAuthenticatedAndAuthorized(configuration.GetAdminEmails(), _logger);
         
         if (!authenticated)
         {

@@ -6,6 +6,7 @@ using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Shosta.Functions.Auth;
 using Shosta.Functions.Domain.Dtos.Session;
@@ -14,7 +15,7 @@ using Shosta.Functions.Infrastructure;
 
 namespace Shosta.Functions.API;
 
-public class Sessions(ILoggerFactory loggerFactory, IMapper mapper, ShostaDbContext dbContext, IMemoryCache memoryCache)
+public class Sessions(IConfiguration configuration, ILoggerFactory loggerFactory, IMapper mapper, ShostaDbContext dbContext, IMemoryCache memoryCache)
 {
     private readonly ILogger _logger = loggerFactory.CreateLogger<Sessions>();
     private static readonly SemaphoreSlim Semaphore = new(1, 1);
@@ -25,7 +26,7 @@ public class Sessions(ILoggerFactory loggerFactory, IMapper mapper, ShostaDbCont
         HttpRequestData req,
         FunctionContext executionContext)
     {
-        var (authenticated, authorized) = req.IsAuthenticatedAndHasRole("shostadmin", _logger);
+        var (authenticated, authorized) = req.IsAuthenticatedAndAuthorized(configuration.GetAdminEmails(), _logger);
         
         if (!authenticated)
         {
@@ -88,7 +89,7 @@ public class Sessions(ILoggerFactory loggerFactory, IMapper mapper, ShostaDbCont
     {
         if(adminOrUser is "admin")
         {
-            var (authenticated, authorized) = req.IsAuthenticatedAndHasRole("shostadmin", _logger);
+            var (authenticated, authorized) = req.IsAuthenticatedAndAuthorized(configuration.GetAdminEmails(), _logger);
         
             if (!authenticated)
             {

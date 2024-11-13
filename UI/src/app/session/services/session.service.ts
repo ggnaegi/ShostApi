@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { AbstractSessionService } from './abstract.session.service';
-import { map, Observable, shareReplay } from 'rxjs';
+import { map, Observable, shareReplay, take, tap } from 'rxjs';
 import { Session, SessionContainer } from '../api/session-element';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
+import { statusCodeChecker } from '../../utils/StatusCodeChecker';
 
 @Injectable({
   providedIn: 'root',
@@ -12,11 +13,35 @@ export class SessionService implements AbstractSessionService {
   private dataCache: Map<number, Observable<Session>> | undefined;
   public constructor(private http: HttpClient) {}
 
-  updateSession$(session: Session): Observable<Session> {
-    return this.http.post<Session>(
-      `${environment.sessionEndpointUrl}?overwrite=true`,
-      session
-    );
+  updateSession(session: Session): void {
+    const year = session.Year;
+
+    this.http
+      .post<SessionContainer>(
+        `${environment.sessionEndpointUrl}?overwrite=true`,
+        session
+      )
+      .pipe(
+        take<SessionContainer>(1),
+        map<SessionContainer, Session>(container => {
+          const statusCode = container.StatusCode;
+          statusCodeChecker(statusCode);
+          return container.Value;
+        }),
+        tap<Session>(updatedSession => {
+          if (this.dataCache) {
+            this.dataCache.set(
+              year,
+              new Observable(observer => {
+                observer.next(updatedSession);
+                observer.complete();
+              })
+            );
+          }
+        }),
+        shareReplay<Session>(1)
+      )
+      .subscribe();
   }
 
   sessionData$(year: number, adminRoute: boolean): Observable<Session> {
@@ -30,7 +55,11 @@ export class SessionService implements AbstractSessionService {
           `${environment.sessionEndpointUrl}${adminRoute ? '/admin' : '/user'}?year=${year}`
         )
         .pipe(
-          map((container: SessionContainer) => container.Value),
+          map((container: SessionContainer) => {
+            const statusCode = container.StatusCode;
+            statusCodeChecker(statusCode);
+            return container.Value;
+          }),
           shareReplay(1)
         );
 

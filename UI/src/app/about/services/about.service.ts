@@ -1,9 +1,15 @@
 import { Injectable } from '@angular/core';
-import { map, Observable, shareReplay } from 'rxjs';
+import { map, Observable, shareReplay, take, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { AbstractAboutService } from './abstract.about.service';
-import { EmailData, Organisation, OrganisationContainer, Sponsor } from '../api/organisation';
+import {
+  EmailData,
+  Organisation,
+  OrganisationContainer,
+  Sponsor,
+} from '../api/organisation';
 import { environment } from '../../../environments/environment';
+import { statusCodeChecker } from '../../utils/StatusCodeChecker';
 
 @Injectable({
   providedIn: 'root',
@@ -24,9 +30,17 @@ export class AboutService implements AbstractAboutService {
 
     if (!this.dataCache.has(year)) {
       const request$ = this.http
-        .get<OrganisationContainer>(`${environment.organisationEndpointUrl}/${year}`)
+        .get<OrganisationContainer>(
+          `${environment.organisationEndpointUrl}/${year}`
+        )
         .pipe(
-          map((container: OrganisationContainer) => container.Value),
+          map((container: OrganisationContainer) => {
+            const statusCode = container.StatusCode;
+
+            statusCodeChecker(statusCode);
+
+            return container.Value;
+          }),
           shareReplay(1)
         );
 
@@ -36,11 +50,34 @@ export class AboutService implements AbstractAboutService {
     return this.dataCache.get(year)!;
   }
 
-  updateAbout$(organisation: Organisation): Observable<Organisation> {
-    return this.http.post<Organisation>(
-      `${environment.organisationEndpointUrl}?overwrite=true`,
-      organisation
-    );
+  updateAbout(organisation: Organisation): void {
+    const year = organisation.Year;
+
+    this.http
+      .post<OrganisationContainer>(
+        `${environment.organisationEndpointUrl}?overwrite=true`,
+        organisation
+      )
+      .pipe(
+        take<OrganisationContainer>(1),
+        map<OrganisationContainer, Organisation>(container => {
+          const statusCode = container.StatusCode;
+          statusCodeChecker(statusCode);
+          return container.Value;
+        }),
+        tap<Organisation>(updatedOrganisation => {
+          if (this.dataCache) {
+            this.dataCache.set(
+              year,
+              new Observable(observer => {
+                observer.next(updatedOrganisation);
+                observer.complete();
+              })
+            );
+          }
+        }),
+        shareReplay<Organisation>(1)
+      ).subscribe();
   }
 
   sendEmail$(email: EmailData): Observable<any> {

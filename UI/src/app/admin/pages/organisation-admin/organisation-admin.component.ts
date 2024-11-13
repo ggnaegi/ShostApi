@@ -1,15 +1,33 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import { Organisation } from '../../../about/api/organisation';
-import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormArray,
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { MatButton, MatIconButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { MatCheckbox } from '@angular/material/checkbox';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { FlexModule } from '@angular/flex-layout';
 import { MatInput } from '@angular/material/input';
-import { MatExpansionPanel, MatExpansionPanelHeader, MatExpansionPanelTitle } from '@angular/material/expansion';
+import {
+  MatExpansionPanel,
+  MatExpansionPanelHeader,
+  MatExpansionPanelTitle,
+} from '@angular/material/expansion';
 import { MatDivider } from '@angular/material/divider';
-import { NgForOf } from '@angular/common';
+import { NgForOf, NgIf } from '@angular/common';
 import { MatOption } from '@angular/material/core';
 import { MatSelect, MatSelectChange } from '@angular/material/select';
 
@@ -33,6 +51,7 @@ import { MatSelect, MatSelectChange } from '@angular/material/select';
     NgForOf,
     MatOption,
     MatSelect,
+    NgIf,
   ],
   templateUrl: './organisation-admin.component.html',
   styleUrl: './organisation-admin.component.css',
@@ -49,6 +68,7 @@ export class OrganisationAdminComponent implements OnInit, OnChanges {
 
   bandForm!: FormGroup;
   years: number[] = [];
+  selectedYear?: number;
 
   constructor(private fb: FormBuilder) {}
 
@@ -75,7 +95,7 @@ export class OrganisationAdminComponent implements OnInit, OnChanges {
         [Validators.required, Validators.maxLength(10000)],
       ],
       CommitteeMembers: this.fb.array([]),
-      Sponsors: this.fb.array([]), // Adjust this based on your sponsors logic
+      Sponsors: this.fb.array([]),
     });
 
     if (this.organisationData) {
@@ -88,13 +108,18 @@ export class OrganisationAdminComponent implements OnInit, OnChanges {
       changes['organisationData'] &&
       changes['organisationData'].currentValue
     ) {
-      this.populateBandForm(changes['organisationData'].currentValue);
+      const currentValue = changes['organisationData'].currentValue;
+      this.populateBandForm(
+        currentValue === 'Organisation not found.'
+          ? ({ Year: this.selectedYear } as Organisation)
+          : (currentValue as Organisation)
+      );
     }
   }
 
   updateYear(event: MatSelectChange): void {
-    const selectedYear = event.value;
-    this.yearChanged.emit(selectedYear);
+    this.selectedYear = event.value;
+    this.yearChanged.emit(this.selectedYear);
   }
 
   get CommitteeMembers() {
@@ -104,9 +129,9 @@ export class OrganisationAdminComponent implements OnInit, OnChanges {
   public addCommitteeMember(): void {
     this.CommitteeMembers.push(
       this.fb.group({
-        Function: ['', [Validators.maxLength(255)]],
-        FirstName: ['', [Validators.maxLength(100)]],
-        LastName: ['', [Validators.maxLength(100)]],
+        Function: ['', [Validators.required, Validators.maxLength(255)]],
+        FirstName: ['', [Validators.required, Validators.maxLength(100)]],
+        LastName: ['', [Validators.required, Validators.maxLength(100)]],
         Address: ['', [Validators.maxLength(255)]],
         Zip: ['', [Validators.maxLength(10)]],
         City: ['', [Validators.maxLength(255)]],
@@ -126,11 +151,14 @@ export class OrganisationAdminComponent implements OnInit, OnChanges {
   onSubmit() {
     if (this.bandForm.valid) {
       const updatedBandData = this.bandForm.value as Organisation;
-      this.bandForm.patchValue(updatedBandData);
+      this.organisationSubmitted.emit(updatedBandData);
     }
   }
 
   private populateBandForm(bandData: Organisation): void {
+    if (!this.bandForm) {
+      return;
+    }
     // Patch the main form controls
     this.bandForm.patchValue({
       Year: bandData.Year,
