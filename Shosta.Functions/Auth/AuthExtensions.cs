@@ -27,8 +27,12 @@ public static class AuthExtensions
         {
             return (false, false);
         }
+        
+        logger.LogInformation("ClaimsPrincipal: {claimsPrincipal}", claimsPrincipal);
 
         var email = claimsPrincipal.FindFirst(ClaimTypes.Email)?.Value;
+        logger.LogInformation("Email claim: {email}", email);
+        
         if (!string.IsNullOrEmpty(email))
         {
             return (true, adminEmails.Contains(email));

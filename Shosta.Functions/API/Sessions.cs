@@ -31,6 +31,7 @@ public class Sessions(
         HttpRequestData req,
         FunctionContext executionContext)
     {
+        _logger.LogInformation("C# HTTP trigger function processed a request.");
         var (authenticated, authorized) = req.IsAuthenticatedAndAuthorized(configuration.GetAdminEmails(),
             configuration.GetValue<string>("JwtSecretKey") ?? throw new InvalidOperationException(), _logger);
 
