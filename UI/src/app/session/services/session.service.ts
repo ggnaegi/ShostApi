@@ -19,7 +19,8 @@ export class SessionService implements AbstractSessionService {
     this.http
       .post<SessionContainer>(
         `${environment.sessionEndpointUrl}?overwrite=true`,
-        session
+        session,
+        { withCredentials: true }
       )
       .pipe(
         take<SessionContainer>(1),
@@ -49,10 +50,12 @@ export class SessionService implements AbstractSessionService {
       this.dataCache = new Map<number, Observable<Session>>();
     }
 
+    const requestOptions = adminRoute ? { withCredentials: true } : {};
     if (!this.dataCache.has(year)) {
       const request$ = this.http
         .get<SessionContainer>(
-          `${environment.sessionEndpointUrl}${adminRoute ? '/admin' : '/user'}?year=${year}`
+          `${environment.sessionEndpointUrl}${adminRoute ? '/admin' : '/user'}?year=${year}`,
+          requestOptions
         )
         .pipe(
           map((container: SessionContainer) => {
