@@ -31,7 +31,8 @@ export class AboutService implements AbstractAboutService {
     if (!this.dataCache.has(year)) {
       const request$ = this.http
         .get<OrganisationContainer>(
-          `${environment.organisationEndpointUrl}/${year}`
+          `${environment.organisationEndpointUrl}/${year}`,
+          { withCredentials: true }
         )
         .pipe(
           map((container: OrganisationContainer) => {
@@ -56,7 +57,8 @@ export class AboutService implements AbstractAboutService {
     this.http
       .post<OrganisationContainer>(
         `${environment.organisationEndpointUrl}?overwrite=true`,
-        organisation
+        organisation,
+        { withCredentials: true }
       )
       .pipe(
         take<OrganisationContainer>(1),
@@ -77,7 +79,8 @@ export class AboutService implements AbstractAboutService {
           }
         }),
         shareReplay<Organisation>(1)
-      ).subscribe();
+      )
+      .subscribe();
   }
 
   sendEmail$(email: EmailData): Observable<any> {
