@@ -1,29 +1,33 @@
 <ng-container *ngIf="sessionData">
-  <div class="floating-menu">
-    <a routerLink="." fragment="concept" class="menu-item">
+  <div class="floating-menu" *ngIf="isFloatingMenuVisible">
+    <a routerLink="." fragment="concept" class="menu-item"
+       [matTooltip]="isMobile ? 'Concept' : null">
       <i class="fa-solid fa-lightbulb menu-icon"></i>
-      <!-- Concept Icon -->
-      <span>Concept</span>
+      <span *ngIf="!isMobile">Concept</span>
     </a>
-    <a routerLink="." fragment="conductor" class="menu-item">
+
+    <a routerLink="." fragment="conductor" class="menu-item"
+       [matTooltip]="isMobile ? 'Directeur' : null">
       <i class="fa-solid fa-user-tie menu-icon"></i>
-      <!-- Conductor Icon -->
-      <span>Directeur</span>
+      <span *ngIf="!isMobile">Directeur</span>
     </a>
-    <a routerLink="." fragment="soloists" class="menu-item">
+
+    <a routerLink="." fragment="soloists" class="menu-item"
+       [matTooltip]="isMobile ? 'Solistes' : null">
       <i class="fa-solid fa-microphone menu-icon"></i>
-      <!-- Soloists Icon -->
-      <span>Solistes</span>
+      <span *ngIf="!isMobile">Solistes</span>
     </a>
-    <a routerLink="." fragment="program" class="menu-item">
+
+    <a routerLink="." fragment="program" class="menu-item"
+       [matTooltip]="isMobile ? 'Programme' : null">
       <i class="fa-solid fa-list menu-icon"></i>
-      <!-- Program Icon -->
-      <span>Programme</span>
+      <span *ngIf="!isMobile">Programme</span>
     </a>
-    <a routerLink="." fragment="musicians" class="menu-item">
+
+    <a routerLink="." fragment="musicians" class="menu-item"
+       [matTooltip]="isMobile ? 'Musiciens' : null">
       <i class="fa-solid fa-music menu-icon"></i>
-      <!-- Musicians Icon -->
-      <span>Musiciens</span>
+      <span *ngIf="!isMobile">Musiciens</span>
     </a>
   </div>
 

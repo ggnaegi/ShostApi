@@ -21,7 +21,7 @@ export class ImageWithLoadingComponent {
   @Input()
   public class?: string;
 
-  constructor(public readonly spinnerService: SpinnerService) {
+  constructor(private readonly spinnerService: SpinnerService) {
     this.spinnerService.show();
   }
 
