@@ -8,10 +8,10 @@
           <mat-card-header>
             <mat-card-title>{{ starredLogo.year }}</mat-card-title>
           </mat-card-header>
-          <img
+          <app-image-with-loading
             [src]="starredLogo.url"
-            alt="{{ starredLogo.alt }}"
-            class="card-logo" />
+            [alt]="starredLogo.alt"
+            [class]="'card-logo'" />
         </mat-card>
       </div>
 
@@ -39,7 +39,10 @@
         <mat-card-header>
           <mat-card-title>{{ logo.year }}</mat-card-title>
         </mat-card-header>
-        <img [src]="logo.url" alt="{{ logo.alt }}" class="card-logo" />
+        <app-image-with-loading
+          [src]="logo.url"
+          [alt]="logo.alt"
+          class="card-logo" />
         <mat-card-actions *ngIf="logo.showGallery">
           <button
             mat-icon-button

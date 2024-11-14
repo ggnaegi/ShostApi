@@ -112,6 +112,7 @@ public class Organisations(
             var organisation = await dbContext.Organisations
                 .Include(i => i.CommitteeMembers)
                 .AsNoTracking()
+                .AsSplitQuery()
                 .OrderByDescending(o => o.Year)
                 .FirstOrDefaultAsync();
 

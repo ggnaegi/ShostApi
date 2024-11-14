@@ -140,6 +140,7 @@ public class Sessions(
                 .Include(i => i.Soloists)
                 .Include(i => i.Musicians)
                 .Include(i => i.Concerts)
+                .AsSplitQuery()
                 .AsNoTracking()
                 .SingleOrDefaultAsync(s => s.Year == year);
 

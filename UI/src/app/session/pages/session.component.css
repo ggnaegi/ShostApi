@@ -143,14 +143,6 @@ li {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Add hover effect */
 }
 
-/* Responsive image for the flyer */
-.responsive-image {
-  width: 100%; /* Make the image fit the width of the mat-card-content */
-  height: auto; /* Maintain the aspect ratio */
-  max-height: 100%; /* Ensure it does not exceed the height of the card */
-  object-fit: contain; /* Ensure the entire image fits within the container */
-}
-
 /* Conductor and soloist images */
 .conductor-photo {
   width: 120px; /* Size of the image */

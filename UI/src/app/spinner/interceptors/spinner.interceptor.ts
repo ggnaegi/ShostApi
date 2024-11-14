@@ -3,23 +3,26 @@ import {
   HttpInterceptor,
   HttpRequest,
   HttpHandler,
-  HttpEvent,
+  HttpEvent, HttpResponse,
 } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import { SpinnerService } from '../services/spinner.service';
 
 @Injectable()
 export class SpinnerInterceptor implements HttpInterceptor {
-  constructor(private spinnerService: SpinnerService) {}
+  constructor(private loadingService: SpinnerService) {}
 
-  intercept(
-    req: HttpRequest<any>,
-    next: HttpHandler
-  ): Observable<HttpEvent<any>> {
-    this.spinnerService.show(); // Show spinner on request start
+  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    this.loadingService.show();
+
     return next.handle(req).pipe(
-      finalize(() => this.spinnerService.hide()) // Hide spinner when response is received
+      tap(event => {
+        if (event instanceof HttpResponse) {
+          this.loadingService.hide();
+        }
+      }),
+      finalize(() => this.loadingService.hide())
     );
   }
 }
