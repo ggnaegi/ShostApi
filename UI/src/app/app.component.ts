@@ -35,6 +35,7 @@ import { SessionContainerComponent } from './session/containers/session.containe
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { SpinnerComponent } from './spinner/pages/spinner.component';
 import { filter } from 'rxjs';
+import { SpinnerService } from './spinner/services/spinner.service';
 
 @Component({
   selector: 'app-root',
@@ -80,7 +81,10 @@ export class AppComponent implements OnInit, AfterViewInit {
     fragment: 'exact',
   };
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    public readonly spinnerService: SpinnerService
+  ) {}
 
   isButtonVisible = false;
   currentYear: string | null = null;

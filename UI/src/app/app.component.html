@@ -263,7 +263,7 @@
   </mat-sidenav-content>
 </mat-sidenav-container>
 
-<mat-toolbar color="secondary" class="footer">
+<mat-toolbar color="secondary" class="footer" *ngIf="!spinnerService.spinnerIsOn()">
   <div fxLayout="row" fxLayoutAlign="flex-start center" fxFlexFill fxLayoutGap="10px">
     <!-- GitHub Link -->
     <a

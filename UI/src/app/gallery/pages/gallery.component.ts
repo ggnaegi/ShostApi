@@ -26,6 +26,7 @@ import { RouterLink } from '@angular/router';
 import { MatIcon } from '@angular/material/icon';
 import { MatIconButton } from '@angular/material/button';
 import { GalleryDialogComponent } from './gallery-dialog/gallery-dialog.component';
+import { ImageWithLoadingComponent } from '../../common/image-with-loading.component';
 
 @Component({
   selector: 'app-gallery',
@@ -49,6 +50,7 @@ import { GalleryDialogComponent } from './gallery-dialog/gallery-dialog.componen
     MatIcon,
     MatIconButton,
     NgClass,
+    ImageWithLoadingComponent,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './gallery.component.html',
@@ -59,9 +61,7 @@ export class GalleryComponent implements OnChanges {
   galleriesDefinitions: GalleriesDefinition | null = null;
   starredLogo: Logo | undefined = undefined;
 
-  constructor(
-    public dialog: MatDialog
-  ) {}
+  constructor(public dialog: MatDialog) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     this.setStarredGallery();

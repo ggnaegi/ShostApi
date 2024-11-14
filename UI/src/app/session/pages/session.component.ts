@@ -25,6 +25,7 @@ import { MatIcon } from '@angular/material/icon';
 import { MatToolbar } from '@angular/material/toolbar';
 import { RouterLink } from '@angular/router';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
+import { ImageWithLoadingComponent } from '../../common/image-with-loading.component';
 
 @Component({
   selector: 'app-session',
@@ -49,6 +50,7 @@ import { MatProgressSpinner } from '@angular/material/progress-spinner';
     MatAnchor,
     RouterLink,
     MatProgressSpinner,
+    ImageWithLoadingComponent,
   ],
   templateUrl: './session.component.html',
   styleUrl: './session.component.css',

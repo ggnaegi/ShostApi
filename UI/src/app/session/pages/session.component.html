@@ -39,10 +39,10 @@
       <mat-card appearance="raised" class="left-column-card">
         <mat-card-header></mat-card-header>
         <mat-card-content>
-          <img
+          <app-image-with-loading
             [src]="'assets/' + sessionData.Picture"
-            alt=""
-            class="responsive-image" />
+            [alt]="''"
+            [class]="'responsive-image'" />
         </mat-card-content>
       </mat-card>
       <mat-card appearance="outlined" class="right-column-card">
