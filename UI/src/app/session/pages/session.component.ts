@@ -1,4 +1,11 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  HostListener,
+  Input,
+  OnDestroy,
+} from '@angular/core';
 import { Session } from '../api/session-element';
 import { DatePipe, NgForOf, NgIf } from '@angular/common';
 import { ExtendedModule, FlexModule } from '@angular/flex-layout';
@@ -26,6 +33,7 @@ import { MatToolbar } from '@angular/material/toolbar';
 import { RouterLink } from '@angular/router';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { ImageWithLoadingComponent } from '../../common/image-with-loading.component';
+import { MatTooltip } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-session',
@@ -51,12 +59,13 @@ import { ImageWithLoadingComponent } from '../../common/image-with-loading.compo
     RouterLink,
     MatProgressSpinner,
     ImageWithLoadingComponent,
+    MatTooltip,
   ],
   templateUrl: './session.component.html',
   styleUrl: './session.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SessionComponent {
+export class SessionComponent implements OnDestroy {
   @Input()
   sessionData: Session | null = null;
 
@@ -64,6 +73,12 @@ export class SessionComponent {
   faCalendarAlt = faCalendarAlt;
   faMapMarkerAlt = faMapMarkerAlt;
   faBuilding = faBuilding;
+
+  isMobile: boolean = window.innerWidth <= 768;
+  isFloatingMenuVisible = false; // Controls the visibility of the menu
+  private scrollTimeout: any;
+
+  public constructor(private cdr: ChangeDetectorRef) {}
 
   /**
    * Retrieving registers,
@@ -90,5 +105,27 @@ export class SessionComponent {
       RegisterName: instrument,
       RegisterMusicians: registerMap[instrument],
     }));
+  }
+
+  @HostListener('window:scroll', [])
+  onWindowScroll(): void {
+    this.isFloatingMenuVisible = true;
+
+    clearTimeout(this.scrollTimeout);
+    this.scrollTimeout = setTimeout(() => {
+      this.isFloatingMenuVisible = false;
+      this.cdr.markForCheck();
+    }, 2000);
+  }
+
+  @HostListener('window:resize', [])
+  onResize() {
+    this.isMobile = window.innerWidth <= 768;
+  }
+
+  ngOnDestroy(): void {
+    if (this.scrollTimeout) {
+      clearTimeout(this.scrollTimeout);
+    }
   }
 }

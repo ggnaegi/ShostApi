@@ -10,10 +10,6 @@ export class SpinnerService {
   private loadingSubject = new BehaviorSubject<boolean>(false);
   public isLoading$ = this.loadingSubject.asObservable();
 
-  spinnerIsOn(): boolean {
-    return this.loadingSubject.value;
-  }
-
   show() {
     this.loadingCount++;
     this.loadingSubject.next(true);

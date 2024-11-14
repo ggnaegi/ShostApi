@@ -155,27 +155,41 @@ li {
 /* The floating menu container */
 .floating-menu {
   position: fixed;
-  top: 50%; /* Center vertically */
+  top: 40%;
   right: 0;
   transform: translateY(-50%);
   background-color: #803357;
   padding: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Slight shadow for floating effect */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   z-index: 1000;
   display: flex;
-  flex-direction: column; /* Stack the icons vertically */
+  flex-direction: column;
   align-items: center;
   transition: all 0.3s ease-in-out;
-  border-radius: 10px 0 0 10px; /* Rounded corners: top-left, top-right, bottom-right, bottom-left */
+  border-radius: 10px 0 0 10px;
 }
 
 @media (max-width: 768px) {
   .floating-menu {
-    padding: 5px; /* Reduce padding */
-    transform: scale(0.8) translateY(-50%); /* Scale down the entire menu */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Adjust shadow for smaller size */
-    border-radius: 8px 0 0 8px; /* Adjust radius to match smaller size */
+    position: fixed;
+    top: 70%;
+    right: 0;
+    padding: 4px;
+    transform: translateY(-50%);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+    border-radius: 6px 0 0 6px;
+    margin-right: 0;
+    z-index: 2000;
   }
+
+  .floating-menu > * {
+    font-size: 0.7em;
+  }
+}
+
+.floating-menu.show {
+  opacity: 1;
+  pointer-events: auto;
 }
 
 /* Individual menu items */
@@ -183,7 +197,7 @@ li {
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-family: Montserrat;
+  font-family: Montserrat, serif;
   margin-bottom: 16px;
   text-decoration: none;
   color: white;
@@ -208,6 +222,24 @@ li {
 
 .menu-item:hover .menu-icon {
   color: #000000; /* Change icon color on hover */
+}
+
+.menu-item.tooltip {
+  position: relative;
+}
+
+.menu-item.tooltip:hover::after {
+  content: attr(title);
+  position: absolute;
+  bottom: 100%; /* Position above the icon */
+  right: 50%;
+  transform: translateX(50%);
+  background-color: #333;
+  color: #fff;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.8em;
+  white-space: nowrap;
 }
 
 /* Floating effect for the menu when scrolling */

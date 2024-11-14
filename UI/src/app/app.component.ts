@@ -30,7 +30,7 @@ import {
   MatIconButton,
 } from '@angular/material/button';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { NgIf, NgOptimizedImage } from '@angular/common';
+import { AsyncPipe, NgIf, NgOptimizedImage } from '@angular/common';
 import { SessionContainerComponent } from './session/containers/session.container';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { SpinnerComponent } from './spinner/pages/spinner.component';
@@ -67,6 +67,7 @@ import { SpinnerService } from './spinner/services/spinner.service';
     MatProgressSpinner,
     SpinnerComponent,
     MatCardTitle,
+    AsyncPipe,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
@@ -84,11 +85,14 @@ export class AppComponent implements OnInit, AfterViewInit {
   constructor(
     private router: Router,
     public readonly spinnerService: SpinnerService
-  ) {}
+  ) {
+    this.spinnerService.show();
+  }
 
-  isButtonVisible = false;
   currentYear: string | null = null;
   showMenu = true;
+  showBackToTop = false;
+  showFooter = false;
 
   @HostListener('window:scroll', [])
   onWindowScroll() {
@@ -97,7 +101,9 @@ export class AppComponent implements OnInit, AfterViewInit {
       document.documentElement.scrollTop ||
       document.body.scrollTop ||
       0;
-    this.isButtonVisible = scrollTop > 300;
+
+    this.showFooter = true;
+    this.showBackToTop = scrollTop > 300;
   }
 
   ngAfterViewInit() {
@@ -106,6 +112,7 @@ export class AppComponent implements OnInit, AfterViewInit {
         (window['FB' as any] as any).XFBML.parse();
       }
     }, 1000);
+    this.spinnerService.hide();
   }
 
   ngOnInit(): void {
