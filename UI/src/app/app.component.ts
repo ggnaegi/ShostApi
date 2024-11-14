@@ -1,8 +1,10 @@
 import {
   AfterViewInit,
+  ApplicationRef,
   ChangeDetectionStrategy,
   Component,
   HostListener,
+  OnDestroy,
   OnInit,
 } from '@angular/core';
 import {
@@ -34,7 +36,7 @@ import { AsyncPipe, NgIf, NgOptimizedImage } from '@angular/common';
 import { SessionContainerComponent } from './session/containers/session.container';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { SpinnerComponent } from './spinner/pages/spinner.component';
-import { filter } from 'rxjs';
+import { filter, Subscription } from 'rxjs';
 import { SpinnerService } from './spinner/services/spinner.service';
 
 @Component({
@@ -72,7 +74,7 @@ import { SpinnerService } from './spinner/services/spinner.service';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
-export class AppComponent implements OnInit, AfterViewInit {
+export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
   title = "Site de l'harmonie Shostakovich";
 
   public linkActiveOptions: IsActiveMatchOptions = {
@@ -84,15 +86,17 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   constructor(
     private router: Router,
-    public readonly spinnerService: SpinnerService
-  ) {
-    this.spinnerService.show();
-  }
+    public readonly spinnerService: SpinnerService,
+    private appRef: ApplicationRef
+  ) {}
 
   currentYear: string | null = null;
   showMenu = true;
   showBackToTop = false;
   showFooter = false;
+
+  routerSubscription?: Subscription;
+  appRefSubscription?: Subscription;
 
   @HostListener('window:scroll', [])
   onWindowScroll() {
@@ -112,11 +116,17 @@ export class AppComponent implements OnInit, AfterViewInit {
         (window['FB' as any] as any).XFBML.parse();
       }
     }, 1000);
-    this.spinnerService.hide();
+
+    setTimeout(() => {
+      const initialLogo = document.getElementById('initial-logo');
+      if (initialLogo) {
+        initialLogo.style.display = 'none';
+      }
+    }, 2000);
   }
 
   ngOnInit(): void {
-    this.router.events
+    this.routerSubscription = this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe(() => {
         const url = this.router.url;
@@ -134,5 +144,15 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   scrollToTop(): void {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  ngOnDestroy(): void {
+    if (this.appRefSubscription) {
+      this.appRefSubscription.unsubscribe();
+    }
+
+    if (this.routerSubscription) {
+      this.routerSubscription.unsubscribe();
+    }
   }
 }

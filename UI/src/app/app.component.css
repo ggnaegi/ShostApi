@@ -67,19 +67,19 @@ mat-sidenav-content {
   left: 0;
   width: 100%;
   height: 1px;
-  background-color: #ead4d7; /* Baseline under all items */
+  background-color: #ead4d7 !important;
 }
 
 .menu-items a {
-  display: block; /* Ensure the entire anchor area is clickable */
+  display: block;
   font-size: 16px;
   color: #333;
   text-decoration: none;
   margin: 0 12px;
-  padding: 15px 10px; /* Padding for a larger clickable area */
+  padding: 15px 10px;
   position: relative;
   transition: all 0.3s ease;
-  z-index: 1; /* Ensure the anchor is above the baseline */
+  z-index: 1;
   height: 100%;
 }
 
@@ -87,7 +87,7 @@ mat-sidenav-content {
   content: '';
   width: 0;
   height: 2px;
-  background-color: transparent;
+  background-color: transparent !important;
   position: absolute;
   bottom: 0;
   left: 0;
@@ -96,8 +96,8 @@ mat-sidenav-content {
 
 .menu-items a:hover::after,
 .menu-items a.active-link::after {
-  background-color: #be3d59; /* Underline color for hover and active */
-  width: 100%; /* Full width underline */
+  background-color: #be3d59 !important;
+  width: 100%;
 }
 
 .menu-toggle-button {
@@ -106,11 +106,11 @@ mat-sidenav-content {
 
 .menu-toggle-button i {
   font-size: 24px;
-  color: #fff;
+  color: #fff !important;
 }
 
 .content {
-  background-color: white;
+  background-color: white !important;
 }
 
 .card-container {
@@ -130,27 +130,27 @@ mat-sidenav-content {
 }
 
 .mobile-sidenav {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a shadow to differentiate the overlay */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   overflow: auto;
   border-left: none;
-  background-color: white;
-  z-index: 1000; /* Ensure it appears on top */
-  width: 250px; /* Set a fixed width for the sidenav */
+  background-color: white !important;
+  z-index: 1000;
+  width: 250px;
   padding-top: 53px;
 }
 
 .mobile-sidenav .mat-nav-list a {
-  color: black; /* Ensure the links are visible with the white background */
+  color: black;
 }
 
 .mobile-sidenav .mat-nav-list a.active-link {
-  background-color: #803357; /* Highlight the active link */
-  color: white; /* Set the text color for the active link */
+  background-color: #803357 !important;
+  color: white !important;
 }
 
 .right-section a i {
   font-size: 24px;
-  color: #fff;
+  color: #fff !important;
 }
 
 .background-image-wrapper {
@@ -171,7 +171,7 @@ mat-sidenav-content {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: #fbe9e7;
+  background-color: #fbe9e7 !important;
   opacity: 0.1;
   z-index: 0;
 }
@@ -230,13 +230,12 @@ mat-toolbar {
 }
 
 .footer {
-  position: marker;
-  bottom: 0;
-  left: 0;
+  position: sticky;
+  top: 100vh;
   width: 100%;
   padding: 5px 20px;
-  color: #fff;
-  background-color: #803357; /* Replace with your color scheme */
+  color: #fff !important;
+  background-color: #803357 !important;
   z-index: 10;
 }
 
@@ -253,7 +252,7 @@ mat-toolbar {
   top: 80%;
   left: 0;
   transform: translateY(-50%);
-  background-color: #803357;
+  background-color: #803357 !important;
   padding: 10px 20px 10px 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   z-index: 1000;
