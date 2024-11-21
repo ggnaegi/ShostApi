@@ -252,7 +252,7 @@
   </mat-sidenav>
 
   <mat-sidenav-content>
-    <div class="back-to-top" (click)="scrollToTop()" *ngIf="showBackToTop">
+    <div (keyup)="scrollToTop()" (click)="scrollToTop()" *ngIf="showBackToTop" class="back-to-top">
       <i class="fas fa-arrow-up"></i>
     </div>
     <div class="content" fxLayout="column" fxLayoutAlign="start stretch">
@@ -263,7 +263,7 @@
   </mat-sidenav-content>
 </mat-sidenav-container>
 
-<mat-toolbar color="secondary" class="footer" *ngIf="(spinnerService.isLoading$ | async) === false">
+<mat-toolbar color="secondary" class="footer" *ngIf="spinnerService && (spinnerService.isLoading$ | async) === false">
   <div fxLayout="row" fxLayoutAlign="flex-start center" fxFlexFill fxLayoutGap="10px">
     <!-- GitHub Link -->
     <a
