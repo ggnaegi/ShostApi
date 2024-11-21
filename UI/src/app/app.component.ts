@@ -1,6 +1,5 @@
 import {
   AfterViewInit,
-  ApplicationRef,
   ChangeDetectionStrategy,
   Component,
   HostListener,
@@ -42,7 +41,7 @@ import { SpinnerService } from './spinner/services/spinner.service';
 @Component({
   selector: 'app-root',
   standalone: true,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.Default,
   imports: [
     RouterOutlet,
     MatToolbar,
@@ -86,8 +85,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
 
   constructor(
     private router: Router,
-    public readonly spinnerService: SpinnerService,
-    private appRef: ApplicationRef
+    public readonly spinnerService: SpinnerService
   ) {}
 
   currentYear: string | null = null;
@@ -111,12 +109,6 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit() {
-    setTimeout(() => {
-      if (window['FB' as any]) {
-        (window['FB' as any] as any).XFBML.parse();
-      }
-    }, 1000);
-
     setTimeout(() => {
       const initialLogo = document.getElementById('initial-logo');
       if (initialLogo) {
