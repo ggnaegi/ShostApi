@@ -16,16 +16,24 @@ public class Authorization(
     ILoggerFactory loggerFactory)
 {
     private readonly ILogger _logger = loggerFactory.CreateLogger<Organisations>();
-
-    [Function(nameof(HandleOptions))]
-    public HttpResponseData HandleOptions(
-        [HttpTrigger(AuthorizationLevel.Anonymous, "options", Route = "{*any}")] HttpRequestData req)
+    
+    [Function(nameof(GetToken))]
+    public async Task<HttpResponseData> GetToken(
+        [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "auth/token")] HttpRequestData req)
     {
-        var response = req.CreateResponse(HttpStatusCode.NoContent);
-        response.Headers.Add("Access-Control-Allow-Origin", "https://www.shosta.ch");
-        response.Headers.Add("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
-        response.Headers.Add("Access-Control-Allow-Headers", "Content-Type, Authorization");
-        response.Headers.Add("Access-Control-Allow-Credentials", "true");
+        var claimsPrincipal = req.GetClaimsPrincipalFromRequest(_logger);
+
+        if (claimsPrincipal?.Identity is not { IsAuthenticated: true })
+        {
+            return req.CreateResponse(HttpStatusCode.Unauthorized);
+        }
+
+        var token = GenerateJwtToken(claimsPrincipal.Claims);
+        _logger.LogInformation("Generated JWT token: {token}", token);
+
+        var response = req.CreateResponse(HttpStatusCode.OK);
+        await response.WriteAsJsonAsync(new { token });
+
         return response;
     }
 
