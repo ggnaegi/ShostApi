@@ -32,8 +32,7 @@ public class Sessions(
         FunctionContext executionContext)
     {
         _logger.LogInformation("C# HTTP trigger function processed a request.");
-        var (authenticated, authorized) = req.IsAuthenticatedAndAuthorized(configuration.GetAdminEmails(),
-            configuration.GetValue<string>("JwtSecretKey") ?? throw new InvalidOperationException(), _logger);
+        var (authenticated, authorized) = req.IsAuthenticatedAndAuthorized(configuration.GetAdminEmails(), _logger);
 
         if (!authenticated)
         {
@@ -97,8 +96,7 @@ public class Sessions(
     {
         if (adminOrUser is "admin")
         {
-            var (authenticated, authorized) = req.IsAuthenticatedAndAuthorized(configuration.GetAdminEmails(),
-                configuration.GetValue<string>("JwtSecretKey") ?? throw new InvalidOperationException(), _logger);
+            var (authenticated, authorized) = req.IsAuthenticatedAndAuthorized(configuration.GetAdminEmails(), _logger);
 
             if (!authenticated)
             {

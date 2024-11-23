@@ -31,8 +31,7 @@ public class Organisations(
         HttpRequestData req,
         FunctionContext executionContext)
     {
-        var (authenticated, authorized) = req.IsAuthenticatedAndAuthorized(configuration.GetAdminEmails(),
-            configuration.GetValue<string>("JwtSecretKey") ?? throw new InvalidOperationException(), _logger);
+        var (authenticated, authorized) = req.IsAuthenticatedAndAuthorized(configuration.GetAdminEmails(), _logger);
 
         if (!authenticated)
         {
@@ -139,8 +138,7 @@ public class Organisations(
         int year,
         FunctionContext executionContext)
     {
-        var (authenticated, authorized) = req.IsAuthenticatedAndAuthorized(configuration.GetAdminEmails(),
-            configuration.GetValue<string>("JwtSecretKey") ?? throw new InvalidOperationException(), _logger);
+        var (authenticated, authorized) = req.IsAuthenticatedAndAuthorized(configuration.GetAdminEmails(), _logger);
 
         if (!authenticated)
         {

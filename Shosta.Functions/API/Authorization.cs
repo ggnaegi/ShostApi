@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Shosta.Functions.Auth;
+using Shosta.Functions.Domain.Dtos.Auth;
 
 namespace Shosta.Functions.API;
 
@@ -16,24 +17,26 @@ public class Authorization(
     ILoggerFactory loggerFactory)
 {
     private readonly ILogger _logger = loggerFactory.CreateLogger<Organisations>();
-    
+
     [Function(nameof(GetToken))]
     public async Task<HttpResponseData> GetToken(
-        [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "auth/token")] HttpRequestData req)
+        [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "auth/token")]
+        HttpRequestData req)
     {
         var claimsPrincipal = req.GetClaimsPrincipalFromRequest(_logger);
+        var response = req.CreateResponse(HttpStatusCode.OK);
+
 
         if (claimsPrincipal?.Identity is not { IsAuthenticated: true })
         {
-            return req.CreateResponse(HttpStatusCode.Unauthorized);
+            await response.WriteAsJsonAsync(new TokenContainer());
+            return response;
         }
 
         var token = GenerateJwtToken(claimsPrincipal.Claims);
         _logger.LogInformation("Generated JWT token: {token}", token);
 
-        var response = req.CreateResponse(HttpStatusCode.OK);
-        await response.WriteAsJsonAsync(new { token });
-
+        await response.WriteAsJsonAsync(new TokenContainer { Token = token });
         return response;
     }
 
@@ -46,16 +49,10 @@ public class Authorization(
         var claimsPrincipal = req.GetClaimsPrincipalFromRequest(_logger);
         if (claimsPrincipal?.Identity is not { IsAuthenticated: true })
         {
-            return req.CreateResponse(System.Net.HttpStatusCode.Unauthorized);
+            return req.CreateResponse(HttpStatusCode.Unauthorized);
         }
 
-        var token = GenerateJwtToken(claimsPrincipal.Claims);
-        _logger.LogInformation("Generated JWT token: {token}", token);
-
-        var response = req.CreateResponse(System.Net.HttpStatusCode.Redirect);
-        response.Headers.Add("Set-Cookie", $"auth_token={token}; HttpOnly; Secure; Path=/; SameSite=None");
-        _logger.LogInformation("Set auth_token cookie");
-
+        var response = req.CreateResponse(HttpStatusCode.Redirect);
         var redirectUrl = IsAdminUser(claimsPrincipal)
             ? configuration.GetValue<string>("SPAUrlAdmin")
             : configuration.GetValue<string>("SPAUrl");
