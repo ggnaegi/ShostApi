@@ -20,9 +20,9 @@ public static class AuthExtensions
     /// <param name="jwtSecret"></param>
     /// <returns></returns>
     public static (bool authenticated, bool authorized) IsAuthenticatedAndAuthorized(this HttpRequestData req,
-        IList<string> adminEmails, string jwtSecret, ILogger logger)
+        IList<string> adminEmails, ILogger logger)
     {
-        var claimsPrincipal = req.ValidateJwtToken(jwtSecret);
+        var claimsPrincipal = req.GetClaimsPrincipalFromRequest(logger);
         if (claimsPrincipal?.Identity is not { IsAuthenticated: true })
         {
             return (false, false);
@@ -59,6 +59,8 @@ public static class AuthExtensions
 
         var decoded = Convert.FromBase64String(data);
         var json = Encoding.UTF8.GetString(decoded);
+        
+        logger.LogInformation(json);
 
         var principal = JsonSerializer.Deserialize<ClientPrincipal>(json, new JsonSerializerOptions
         {
@@ -75,43 +77,6 @@ public static class AuthExtensions
         identity.AddClaims(principal.Claims.Select(c => new Claim(c.Type, c.Value)));
 
         return new ClaimsPrincipal(identity);
-    }
-
-    private static ClaimsPrincipal? ValidateJwtToken(this HttpRequestData req, string jwtSecretKey)
-    {
-        if (!req.Headers.TryGetValues("Cookie", out var cookies))
-        {
-            return null;
-        }
-
-        var authToken = cookies.SelectMany(c => c.Split(';'))
-            .FirstOrDefault(c => c.Trim().StartsWith("auth_token="))?
-            .Split('=')[1];
-
-        if (string.IsNullOrEmpty(authToken))
-        {
-            return null;
-        }
-
-        var tokenHandler = new JwtSecurityTokenHandler();
-        var key = Encoding.UTF8.GetBytes(jwtSecretKey);
-
-        try
-        {
-            var claimsPrincipal = tokenHandler.ValidateToken(authToken, new TokenValidationParameters
-            {
-                ValidateIssuerSigningKey = true,
-                IssuerSigningKey = new SymmetricSecurityKey(key),
-                ValidateIssuer = false,
-                ValidateAudience = false
-            }, out _);
-
-            return claimsPrincipal;
-        }
-        catch
-        {
-            return null;
-        }
     }
 }
 
