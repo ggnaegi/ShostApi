@@ -53,6 +53,11 @@ jobs:
           file output/publish.zip
           unzip -l output/publish.zip | head -20
 
+      - name: Debug App Service settings
+        run: |
+          az webapp config show --name ${{ secrets.APP_NAME }} --resource-group ${{ secrets.RESOURCE_GROUP }}
+          az webapp list-runtimes --os linux
+
       # ---- DEPLOY: OPTION A (functions-action) ----
       - name: Deploy to Azure Functions (explicit zip)
         uses: Azure/functions-action@v1
@@ -69,4 +74,5 @@ jobs:
       #     app-name: 'shosta'
       #     publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_322F079E6B5744B38180AA4312274319 }}
       #     package: 'output/publish.zip'
+
 
