@@ -1,4 +1,6 @@
-name: Build and deploy (Functions .NET 8 isolated)
+# Build & deploy .NET 8 isolated Azure Functions (explicit ZIP)
+
+name: Build and deploy dotnet core project to Azure Function App - shostatest
 
 on:
   push:
@@ -12,8 +14,10 @@ env:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
@@ -24,14 +28,29 @@ jobs:
           dotnet restore Shosta.Functions.csproj
           dotnet publish Shosta.Functions.csproj -c Release -o ../output/publish /p:UseAppHost=false /p:GenerateRuntimeConfigDevFile=false
 
-      - name: Validate package layout (.NET isolated)
+      # ---- VALIDATE PUBLISH ----
+      - name: Validate publish layout (.NET isolated)
         run: |
-          test -f ./output/publish/host.json || (echo "host.json missing"; exit 1)
-          test -f ./output/publish/functions.metadata || (echo "functions.metadata missing"; exit 1)
+          test -f output/publish/host.json || (echo "host.json missing at publish root"; exit 1)
+          test -f output/publish/functions.metadata || (echo "functions.metadata missing (isolated model)"; exit 1)
+          du -sh output/publish
 
-      - name: Deploy to Azure Functions
+      # ---- CREATE ZIP YOURSELF ----
+      - name: Create deployment zip
+        run: |
+          cd output/publish
+          # Create a clean, standard ZIP (no symlinks, relative paths)
+          zip -r ../publish.zip .
+          cd ../..
+          # Sanity checks: file type, list, integrity
+          file output/publish.zip
+          unzip -l output/publish.zip | head -n 50
+          unzip -t output/publish.zip
+
+      # ---- DEPLOY: OPTION A (functions-action) ----
+      - name: Deploy to Azure Functions (explicit zip)
         uses: Azure/functions-action@v1
         with:
           app-name: 'shosta'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_322F079E6B5744B38180AA4312274319 }}
-          package: 'output/publish'
+          package: 'output/publish.zip'
