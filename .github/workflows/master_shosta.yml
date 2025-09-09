@@ -47,6 +47,12 @@ jobs:
           unzip -l output/publish.zip | head -n 50
           unzip -t output/publish.zip
 
+      - name: Verify publish package
+        run: |
+          ls -la output/
+          file output/publish.zip
+          unzip -l output/publish.zip | head -20
+
       # ---- DEPLOY: OPTION A (functions-action) ----
       - name: Deploy to Azure Functions (explicit zip)
         uses: Azure/functions-action@v1
@@ -63,3 +69,4 @@ jobs:
       #     app-name: 'shosta'
       #     publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_322F079E6B5744B38180AA4312274319 }}
       #     package: 'output/publish.zip'
+
