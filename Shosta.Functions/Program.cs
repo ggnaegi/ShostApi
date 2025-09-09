@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using SendGrid.Extensions.DependencyInjection;
+using Shosta.Functions.API;
 using Shosta.Functions.Infrastructure;
 
 var host = new HostBuilder()
@@ -25,7 +26,12 @@ var host = new HostBuilder()
                         errorNumbersToAdd: null);
                 })
         );
-        services.AddAutoMapper(Assembly.GetExecutingAssembly());
+        
+        services.AddAutoMapper((_, ctx) =>
+        {
+            ctx.AddProfile<ApiProfiles>();
+        }, Array.Empty<Assembly>());
+        
         services.AddSingleton<IMemoryCache, MemoryCache>();
         services.AddSendGrid(options => { options.ApiKey = context.Configuration.GetValue<string>("SendgridKey"); });
     })
