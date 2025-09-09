@@ -54,3 +54,12 @@ jobs:
           app-name: 'shosta'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_322F079E6B5744B38180AA4312274319 }}
           package: 'output/publish.zip'
+
+      # ---- DEPLOY: OPTION B (webapps-deploy) ----
+      # If the step above still 400s, comment it out and use this instead:
+      # - name: Deploy with webapps-deploy (explicit zip)
+      #   uses: azure/webapps-deploy@v3
+      #   with:
+      #     app-name: 'shosta'
+      #     publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_322F079E6B5744B38180AA4312274319 }}
+      #     package: 'output/publish.zip'
