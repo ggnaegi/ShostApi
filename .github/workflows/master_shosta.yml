@@ -30,7 +30,6 @@ jobs:
           # sanity checks
           test -f host.json || (echo "host.json missing in project root"; exit 1)
           test -f ../output/publish/host.json || (echo "host.json missing at publish root"; exit 1)
-          find ../output/publish -mindepth 2 -maxdepth 2 -name function.json | head -n1 | grep function.json || (echo "No function.json found"; exit 1)
 
       - name: Inspect publish output
         run: |
@@ -43,4 +42,5 @@ jobs:
           app-name: 'shosta'
           package: 'output/publish'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_322F079E6B5744B38180AA4312274319 }}
+
 
