@@ -1,4 +1,4 @@
-name: Build and deploy dotnet core project to Azure Function App - shostatest
+name: Build and deploy (Functions .NET 8 isolated)
 
 on:
   push:
@@ -7,40 +7,31 @@ on:
 
 env:
   DOTNET_VERSION: '8.0.x'
-  # Path to your Functions PROJECT folder (contains host.json and .csproj)
   FUNCTIONS_PROJECT_PATH: 'Shosta.Functions'
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
-      - name: Publish Functions (project, not solution)
+      - name: Publish Functions
         working-directory: ${{ env.FUNCTIONS_PROJECT_PATH }}
         run: |
           dotnet restore Shosta.Functions.csproj
           dotnet publish Shosta.Functions.csproj -c Release -o ../output/publish /p:UseAppHost=false /p:GenerateRuntimeConfigDevFile=false
-          # sanity checks
-          test -f host.json || (echo "host.json missing in project root"; exit 1)
-          test -f ../output/publish/host.json || (echo "host.json missing at publish root"; exit 1)
 
-      - name: Inspect publish output
+      - name: Validate package layout (.NET isolated)
         run: |
-          echo "Top-level of publish:"
-          find ./output/publish -maxdepth 2 -type f -printf "%P\n" | sort | head -n 200
+          test -f ./output/publish/host.json || (echo "host.json missing"; exit 1)
+          test -f ./output/publish/functions.metadata || (echo "functions.metadata missing"; exit 1)
 
       - name: Deploy to Azure Functions
         uses: Azure/functions-action@v1
         with:
           app-name: 'shosta'
-          package: 'output/publish'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_322F079E6B5744B38180AA4312274319 }}
-
-
+          package: 'output/publish'
