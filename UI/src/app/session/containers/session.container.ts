@@ -15,7 +15,7 @@ import { ActivatedRoute } from '@angular/router';
   `,
 })
 export class SessionContainerComponent implements OnInit {
-  year = 2024;
+  year = 2025;
 
   constructor(
     public readonly sessionService: AbstractSessionService,
