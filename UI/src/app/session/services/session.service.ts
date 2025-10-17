@@ -54,7 +54,7 @@ export class SessionService implements AbstractSessionService {
     if (!this.dataCache.has(year)) {
       const request$ = this.http
         .get<SessionContainer>(
-          `${environment.sessionEndpointUrl}${adminRoute ? '/admin' : '/user'}?year=${year}`,
+          `${environment.sessionEndpointUrl}/${year}`,
           requestOptions
         )
         .pipe(
