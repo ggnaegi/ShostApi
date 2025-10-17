@@ -164,6 +164,26 @@ mat-sidenav-content {
   z-index: 0;
 }
 
+@media (min-width: 769px) {
+  .facebook-widget-container {
+    margin-right: 5px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+    position: absolute;
+    top: 132px;
+    right: 20px;
+    width: 500px;
+    z-index: 3000;
+  }
+}
+
+@media (max-width: 768px) {
+  .facebook-widget-container {
+    display: none;
+  }
+}
+
 .background-image-wrapper::before {
   content: '';
   position: absolute;
@@ -294,3 +314,21 @@ mat-toolbar {
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
   }
 }
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* High z-index to cover other content */
+}
+
+.spinner-container .mat-spinner circle {
+  stroke: #803357 !important; /* Force override */
+}
+

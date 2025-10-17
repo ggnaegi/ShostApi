@@ -6,14 +6,7 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { GalleriesDefinition, Logo } from '../api/gallery';
-import {
-  MatAccordion,
-  MatExpansionPanel,
-  MatExpansionPanelHeader,
-  MatExpansionPanelTitle,
-} from '@angular/material/expansion';
-import { MatGridList, MatGridTile } from '@angular/material/grid-list';
-import { NgClass, NgForOf, NgIf, SlicePipe } from '@angular/common';
+import { NgForOf, NgIf } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
 import { FlexModule } from '@angular/flex-layout';
 import {
@@ -32,16 +25,9 @@ import { ImageWithLoadingComponent } from '../../common/image-with-loading.compo
   selector: 'app-gallery',
   standalone: true,
   imports: [
-    MatAccordion,
-    MatExpansionPanel,
-    MatExpansionPanelTitle,
-    MatExpansionPanelHeader,
-    MatGridList,
-    MatGridTile,
     NgForOf,
     NgIf,
     FlexModule,
-    SlicePipe,
     MatCard,
     MatCardHeader,
     MatCardTitle,
@@ -49,7 +35,6 @@ import { ImageWithLoadingComponent } from '../../common/image-with-loading.compo
     MatCardActions,
     MatIcon,
     MatIconButton,
-    NgClass,
     ImageWithLoadingComponent,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -57,6 +42,8 @@ import { ImageWithLoadingComponent } from '../../common/image-with-loading.compo
   styleUrl: './gallery.component.css',
 })
 export class GalleryComponent implements OnChanges {
+  @Input()
+  welcomeMessage: string = '';
   @Input()
   galleriesDefinitions: GalleriesDefinition | null = null;
   starredLogo: Logo | undefined = undefined;

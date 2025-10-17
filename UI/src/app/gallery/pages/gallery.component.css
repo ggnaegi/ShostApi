@@ -105,6 +105,16 @@ mat-grid-tile {
     margin-left: 5px;
     padding-top: 20px;
   }
+
+  .welcome-sub-section-margin {
+    margin-left: 0;
+  }
+}
+
+@media (min-width: 769px){
+  .welcome-sub-section-margin {
+    margin-left: 47px;
+  }
 }
 
 #medias-section {
@@ -118,10 +128,10 @@ mat-grid-tile {
 /* Main section styling */
 #welcome-sub-section {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: left;
+  align-items: flex-start;
   position: relative;
-  font-family: Montserrat, serif;
+  font-family: "Avenir Next Light", serif;
 }
 
 /* Wrapper for image and text */

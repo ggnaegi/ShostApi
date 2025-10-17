@@ -6,6 +6,8 @@ public class SessionDto
 {
     public int Year { get; set; }
     
+    [MaxLength(1000)] public string? WelcomeText { get; set; }
+    
     [MaxLength(100)] public string? Title { get; set; }
     [MaxLength(4000)] public string? Presentation { get; set; }
     [MaxLength(2000)] public string? Program { get; set; }

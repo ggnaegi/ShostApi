@@ -4,36 +4,42 @@
 @import "https://fonts.googleapis.com/icon?family=Material+Icons+Outlined";
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap");
 
-$base-font-family: "Montserrat";
+@font-face {
+  font-family: "Avenir Next Light";
+  src: url("/assets/fonts/avenir-next-light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+}
 
-// Define typography levels using the new API for M2
+$base-font-family: "Avenir Next Light";
+
 $typography: mat.m2-define-typography-config(
   $headline-1:
-    mat.m2-define-typography-level(112px, 112px, 300, "Montserrat", -0.0134em),
+    mat.m2-define-typography-level(112px, 112px, 300, "Avenir Next Light", -0.0134em),
   $headline-2:
-    mat.m2-define-typography-level(56px, 56px, 400, "Montserrat", -0.0089em),
+    mat.m2-define-typography-level(56px, 56px, 400, "Avenir Next Light", -0.0089em),
   $headline-3:
-    mat.m2-define-typography-level(45px, 48px, 400, "Montserrat", 0em),
+    mat.m2-define-typography-level(45px, 48px, 400, "Avenir Next Light", 0em),
   $headline-4:
-    mat.m2-define-typography-level(34px, 40px, 400, "Montserrat", 0.0074em),
+    mat.m2-define-typography-level(34px, 40px, 400, "Avenir Next Light", 0.0074em),
   $headline-5:
-    mat.m2-define-typography-level(24px, 32px, 400, "Montserrat", 0em),
+    mat.m2-define-typography-level(24px, 32px, 400, "Avenir Next Light", 0em),
   $headline-6:
-    mat.m2-define-typography-level(20px, 32px, 500, "Montserrat", 0.0075em),
+    mat.m2-define-typography-level(20px, 32px, 500, "Avenir Next Light", 0.0075em),
   $subtitle-2:
-    mat.m2-define-typography-level(16px, 28px, 400, "Montserrat", 0.0094em),
+    mat.m2-define-typography-level(16px, 28px, 400, "Avenir Next Light", 0.0094em),
   $subtitle-1:
-    mat.m2-define-typography-level(15px, 24px, 500, "Montserrat", 0.0067em),
+    mat.m2-define-typography-level(15px, 24px, 500, "Avenir Next Light", 0.0067em),
   $body-2:
-    mat.m2-define-typography-level(14px, 24px, 500, "Montserrat", 0.0179em),
+    mat.m2-define-typography-level(14px, 24px, 500, "Avenir Next Light", 0.0179em),
   $body-1:
-    mat.m2-define-typography-level(14px, 20px, 400, "Montserrat", 0.0179em),
+    mat.m2-define-typography-level(14px, 20px, 400, "Avenir Next Light", 0.0179em),
   $button:
-    mat.m2-define-typography-level(14px, 14px, 500, "Montserrat", 0.0893em),
+    mat.m2-define-typography-level(14px, 14px, 500, "Avenir Next Light", 0.0893em),
   $caption:
-    mat.m2-define-typography-level(12px, 20px, 400, "Montserrat", 0.0333em),
+    mat.m2-define-typography-level(12px, 20px, 400, "Avenir Next Light", 0.0333em),
   $overline:
-    mat.m2-define-typography-level(inherit, 1.125, 400, "Montserrat", 1.5px),
+    mat.m2-define-typography-level(inherit, 1.125, 400, "Avenir Next Light", 1.5px),
 );
 
 $custom-primary-palette: mat.m2-define-palette(
@@ -235,7 +241,7 @@ $dark-theme: mat.m2-define-dark-theme(
 }
 
 .mat-badge-content {
-  font-family: "Montserrat";
+  font-family: "Avenir Next Light";
 }
 
 .cdk-overlay-container,

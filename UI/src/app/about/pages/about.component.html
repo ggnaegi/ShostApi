@@ -1,12 +1,12 @@
-<ng-container *ngIf="organisation && sponsors">
-  <div
+<ng-container>
+  <div *ngIf="organisation"
     class="welcome-title"
     [innerHtml]="organisation.WelcomeText"
     id="welcome-section"></div>
-
-  <app-gallery-container></app-gallery-container>
-
+  <app-gallery-container
+    [welcomeMessage]="organisation.WelcomeText" *ngIf="organisation"></app-gallery-container>
   <div
+    *ngIf="organisation"
     id="about-section"
     fxLayout="row"
     fxLayout.lt-lg="column"
@@ -17,11 +17,14 @@
       <mat-card-header>
         <mat-card-title>{{ organisation.BandTitle }}</mat-card-title>
       </mat-card-header>
-      <img mat-card-image [src]="'assets/' + organisation.BandPicture" alt="" />
+      <img
+        mat-card-image
+        [src]="'assets/' + organisation.BandPicture"
+        alt="" />
       <mat-card-content>
         <div
           style="
-            font-family: Montserrat, sans-serif;
+            font-family: 'Avenir Next Light', sans-serif;
             line-height: 1.6;
             color: #333;
           ">
@@ -38,7 +41,7 @@
       <mat-card-content>
         <div
           style="
-            font-family: Montserrat, sans-serif;
+            font-family: 'Avenir Next Light', sans-serif;
             line-height: 1.6;
             color: #333;
           ">
@@ -47,7 +50,7 @@
         <div
           fxLayout="row wrap"
           style="
-            font-family: Montserrat, sans-serif;
+            font-family: 'Avenir Next Light', sans-serif;
             line-height: 1.6;
             color: #333;
           ">
@@ -65,7 +68,7 @@
     </mat-card>
   </div>
 
-  <div id="sponsors-section" style="margin: 20px">
+  <div id="sponsors-section" style="margin: 20px" *ngIf="sponsors">
     <!-- Introduction for Sponsors -->
     <div style="margin-bottom: 20px">
       <h2>Sponsors</h2>
@@ -170,7 +173,7 @@
             </form>
           </div>
           <!-- Committee President Info -->
-          <div class="president-info" fxFlex="30%" *ngIf="president">
+          <div class="president-info" fxFlex="30%" *ngIf="organisation && president">
             <div class="president-info-title">
               {{ organisation.ContactPersonText }}
             </div>

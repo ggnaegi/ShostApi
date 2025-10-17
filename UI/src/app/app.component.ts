@@ -23,20 +23,23 @@ import {
   MatSidenavModule,
 } from '@angular/material/sidenav';
 import { MatListItem, MatNavList } from '@angular/material/list';
-import { MatCard, MatCardTitle } from '@angular/material/card';
-import { MatMenu, MatMenuItem, MatMenuTrigger } from '@angular/material/menu';
 import {
   MatAnchor,
   MatIconAnchor,
   MatIconButton,
 } from '@angular/material/button';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { AsyncPipe, NgIf, NgOptimizedImage } from '@angular/common';
-import { SessionContainerComponent } from './session/containers/session.container';
-import { MatProgressSpinner } from '@angular/material/progress-spinner';
+import { AsyncPipe, NgIf } from '@angular/common';
 import { SpinnerComponent } from './spinner/pages/spinner.component';
 import { filter, Subscription } from 'rxjs';
 import { SpinnerService } from './spinner/services/spinner.service';
+import { MatProgressSpinner } from '@angular/material/progress-spinner';
+
+declare global {
+  interface Window {
+    FB: any; // More specific types can be used if available
+  }
+}
 
 @Component({
   selector: 'app-root',
@@ -48,11 +51,7 @@ import { SpinnerService } from './spinner/services/spinner.service';
     MatIcon,
     MatSidenavContainer,
     MatNavList,
-    MatCard,
-    MatMenu,
-    MatMenuItem,
     MatListItem,
-    MatMenuTrigger,
     MatSidenav,
     MatToolbarModule,
     MatSidenavModule,
@@ -61,14 +60,11 @@ import { SpinnerService } from './spinner/services/spinner.service';
     FlexLayoutModule,
     RouterLink,
     RouterLinkActive,
-    NgOptimizedImage,
-    SessionContainerComponent,
     MatIconAnchor,
     NgIf,
-    MatProgressSpinner,
     SpinnerComponent,
-    MatCardTitle,
     AsyncPipe,
+    MatProgressSpinner,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
@@ -90,6 +86,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
 
   currentYear: string | null = null;
   showMenu = true;
+  showFacebook = true;
   showBackToTop = false;
   showFooter = false;
 
@@ -124,6 +121,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
         const url = this.router.url;
 
         this.showMenu = !url.includes('/admin');
+        this.showFacebook = url.includes('/about');
 
         const sessionRouteMatch = url.match(/^\/session\/(\d{4})$/);
         if (sessionRouteMatch) {
@@ -132,6 +130,40 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
           this.currentYear = null;
         }
       });
+    this.loadScript();
+  }
+
+  private loadScript() {
+    // Check if FB is already loaded to avoid loading it multiple times
+    if (window.FB) {
+      this.initFB();
+      return;
+    }
+
+    const node = document.createElement('script');
+    node.src = 'https://connect.facebook.net/fr_FR/sdk.js'; // Adjust the URL to your needs
+    node.type = 'text/javascript';
+    node.async = true;
+    node.onload = () => this.initFB();
+    document.getElementsByTagName('head')[0].appendChild(node);
+  }
+
+
+  /*
+  <script
+    async
+    defer
+    crossorigin="anonymous"
+    src="https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v21.0"></script>
+   */
+  private initFB() {
+    // Initialize the Facebook SDK
+    window.FB.init({
+      appId      : 'harmonieshosta', // Replace with your actual Facebook App ID
+      cookie     : false,
+      xfbml      : true,
+      version    : 'v21.0' // Use the appropriate Facebook SDK version
+    });
   }
 
   scrollToTop(): void {

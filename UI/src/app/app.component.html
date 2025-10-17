@@ -1,4 +1,6 @@
-<app-spinner-overlay></app-spinner-overlay>
+<div *ngIf="spinnerService.isLoading$ | async" class="overlay">
+  <mat-spinner></mat-spinner>
+</div>
 <!-- Top Bar with Logo, Social Icons, and Mobile Menu Button -->
 <mat-toolbar
   color="primary"
@@ -67,7 +69,7 @@
       [routerLinkActiveOptions]="linkActiveOptions"
       class="menu-link"
       fragment="welcome-section"
-    >Accueil</a
+      >Accueil</a
     >
     <a
       mat-button
@@ -75,7 +77,7 @@
       routerLinkActive="active-link"
       [routerLinkActiveOptions]="linkActiveOptions"
       class="menu-link"
-    >Sessions</a
+      >Sessions</a
     >
     <a
       mat-button
@@ -83,7 +85,7 @@
       routerLinkActive="active-link"
       [routerLinkActiveOptions]="linkActiveOptions"
       class="menu-link"
-    >Organisation</a
+      >Organisation</a
     >
   </div>
   <div
@@ -166,7 +168,7 @@
         class="menu-link"
         fragment="welcome-section"
         (click)="sidenav.close()"
-      >Accueil</a
+        >Accueil</a
       >
       <a
         mat-list-item
@@ -175,7 +177,7 @@
         [routerLinkActiveOptions]="linkActiveOptions"
         class="menu-link"
         (click)="sidenav.close()"
-      >Sessions</a
+        >Sessions</a
       >
       <a
         mat-list-item
@@ -184,7 +186,7 @@
         [routerLinkActiveOptions]="linkActiveOptions"
         class="menu-link"
         (click)="sidenav.close()"
-      >Organisation</a
+        >Organisation</a
       >
     </mat-nav-list>
     <mat-nav-list *ngIf="showMenu">
@@ -252,19 +254,45 @@
   </mat-sidenav>
 
   <mat-sidenav-content>
-    <div (keyup)="scrollToTop()" (click)="scrollToTop()" *ngIf="showBackToTop" class="back-to-top">
+    <div
+      (keyup)="scrollToTop()"
+      (click)="scrollToTop()"
+      *ngIf="showBackToTop"
+      class="back-to-top">
       <i class="fas fa-arrow-up"></i>
     </div>
     <div class="content" fxLayout="column" fxLayoutAlign="start stretch">
-      <ng-container>
-        <router-outlet></router-outlet>
-      </ng-container>
+      <router-outlet></router-outlet>
+    </div>
+    <div class="facebook-widget-container" *ngIf="showFacebook">
+      <div style="margin-bottom: 10px"
+           class="fb-page"
+           data-href="https://www.facebook.com/harmonieshosta"
+           data-tabs="timeline"
+           data-width="500"
+           data-height="475"
+           data-small-header="true"
+           data-adapt-container-width="false"
+           data-hide-cover="false"
+           data-show-facepile="true">
+        <blockquote
+          cite="https://www.facebook.com/harmonieshosta"
+          class="fb-xfbml-parse-ignore">
+          <a href="https://www.facebook.com/harmonieshosta"
+          >Harmonie Shostakovich</a
+          >
+        </blockquote>
+      </div>
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>
 
 <mat-toolbar color="secondary" class="footer">
-  <div fxLayout="row" fxLayoutAlign="flex-start center" fxFlexFill fxLayoutGap="10px">
+  <div
+    fxLayout="row"
+    fxLayoutAlign="flex-start center"
+    fxFlexFill
+    fxLayoutGap="10px">
     <!-- GitHub Link -->
     <a
       href="https://github.com/ggnaegi/ShostApi"

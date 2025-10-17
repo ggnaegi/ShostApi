@@ -1,0 +1,15 @@
+﻿using System.ComponentModel.DataAnnotations;
+using Shosta.Functions.Domain.Dtos.Organisation;
+
+namespace Shosta.Functions.Domain.Dtos.Site;
+
+public class AboutPageDto
+{
+    [MaxLength(255)] public string? BandPicture { get; set; }
+    [MaxLength(255)] public string? BandTitle { get; set; }
+    [MaxLength(4000)] public string? BandPresentation { get; set; }
+    [MaxLength(255)] public string? CommitteePicture { get; set; }
+    [MaxLength(255)] public string? CommitteeTitle { get; set; }
+    [MaxLength(4000)] public string? CommitteePresentation { get; set; }
+    public IList<CommitteeMemberDto>? CommitteeMembers { get; set; }
+}
