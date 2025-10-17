@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Shosta.Functions.Domain.Dtos.Organisation;
 using Shosta.Functions.Domain.Dtos.Session;
+using Shosta.Functions.Domain.Dtos.Site;
 using Shosta.Functions.Domain.Entities.Organisation;
 using Shosta.Functions.Domain.Entities.Session;
 
@@ -19,5 +20,9 @@ public class ApiProfiles : Profile
         CreateMap<CommitteeMember, CommitteeMemberDto>().ReverseMap();
         CreateMap<Organisation, OrganisationDto>().ReverseMap();
         CreateMap<Sponsor, SponsorDto>().ReverseMap();
+        
+        // Additional mappings for layout dtos
+        CreateMap<OrganisationDto, AboutPageDto>();
+        CreateMap<SessionDto, WelcomePageDto>();
     }
 }

@@ -99,7 +99,7 @@ export class AboutService implements AbstractAboutService {
   getAboutDefinition$(): Observable<Organisation> {
     if (!this.organisation$) {
       this.organisation$ = this.http
-        .get<OrganisationContainer>(environment.organisationEndpointUrl)
+        .get<OrganisationContainer>(environment.organisationEndpointUrl, { withCredentials: true })
         .pipe(
           map((container: OrganisationContainer) => container.Value),
           shareReplay(1)

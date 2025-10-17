@@ -41,7 +41,7 @@ public class Authorization(
     }
 
     [Function(nameof(AdminRedirect))]
-    public async Task<HttpResponseData> AdminRedirect(
+    public Task<HttpResponseData> AdminRedirect(
         [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "auth/admin-redirect")]
         HttpRequestData req,
         FunctionContext executionContext)
@@ -49,7 +49,7 @@ public class Authorization(
         var claimsPrincipal = req.GetClaimsPrincipalFromRequest(_logger);
         if (claimsPrincipal?.Identity is not { IsAuthenticated: true })
         {
-            return req.CreateResponse(HttpStatusCode.Unauthorized);
+            return Task.FromResult(req.CreateResponse(HttpStatusCode.Unauthorized));
         }
 
         var response = req.CreateResponse(HttpStatusCode.Redirect);
@@ -58,7 +58,7 @@ public class Authorization(
             : configuration.GetValue<string>("SPAUrl");
         response.Headers.Add("Location", redirectUrl);
 
-        return response;
+        return Task.FromResult(response);
     }
 
     private string GenerateJwtToken(IEnumerable<Claim> claims)

@@ -2,6 +2,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   EventEmitter,
+  Input,
   Output,
 } from '@angular/core';
 import { AsyncPipe } from '@angular/common';
@@ -15,10 +16,12 @@ import { AbstractGalleryService } from '../services/abstract.gallery.service';
   imports: [GalleryComponent, AsyncPipe],
   template: `
     <app-gallery
-      [galleriesDefinitions]="galleryService.getGalleryDefinition$() | async" />
+      [galleriesDefinitions]="galleryService.getGalleryDefinition$() | async"
+      [welcomeMessage]="welcomeMessage" />
   `,
 })
 export class GalleryContainerComponent {
+  @Input() welcomeMessage: string = '';
   @Output() galleryDataLoaded = new EventEmitter<boolean>();
   constructor(public readonly galleryService: AbstractGalleryService) {}
 }
