@@ -27,11 +27,8 @@ import {
   faTicket,
   faBuilding,
 } from '@fortawesome/free-solid-svg-icons';
-import { MatAnchor, MatButton, MatIconButton } from '@angular/material/button';
-import { MatIcon } from '@angular/material/icon';
-import { MatToolbar } from '@angular/material/toolbar';
+import { MatButton } from '@angular/material/button';
 import { RouterLink } from '@angular/router';
-import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { ImageWithLoadingComponent } from '../../common/image-with-loading.component';
 import { MatTooltip } from '@angular/material/tooltip';
 
@@ -52,12 +49,7 @@ import { MatTooltip } from '@angular/material/tooltip';
     FontAwesomeModule,
     MatButton,
     ExtendedModule,
-    MatIcon,
-    MatIconButton,
-    MatToolbar,
-    MatAnchor,
     RouterLink,
-    MatProgressSpinner,
     ImageWithLoadingComponent,
     MatTooltip,
   ],
@@ -105,6 +97,32 @@ export class SessionComponent implements OnDestroy {
       RegisterName: instrument,
       RegisterMusicians: registerMap[instrument],
     }));
+  }
+
+  /**
+   * Distributes complete registers across three groups,
+   * ensuring musicians of the same instrument stay together
+   */
+  getRegisterGroups(): { left: Register[], center: Register[], right: Register[] } {
+    const registers = this.getRegisters();
+    const groups: { left: Register[], center: Register[], right: Register[] } = {
+      left: [],
+      center: [],
+      right: []
+    };
+
+    registers.forEach((register, index) => {
+      const groupIndex = index % 3;
+      if (groupIndex === 0) {
+        groups.left.push(register);
+      } else if (groupIndex === 1) {
+        groups.center.push(register);
+      } else {
+        groups.right.push(register);
+      }
+    });
+
+    return groups;
   }
 
   @HostListener('window:scroll', [])

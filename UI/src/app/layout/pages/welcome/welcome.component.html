@@ -2,7 +2,7 @@
   <div class="main-content-container">
     <div class="left-section">
       <div class="welcome-title" id="welcome-section">
-        <h1 [innerHtml]="data.WelcomeText"></h1>
+        <h1><span [innerHtml]="data.WelcomeText"></span></h1>
       </div>
       <div class="welcome-current-session">
         <div class="content-wrapper">
@@ -48,7 +48,10 @@
                 </li>
                 <li>
                   <a [href]="concert.Tickets" target="_blank">
-                    <button mat-raised-button color="primary" class="ticket-button">
+                    <button
+                      mat-raised-button
+                      color="primary"
+                      class="ticket-button">
                       <fa-icon [icon]="faTicket" style="color: white"></fa-icon>
                       Billets
                     </button>
