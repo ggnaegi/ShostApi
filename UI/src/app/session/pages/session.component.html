@@ -1,31 +1,46 @@
 <ng-container *ngIf="sessionData">
   <div class="floating-menu" *ngIf="isFloatingMenuVisible">
-    <a routerLink="." fragment="concept" class="menu-item"
-       [matTooltip]="isMobile ? 'Concept' : null">
+    <a
+      routerLink="."
+      fragment="concept"
+      class="menu-item"
+      [matTooltip]="isMobile ? 'Concept' : null">
       <i class="fa-solid fa-lightbulb menu-icon"></i>
       <span *ngIf="!isMobile">Concept</span>
     </a>
 
-    <a routerLink="." fragment="conductor" class="menu-item"
-       [matTooltip]="isMobile ? 'Directeur' : null">
+    <a
+      routerLink="."
+      fragment="conductor"
+      class="menu-item"
+      [matTooltip]="isMobile ? 'Directeur' : null">
       <i class="fa-solid fa-user-tie menu-icon"></i>
       <span *ngIf="!isMobile">Directeur</span>
     </a>
 
-    <a routerLink="." fragment="soloists" class="menu-item"
-       [matTooltip]="isMobile ? 'Solistes' : null">
+    <a
+      routerLink="."
+      fragment="soloists"
+      class="menu-item"
+      [matTooltip]="isMobile ? 'Solistes' : null">
       <i class="fa-solid fa-microphone menu-icon"></i>
       <span *ngIf="!isMobile">Solistes</span>
     </a>
 
-    <a routerLink="." fragment="program" class="menu-item"
-       [matTooltip]="isMobile ? 'Programme' : null">
+    <a
+      routerLink="."
+      fragment="program"
+      class="menu-item"
+      [matTooltip]="isMobile ? 'Programme' : null">
       <i class="fa-solid fa-list menu-icon"></i>
       <span *ngIf="!isMobile">Programme</span>
     </a>
 
-    <a routerLink="." fragment="musicians" class="menu-item"
-       [matTooltip]="isMobile ? 'Musiciens' : null">
+    <a
+      routerLink="."
+      fragment="musicians"
+      class="menu-item"
+      [matTooltip]="isMobile ? 'Musiciens' : null">
       <i class="fa-solid fa-music menu-icon"></i>
       <span *ngIf="!isMobile">Musiciens</span>
     </a>
@@ -73,7 +88,6 @@
                 <li>
                   <fa-icon [icon]="faMapMarkerAlt"></fa-icon>
                   {{ concert.City }}
-                  <!-- City with Icon -->
                 </li>
                 <li style="width: 100%">
                   <a
@@ -87,7 +101,6 @@
                       style="width: 100%">
                       <fa-icon [icon]="faTicket" style="color: white"></fa-icon>
                       Billets
-                      <!-- Button with icon and caption -->
                     </button>
                   </a>
                 </li>
@@ -103,7 +116,7 @@
       <!-- concept -->
       <mat-card id="concept" appearance="outlined" class="center-column-card">
         <mat-card-header>
-          <mat-card-title>Concept</mat-card-title>
+          <mat-card-title><h1>Concept</h1></mat-card-title>
         </mat-card-header>
         <mat-card-content>
           <div
@@ -134,7 +147,7 @@
               ' ' +
               sessionData.Conductor?.LastName
           }}</mat-card-title>
-          <mat-card-subtitle>Directeur</mat-card-subtitle>
+          <mat-card-subtitle><h1>Directeur</h1></mat-card-subtitle>
         </mat-card-header>
         <mat-card-content>
           <div
@@ -160,7 +173,9 @@
             <mat-card-title>{{
               soloist.FirstName + ' ' + soloist.LastName
             }}</mat-card-title>
-            <mat-card-subtitle>{{ soloist.Instrument }}</mat-card-subtitle>
+            <mat-card-subtitle
+              ><h1>{{ soloist.Instrument }}</h1></mat-card-subtitle
+            >
           </mat-card-header>
           <mat-card-content>
             <div
@@ -181,7 +196,7 @@
       <!-- program -->
       <mat-card id="program" appearance="outlined" class="right-column-card">
         <mat-card-header>
-          <mat-card-title>Programme</mat-card-title>
+          <mat-card-title><h1>Programme</h1></mat-card-title>
         </mat-card-header>
         <mat-card-content>
           <div
@@ -194,25 +209,65 @@
           </div>
         </mat-card-content>
       </mat-card>
-      <!-- musicians -->
-      <mat-card id="musicians" appearance="outlined" class="right-column-card">
+    </div>
+  </div>
+
+  <!-- musicians section -->
+  <div
+    id="musicians"
+    class="main-content-wrapper"
+    fxLayout="row"
+    fxLayout.lt-md="column"
+    fxLayoutAlign="center stretch"
+    fxFlexFill>
+    <div fxFlex="100" class="center-column">
+      <mat-card appearance="outlined" class="center-column-card">
         <mat-card-header>
-          <mat-card-title>Musiciens</mat-card-title>
+          <mat-card-title><h1>Musiciens</h1></mat-card-title>
         </mat-card-header>
         <mat-card-content>
           <div
-            style="
-              font-family: 'Avenir Next Light', sans-serif;
-              line-height: 1.6;
-              color: #333;
-            ">
-            <div *ngFor="let register of getRegisters()">
-              <h3>{{ register.RegisterName }}</h3>
-              <ul>
-                <li *ngFor="let musician of register.RegisterMusicians">
-                  {{ musician.FirstName + ' ' + musician.LastName }}
-                </li>
-              </ul>
+            fxLayout="row"
+            fxLayout.lt-md="column"
+            fxLayoutAlign="start stretch"
+            fxLayoutGap="16px">
+            <div fxFlex="33.33" fxFlex.lt-md="100">
+              <div class="text-content">
+                <div *ngFor="let register of getRegisterGroups().left">
+                  <h3>{{ register.RegisterName }}</h3>
+                  <ul>
+                    <li *ngFor="let musician of register.RegisterMusicians">
+                      {{ musician.FirstName + ' ' + musician.LastName }}
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div fxFlex="33.33" fxFlex.lt-md="100">
+              <div class="text-content">
+                <div *ngFor="let register of getRegisterGroups().center">
+                  <h3>{{ register.RegisterName }}</h3>
+                  <ul>
+                    <li *ngFor="let musician of register.RegisterMusicians">
+                      {{ musician.FirstName + ' ' + musician.LastName }}
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div fxFlex="33.33" fxFlex.lt-md="100">
+              <div class="text-content">
+                <div *ngFor="let register of getRegisterGroups().right">
+                  <h3>{{ register.RegisterName }}</h3>
+                  <ul>
+                    <li *ngFor="let musician of register.RegisterMusicians">
+                      {{ musician.FirstName + ' ' + musician.LastName }}
+                    </li>
+                  </ul>
+                </div>
+              </div>
             </div>
           </div>
         </mat-card-content>
