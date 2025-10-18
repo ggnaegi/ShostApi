@@ -1,6 +1,7 @@
 export const environment = {
   production: true,
   recaptchaClientKey: '6LdGR0kqAAAAAAXozocWd-FEpS2K_elTn0dIVzTc',
+  apiBaseUrl: 'https://shosta.azurewebsites.net/api',
   sendMessageEndpointUrl: 'https://shosta.azurewebsites.net/api/contact-mail',
   sessionEndpointUrl: 'https://shosta.azurewebsites.net/api/sessions',
   organisationEndpointUrl: 'https://shosta.azurewebsites.net/api/organisations',
