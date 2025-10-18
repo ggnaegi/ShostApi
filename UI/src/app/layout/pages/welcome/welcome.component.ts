@@ -48,7 +48,7 @@ export class WelcomeComponent {
   @Input()
   data: WelcomePageDto | null = null;
 
-  year = 2025;
+  year = 2026;
   protected readonly faCalendarAlt = faCalendarAlt;
   protected readonly faMapMarkerAlt = faMapMarkerAlt;
   protected readonly faBuilding = faBuilding;
