@@ -23,9 +23,9 @@
             "assets": [
               {
                 "glob": "**/*",
-                "input": "public"
-              },
-              "src/assets"
+                "input": "src/assets",
+                "output": "assets"
+              }
             ],
             "styles": [
               "src/styles.scss",
@@ -68,6 +68,9 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "buildTarget": "UI:build:development"
+          },
           "configurations": {
             "production": {
               "buildTarget": "UI:build:production"

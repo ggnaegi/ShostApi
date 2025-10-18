@@ -1,4 +1,7 @@
-import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
+import {
+  ApplicationConfig,
+  provideZoneChangeDetection,
+} from '@angular/core';
 import {
   InMemoryScrollingFeature,
   InMemoryScrollingOptions,
@@ -21,6 +24,8 @@ import { AboutService } from './about/services/about.service';
 import { SpinnerInterceptor } from './spinner/interceptors/spinner.interceptor';
 import { SpinnerService } from './spinner/services/spinner.service';
 import { RecaptchaService } from './about/services/recaptcha.service';
+import { AbstractLayoutService } from './layout/services/abstract.layout.service';
+import { LayoutService } from './layout/services/layout.service';
 
 const scrollConfig: InMemoryScrollingOptions = {
   scrollPositionRestoration: 'top',
@@ -47,6 +52,10 @@ export const appConfig: ApplicationConfig = {
       provide: AbstractAboutService,
       useClass: AboutService,
     },
+    {
+      provide: AbstractLayoutService,
+      useClass: LayoutService,
+    },
     SpinnerService,
     {
       provide: HTTP_INTERCEPTORS,
@@ -54,6 +63,6 @@ export const appConfig: ApplicationConfig = {
       multi: true,
     },
     RecaptchaService,
-    provideHttpClient(withInterceptorsFromDi()),
+    provideHttpClient(withInterceptorsFromDi())
   ],
 };

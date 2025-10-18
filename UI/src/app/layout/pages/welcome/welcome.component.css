@@ -1,0 +1,182 @@
+.welcome-title {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  padding-top: 2rem;
+  padding-left: 2rem;
+}
+
+.welcome-title h1 {
+  font-family: 'Avenir Next Light', serif;
+}
+
+.main-content-container {
+  display: flex;
+  gap: 24px;
+  padding: 0 2rem;
+  align-items: flex-start;
+}
+
+.left-section {
+  flex: 1;
+  min-width: 0;
+}
+
+.right-section {
+  flex: 0 0 auto;
+  width: 500px;
+  padding-top: 2rem;
+}
+
+.welcome-current-session {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 24px;
+  margin: 0;
+  padding: 0;
+  font-family: 'Avenir Next Light', serif;
+}
+
+.content-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  margin: 0;
+  padding: 0;
+}
+
+.year-card-wrapper {
+  flex: 0 0 auto;
+  margin-right: 16px;
+}
+
+.year-card {
+  max-width: 200px;
+  cursor: pointer;
+  transition: transform 0.2s;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.year-card:hover {
+  transform: scale(1.05);
+}
+
+.welcome-teaser {
+  max-width: 600px;
+}
+
+.redirect-link {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  cursor: pointer;
+  color: #803357;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.redirect-link i {
+  margin-right: 8px;
+  transition: transform 0.2s ease;
+}
+
+.redirect-link:hover {
+  color: #be3d59;
+}
+
+.redirect-link:hover i {
+  transform: translateX(5px);
+}
+
+.facebook-widget-container {
+  width: 100%;
+  height: 700px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+}
+
+/* Concerts Card - No spacing, no border, centered */
+.concerts-card {
+  margin: 0 auto;
+  padding: 16px;
+  border: none;
+  box-shadow: none;
+  font-family: 'Avenir Next Light', serif;
+  max-width: fit-content;
+}
+
+.concerts-container {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 24px;
+  overflow-x: auto;
+}
+
+.concert-item {
+  flex: 0 0 auto;
+  min-width: 250px;
+}
+
+.concert-details {
+  list-style: none;
+  padding: 0;
+  margin: 8px 0;
+}
+
+.concert-details li {
+  display: flex;
+  align-items: center;
+  margin: 8px 0;
+}
+
+.concert-details fa-icon {
+  margin-right: 8px;
+  color: #007bff;
+}
+
+.ticket-button {
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .main-content-container {
+    flex-direction: column;
+  }
+
+  .right-section {
+    display: none;
+  }
+
+  .welcome-current-session {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .content-wrapper {
+    flex-direction: column;
+  }
+
+  .year-card-wrapper {
+    margin: 0 0 16px;
+  }
+
+  .concerts-card {
+    max-width: 90%;
+    margin: 0 auto;
+  }
+
+  .concerts-container {
+    flex-direction: column;
+    overflow-x: visible;
+    align-items: center;
+  }
+
+  .concert-item {
+    min-width: auto;
+    width: 100%;
+    max-width: 400px;
+  }
+}
