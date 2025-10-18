@@ -164,26 +164,6 @@ mat-sidenav-content {
   z-index: 0;
 }
 
-@media (min-width: 769px) {
-  .facebook-widget-container {
-    margin-right: 5px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    overflow-y: auto;
-    position: absolute;
-    top: 132px;
-    right: 20px;
-    width: 500px;
-    z-index: 3000;
-  }
-}
-
-@media (max-width: 768px) {
-  .facebook-widget-container {
-    display: none;
-  }
-}
-
 .background-image-wrapper::before {
   content: '';
   position: absolute;
@@ -250,8 +230,9 @@ mat-toolbar {
 }
 
 .footer {
-  position: sticky;
-  top: 100vh;
+  position: fixed;
+  bottom: 0;
+  left: 0;
   width: 100%;
   padding: 5px 20px;
   color: #fff !important;

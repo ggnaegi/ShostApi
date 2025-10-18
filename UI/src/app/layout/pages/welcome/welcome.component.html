@@ -1,0 +1,87 @@
+<ng-container *ngIf="data">
+  <div class="main-content-container">
+    <div class="left-section">
+      <div class="welcome-title" id="welcome-section">
+        <h1 [innerHtml]="data.WelcomeText"></h1>
+      </div>
+      <div class="welcome-current-session">
+        <div class="content-wrapper">
+          <div class="year-card-wrapper">
+            <mat-card class="year-card" [routerLink]="['/session', year]">
+              <mat-card-header>
+                <mat-card-title>{{ year }}</mat-card-title>
+              </mat-card-header>
+              <app-image-with-loading
+                [src]="'assets/' + data.Picture"
+                [class]="'card-logo'" />
+            </mat-card>
+          </div>
+
+          <div class="welcome-teaser">
+            <div [innerHTML]="data.Teaser"></div>
+            <div class="redirect-link" [routerLink]="['/session', year]">
+              <i class="fa fa-arrow-right"></i>
+              <span>C'est par ici !</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <mat-card appearance="outlined" class="concerts-card">
+        <mat-card-header>
+          <mat-card-title>Représentations</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="concerts-container">
+            <div *ngFor="let concert of data.Concerts" class="concert-item">
+              <h3>
+                <fa-icon [icon]="faCalendarAlt"></fa-icon>
+                {{ concert.Date | date: 'dd.MM.yyyy HH:mm' }}
+              </h3>
+              <ul class="concert-details">
+                <li>
+                  <fa-icon [icon]="faBuilding"></fa-icon>
+                  {{ concert.Venue }}
+                </li>
+                <li>
+                  <fa-icon [icon]="faMapMarkerAlt"></fa-icon>
+                  {{ concert.City }}
+                </li>
+                <li>
+                  <a [href]="concert.Tickets" target="_blank">
+                    <button mat-raised-button color="primary" class="ticket-button">
+                      <fa-icon [icon]="faTicket" style="color: white"></fa-icon>
+                      Billets
+                    </button>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div class="right-section">
+      <div class="facebook-widget-container">
+        <div id="fb-root"></div>
+        <div
+          class="fb-page"
+          data-href="https://www.facebook.com/harmonieshosta"
+          data-tabs="timeline"
+          data-width="500"
+          data-height="700"
+          data-small-header="true"
+          data-adapt-container-width="false"
+          data-hide-cover="false"
+          data-show-facepile="true">
+          <blockquote
+            cite="https://www.facebook.com/harmonieshosta"
+            class="fb-xfbml-parse-ignore">
+            <a href="https://www.facebook.com/harmonieshosta"
+              >Harmonie Shostakovich</a
+            >
+          </blockquote>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>

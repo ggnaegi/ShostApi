@@ -1,6 +1,6 @@
-<div *ngIf="spinnerService.isLoading$ | async" class="overlay">
+<!--<div *ngIf="spinnerService.isLoading$ | async" class="overlay">
   <mat-spinner></mat-spinner>
-</div>
+</div>-->
 <!-- Top Bar with Logo, Social Icons, and Mobile Menu Button -->
 <mat-toolbar
   color="primary"
@@ -64,11 +64,10 @@
     fxFlexFill>
     <a
       mat-button
-      routerLink="/about"
+      routerLink="/welcome"
       routerLinkActive="active-link"
       [routerLinkActiveOptions]="linkActiveOptions"
       class="menu-link"
-      fragment="welcome-section"
       >Accueil</a
     >
     <a
@@ -96,11 +95,10 @@
     fxFlexFill>
     <a
       mat-button
-      routerLink="/about"
+      routerLink="/welcome"
       routerLinkActive="active-link"
       [routerLinkActiveOptions]="linkActiveOptions"
       class="menu-link"
-      fragment="welcome-section"
       >Accueil</a
     >
     <a
@@ -108,7 +106,6 @@
       routerLink="/about"
       [routerLinkActiveOptions]="linkActiveOptions"
       routerLinkActive="active-link"
-      fragment="about-section"
       class="menu-link"
       >A Propos</a
     >
@@ -264,26 +261,6 @@
     <div class="content" fxLayout="column" fxLayoutAlign="start stretch">
       <router-outlet></router-outlet>
     </div>
-    <div class="facebook-widget-container" *ngIf="showFacebook">
-      <div style="margin-bottom: 10px"
-           class="fb-page"
-           data-href="https://www.facebook.com/harmonieshosta"
-           data-tabs="timeline"
-           data-width="500"
-           data-height="475"
-           data-small-header="true"
-           data-adapt-container-width="false"
-           data-hide-cover="false"
-           data-show-facepile="true">
-        <blockquote
-          cite="https://www.facebook.com/harmonieshosta"
-          class="fb-xfbml-parse-ignore">
-          <a href="https://www.facebook.com/harmonieshosta"
-          >Harmonie Shostakovich</a
-          >
-        </blockquote>
-      </div>
-    </div>
   </mat-sidenav-content>
 </mat-sidenav-container>
 
@@ -302,6 +279,6 @@
       <i class="fa-brands fa-github"></i>
     </a>
     <!-- Copyright Notice -->
-    <span class="footer-text">© 2024 Harmonie Shostakovich</span>
+    <span class="footer-text">© 2025 Harmonie Shostakovich</span>
   </div>
 </mat-toolbar>
