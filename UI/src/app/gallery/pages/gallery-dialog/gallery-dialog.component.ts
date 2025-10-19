@@ -26,7 +26,6 @@ import { MatPaginator } from '@angular/material/paginator';
     MatDialogContent,
     MatDialogTitle,
     NgIf,
-    NgForOf,
     MatButton,
     MatDialogClose,
     MatPaginator,
@@ -36,7 +35,7 @@ import { MatPaginator } from '@angular/material/paginator';
 export class GalleryDialogComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator | null = null;
   currentIndex = 0;
-  isMobile: boolean = false;
+  isMobile = false;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: Album) {
     this.checkScreenWidth();
