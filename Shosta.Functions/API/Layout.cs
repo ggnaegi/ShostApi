@@ -63,4 +63,25 @@ public class Layout(ILoggerFactory loggerFactory,
         await notFound.WriteStringAsync("Organisation data not found");
         return notFound;
     }
+    
+    [Function(nameof(GetContactPageData))]
+    public async Task<HttpResponseData> GetContactPageData(
+        [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "contact-page")]
+        HttpRequestData req,
+        FunctionContext executionContext)
+    {
+        var organisationDto = await organisationService.GetOrganisationAsync(null);
+
+        if (organisationDto != null)
+        {
+            var res = req.CreateResponse(HttpStatusCode.OK);
+            await res.WriteAsJsonAsync(mapper.Map<ContactPageDto>(organisationDto));
+            return res;
+        }
+
+        _logger.LogError("Organisation data not found.");
+        var notFound = req.CreateResponse(HttpStatusCode.NotFound);
+        await notFound.WriteStringAsync("Organisation data not found");
+        return notFound;
+    }
 }
