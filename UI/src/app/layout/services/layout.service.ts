@@ -1,7 +1,11 @@
 import { AbstractLayoutService } from './abstract.layout.service';
 import { Observable, throwError } from 'rxjs';
 import { catchError, shareReplay } from 'rxjs/operators';
-import { WelcomePageDto, AboutPageDto } from '../api/layout.models';
+import {
+  WelcomePageDto,
+  AboutPageDto,
+  ContactPageDto,
+} from '../api/layout.models';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { statusCodeChecker } from '../../utils/StatusCodeChecker';
@@ -28,6 +32,18 @@ export class LayoutService implements AbstractLayoutService {
   public aboutPageData$(): Observable<AboutPageDto> {
     return this.http
       .get<AboutPageDto>(`${environment.apiBaseUrl}/about-page`)
+      .pipe(
+        shareReplay(1),
+        catchError((error: HttpErrorResponse) => {
+          statusCodeChecker(error.status);
+          return throwError(() => error);
+        })
+      );
+  }
+
+  public contactPageData$(): Observable<ContactPageDto> {
+    return this.http
+      .get<ContactPageDto>(`${environment.apiBaseUrl}/contact-page`)
       .pipe(
         shareReplay(1),
         catchError((error: HttpErrorResponse) => {

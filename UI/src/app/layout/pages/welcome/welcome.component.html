@@ -7,7 +7,7 @@
       <div class="welcome-current-session">
         <div class="content-wrapper">
           <div class="year-card-wrapper">
-            <mat-card class="year-card" [routerLink]="['/session', year]">
+            <mat-card class="year-card" [routerLink]="['/session']">
               <mat-card-header>
                 <mat-card-title>{{ year }}</mat-card-title>
               </mat-card-header>
@@ -19,7 +19,7 @@
 
           <div class="welcome-teaser">
             <div [innerHTML]="data.Teaser"></div>
-            <div class="redirect-link" [routerLink]="['/session', year]">
+            <div class="redirect-link" [routerLink]="['/session']">
               <i class="fa fa-arrow-right"></i>
               <span>C'est par ici !</span>
             </div>

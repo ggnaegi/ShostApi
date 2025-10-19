@@ -18,3 +18,8 @@ export interface AboutPageDto {
   CommitteePresentation?: string;
   CommitteeMembers?: CommitteeMember[];
 }
+
+export interface ContactPageDto {
+  ContactPersonText?: string;
+  ContactPerson?: CommitteeMember;
+}

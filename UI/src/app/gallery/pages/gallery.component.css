@@ -24,14 +24,15 @@
   margin-right: 16px;
 }
 
-/* Remove border-radius for the mat-card to remove rounded corners */
+/* css */
 .year-card {
-  max-width: 200px;
+  max-width: 140px; /* reduced from 200px */
   cursor: pointer;
-  transition: transform 0.2s;
-  border-radius: 0; /* Remove rounded corners */
-  box-shadow: none; /* Optional: remove box shadow */
+  transition: transform 0.2s, box-shadow 160ms ease;
+  border-radius: 0;
+  box-shadow: none;
 }
+
 
 .year-card app-image-with-loading {
   max-width: 100%;

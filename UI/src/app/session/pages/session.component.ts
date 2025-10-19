@@ -2,9 +2,11 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  EventEmitter,
   HostListener,
   Input,
   OnDestroy,
+  Output,
 } from '@angular/core';
 import { Session } from '../api/session-element';
 import { DatePipe, NgForOf, NgIf } from '@angular/common';
@@ -31,6 +33,8 @@ import { MatButton } from '@angular/material/button';
 import { RouterLink } from '@angular/router';
 import { ImageWithLoadingComponent } from '../../common/image-with-loading.component';
 import { MatTooltip } from '@angular/material/tooltip';
+import { GalleryContainerComponent } from '../../gallery/container/gallery.container.component';
+import { Organisation } from '../../about/api/organisation';
 
 @Component({
   selector: 'app-session',
@@ -52,6 +56,7 @@ import { MatTooltip } from '@angular/material/tooltip';
     RouterLink,
     ImageWithLoadingComponent,
     MatTooltip,
+    GalleryContainerComponent,
   ],
   templateUrl: './session.component.html',
   styleUrl: './session.component.css',
@@ -60,6 +65,12 @@ import { MatTooltip } from '@angular/material/tooltip';
 export class SessionComponent implements OnDestroy {
   @Input()
   sessionData: Session | null = null;
+
+  @Input()
+  organisationData: Organisation | null = null;
+
+  @Output()
+  yearChanged = new EventEmitter<number>();
 
   faTicket = faTicket;
   faCalendarAlt = faCalendarAlt;
@@ -70,7 +81,18 @@ export class SessionComponent implements OnDestroy {
   isFloatingMenuVisible = false; // Controls the visibility of the menu
   private scrollTimeout: any;
 
+  mobileSelectedYear = 2026;
+
   public constructor(private cdr: ChangeDetectorRef) {}
+
+  public onYearChanged(year: number) {
+    this.yearChanged.emit(year);
+  }
+
+  public onMobileSelectedYear(year: number) {
+    this.mobileSelectedYear = year;
+    this.yearChanged.emit(year);
+  }
 
   /**
    * Retrieving registers,
@@ -103,13 +125,18 @@ export class SessionComponent implements OnDestroy {
    * Distributes complete registers across three groups,
    * ensuring musicians of the same instrument stay together
    */
-  getRegisterGroups(): { left: Register[], center: Register[], right: Register[] } {
+  getRegisterGroups(): {
+    left: Register[];
+    center: Register[];
+    right: Register[];
+  } {
     const registers = this.getRegisters();
-    const groups: { left: Register[], center: Register[], right: Register[] } = {
-      left: [],
-      center: [],
-      right: []
-    };
+    const groups: { left: Register[]; center: Register[]; right: Register[] } =
+      {
+        left: [],
+        center: [],
+        right: [],
+      };
 
     registers.forEach((register, index) => {
       const groupIndex = index % 3;

@@ -111,39 +111,27 @@
     >
     <a
       mat-button
-      routerLink="/about"
+      routerLink="/session"
       [routerLinkActiveOptions]="linkActiveOptions"
       routerLinkActive="active-link"
-      fragment="medias-section"
       class="menu-link"
       >Concerts</a
     >
     <a
       mat-button
-      routerLink="/about"
+      routerLink="/contact"
       [routerLinkActiveOptions]="linkActiveOptions"
       routerLinkActive="active-link"
-      fragment="contact-section"
       class="menu-link"
       >Contact</a
     >
     <a
       mat-button
-      routerLink="/about"
+      routerLink="/sponsors"
       [routerLinkActiveOptions]="linkActiveOptions"
       routerLinkActive="active-link"
-      fragment="sponsors-section"
       class="menu-link"
       >Sponsors</a
-    >
-    <a
-      *ngIf="currentYear"
-      mat-button
-      [routerLink]="['/session', currentYear]"
-      routerLinkActive="active-link"
-      [routerLinkActiveOptions]="{ exact: true }"
-      class="menu-link"
-      >Concerts {{ currentYear }}</a
     >
   </div>
 </mat-toolbar>
@@ -159,7 +147,7 @@
     <mat-nav-list *ngIf="!showMenu">
       <a
         mat-list-item
-        routerLink="/about"
+        routerLink="/welcome"
         routerLinkActive="active-link"
         [routerLinkActiveOptions]="linkActiveOptions"
         class="menu-link"
@@ -189,11 +177,10 @@
     <mat-nav-list *ngIf="showMenu">
       <a
         mat-list-item
-        routerLink="/about"
+        routerLink="/welcome"
         routerLinkActive="active-link"
         [routerLinkActiveOptions]="linkActiveOptions"
         class="menu-link"
-        fragment="welcome-section"
         (click)="sidenav.close()"
         >Accueil</a
       >
@@ -202,50 +189,36 @@
         routerLink="/about"
         routerLinkActive="active-link"
         [routerLinkActiveOptions]="linkActiveOptions"
-        fragment="about-section"
         class="menu-link"
         (click)="sidenav.close()"
         >A Propos</a
       >
       <a
         mat-list-item
-        routerLink="/about"
+        routerLink="/session"
         routerLinkActive="active-link"
         [routerLinkActiveOptions]="linkActiveOptions"
-        fragment="medias-section"
         class="menu-link"
         (click)="sidenav.close()"
         >Concerts</a
       >
       <a
         mat-list-item
-        routerLink="/about"
+        routerLink="/contact"
         routerLinkActive="active-link"
         [routerLinkActiveOptions]="linkActiveOptions"
-        fragment="contact-section"
         class="menu-link"
         (click)="sidenav.close()"
         >Contact</a
       >
       <a
         mat-list-item
-        routerLink="/about"
+        routerLink="/sponsors"
         routerLinkActive="active-link"
         [routerLinkActiveOptions]="linkActiveOptions"
-        fragment="sponsors-section"
         class="menu-link"
         (click)="sidenav.close()"
         >Sponsors</a
-      >
-      <a
-        *ngIf="currentYear"
-        mat-list-item
-        [routerLink]="['/session', currentYear]"
-        routerLinkActive="active-link"
-        [routerLinkActiveOptions]="{ exact: true }"
-        class="menu-link"
-        (click)="sidenav.close()"
-        >Concerts {{ currentYear }}</a
       >
     </mat-nav-list>
   </mat-sidenav>

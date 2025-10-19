@@ -1,8 +1,10 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  EventEmitter,
   Input,
   OnChanges,
+  Output,
   SimpleChanges,
 } from '@angular/core';
 import { GalleriesDefinition, Logo } from '../api/gallery';
@@ -15,7 +17,6 @@ import {
   MatCardHeader,
   MatCardTitle,
 } from '@angular/material/card';
-import { RouterLink } from '@angular/router';
 import { MatIcon } from '@angular/material/icon';
 import { MatIconButton } from '@angular/material/button';
 import { GalleryDialogComponent } from './gallery-dialog/gallery-dialog.component';
@@ -31,7 +32,6 @@ import { ImageWithLoadingComponent } from '../../common/image-with-loading.compo
     MatCard,
     MatCardHeader,
     MatCardTitle,
-    RouterLink,
     MatCardActions,
     MatIcon,
     MatIconButton,
@@ -43,15 +43,25 @@ import { ImageWithLoadingComponent } from '../../common/image-with-loading.compo
 })
 export class GalleryComponent implements OnChanges {
   @Input()
-  welcomeMessage: string = '';
+  welcomeMessage = '';
   @Input()
   galleriesDefinitions: GalleriesDefinition | null = null;
+  @Output()
+  yearChanged = new EventEmitter<number>();
+
   starredLogo: Logo | undefined = undefined;
 
   constructor(public dialog: MatDialog) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     this.setStarredGallery();
+  }
+
+  onYearClick(showPage: boolean, year: number) {
+    if (!showPage) {
+      return;
+    }
+    this.yearChanged.emit(year);
   }
 
   openGalleryDialog(year: number): void {
@@ -69,6 +79,18 @@ export class GalleryComponent implements OnChanges {
       autoFocus: false,
       data: gallery,
     });
+  }
+
+  selectedLogo: Logo | undefined;
+
+  // call this on card click to mark selection
+  selectLogo(logo: Logo): void {
+    this.selectedLogo = logo;
+  }
+
+  // helper used by template
+  isSelected(logo: Logo): boolean {
+    return logo === this.selectedLogo || logo === this.starredLogo;
   }
 
   private setStarredGallery(): void {

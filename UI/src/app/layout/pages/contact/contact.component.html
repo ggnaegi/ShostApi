@@ -1,1 +1,107 @@
-<p>contact works!</p>
+<div
+  id="contact-section"
+  fxLayout="row"
+  fxLayoutAlign="space-around start"
+  fxLayoutGap="16px">
+  <mat-card fxFlex="60%" fxFlex.xs="100%" class="custom-card">
+    <mat-card-header>
+      <mat-card-title>Contact</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div fxLayout="row" fxLayout.lt-lg="column" fxLayoutGap="16px">
+        <!-- Contact Form -->
+        <div class="contact-form" fxFlex="60%">
+          <form
+            #contactForm="ngForm"
+            (ngSubmit)="submitForm(contactForm)"
+            style="display: flex; flex-direction: column; gap: 16px">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Prénom</mat-label>
+              <input
+                matInput
+                placeholder="Veuillez saisir votre prénom"
+                name="firstName"
+                ngModel
+                required />
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Nom</mat-label>
+              <input
+                matInput
+                placeholder="Veuillez saisir votre nom"
+                name="lastName"
+                ngModel
+                required />
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Courriel</mat-label>
+              <input
+                [required]="true"
+                matInput
+                type="email"
+                placeholder="Veuillez saisir votre courriel"
+                name="email"
+                ngModel
+                required
+                email />
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Téléphone</mat-label>
+              <input
+                matInput
+                type="tel"
+                placeholder="Veuillez saisir votre numéro de téléphone"
+                name="phone"
+                ngModel
+                required />
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Message</mat-label>
+              <textarea
+                [required]="true"
+                matInput
+                rows="6"
+                name="message"
+                ngModel
+                required></textarea>
+            </mat-form-field>
+            <div class="recaptcha-container" id="recaptcha"></div>
+            <button
+              mat-raised-button
+              color="primary"
+              type="submit"
+              [disabled]="contactForm.invalid">
+              Envoyer
+            </button>
+          </form>
+        </div>
+        <!-- Committee President Info -->
+        <div class="president-info" fxFlex="30%" *ngIf="data">
+          <div class="president-info-title">
+            {{ data.ContactPersonText }}
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 8px">
+            <div>
+              <span
+                >{{ data.ContactPerson?.FirstName }}
+                {{ data.ContactPerson?.LastName }}</span
+              >
+            </div>
+            <div>Rue: {{ data.ContactPerson?.Address }}</div>
+            <div>
+              Ville: {{ data.ContactPerson?.Zip }}
+              {{ data.ContactPerson?.City }}
+            </div>
+            <div>Téléphone: {{ data.ContactPerson?.PhoneNumber }}</div>
+            <div>
+              Courriel:
+              <a href="mailto:{{ data.ContactPerson?.Email }}">{{
+                data.ContactPerson?.Email
+              }}</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
