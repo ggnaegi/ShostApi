@@ -10,10 +10,6 @@ import { OrganisationAdminComponent } from '../pages/organisation-admin/organisa
   selector: 'app-organisation-admin-container',
   standalone: true,
   imports: [
-    MatTab,
-    MatTabGroup,
-    MatTabLabel,
-    SessionAdminComponent,
     AsyncPipe,
     OrganisationAdminComponent,
   ],

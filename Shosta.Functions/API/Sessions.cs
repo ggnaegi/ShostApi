@@ -87,4 +87,37 @@ public class Sessions(
         _logger.LogError("Session not found for year: {year}", year);
         return new NotFoundObjectResult("Session not found.");
     }
+    
+    [Function(nameof(GetAdminSessionByYear))]
+    public async Task<IActionResult> GetAdminSessionByYear(
+        [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "sessions/admin/{year}")]
+        HttpRequestData req,
+        int year,
+        FunctionContext executionContext)
+    {
+        var (authenticated, authorized) = req.IsAuthenticatedAndAuthorized(configuration.GetAdminEmails(), _logger);
+
+        if (!authenticated)
+        {
+            _logger.LogError("Unauthorized request");
+            return new ObjectResult("Unauthorized request") { StatusCode = (int?)HttpStatusCode.Unauthorized };
+        }
+
+        if (!authorized)
+        {
+            _logger.LogError("Forbidden request");
+            return new ObjectResult("Forbidden request") { StatusCode = (int?)HttpStatusCode.Forbidden };
+        }
+        
+        var organisationDto = await sessionService.GetSessionAsync(year);
+
+        if (organisationDto != null)
+        {
+            return new OkObjectResult(organisationDto);
+        }
+
+        _logger.LogError("Session not found for year: {year}", year);
+        return new NotFoundObjectResult("Session not found.");
+    }
+    
 }
