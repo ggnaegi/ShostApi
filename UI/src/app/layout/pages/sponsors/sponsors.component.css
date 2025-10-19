@@ -1,0 +1,46 @@
+.sponsor-card {
+  max-width: 600px;
+  min-width: 100px;
+  width: 100%;
+  box-shadow: none;
+}
+
+.sponsor-card img {
+  width: 100%; /* Make the image expand to the full width of the card */
+  height: auto; /* Maintain aspect ratio */
+}
+
+#sponsors-section h2 {
+  color: #000; /* Adjust color to fit your design */
+  margin-bottom: 0.5em;
+  font-family: 'Avenir Next Light', serif;
+}
+
+#sponsors-section p {
+  color: #000;
+  font-family: 'Avenir Next Light', serif;
+  font-size: 16px;
+  max-width: 600px;
+}
+
+#sponsors-section h2 {
+  color: #333; /* Dark color for headings */
+}
+
+.sponsor-card img {
+  width: 100%; /* Make the image expand to the full width of the card */
+  height: auto; /* Maintain aspect ratio */
+  object-fit: cover; /* Ensures the image covers the designated area properly */
+}
+
+.sponsor-card {
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease; /* Smooth transition for both movement and shadow */
+  cursor: pointer;
+}
+
+.sponsor-card:hover {
+  transform: translateY(-10px); /* Move the card up by 10px */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Add a larger shadow when hovering */
+}

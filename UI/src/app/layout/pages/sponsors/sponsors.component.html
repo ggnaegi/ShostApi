@@ -1,0 +1,26 @@
+<div id="sponsors-section" style="margin: 20px" *ngIf="data">
+  <!-- Introduction for Sponsors -->
+  <div style="margin-bottom: 20px">
+    <h2>Sponsors</h2>
+    <p>
+      Nous remercions infiniment nos sponsors pour leur soutien en 2024 et
+      vous les recommandons vivement !
+    </p>
+  </div>
+
+  <div fxLayout="row wrap" fxLayoutGap="10px" fxLayoutAlign="start center">
+    <mat-card
+      *ngFor="let sponsor of data"
+      class="sponsor-card"
+      fxFlex="20%"
+      fxFlex.gt-xs="200px"
+      fxLayoutAlign="center center">
+      <mat-card-header>
+        <img
+          mat-card-image
+          [src]="'/assets/sponsors/' + sponsor.filename"
+          alt="{{ sponsor.alt }}" />
+      </mat-card-header>
+    </mat-card>
+  </div>
+</div>
