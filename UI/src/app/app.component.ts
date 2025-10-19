@@ -16,7 +16,7 @@ import {
   RouterLinkActive,
   RouterOutlet,
 } from '@angular/router';
-import { isPlatformBrowser } from '@angular/common';
+import { AsyncPipe, isPlatformBrowser } from '@angular/common';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatToolbar } from '@angular/material/toolbar';
 import { MatIcon } from '@angular/material/icon';
@@ -35,6 +35,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { NgIf } from '@angular/common';
 import { filter, Subscription } from 'rxjs';
 import { SpinnerService } from './spinner/services/spinner.service';
+import { MatProgressSpinner } from '@angular/material/progress-spinner';
 
 declare global {
   interface Window {
@@ -67,6 +68,8 @@ declare global {
     RouterLinkActive,
     MatIconAnchor,
     NgIf,
+    MatProgressSpinner,
+    AsyncPipe,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
@@ -126,7 +129,11 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
         this.showMenu = !url.includes('/admin');
         const shouldShowFacebook = url.includes('/welcome');
 
-        if (shouldShowFacebook && !this.showFacebook && isPlatformBrowser(this.platformId)) {
+        if (
+          shouldShowFacebook &&
+          !this.showFacebook &&
+          isPlatformBrowser(this.platformId)
+        ) {
           this.showFacebook = true;
           setTimeout(() => this.reloadFacebookWidget(), 300);
         } else {
