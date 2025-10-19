@@ -24,5 +24,13 @@ public class ApiProfiles : Profile
         // Additional mappings for layout dtos
         CreateMap<OrganisationDto, AboutPageDto>();
         CreateMap<SessionDto, WelcomePageDto>();
+
+        CreateMap<OrganisationDto, ContactPageDto>()
+            .ForMember(dest => dest.ContactPerson,
+                opt => opt.MapFrom(src => src.CommitteeMembers != null
+                    ? src.CommitteeMembers.FirstOrDefault(m => m.IsContactPerson)
+                    : null))
+            .ForMember(dest => dest.ContactPersonText,
+                opt => opt.MapFrom(src => src.ContactPersonText));
     }
 }
