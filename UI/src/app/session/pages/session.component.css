@@ -8,13 +8,13 @@
   display: flex;
   justify-content: space-around;
   width: 100%;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: Add some shadow */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .top-menu ul {
   list-style: none;
   display: flex;
-  justify-content: space-around; /* Horizontal layout for menu items */
+  justify-content: space-around;
   padding: 0;
   margin: 0;
 }
@@ -32,7 +32,7 @@
 }
 
 .top-menu ul li a:hover {
-  color: #007bff; /* Change color on hover */
+  color: #007bff;
 }
 
 .top-menu ul li fa-icon {
@@ -49,7 +49,7 @@
 .left-column-card,
 .center-column-card,
 .right-column-card {
-  margin-bottom: 16px; /* Ensure spacing between cards */
+  margin-bottom: 16px;
 }
 
 /* Column styling */
@@ -75,7 +75,7 @@
   border-left: 0 !important;
   border-right: 0 !important;
   border-bottom: 1px solid #f0f0f0;
-  box-shadow: none; /* Remove shadow */
+  box-shadow: none;
 }
 
 .right-column-card {
@@ -83,12 +83,12 @@
   border-left: 0 !important;
   border-right: 0 !important;
   border-bottom: 1px solid #f0f0f0;
-  border-radius: 0; /* Remove rounded corners */
+  border-radius: 0;
 }
 
 .left-column-card {
   border-right: #ead4d7 2px solid;
-  border-radius: 0; /* Remove rounded corners */
+  border-radius: 0;
 }
 
 mat-card {
@@ -126,8 +126,8 @@ li {
 }
 
 .concert-details fa-icon {
-  margin-right: 8px; /* Space between icon and text */
-  color: #007bff; /* Primary color for icons */
+  margin-right: 8px;
+  color: #007bff;
 }
 
 .ticket-link {
@@ -136,22 +136,22 @@ li {
   background-color: #007bff;
   color: white;
   border-radius: 4px;
-  transition: all 0.3s ease; /* Smooth hover transition */
+  transition: all 0.3s ease;
   text-decoration: none;
 }
 
 .ticket-link:hover {
-  background-color: #0056b3; /* Darken color on hover */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Add hover effect */
+  background-color: #0056b3;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 /* Conductor and soloist images */
 .conductor-photo {
-  width: 120px; /* Size of the image */
-  height: auto; /* Keep aspect ratio */
+  width: 120px;
+  height: auto;
   margin-right: 10px;
   border: 5px solid white;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: Shadow effect for image */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 /* The floating menu container */
@@ -203,7 +203,6 @@ li {
     margin-top: 8px;
     margin-left: 4px;
   }
-
 }
 
 .floating-menu.show {
@@ -236,11 +235,11 @@ li {
 
 /* Hover effect for the icons and text */
 .menu-item:hover {
-  color: #000000; /* Change text color on hover */
+  color: #000000;
 }
 
 .menu-item:hover .menu-icon {
-  color: #000000; /* Change icon color on hover */
+  color: #000000;
 }
 
 .menu-item.tooltip {
@@ -250,7 +249,7 @@ li {
 .menu-item.tooltip:hover::after {
   content: attr(title);
   position: absolute;
-  bottom: 100%; /* Position above the icon */
+  bottom: 100%;
   right: 50%;
   transform: translateX(50%);
   background-color: #333;
@@ -296,7 +295,6 @@ ng-container {
   padding-bottom: 100px;
   display: block;
 }
-
 
 .session-floating-menu {
   position: fixed;
@@ -347,4 +345,16 @@ ng-container {
   font-size: 8px;
   color: #803357;
   transition: color 0.3s ease;
+}
+
+/* Anchor scroll offset - only use ONE approach */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 192px; /* Adjust to your actual top-bar height */
+}
+
+@media (max-width: 768px) {
+  html {
+    scroll-padding-top: 60px; /* Adjust to your actual mobile top-bar height */
+  }
 }

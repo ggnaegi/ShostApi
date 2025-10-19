@@ -277,8 +277,23 @@ mat-sidenav-content {
 }
 
 @media (max-width: 768px) {
-  mat-sidenav-content {
-    padding-top: 0;
+  /* Remove dvh calculation - use fixed positioning */
+  .sidenav-container {
+    min-height: 100%;
+  }
+
+  /* Force proper height inheritance */
+  html {
+    height: 100%;
+    position: fixed;
+    overflow: hidden;
+    width: 100%;
+  }
+
+  body {
+    height: 100%;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
   }
 
   .navbar {
@@ -310,5 +325,12 @@ mat-sidenav-content {
   .back-to-top:hover {
     transform: scale(1.1) translateY(-50%);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Prevent flickering from images */
+  .full-viewport-image-container,
+  .background-image-wrapper {
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
   }
 }
