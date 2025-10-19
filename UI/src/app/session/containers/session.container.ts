@@ -1,8 +1,8 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { AsyncPipe } from '@angular/common';
 import { SessionComponent } from '../pages/session.component';
 import { AbstractSessionService } from '../services/abstract.session.service';
-import { ActivatedRoute } from '@angular/router';
+import { AbstractAboutService } from '../../about/services/abstract.about.service';
 
 @Component({
   selector: 'app-session-container',
@@ -11,20 +11,21 @@ import { ActivatedRoute } from '@angular/router';
   imports: [SessionComponent, AsyncPipe],
   template: `
     <app-session
-      [sessionData]="sessionService.sessionData$(this.year, false) | async" />
+      [sessionData]="sessionService.sessionData$(this.year, false) | async"
+      [organisationData]="aboutService.getAboutDefinition$() | async"
+      (yearChanged)="onYearChanged($event)" />
   `,
 })
-export class SessionContainerComponent implements OnInit {
-  year = 2025;
+export class SessionContainerComponent {
+  // default year, if not set in route
+  year = 2026;
 
   constructor(
     public readonly sessionService: AbstractSessionService,
-    private route: ActivatedRoute
+    public readonly aboutService: AbstractAboutService
   ) {}
 
-  ngOnInit(): void {
-    this.route.params.subscribe(params => {
-      this.year = +params['year'];
-    });
+  onYearChanged(year: number): void {
+    this.year = year;
   }
 }

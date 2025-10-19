@@ -1,3 +1,29 @@
+<div class="session-floating-menu" *ngIf="isMobile && organisationData">
+  <a
+    *ngFor="let year of [2026, 2025, 2024]"
+    routerLink="."
+    class="session-menu-item"
+    [class.active]="mobileSelectedYear === year"
+    (click)="onMobileSelectedYear(year)">
+    <span>{{ year }}</span>
+  </a>
+</div>
+
+
+<div
+  class="top-gallery-wrapper"
+  fxLayout="row"
+  fxFlexFill
+  *ngIf="!isMobile && organisationData">
+  <div fxFlex="100">
+    <app-gallery-container
+      [welcomeMessage]="organisationData.WelcomeText"
+      (yearChanged)="onYearChanged($event)"
+      *ngIf="organisationData">
+    </app-gallery-container>
+  </div>
+</div>
+
 <ng-container *ngIf="sessionData">
   <div class="floating-menu" *ngIf="isFloatingMenuVisible">
     <a

@@ -1,6 +1,14 @@
 {
   "logos": [
     {
+      "year": 2026,
+      "url": "assets/flyers/2026.jpg",
+      "alt": "logo-2026",
+      "showGallery": false,
+      "showPage": true,
+      "teaser": ""
+    },
+    {
       "year": 2025,
       "url": "assets/flyers/2025.jpg",
       "alt": "logo-2025",

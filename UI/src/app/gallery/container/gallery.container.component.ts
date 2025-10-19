@@ -17,11 +17,18 @@ import { AbstractGalleryService } from '../services/abstract.gallery.service';
   template: `
     <app-gallery
       [galleriesDefinitions]="galleryService.getGalleryDefinition$() | async"
-      [welcomeMessage]="welcomeMessage" />
+      [welcomeMessage]="welcomeMessage"
+      (yearChanged)="onYearChanged($event)" />
   `,
 })
 export class GalleryContainerComponent {
-  @Input() welcomeMessage: string = '';
+  @Input() welcomeMessage = '';
   @Output() galleryDataLoaded = new EventEmitter<boolean>();
+  @Output() yearChanged = new EventEmitter<number>();
+
   constructor(public readonly galleryService: AbstractGalleryService) {}
+
+  public onYearChanged(year: number): void {
+    this.yearChanged.emit(year);
+  }
 }

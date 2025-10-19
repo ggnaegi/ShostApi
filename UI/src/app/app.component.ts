@@ -33,7 +33,6 @@ import {
 } from '@angular/material/button';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { NgIf } from '@angular/common';
-import { SpinnerComponent } from './spinner/pages/spinner.component';
 import { filter, Subscription } from 'rxjs';
 import { SpinnerService } from './spinner/services/spinner.service';
 

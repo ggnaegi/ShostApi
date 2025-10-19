@@ -4,12 +4,14 @@ import { SessionAdminContainerComponent } from './admin/containers/session-admin
 import { OrganisationAdminContainerComponent } from './admin/containers/organisation-admin.container.component';
 import { WelcomeContainerComponent } from './layout/containers/welcome.container';
 import { AboutContainerComponent } from './layout/containers/about.container';
+import { ContactContainerComponent } from './layout/containers/contact.container';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/welcome', pathMatch: 'full' },
   { path: 'welcome', component: WelcomeContainerComponent }, // Main route for the AboutComponent
   { path: 'about', component: AboutContainerComponent },
-  { path: 'session/:year', component: SessionContainerComponent },
+  { path: 'session', component:  SessionContainerComponent},
+  { path: 'contact', component: ContactContainerComponent},
   { path: 'admin', redirectTo: '/admin/sessions', pathMatch: 'full' },
   { path: 'admin/sessions', component: SessionAdminContainerComponent },
   { path: 'admin/organisation', component: OrganisationAdminContainerComponent },
