@@ -52,6 +52,7 @@
   width: 100%;
   margin: 0;
   padding: 0;
+  overflow-x: hidden;
 }
 
 .anchor-section {
@@ -60,7 +61,8 @@
 }
 
 .full-viewport-image-container {
-  width: 100vw;
+  width: 100%;
+  max-width: 100%;
   position: relative;
   left: 50%;
   right: 50%;
