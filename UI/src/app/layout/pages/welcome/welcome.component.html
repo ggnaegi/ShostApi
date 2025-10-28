@@ -65,25 +65,15 @@
     </div>
     <div class="right-section">
       <div class="facebook-widget-container">
-        <div id="fb-root"></div>
-        <div
-          class="fb-page"
-          data-href="https://www.facebook.com/harmonieshosta"
-          data-tabs="timeline"
-          data-width="500"
-          data-height="700"
-          data-small-header="true"
-          data-adapt-container-width="false"
-          data-hide-cover="false"
-          data-show-facepile="true">
-          <blockquote
-            cite="https://www.facebook.com/harmonieshosta"
-            class="fb-xfbml-parse-ignore">
-            <a href="https://www.facebook.com/harmonieshosta"
-              >Harmonie Shostakovich</a
-            >
-          </blockquote>
-        </div>
+        <app-fb-page-xfbml
+          pageUrl="https://www.facebook.com/harmonieshosta"
+          tabs="timeline"
+          [width]="500"
+          [height]="700"
+          [smallHeader]="true"
+          [hideCover]="false"
+          [showFacepile]="true">
+        </app-fb-page-xfbml>
       </div>
     </div>
   </div>
