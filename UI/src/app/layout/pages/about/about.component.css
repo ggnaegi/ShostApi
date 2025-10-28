@@ -64,10 +64,6 @@
   width: 100%;
   max-width: 100%;
   position: relative;
-  left: 50%;
-  right: 50%;
-  margin-left: -50vw;
-  margin-right: -50vw;
   margin-bottom: 32px;
   overflow: hidden;
 }
@@ -75,7 +71,6 @@
 .full-viewport-image-container img {
   width: 100%;
   height: auto;
-  display: block;
   object-fit: cover;
   max-height: 600px;
 }
