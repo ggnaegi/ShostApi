@@ -24,6 +24,7 @@ import {
   faMapMarkerAlt,
   faTicket,
 } from '@fortawesome/free-solid-svg-icons';
+import { FbPageXfbmlComponent } from './fb.page.xml.component';
 
 @Component({
   selector: 'app-welcome',
@@ -39,7 +40,8 @@ import {
     FaIconComponent,
     MatButton,
     MatCardContent,
-    NgForOf
+    NgForOf,
+    FbPageXfbmlComponent,
   ],
   templateUrl: './welcome.component.html',
   styleUrl: './welcome.component.css',

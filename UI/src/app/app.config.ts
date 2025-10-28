@@ -26,6 +26,7 @@ import { SpinnerService } from './spinner/services/spinner.service';
 import { RecaptchaService } from './about/services/recaptcha.service';
 import { AbstractLayoutService } from './layout/services/abstract.layout.service';
 import { LayoutService } from './layout/services/layout.service';
+import { FbSdkService } from './layout/services/fb-sdk.service';
 
 const scrollConfig: InMemoryScrollingOptions = {
   scrollPositionRestoration: 'top',
@@ -63,6 +64,7 @@ export const appConfig: ApplicationConfig = {
       multi: true,
     },
     RecaptchaService,
+    FbSdkService,
     provideHttpClient(withInterceptorsFromDi())
   ],
 };

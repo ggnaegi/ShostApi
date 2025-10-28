@@ -37,16 +37,6 @@ import { filter, Subscription } from 'rxjs';
 import { SpinnerService } from './spinner/services/spinner.service';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 
-declare global {
-  interface Window {
-    FB?: {
-      init: (params: Record<string, unknown>) => void;
-      XFBML: { parse: (element?: HTMLElement) => void };
-    };
-    fbAsyncInit?: () => void;
-  }
-}
-
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -91,7 +81,6 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
   showFooter = false;
 
   routerSubscription?: Subscription;
-  private fbInitialized = false;
 
   constructor(
     private router: Router,
@@ -135,7 +124,6 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
           isPlatformBrowser(this.platformId)
         ) {
           this.showFacebook = true;
-          setTimeout(() => this.reloadFacebookWidget(), 300);
         } else {
           this.showFacebook = shouldShowFacebook;
         }
@@ -143,59 +131,6 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
         const sessionRouteMatch = url.match(/^\/session\/(\d{4})$/);
         this.currentYear = sessionRouteMatch ? sessionRouteMatch[1] : null;
       });
-
-    if (isPlatformBrowser(this.platformId)) {
-      this.loadFacebookSDK();
-    }
-  }
-
-  private loadFacebookSDK() {
-    if (this.fbInitialized || !isPlatformBrowser(this.platformId)) {
-      return;
-    }
-
-    const existingScript = document.getElementById('facebook-jssdk');
-    if (existingScript) {
-      existingScript.remove();
-    }
-
-    const fbRoot = document.getElementById('fb-root');
-    if (!fbRoot) {
-      const div = document.createElement('div');
-      div.id = 'fb-root';
-      document.body.insertBefore(div, document.body.firstChild);
-    }
-
-    window.fbAsyncInit = () => {
-      if (window.FB) {
-        window.FB.init({
-          xfbml: true,
-          version: 'v21.0',
-        });
-        this.fbInitialized = true;
-      }
-    };
-
-    const script = document.createElement('script');
-    script.id = 'facebook-jssdk';
-    script.src = 'https://connect.facebook.net/fr_FR/sdk.js';
-    script.async = true;
-    script.defer = true;
-    script.crossOrigin = 'anonymous';
-    script.onerror = () => {
-      console.warn('Facebook SDK failed to load');
-      this.showFacebook = false;
-    };
-    document.body.appendChild(script);
-  }
-
-  private reloadFacebookWidget() {
-    if (window.FB && this.fbInitialized) {
-      const fbContainer = document.querySelector('.fb-page');
-      if (fbContainer) {
-        window.FB.XFBML.parse(fbContainer.parentElement || undefined);
-      }
-    }
   }
 
   scrollToTop(): void {
