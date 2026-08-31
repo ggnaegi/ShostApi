@@ -1,15 +1,13 @@
 ﻿using System.Net;
-using AutoMapper;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Extensions.Logging;
-using Shosta.Functions.Domain.Dtos.Site;
+using Shosta.Functions.Domain.Extensions;
 using Shosta.Functions.Domain.Interfaces;
 
 namespace Shosta.Functions.API;
 
 public class Layout(ILoggerFactory loggerFactory,
-    IMapper mapper,
     ISessionService sessionService,
     IOrganisationService organisationService)
 {
@@ -32,7 +30,7 @@ public class Layout(ILoggerFactory loggerFactory,
         if (sessionDto != null)
         {
             var res = req.CreateResponse(HttpStatusCode.OK);
-            await res.WriteAsJsonAsync(mapper.Map<WelcomePageDto>(sessionDto));
+            await res.WriteAsJsonAsync(sessionDto.ToWelcomePageDto());
             return res;
         }
 
@@ -54,7 +52,7 @@ public class Layout(ILoggerFactory loggerFactory,
         if (organisationDto != null)
         {
             var res = req.CreateResponse(HttpStatusCode.OK);
-            await res.WriteAsJsonAsync(mapper.Map<AboutPageDto>(organisationDto));
+            await res.WriteAsJsonAsync(organisationDto.ToAboutPageDto());
             return res;
         }
 
@@ -75,7 +73,7 @@ public class Layout(ILoggerFactory loggerFactory,
         if (organisationDto != null)
         {
             var res = req.CreateResponse(HttpStatusCode.OK);
-            await res.WriteAsJsonAsync(mapper.Map<ContactPageDto>(organisationDto));
+            await res.WriteAsJsonAsync(organisationDto.ToContactPageDto());
             return res;
         }
 

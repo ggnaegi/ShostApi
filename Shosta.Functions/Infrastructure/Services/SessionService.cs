@@ -1,9 +1,9 @@
-﻿using AutoMapper;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 using Shosta.Functions.Domain.Dtos.Session;
 using Shosta.Functions.Domain.Entities.Session;
+using Shosta.Functions.Domain.Extensions;
 using Shosta.Functions.Domain.Interfaces;
 
 namespace Shosta.Functions.Infrastructure.Services;
@@ -11,8 +11,7 @@ namespace Shosta.Functions.Infrastructure.Services;
 public class SessionService(
     IMemoryCache memoryCache,
     ShostaDbContext dbContext,
-    ILoggerFactory loggerFactory,
-    IMapper mapper) : ISessionService
+    ILoggerFactory loggerFactory) : ISessionService
 {
     private readonly ILogger _logger = loggerFactory.CreateLogger<SessionService>();
 
@@ -39,9 +38,7 @@ public class SessionService(
                 dbContext.Sessions.Where(s => s.Year == sessionDto.Year));
         }
 
-        var session = mapper.Map<SessionDto, Session>(sessionDto);
-
-        dbContext.Sessions.Add(session);
+        dbContext.Sessions.Add(sessionDto.ToEntity());
         await dbContext.SaveChangesAsync();
 
         SetSessionCache(sessionDto);
@@ -97,7 +94,7 @@ public class SessionService(
                 return null;
             }
 
-            var dto = mapper.Map<Session, SessionDto>(session);
+            var dto = session.ToDto();
             SetSessionCache(dto);
             return dto;
         });
