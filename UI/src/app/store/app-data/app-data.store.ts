@@ -1,4 +1,4 @@
-import { inject } from '@angular/core';
+import { computed, inject, Signal } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { patchState, signalStore, withMethods, withState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
@@ -16,6 +16,7 @@ import {
   ContactPageDto,
   WelcomePageDto,
 } from '../../layout/api/layout.models';
+import { Session, SessionContainer } from '../../session/api/session-element';
 import { environment } from '../../../environments/environment';
 import { statusCodeChecker } from '../../utils/StatusCodeChecker';
 
@@ -30,6 +31,7 @@ export interface AppDataState {
   aboutPage: AboutPageDto | null;
   contactPage: ContactPageDto | null;
   emailSendResult: EmailSendResult | null;
+  sessionsByYear: Record<number, Session>;
 }
 
 const initialState: AppDataState = {
@@ -41,6 +43,7 @@ const initialState: AppDataState = {
   aboutPage: null,
   contactPage: null,
   emailSendResult: null,
+  sessionsByYear: {},
 };
 
 const sponsorsUrl = 'assets/sponsors/sponsors-config.json';
@@ -121,6 +124,11 @@ export const AppDataStore = signalStore(
         )
       )
     ),
+
+    /** Custom selector: the cached organisation for a given (reactive) year. */
+    organisationForYear(year: Signal<number>): Signal<Organisation | null> {
+      return computed(() => store.organisationsByYear()[year()] ?? null);
+    },
 
     loadSponsors: rxMethod<void>(
       pipe(
@@ -232,5 +240,64 @@ export const AppDataStore = signalStore(
         )
       )
     ),
+
+    /** Loads the session for a given year, using the public or admin endpoint. */
+    loadSession: rxMethod<{ year: number; adminRoute: boolean }>(
+      pipe(
+        filter(({ year }) => !store.sessionsByYear()[year]),
+        switchMap(({ year, adminRoute }) => {
+          const requestOptions = adminRoute ? { withCredentials: true } : {};
+          const endpoint = adminRoute
+            ? environment.sessionAdminEndpointUrl
+            : environment.sessionEndpointUrl;
+
+          return http
+            .get<SessionContainer>(`${endpoint}/${year}`, requestOptions)
+            .pipe(
+              tap(container => {
+                statusCodeChecker(container.StatusCode);
+                patchState(store, {
+                  sessionsByYear: {
+                    ...store.sessionsByYear(),
+                    [year]: container.Value,
+                  },
+                });
+              }),
+              catchError(() => EMPTY)
+            );
+        })
+      )
+    ),
+
+    /** Persists an updated session and refreshes the per-year cache. */
+    updateSession: rxMethod<Session>(
+      pipe(
+        switchMap(session =>
+          http
+            .post<SessionContainer>(
+              `${environment.sessionEndpointUrl}?overwrite=true`,
+              session,
+              { withCredentials: true }
+            )
+            .pipe(
+              tap(container => {
+                statusCodeChecker(container.StatusCode);
+                patchState(store, {
+                  sessionsByYear: {
+                    ...store.sessionsByYear(),
+                    [container.Value.Year]: container.Value,
+                  },
+                });
+              }),
+              catchError(() => EMPTY)
+            )
+        )
+      )
+    ),
+
+    /** Custom selector: the cached session for a given (reactive) year. */
+    sessionForYear(year: Signal<number>): Signal<Session | null> {
+      return computed(() => store.sessionsByYear()[year()] ?? null);
+    },
   }))
 );

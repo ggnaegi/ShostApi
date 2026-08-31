@@ -1,32 +1,40 @@
-import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
-import { AsyncPipe } from '@angular/common';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  OnInit,
+  signal,
+} from '@angular/core';
 import { SessionComponent } from '../pages/session.component';
-import { AbstractSessionService } from '../services/abstract.session.service';
 import { AppDataStore } from '../../store/app-data/app-data.store';
 
 @Component({
   selector: 'app-session-container',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [SessionComponent, AsyncPipe],
+  imports: [SessionComponent],
   template: `
     <app-session
-      [sessionData]="sessionService.sessionData$(this.year, false) | async"
-      [organisationData]="appDataStore.organisation()"
+      [sessionData]="sessionData()"
+      [organisationData]="organisation()"
       (yearChanged)="onYearChanged($event)" />
   `,
 })
 export class SessionContainerComponent implements OnInit {
   // default year, if not set in route
-  year = 2026;
+  protected readonly year = signal(2026);
 
-  public readonly sessionService = inject(AbstractSessionService);
-  public readonly appDataStore = inject(AppDataStore);
+  private readonly appDataStore = inject(AppDataStore);
+
+  protected readonly organisation = this.appDataStore.organisation;
+  protected readonly sessionData = this.appDataStore.sessionForYear(this.year);
 
   ngOnInit(): void {
     this.appDataStore.loadOrganisation();
+    this.appDataStore.loadSession({ year: this.year(), adminRoute: false });
   }
 
   onYearChanged(year: number): void {
-    this.year = year;
+    this.year.set(year);
+    this.appDataStore.loadSession({ year, adminRoute: false });
   }
 }

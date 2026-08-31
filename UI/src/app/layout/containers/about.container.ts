@@ -4,12 +4,14 @@ import { AppDataStore } from '../../store/app-data/app-data.store';
 
 @Component({
   selector: 'app-about-container',
-  template: `<app-about [data]="appDataStore.aboutPage()"></app-about>`,
+  template: `<app-about [data]="aboutPage()"></app-about>`,
   imports: [AboutComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AboutContainerComponent implements OnInit {
-  public readonly appDataStore = inject(AppDataStore);
+  private readonly appDataStore = inject(AppDataStore);
+
+  protected readonly aboutPage = this.appDataStore.aboutPage;
 
   ngOnInit(): void {
     this.appDataStore.loadAboutPage();

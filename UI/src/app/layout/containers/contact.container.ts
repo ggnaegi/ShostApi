@@ -8,14 +8,16 @@ import { AppDataStore } from '../../store/app-data/app-data.store';
 @Component({
   selector: 'app-contact-container',
   template: `<app-contact
-    [data]="appDataStore.contactPage()"
+    [data]="contactPage()"
     (formSubmitted)="sendEmail($event)"></app-contact>`,
   imports: [ContactComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ContactContainerComponent implements OnInit {
-  public readonly appDataStore = inject(AppDataStore);
+  private readonly appDataStore = inject(AppDataStore);
   private readonly recaptchaService = inject(RecaptchaService);
+
+  protected readonly contactPage = this.appDataStore.contactPage;
 
   ngOnInit(): void {
     this.recaptchaService.load(environment.recaptchaClientKey);
