@@ -7,8 +7,6 @@ import {
 } from '@angular/router';
 import { routes } from './app.routes';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { AbstractSessionService } from './session/services/abstract.session.service';
-import { SessionService } from './session/services/session.service';
 import {
   HTTP_INTERCEPTORS,
   provideHttpClient,
@@ -35,10 +33,6 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes, inMemoryScrollingFeature),
     provideAnimationsAsync(),
-    {
-      provide: AbstractSessionService,
-      useClass: SessionService,
-    },
     SpinnerService,
     {
       provide: HTTP_INTERCEPTORS,

@@ -15,7 +15,7 @@ import { AppDataStore } from '../../store/app-data/app-data.store';
   imports: [GalleryComponent],
   template: `
     <app-gallery
-      [galleriesDefinitions]="appDataStore.galleryDefinition()"
+      [galleriesDefinitions]="galleryDefinition()"
       [welcomeMessage]="welcomeMessage()"
       (yearChanged)="onYearChanged($event)" />
   `,
@@ -25,7 +25,8 @@ export class GalleryContainerComponent implements OnInit {
   readonly galleryDataLoaded = output<boolean>();
   readonly yearChanged = output<number>();
 
-  public readonly appDataStore = inject(AppDataStore);
+  private readonly appDataStore = inject(AppDataStore);
+  protected readonly galleryDefinition = this.appDataStore.galleryDefinition;
 
   ngOnInit(): void {
     this.appDataStore.loadGalleryDefinition();

@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  OnInit,
+  signal,
+} from '@angular/core';
 import { Organisation } from '../../about/api/organisation';
 import { OrganisationAdminComponent } from '../pages/organisation-admin/organisation-admin.component';
 import { AppDataStore } from '../../store/app-data/app-data.store';
@@ -14,21 +20,21 @@ import { AppDataStore } from '../../store/app-data/app-data.store';
   </app-organisation-admin>`,
 })
 export class OrganisationAdminContainerComponent implements OnInit {
-  year = 2025;
+  protected readonly year = signal(2025);
 
-  public readonly appDataStore = inject(AppDataStore);
+  private readonly appDataStore = inject(AppDataStore);
 
-  public organisationData(): Organisation | null {
-    return this.appDataStore.organisationsByYear()[this.year] ?? null;
-  }
+  protected readonly organisationData = this.appDataStore.organisationForYear(
+    this.year
+  );
 
   ngOnInit(): void {
-    this.appDataStore.loadOrganisationForYear(this.year);
+    this.appDataStore.loadOrganisationForYear(this.year());
   }
 
   public updateYear(year: number): void {
-    this.year = year;
-    this.appDataStore.loadOrganisationForYear(this.year);
+    this.year.set(year);
+    this.appDataStore.loadOrganisationForYear(year);
   }
 
   public updateOrganisation(organisation: Organisation): void {

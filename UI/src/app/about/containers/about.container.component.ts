@@ -13,15 +13,19 @@ import { AppDataStore } from '../../store/app-data/app-data.store';
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <app-about
-      [organisation]="appDataStore.organisation()"
-      [sponsors]="appDataStore.sponsors()"
+      [organisation]="organisation()"
+      [sponsors]="sponsors()"
       (formSubmitted)="sendEmail($event)" />
-    <app-email-overlay [result]="appDataStore.emailSendResult()"></app-email-overlay>
+    <app-email-overlay [result]="emailSendResult()"></app-email-overlay>
   `,
 })
 export class AboutContainerComponent implements OnInit {
-  public readonly appDataStore = inject(AppDataStore);
+  private readonly appDataStore = inject(AppDataStore);
   private readonly recaptchaService = inject(RecaptchaService);
+
+  protected readonly organisation = this.appDataStore.organisation;
+  protected readonly sponsors = this.appDataStore.sponsors;
+  protected readonly emailSendResult = this.appDataStore.emailSendResult;
 
   ngOnInit(): void {
     this.recaptchaService.load(environment.recaptchaClientKey);
