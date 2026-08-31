@@ -1,8 +1,36 @@
 @use "@angular/material" as mat;
 
-// Import Google Fonts
-@import "https://fonts.googleapis.com/icon?family=Material+Icons+Outlined";
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap");
+@font-face {
+  font-family: "Material Icons Outlined";
+  src: url("/assets/fonts/material-icons-outlined.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: block;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("/assets/fonts/montserrat-300.woff2") format("woff2");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("/assets/fonts/montserrat-400.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("/assets/fonts/montserrat-500.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
 
 @font-face {
   font-family: "Avenir Next Light";
