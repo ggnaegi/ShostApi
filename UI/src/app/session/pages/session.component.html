@@ -330,4 +330,117 @@
       </mat-card>
     </div>
   </div>
+} @else {
+  <div
+    class="main-content-wrapper"
+    fxLayout="row"
+    fxLayout.lt-md="column"
+    fxLayoutAlign="start stretch"
+    style="max-width: 100%; overflow-x: hidden">
+    <!-- left -->
+    <div fxFlex="20" fxFlex.lt-md="100" class="left-column">
+      <mat-card appearance="raised" class="left-column-card">
+        <mat-card-header></mat-card-header>
+        <mat-card-content>
+          <div class="skeleton-shimmer skeleton-flyer"></div>
+        </mat-card-content>
+      </mat-card>
+      <mat-card appearance="outlined" class="right-column-card">
+        <mat-card-header>
+          <div class="skeleton-shimmer skeleton-title" style="width: 70%"></div>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="skeleton-shimmer skeleton-line" style="width: 80%; height: 20px; margin-bottom: 10px"></div>
+          <div class="skeleton-shimmer skeleton-line" style="width: 60%; margin-bottom: 16px"></div>
+          <div class="skeleton-shimmer skeleton-button" style="width: 100%"></div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <!-- center -->
+    <div fxFlex="53" fxFlex.lt-md="100" class="center-column">
+      <!-- concept -->
+      <mat-card appearance="outlined" class="center-column-card">
+        <mat-card-header>
+          <div class="skeleton-shimmer skeleton-title" style="width: 40%"></div>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="skeleton-shimmer skeleton-line" style="width: 100%"></div>
+          <div class="skeleton-shimmer skeleton-line" style="width: 95%"></div>
+          <div class="skeleton-shimmer skeleton-line" style="width: 85%"></div>
+        </mat-card-content>
+      </mat-card>
+      <!-- conductor -->
+      <mat-card appearance="raised" class="center-column-card">
+        <mat-card-header>
+          <div mat-card-avatar>
+            <div class="skeleton-shimmer skeleton-avatar"></div>
+          </div>
+          <div class="skeleton-shimmer skeleton-title" style="width: 50%"></div>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="skeleton-shimmer skeleton-line" style="width: 100%"></div>
+          <div class="skeleton-shimmer skeleton-line" style="width: 90%"></div>
+        </mat-card-content>
+      </mat-card>
+      <!-- soloist -->
+      <mat-card appearance="raised" class="center-column-card">
+        <mat-card-header>
+          <div mat-card-avatar>
+            <div class="skeleton-shimmer skeleton-avatar"></div>
+          </div>
+          <div class="skeleton-shimmer skeleton-title" style="width: 50%"></div>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="skeleton-shimmer skeleton-line" style="width: 100%"></div>
+          <div class="skeleton-shimmer skeleton-line" style="width: 90%"></div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <!-- right -->
+    <div fxFlex="27" fxFlex.lt-md="100" class="right-column">
+      <mat-card appearance="outlined" class="right-column-card">
+        <mat-card-header>
+          <div class="skeleton-shimmer skeleton-title" style="width: 55%"></div>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="skeleton-shimmer skeleton-line" style="width: 100%"></div>
+          <div class="skeleton-shimmer skeleton-line" style="width: 90%"></div>
+          <div class="skeleton-shimmer skeleton-line" style="width: 75%"></div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+  <!-- musicians section -->
+  <div
+    class="main-content-wrapper"
+    fxLayout="row"
+    fxLayout.lt-md="column"
+    fxLayoutAlign="center stretch"
+    fxFlexFill>
+    <div fxFlex="100" class="center-column">
+      <mat-card appearance="outlined" class="center-column-card">
+        <mat-card-header>
+          <div class="skeleton-shimmer skeleton-title" style="width: 30%"></div>
+        </mat-card-header>
+        <mat-card-content>
+          <div
+            fxLayout="row"
+            fxLayout.lt-md="column"
+            fxLayoutAlign="start stretch"
+            fxLayoutGap="16px">
+            @for (col of [1, 2, 3]; track col) {
+              <div fxFlex="33.33" fxFlex.lt-md="100">
+                <div class="text-content">
+                  <div class="skeleton-shimmer skeleton-line" style="width: 50%; height: 20px; margin-bottom: 12px"></div>
+                  @for (row of [1, 2, 3, 4]; track row) {
+                    <div class="skeleton-shimmer skeleton-line" style="width: 80%"></div>
+                  }
+                </div>
+              </div>
+            }
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
 }

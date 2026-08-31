@@ -1,5 +1,6 @@
 import { computed, inject, Signal } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpContext, HttpErrorResponse } from '@angular/common/http';
+import { SKIP_SPINNER } from '../../spinner/services/spinner.context';
 import { patchState, signalStore, withMethods, withState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { catchError, EMPTY, filter, pipe, switchMap, tap } from 'rxjs';
@@ -61,6 +62,7 @@ export const AppDataStore = signalStore(
           http
             .get<OrganisationContainer>(environment.organisationEndpointUrl, {
               withCredentials: true,
+              context: new HttpContext().set(SKIP_SPINNER, true),
             })
             .pipe(
               tap(container => {
@@ -134,10 +136,14 @@ export const AppDataStore = signalStore(
       pipe(
         filter(() => !store.sponsors()),
         switchMap(() =>
-          http.get<Sponsor[]>(sponsorsUrl).pipe(
-            tap(sponsors => patchState(store, { sponsors })),
-            catchError(() => EMPTY)
-          )
+          http
+            .get<Sponsor[]>(sponsorsUrl, {
+              context: new HttpContext().set(SKIP_SPINNER, true),
+            })
+            .pipe(
+              tap(sponsors => patchState(store, { sponsors })),
+              catchError(() => EMPTY)
+            )
         )
       )
     ),
@@ -212,7 +218,9 @@ export const AppDataStore = signalStore(
         filter(() => !store.aboutPage()),
         switchMap(() =>
           http
-            .get<AboutPageDto>(`${environment.apiBaseUrl}/about-page`)
+            .get<AboutPageDto>(`${environment.apiBaseUrl}/about-page`, {
+              context: new HttpContext().set(SKIP_SPINNER, true),
+            })
             .pipe(
               tap(aboutPage => patchState(store, { aboutPage })),
               catchError((error: HttpErrorResponse) => {
@@ -229,7 +237,9 @@ export const AppDataStore = signalStore(
         filter(() => !store.contactPage()),
         switchMap(() =>
           http
-            .get<ContactPageDto>(`${environment.apiBaseUrl}/contact-page`)
+            .get<ContactPageDto>(`${environment.apiBaseUrl}/contact-page`, {
+              context: new HttpContext().set(SKIP_SPINNER, true),
+            })
             .pipe(
               tap(contactPage => patchState(store, { contactPage })),
               catchError((error: HttpErrorResponse) => {
@@ -246,7 +256,11 @@ export const AppDataStore = signalStore(
       pipe(
         filter(({ year }) => !store.sessionsByYear()[year]),
         switchMap(({ year, adminRoute }) => {
-          const requestOptions = adminRoute ? { withCredentials: true } : {};
+          // Admin route keeps the global spinner; the public session page
+          // shows a skeleton instead while the session data is loading.
+          const requestOptions = adminRoute
+            ? { withCredentials: true }
+            : { context: new HttpContext().set(SKIP_SPINNER, true) };
           const endpoint = adminRoute
             ? environment.sessionAdminEndpointUrl
             : environment.sessionEndpointUrl;

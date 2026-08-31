@@ -32,3 +32,7 @@
   transform: translateY(-10px); /* Move the card up by 10px */
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Add a larger shadow when hovering */
 }
+
+.skeleton-sponsor-card {
+  height: 120px;
+}
