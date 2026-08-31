@@ -58,6 +58,7 @@ jobs:
         uses: Azure/functions-action@v1
         with:
           app-name: 'shosta'
+          sku: flexconsumption
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_322F079E6B5744B38180AA4312274319 }}
           package: 'output/publish.zip'
 
