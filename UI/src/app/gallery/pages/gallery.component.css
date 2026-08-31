@@ -230,9 +230,6 @@ mat-grid-tile {
   background: transparent;
   box-shadow: none;
   overflow: hidden;
-}
-
-.fullscreen-dialog .mat-dialog-container {
   animation: fadeIn 0.3s ease-in-out;
 }
 
