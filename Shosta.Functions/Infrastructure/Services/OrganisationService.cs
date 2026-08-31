@@ -1,16 +1,15 @@
-﻿using AutoMapper;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 using Shosta.Functions.Domain.Dtos.Organisation;
 using Shosta.Functions.Domain.Entities.Organisation;
+using Shosta.Functions.Domain.Extensions;
 using Shosta.Functions.Domain.Interfaces;
 
 namespace Shosta.Functions.Infrastructure.Services;
 
 public class OrganisationService(
     IMemoryCache memoryCache,
-    IMapper mapper,
     ILoggerFactory loggerFactory,
     ShostaDbContext dbContext) : IOrganisationService
 {
@@ -47,7 +46,7 @@ public class OrganisationService(
                 dbContext.Organisations.Where(s => s.Year == organisationDto.Year));
         }
 
-        var organisation = mapper.Map<OrganisationDto, Organisation>(organisationDto);
+        var organisation = organisationDto.ToEntity();
 
         dbContext.Organisations.Add(organisation);
         await dbContext.SaveChangesAsync();
@@ -97,8 +96,8 @@ public class OrganisationService(
                 _logger.LogError("Organisation not found.");
                 return null;
             }
-
-            var dto = mapper.Map<Organisation, OrganisationDto>(organisation);
+            
+            var dto = organisation.ToDto();
             SetOrganisationCache(dto);
             return dto;
         });

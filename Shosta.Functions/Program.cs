@@ -29,11 +29,6 @@ var host = new HostBuilder()
                 })
         );
         
-        services.AddAutoMapper((_, ctx) =>
-        {
-            ctx.AddProfile<ApiProfiles>();
-        }, Array.Empty<Assembly>());
-        
         services.AddSingleton<IMemoryCache, MemoryCache>();
         services.AddScoped<IOrganisationService, OrganisationService>();
         services.AddScoped<ISessionService, SessionService>();
