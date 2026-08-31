@@ -1,23 +1,17 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Observable } from 'rxjs';
-import { AbstractLayoutService } from '../services/abstract.layout.service';
-import { WelcomePageDto } from '../api/layout.models';
-import { AsyncPipe } from '@angular/common';
+import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { WelcomeComponent } from '../pages/welcome/welcome.component';
+import { AppDataStore } from '../../store/app-data/app-data.store';
 
 @Component({
   selector: 'app-welcome-container',
-  template: `<app-welcome [data]="welcome$ | async"></app-welcome>`,
-  standalone: true,
-  imports: [AsyncPipe, WelcomeComponent],
+  template: `<app-welcome [data]="appDataStore.welcomePage()"></app-welcome>`,
+  imports: [WelcomeComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class WelcomeContainerComponent {
-  welcome$: Observable<WelcomePageDto>;
+export class WelcomeContainerComponent implements OnInit {
+  public readonly appDataStore = inject(AppDataStore);
 
-  constructor(
-    private layoutService: AbstractLayoutService,
-  ) {
-    this.welcome$ = this.layoutService.welcomePageData$();
+  ngOnInit(): void {
+    this.appDataStore.loadWelcomePage();
   }
 }

@@ -1,4 +1,4 @@
-<ng-container *ngIf="data">
+@if (data(); as data) {
   <div class="main-content-container">
     <div class="left-section">
       <div class="welcome-title" id="welcome-section">
@@ -16,7 +16,6 @@
                 [class]="'card-logo'" />
             </mat-card>
           </div>
-
           <div class="welcome-teaser">
             <div [innerHTML]="data.Teaser"></div>
             <div class="redirect-link" [routerLink]="['/session']">
@@ -32,33 +31,37 @@
         </mat-card-header>
         <mat-card-content>
           <div class="concerts-container">
-            <div *ngFor="let concert of data.Concerts" class="concert-item">
-              <h3>
-                <fa-icon [icon]="faCalendarAlt"></fa-icon>
-                {{ concert.Date | date: 'dd.MM.yyyy HH:mm' }}
-              </h3>
-              <ul class="concert-details">
-                <li>
-                  <fa-icon [icon]="faBuilding"></fa-icon>
-                  {{ concert.Venue }}
-                </li>
-                <li>
-                  <fa-icon [icon]="faMapMarkerAlt"></fa-icon>
-                  {{ concert.City }}
-                </li>
-                <li>
-                  <a [href]="concert.Tickets" target="_blank">
-                    <button
-                      mat-raised-button
-                      color="primary"
-                      class="ticket-button">
-                      <fa-icon [icon]="faTicket" style="color: white"></fa-icon>
-                      Billets
-                    </button>
-                  </a>
-                </li>
-              </ul>
-            </div>
+            @for (concert of data.Concerts; track concert) {
+              <div class="concert-item">
+                <h3>
+                  <fa-icon [icon]="faCalendarAlt"></fa-icon>
+                  {{ concert.Date | date: 'dd.MM.yyyy HH:mm' }}
+                </h3>
+                <ul class="concert-details">
+                  <li>
+                    <fa-icon [icon]="faBuilding"></fa-icon>
+                    {{ concert.Venue }}
+                  </li>
+                  <li>
+                    <fa-icon [icon]="faMapMarkerAlt"></fa-icon>
+                    {{ concert.City }}
+                  </li>
+                  <li>
+                    <a [href]="concert.Tickets" target="_blank">
+                      <button
+                        mat-raised-button
+                        color="primary"
+                        class="ticket-button">
+                        <fa-icon
+                          [icon]="faTicket"
+                          style="color: white"></fa-icon>
+                        Billets
+                      </button>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            }
           </div>
         </mat-card-content>
       </mat-card>
@@ -77,4 +80,4 @@
       </div>
     </div>
   </div>
-</ng-container>
+}

@@ -1,12 +1,12 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  EventEmitter,
-  Input,
+  inject,
   OnChanges,
   OnInit,
-  Output,
   SimpleChanges,
+  input,
+  output,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { GalleryContainerComponent } from '../../gallery/container/gallery.container.component';
@@ -24,7 +24,7 @@ import {
   Organisation,
   Sponsor,
 } from '../api/organisation';
-import { NgForOf, NgIf } from '@angular/common';
+
 import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
 import { MatButton } from '@angular/material/button';
@@ -32,7 +32,6 @@ import { FormsModule, NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-about',
-  standalone: true,
   imports: [
     GalleryContainerComponent,
     MatCard,
@@ -41,8 +40,6 @@ import { FormsModule, NgForm } from '@angular/forms';
     MatCardImage,
     MatCardTitle,
     FlexModule,
-    NgIf,
-    NgForOf,
     MatFormField,
     MatInput,
     MatButton,
@@ -54,18 +51,15 @@ import { FormsModule, NgForm } from '@angular/forms';
   styleUrl: './about.component.css',
 })
 export class AboutComponent implements OnInit, OnChanges {
-  @Input()
-  organisation: Organisation | null = null;
+  readonly organisation = input<Organisation | null>(null);
 
-  @Input()
-  sponsors: Sponsor[] | null = null;
+  readonly sponsors = input<Sponsor[] | null>(null);
 
-  @Output()
-  formSubmitted = new EventEmitter<EmailData>();
+  readonly formSubmitted = output<EmailData>();
 
   president: CommitteeMember | undefined;
 
-  constructor(private route: ActivatedRoute) {}
+  private readonly route = inject(ActivatedRoute);
 
   ngOnInit(): void {
     this.route.fragment.subscribe((fragment: string | null) => {
@@ -78,7 +72,6 @@ export class AboutComponent implements OnInit, OnChanges {
     });
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   ngOnChanges(changes: SimpleChanges) {
     this.setPresident();
   }
@@ -98,12 +91,11 @@ export class AboutComponent implements OnInit, OnChanges {
   }
 
   private setPresident(): void {
-    if (!this.organisation?.CommitteeMembers) {
+    const organisation = this.organisation();
+    if (!organisation?.CommitteeMembers) {
       return;
     }
 
-    this.president = this.organisation.CommitteeMembers.find(
-      x => x.IsContactPerson
-    );
+    this.president = organisation.CommitteeMembers.find(x => x.IsContactPerson);
   }
 }

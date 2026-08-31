@@ -1,29 +1,35 @@
-<ng-container *ngIf="galleriesDefinitions">
+@if (galleriesDefinitions(); as galleriesDefinitions) {
   <div class="card-container" id="medias-section">
     <!-- Iterate over galleries, displaying a card for each year -->
-    <div
-      class="year-card-wrapper"
-      *ngFor="let logo of galleriesDefinitions.logos">
-      <mat-card
-        *ngIf="logo.year >= 2020"
-        class="year-card"
-        (click)="onYearClick(logo.showPage, logo.year)">
-        <mat-card-header>
-          <mat-card-title>{{ logo.year }}</mat-card-title>
-        </mat-card-header>
-        <app-image-with-loading
-          [src]="logo.url"
-          [alt]="logo.alt"
-          class="card-logo" />
-        <mat-card-actions *ngIf="logo.showGallery">
-          <button
-            mat-icon-button
-            (click)="$event.stopPropagation(); openGalleryDialog(logo.year)">
-            <mat-icon>photo_library</mat-icon>
-            <!-- Gallery Icon -->
-          </button>
-        </mat-card-actions>
-      </mat-card>
-    </div>
+    @for (logo of galleriesDefinitions.logos; track logo) {
+      <div class="year-card-wrapper">
+        @if (logo.year >= 2020) {
+          <mat-card
+            class="year-card"
+            (click)="onYearClick(logo.showPage, logo.year)"
+            (keydown)="onYearClick(logo.showPage, logo.year)">
+            <mat-card-header>
+              <mat-card-title>{{ logo.year }}</mat-card-title>
+            </mat-card-header>
+            <app-image-with-loading
+              [src]="logo.url"
+              [alt]="logo.alt"
+              class="card-logo" />
+            @if (logo.showGallery) {
+              <mat-card-actions>
+                <button
+                  mat-icon-button
+                  (click)="
+                    $event.stopPropagation(); openGalleryDialog(logo.year)
+                  ">
+                  <mat-icon>photo_library</mat-icon>
+                  <!-- Gallery Icon -->
+                </button>
+              </mat-card-actions>
+            }
+          </mat-card>
+        }
+      </div>
+    }
   </div>
-</ng-container>
+}

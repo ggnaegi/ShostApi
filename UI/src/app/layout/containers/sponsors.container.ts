@@ -1,23 +1,17 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Observable } from 'rxjs';
-import { AsyncPipe } from '@angular/common';
-import { AbstractAboutService } from '../../about/services/abstract.about.service';
-import { Sponsor } from '../../about/api/organisation';
+import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { SponsorsComponent } from '../pages/sponsors/sponsors.component';
+import { AppDataStore } from '../../store/app-data/app-data.store';
 
 @Component({
   selector: 'app-sponsors-container',
-  template: `<app-sponsors [data]="sponsors$ | async"></app-sponsors>`,
-  standalone: true,
-  imports: [AsyncPipe, SponsorsComponent],
+  template: `<app-sponsors [data]="appDataStore.sponsors()"></app-sponsors>`,
+  imports: [SponsorsComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SponsorsContainerComponent {
-   sponsors$: Observable<Sponsor[]> | undefined;
+export class SponsorsContainerComponent implements OnInit {
+  public readonly appDataStore = inject(AppDataStore);
 
-  constructor(
-    private aboutService: AbstractAboutService
-  ) {
-    this.sponsors$ = this.aboutService.getSponsors$();
+  ngOnInit(): void {
+    this.appDataStore.loadSponsors();
   }
 }

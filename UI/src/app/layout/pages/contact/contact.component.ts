@@ -1,4 +1,9 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  input,
+  output,
+} from '@angular/core';
 import { FlexModule } from '@angular/flex-layout';
 import { FormsModule, NgForm } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
@@ -10,13 +15,12 @@ import {
 } from '@angular/material/card';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
-import { NgIf } from '@angular/common';
+
 import { EmailData } from '../../../about/api/organisation';
 import { ContactPageDto } from '../../api/layout.models';
 
 @Component({
   selector: 'app-contact',
-  standalone: true,
   imports: [
     FlexModule,
     FormsModule,
@@ -28,17 +32,15 @@ import { ContactPageDto } from '../../api/layout.models';
     MatFormField,
     MatInput,
     MatLabel,
-    NgIf,
   ],
   templateUrl: './contact.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './contact.component.css',
 })
 export class ContactComponent {
-  @Input()
-  data: ContactPageDto | null = null;
+  readonly data = input<ContactPageDto | null>(null);
 
-  @Output()
-  formSubmitted = new EventEmitter<EmailData>();
+  readonly formSubmitted = output<EmailData>();
 
   submitForm(contactForm: NgForm): void {
     if (contactForm.valid) {

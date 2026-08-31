@@ -1,99 +1,104 @@
 <ng-container>
-  <div *ngIf="organisation"
-    class="welcome-title"
-    [innerHtml]="organisation.WelcomeText"
-    id="welcome-section"></div>
-  <app-gallery-container
-    [welcomeMessage]="organisation.WelcomeText" *ngIf="organisation"></app-gallery-container>
-  <div
-    *ngIf="organisation"
-    id="about-section"
-    fxLayout="row"
-    fxLayout.lt-lg="column"
-    fxLayoutAlign="space-around start"
-    fxLayoutGap="16px">
-    <!-- First Card -->
-    <mat-card fxFlex="70%" fxFlex.lt-lg="100" class="custom-card">
-      <mat-card-header>
-        <mat-card-title>{{ organisation.BandTitle }}</mat-card-title>
-      </mat-card-header>
-      <img
-        mat-card-image
-        [src]="'assets/' + organisation.BandPicture"
-        alt="" />
-      <mat-card-content>
-        <div
-          style="
-            font-family: 'Avenir Next Light', sans-serif;
-            line-height: 1.6;
-            color: #333;
-          ">
-          <div [innerHTML]="organisation.BandPresentation"></div>
-        </div>
-      </mat-card-content>
-    </mat-card>
-
-    <!-- Second Card -->
-    <mat-card fxFlex="30%" fxFlex.lt-lg="100" class="custom-card">
-      <mat-card-header>
-        <mat-card-title>{{ organisation.CommitteeTitle }}</mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        <div
-          style="
-            font-family: 'Avenir Next Light', sans-serif;
-            line-height: 1.6;
-            color: #333;
-          ">
-          <p [innerHTML]="organisation.CommitteePresentation"></p>
-        </div>
-        <div
-          fxLayout="row wrap"
-          style="
-            font-family: 'Avenir Next Light', sans-serif;
-            line-height: 1.6;
-            color: #333;
-          ">
-          <div
-            fxFlex="100%"
-            *ngFor="let member of organisation.CommitteeMembers">
-            <div style="padding: 10px; box-sizing: border-box">
-              <strong>{{ member.Function }}</strong
-              ><br />
-              <span>{{ member.FirstName }} {{ member.LastName }}</span>
-            </div>
-          </div>
-        </div>
-      </mat-card-content>
-    </mat-card>
-  </div>
-
-  <div id="sponsors-section" style="margin: 20px" *ngIf="sponsors">
-    <!-- Introduction for Sponsors -->
-    <div style="margin-bottom: 20px">
-      <h2>Sponsors</h2>
-      <p>
-        Nous remercions infiniment nos sponsors pour leur soutien en 2024 et
-        vous les recommandons vivement !
-      </p>
-    </div>
-
-    <div fxLayout="row wrap" fxLayoutGap="10px" fxLayoutAlign="start center">
-      <mat-card
-        *ngFor="let sponsor of sponsors"
-        class="sponsor-card"
-        fxFlex="20%"
-        fxFlex.gt-xs="200px"
-        fxLayoutAlign="center center">
+  @let org = organisation();
+  @if (org) {
+    <div
+      class="welcome-title"
+      [innerHtml]="org.WelcomeText"
+      id="welcome-section"></div>
+  }
+  @if (org) {
+    <app-gallery-container
+      [welcomeMessage]="org.WelcomeText"></app-gallery-container>
+  }
+  @if (org) {
+    <div
+      id="about-section"
+      fxLayout="row"
+      fxLayout.lt-lg="column"
+      fxLayoutAlign="space-around start"
+      fxLayoutGap="16px">
+      <!-- First Card -->
+      <mat-card fxFlex="70%" fxFlex.lt-lg="100" class="custom-card">
         <mat-card-header>
-          <img
-            mat-card-image
-            [src]="'/assets/sponsors/' + sponsor.filename"
-            alt="{{ sponsor.alt }}" />
+          <mat-card-title>{{ org.BandTitle }}</mat-card-title>
         </mat-card-header>
+        <img mat-card-image [src]="'assets/' + org.BandPicture" alt="" />
+        <mat-card-content>
+          <div
+            style="
+              font-family: 'Avenir Next Light', sans-serif;
+              line-height: 1.6;
+              color: #333;
+            ">
+            <div [innerHTML]="org.BandPresentation"></div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+      <!-- Second Card -->
+      <mat-card fxFlex="30%" fxFlex.lt-lg="100" class="custom-card">
+        <mat-card-header>
+          <mat-card-title>{{ org.CommitteeTitle }}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div
+            style="
+              font-family: 'Avenir Next Light', sans-serif;
+              line-height: 1.6;
+              color: #333;
+            ">
+            <p [innerHTML]="org.CommitteePresentation"></p>
+          </div>
+          <div
+            fxLayout="row wrap"
+            style="
+              font-family: 'Avenir Next Light', sans-serif;
+              line-height: 1.6;
+              color: #333;
+            ">
+            @for (member of org.CommitteeMembers; track member) {
+              <div fxFlex="100%">
+                <div style="padding: 10px; box-sizing: border-box">
+                  <strong>{{ member.Function }}</strong
+                  ><br />
+                  <span>{{ member.FirstName }} {{ member.LastName }}</span>
+                </div>
+              </div>
+            }
+          </div>
+        </mat-card-content>
       </mat-card>
     </div>
-  </div>
+  }
+
+  @let currentSponsors = sponsors();
+  @if (currentSponsors) {
+    <div id="sponsors-section" style="margin: 20px">
+      <!-- Introduction for Sponsors -->
+      <div style="margin-bottom: 20px">
+        <h2>Sponsors</h2>
+        <p>
+          Nous remercions infiniment nos sponsors pour leur soutien en 2024 et
+          vous les recommandons vivement !
+        </p>
+      </div>
+      <div fxLayout="row wrap" fxLayoutGap="10px" fxLayoutAlign="start center">
+        @for (sponsor of currentSponsors; track sponsor) {
+          <mat-card
+            class="sponsor-card"
+            fxFlex="20%"
+            fxFlex.gt-xs="200px"
+            fxLayoutAlign="center center">
+            <mat-card-header>
+              <img
+                mat-card-image
+                [src]="'/assets/sponsors/' + sponsor.filename"
+                alt="{{ sponsor.alt }}" />
+            </mat-card-header>
+          </mat-card>
+        }
+      </div>
+    </div>
+  }
 
   <div
     id="contact-section"
@@ -113,8 +118,10 @@
               (ngSubmit)="submitForm(contactForm)"
               style="display: flex; flex-direction: column; gap: 16px">
               <mat-form-field appearance="outline" class="full-width">
-                <mat-label>Prénom</mat-label>
+                <mat-label id="first-name-label">Prénom</mat-label>
                 <input
+                  id="first-name-input"
+                  aria-labelledby="first-name-label"
                   matInput
                   placeholder="Veuillez saisir votre prénom"
                   name="firstName"
@@ -122,8 +129,10 @@
                   required />
               </mat-form-field>
               <mat-form-field appearance="outline" class="full-width">
-                <mat-label>Nom</mat-label>
+                <mat-label id="last-name-label">Nom</mat-label>
                 <input
+                  id="last-name-input"
+                  aria-labelledby="last-name-label"
                   matInput
                   placeholder="Veuillez saisir votre nom"
                   name="lastName"
@@ -131,8 +140,10 @@
                   required />
               </mat-form-field>
               <mat-form-field appearance="outline" class="full-width">
-                <mat-label>Courriel</mat-label>
+                <mat-label id="email-label">Courriel</mat-label>
                 <input
+                  id="email-input"
+                  aria-labelledby="email-label"
                   [required]="true"
                   matInput
                   type="email"
@@ -143,8 +154,10 @@
                   email />
               </mat-form-field>
               <mat-form-field appearance="outline" class="full-width">
-                <mat-label>Téléphone</mat-label>
+                <mat-label id="phone-label">Téléphone</mat-label>
                 <input
+                  id="phone-input"
+                  aria-labelledby="phone-label"
                   matInput
                   type="tel"
                   placeholder="Veuillez saisir votre numéro de téléphone"
@@ -153,8 +166,10 @@
                   required />
               </mat-form-field>
               <mat-form-field appearance="outline" class="full-width">
-                <mat-label>Message</mat-label>
+                <mat-label id="message-label">Message</mat-label>
                 <textarea
+                  id="message-input"
+                  aria-labelledby="message-label"
                   [required]="true"
                   matInput
                   rows="6"
@@ -173,23 +188,31 @@
             </form>
           </div>
           <!-- Committee President Info -->
-          <div class="president-info" fxFlex="30%" *ngIf="organisation && president">
-            <div class="president-info-title">
-              {{ organisation.ContactPersonText }}
-            </div>
-            <div style="display: flex; flex-direction: column; gap: 8px">
-              <div>
-                <span>{{ president.FirstName }} {{ president.LastName }}</span>
+          @if (org) {
+            @if (president) {
+              <div class="president-info" fxFlex="30%">
+                <div class="president-info-title">
+                  {{ org.ContactPersonText }}
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 8px">
+                  <div>
+                    <span
+                      >{{ president.FirstName }} {{ president.LastName }}</span
+                    >
+                  </div>
+                  <div>Rue: {{ president.Address }}</div>
+                  <div>Ville: {{ president.Zip }} {{ president.City }}</div>
+                  <div>Téléphone: {{ president.PhoneNumber }}</div>
+                  <div>
+                    Courriel:
+                    <a href="mailto:{{ president.Email }}">{{
+                      president.Email
+                    }}</a>
+                  </div>
+                </div>
               </div>
-              <div>Rue: {{ president.Address }}</div>
-              <div>Ville: {{ president.Zip }} {{ president.City }}</div>
-              <div>Téléphone: {{ president.PhoneNumber }}</div>
-              <div>
-                Courriel:
-                <a href="mailto:{{ president.Email }}">{{ president.Email }}</a>
-              </div>
-            </div>
-          </div>
+            }
+          }
         </div>
       </mat-card-content>
     </mat-card>

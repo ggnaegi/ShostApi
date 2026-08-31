@@ -1,9 +1,10 @@
 import {
   Component,
-  Inject,
   HostListener,
+  inject,
   ViewChild,
   AfterViewInit,
+  ChangeDetectionStrategy,
 } from '@angular/core';
 import {
   MAT_DIALOG_DATA,
@@ -13,23 +14,22 @@ import {
   MatDialogTitle,
 } from '@angular/material/dialog';
 import { Album } from '../../api/gallery';
-import { NgForOf, NgIf } from '@angular/common';
+
 import { MatButton } from '@angular/material/button';
 import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-gallery-dialog',
-  standalone: true,
   templateUrl: './gallery-dialog.component.html',
   imports: [
     MatDialogActions,
     MatDialogContent,
     MatDialogTitle,
-    NgIf,
     MatButton,
     MatDialogClose,
     MatPaginator,
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['./gallery-dialog.component.css'],
 })
 export class GalleryDialogComponent implements AfterViewInit {
@@ -37,7 +37,9 @@ export class GalleryDialogComponent implements AfterViewInit {
   currentIndex = 0;
   isMobile = false;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: Album) {
+  public data = inject<Album>(MAT_DIALOG_DATA);
+
+  constructor() {
     this.checkScreenWidth();
   }
   ngAfterViewInit() {

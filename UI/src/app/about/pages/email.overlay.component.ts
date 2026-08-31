@@ -1,5 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { NgIf } from '@angular/common';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { EmailSendResult } from '../api/organisation';
 
 @Component({
@@ -7,21 +6,20 @@ import { EmailSendResult } from '../api/organisation';
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <ng-container *ngIf="result">
-      <div *ngIf="result" class="overlay">
-        <i
-          *ngIf="result.success"
-          class="fa fa-check-circle"
-          aria-hidden="true"></i>
-        <i
-          *ngIf="!result.success"
-          class="fa fa-exclamation-triangle"
-          aria-hidden="true"></i>
-        <span>{{ result.message }}</span>
+    @let emailSentResult = result();
+    @if (emailSentResult) {
+      <div class="overlay">
+        @if (emailSentResult?.success) {
+          <i class="fa fa-check-circle" aria-hidden="true"></i>
+        } @else {
+          <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+        }
+
+        <span>{{ result()?.message }}</span>
       </div>
-    </ng-container>
+    }
   `,
-  imports: [NgIf],
+  imports: [],
   styles: [
     `
       .overlay {
@@ -50,5 +48,5 @@ import { EmailSendResult } from '../api/organisation';
   ],
 })
 export class EmailOverlayComponent {
-  @Input() result: EmailSendResult | undefined = undefined;
+  readonly result = input<EmailSendResult | null | undefined>(undefined);
 }

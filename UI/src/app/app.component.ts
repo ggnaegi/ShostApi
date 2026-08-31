@@ -3,10 +3,10 @@ import {
   ChangeDetectionStrategy,
   Component,
   HostListener,
+  inject,
   OnDestroy,
   OnInit,
   PLATFORM_ID,
-  Inject,
 } from '@angular/core';
 import {
   IsActiveMatchOptions,
@@ -17,8 +17,7 @@ import {
   RouterOutlet,
 } from '@angular/router';
 import { AsyncPipe, isPlatformBrowser } from '@angular/common';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatToolbar } from '@angular/material/toolbar';
+import { MatToolbar, MatToolbarModule } from '@angular/material/toolbar';
 import { MatIcon } from '@angular/material/icon';
 import {
   MatSidenav,
@@ -27,20 +26,19 @@ import {
 } from '@angular/material/sidenav';
 import { MatListItem, MatNavList } from '@angular/material/list';
 import {
-  MatAnchor,
+  MatAnchor, MatButton,
   MatIconAnchor,
   MatIconButton,
 } from '@angular/material/button';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { NgIf } from '@angular/common';
+
 import { filter, Subscription } from 'rxjs';
 import { SpinnerService } from './spinner/services/spinner.service';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-root',
-  standalone: true,
-  changeDetection: ChangeDetectionStrategy.Default,
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [
     RouterOutlet,
     MatToolbar,
@@ -57,9 +55,9 @@ import { MatProgressSpinner } from '@angular/material/progress-spinner';
     RouterLink,
     RouterLinkActive,
     MatIconAnchor,
-    NgIf,
     MatProgressSpinner,
     AsyncPipe,
+    MatButton,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
@@ -82,11 +80,9 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
 
   routerSubscription?: Subscription;
 
-  constructor(
-    private router: Router,
-    public readonly spinnerService: SpinnerService,
-    @Inject(PLATFORM_ID) private platformId: object
-  ) {}
+  private readonly router = inject(Router);
+  public readonly spinnerService = inject(SpinnerService);
+  private readonly platformId = inject<object>(PLATFORM_ID);
 
   @HostListener('window:scroll', [])
   onWindowScroll() {
@@ -128,7 +124,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
           this.showFacebook = shouldShowFacebook;
         }
 
-        const sessionRouteMatch = url.match(/^\/session\/(\d{4})$/);
+        const sessionRouteMatch = new RegExp(/^\/session\/(\d{4})$/).exec(url);
         this.currentYear = sessionRouteMatch ? sessionRouteMatch[1] : null;
       });
   }

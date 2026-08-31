@@ -1,7 +1,4 @@
-import {
-  ApplicationConfig,
-  provideZoneChangeDetection,
-} from '@angular/core';
+import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import {
   InMemoryScrollingFeature,
   InMemoryScrollingOptions,
@@ -16,17 +13,14 @@ import {
   HTTP_INTERCEPTORS,
   provideHttpClient,
   withInterceptorsFromDi,
+  withXhr,
 } from '@angular/common/http';
-import { AbstractGalleryService } from './gallery/services/abstract.gallery.service';
-import { GalleryService } from './gallery/services/gallery.service';
-import { AbstractAboutService } from './about/services/abstract.about.service';
-import { AboutService } from './about/services/about.service';
 import { SpinnerInterceptor } from './spinner/interceptors/spinner.interceptor';
 import { SpinnerService } from './spinner/services/spinner.service';
 import { RecaptchaService } from './about/services/recaptcha.service';
-import { AbstractLayoutService } from './layout/services/abstract.layout.service';
-import { LayoutService } from './layout/services/layout.service';
 import { FbSdkService } from './layout/services/fb-sdk.service';
+import { provideStore } from '@ngrx/store';
+import { spinnerFeatureKey, spinnerReducer } from './spinner/store/spinner.reducer';
 
 const scrollConfig: InMemoryScrollingOptions = {
   scrollPositionRestoration: 'top',
@@ -45,18 +39,6 @@ export const appConfig: ApplicationConfig = {
       provide: AbstractSessionService,
       useClass: SessionService,
     },
-    {
-      provide: AbstractGalleryService,
-      useClass: GalleryService,
-    },
-    {
-      provide: AbstractAboutService,
-      useClass: AboutService,
-    },
-    {
-      provide: AbstractLayoutService,
-      useClass: LayoutService,
-    },
     SpinnerService,
     {
       provide: HTTP_INTERCEPTORS,
@@ -65,6 +47,9 @@ export const appConfig: ApplicationConfig = {
     },
     RecaptchaService,
     FbSdkService,
-    provideHttpClient(withInterceptorsFromDi())
+    provideHttpClient(withXhr(), withInterceptorsFromDi()),
+    provideStore({
+      [spinnerFeatureKey]: spinnerReducer,
+    }),
   ],
 };

@@ -1,12 +1,12 @@
 // fb-sdk.service.ts
-import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
+import { Injectable, inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 
 @Injectable({ providedIn: 'root' })
 export class FbSdkService {
   private loading?: Promise<void>;
 
-  constructor(@Inject(PLATFORM_ID) private pid: Object) {}
+  private readonly pid = inject<Object>(PLATFORM_ID);
 
   load(locale = 'fr_CH'): Promise<void> {
     if (!isPlatformBrowser(this.pid)) return Promise.resolve();
