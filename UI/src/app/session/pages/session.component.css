@@ -52,6 +52,11 @@
   margin-bottom: 16px;
 }
 
+.skeleton-flyer {
+  width: 100%;
+  height: 320px;
+}
+
 /* Column styling */
 .right-column {
   margin-top: 16px;

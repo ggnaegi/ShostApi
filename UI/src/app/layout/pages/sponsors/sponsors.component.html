@@ -25,4 +25,21 @@
       }
     </div>
   </div>
+} @else {
+  <div id="sponsors-section" style="margin: 20px">
+    <!-- Skeleton: introduction block -->
+    <div style="margin-bottom: 20px">
+      <div class="skeleton-shimmer skeleton-title" style="width: 180px"></div>
+      <div class="skeleton-shimmer skeleton-line" style="width: 60%; margin-top: 12px"></div>
+    </div>
+    <!-- Skeleton: sponsor grid block -->
+    <div fxLayout="row wrap" fxLayoutGap="10px" fxLayoutAlign="start center">
+      @for (i of [1, 2, 3, 4, 5, 6]; track i) {
+        <div
+          class="sponsor-card skeleton-shimmer skeleton-sponsor-card"
+          fxFlex="20%"
+          fxFlex.gt-xs="200px"></div>
+      }
+    </div>
+  </div>
 }
