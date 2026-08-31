@@ -99,6 +99,18 @@
   overflow-y: auto;
 }
 
+.skeleton-facebook-widget {
+  width: 100%;
+  height: 700px;
+  border-radius: 8px;
+}
+
+.skeleton-card-logo {
+  width: 100%;
+  height: 140px;
+  border-radius: 0;
+}
+
 /* Concerts Card - No spacing, no border, centered */
 .concerts-card {
   margin: 0 auto;

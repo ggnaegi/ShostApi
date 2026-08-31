@@ -1,3 +1,36 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+.image-with-loading-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.image-with-loading-container.is-loading {
+  min-height: 120px;
+}
+
+.skeleton-image-placeholder {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+img {
+  display: block;
+  position: relative;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+img.image-loaded {
+  opacity: 1;
+}
+
 .card-logo {
   width: 100%;
   height: auto;

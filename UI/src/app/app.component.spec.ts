@@ -2,19 +2,13 @@ import { beforeEach, describe, expect, it } from 'vitest';
 import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { provideStore } from '@ngrx/store';
-import { spinnerFeatureKey, spinnerReducer } from './spinner/store/spinner.reducer';
 import { AppComponent } from './app.component';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [AppComponent],
-      providers: [
-        provideRouter([]),
-        provideStore({
-          [spinnerFeatureKey]: spinnerReducer,
-        }),
-      ],
+      providers: [provideRouter([]), provideStore()],
     }).compileComponents();
   });
 

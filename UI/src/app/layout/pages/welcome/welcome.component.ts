@@ -17,7 +17,6 @@ import {
   faMapMarkerAlt,
   faTicket,
 } from '@fortawesome/free-solid-svg-icons';
-import { FbPageXfbmlComponent } from './fb.page.xml.component';
 
 @Component({
   selector: 'app-welcome',
@@ -31,7 +30,6 @@ import { FbPageXfbmlComponent } from './fb.page.xml.component';
     FaIconComponent,
     MatButton,
     MatCardContent,
-    FbPageXfbmlComponent,
   ],
   templateUrl: './welcome.component.html',
   changeDetection: ChangeDetectionStrategy.Eager,
