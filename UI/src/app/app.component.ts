@@ -16,7 +16,7 @@ import {
   RouterLinkActive,
   RouterOutlet,
 } from '@angular/router';
-import { AsyncPipe, isPlatformBrowser } from '@angular/common';
+import { isPlatformBrowser } from '@angular/common';
 import { MatToolbar, MatToolbarModule } from '@angular/material/toolbar';
 import { MatIcon } from '@angular/material/icon';
 import {
@@ -26,15 +26,13 @@ import {
 } from '@angular/material/sidenav';
 import { MatListItem, MatNavList } from '@angular/material/list';
 import {
-  MatAnchor, MatButton,
+  MatAnchor,
+  MatButton,
   MatIconAnchor,
   MatIconButton,
 } from '@angular/material/button';
 import { FlexLayoutModule } from '@angular/flex-layout';
-
 import { filter, Subscription } from 'rxjs';
-import { SpinnerService } from './spinner/services/spinner.service';
-import { MatProgressSpinner } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-root',
@@ -55,8 +53,6 @@ import { MatProgressSpinner } from '@angular/material/progress-spinner';
     RouterLink,
     RouterLinkActive,
     MatIconAnchor,
-    MatProgressSpinner,
-    AsyncPipe,
     MatButton,
   ],
   templateUrl: './app.component.html',
@@ -81,7 +77,6 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
   routerSubscription?: Subscription;
 
   private readonly router = inject(Router);
-  public readonly spinnerService = inject(SpinnerService);
   private readonly platformId = inject<object>(PLATFORM_ID);
 
   @HostListener('window:scroll', [])

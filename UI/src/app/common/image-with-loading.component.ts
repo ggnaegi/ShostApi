@@ -1,10 +1,9 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  inject,
   input,
+  signal,
 } from '@angular/core';
-import { SpinnerService } from '../spinner/services/spinner.service';
 
 @Component({
   selector: 'app-image-with-loading',
@@ -12,7 +11,19 @@ import { SpinnerService } from '../spinner/services/spinner.service';
   imports: [],
   styleUrl: './image-with-loading.component.scss',
   template: `
-    <img [src]="src()" [alt]="alt()" [class]="class()" (load)="loaded()" />
+    <div
+      class="image-with-loading-container"
+      [class.is-loading]="!imageLoaded()">
+      @if (!imageLoaded()) {
+        <div class="skeleton-shimmer skeleton-image-placeholder"></div>
+      }
+      <img
+        [src]="src()"
+        [alt]="alt()"
+        [class]="class()"
+        [class.image-loaded]="imageLoaded()"
+        (load)="loaded()" />
+    </div>
   `,
 })
 export class ImageWithLoadingComponent {
@@ -22,13 +33,9 @@ export class ImageWithLoadingComponent {
 
   public readonly class = input<string>();
 
-  private readonly spinnerService = inject(SpinnerService);
-
-  constructor() {
-    this.spinnerService.show();
-  }
+  protected readonly imageLoaded = signal(false);
 
   public loaded(): void {
-    this.spinnerService.hide();
+    this.imageLoaded.set(true);
   }
 }
