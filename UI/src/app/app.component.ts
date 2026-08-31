@@ -1,13 +1,12 @@
 import {
-  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
   HostListener,
   inject,
-  OnDestroy,
   OnInit,
-  PLATFORM_ID,
+  signal,
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
   IsActiveMatchOptions,
   NavigationEnd,
@@ -16,7 +15,6 @@ import {
   RouterLinkActive,
   RouterOutlet,
 } from '@angular/router';
-import { isPlatformBrowser } from '@angular/common';
 import { MatToolbar, MatToolbarModule } from '@angular/material/toolbar';
 import { MatIcon } from '@angular/material/icon';
 import {
@@ -32,11 +30,11 @@ import {
   MatIconButton,
 } from '@angular/material/button';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { filter, Subscription } from 'rxjs';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-root',
-  changeDetection: ChangeDetectionStrategy.Eager,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     RouterOutlet,
     MatToolbar,
@@ -58,7 +56,7 @@ import { filter, Subscription } from 'rxjs';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
-export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
+export class AppComponent implements OnInit {
   title = "Site de l'harmonie Shostakovich";
 
   public linkActiveOptions: IsActiveMatchOptions = {
@@ -68,16 +66,12 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
     fragment: 'exact',
   };
 
-  currentYear: string | null = null;
-  showMenu = true;
-  showFacebook = true;
-  showBackToTop = false;
-  showFooter = false;
-
-  routerSubscription?: Subscription;
+  currentYear = signal<string | null>(null);
+  showMenu = signal(true);
+  showBackToTop = signal(false);
+  showFooter = signal(false);
 
   private readonly router = inject(Router);
-  private readonly platformId = inject<object>(PLATFORM_ID);
 
   @HostListener('window:scroll', [])
   onWindowScroll() {
@@ -87,50 +81,25 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
       document.body.scrollTop ||
       0;
 
-    this.showFooter = true;
-    this.showBackToTop = scrollTop > 300;
-  }
-
-  ngAfterViewInit() {
-    setTimeout(() => {
-      const initialLogo = document.getElementById('initial-logo');
-      if (initialLogo) {
-        initialLogo.style.display = 'none';
-      }
-    }, 2000);
+    this.showFooter.set(true);
+    this.showBackToTop.set(scrollTop > 300);
   }
 
   ngOnInit(): void {
-    this.routerSubscription = this.router.events
-      .pipe(filter(event => event instanceof NavigationEnd))
+    this.router.events
+      .pipe(
+        filter(event => event instanceof NavigationEnd),
+        takeUntilDestroyed()
+      )
       .subscribe(() => {
         const url = this.router.url;
-
-        this.showMenu = !url.includes('/admin');
-        const shouldShowFacebook = url.includes('/welcome');
-
-        if (
-          shouldShowFacebook &&
-          !this.showFacebook &&
-          isPlatformBrowser(this.platformId)
-        ) {
-          this.showFacebook = true;
-        } else {
-          this.showFacebook = shouldShowFacebook;
-        }
-
+        this.showMenu.set(!url.includes('/admin'));
         const sessionRouteMatch = new RegExp(/^\/session\/(\d{4})$/).exec(url);
-        this.currentYear = sessionRouteMatch ? sessionRouteMatch[1] : null;
+        this.currentYear.set(sessionRouteMatch ? sessionRouteMatch[1] : null);
       });
   }
 
   scrollToTop(): void {
     window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-
-  ngOnDestroy(): void {
-    if (this.routerSubscription) {
-      this.routerSubscription.unsubscribe();
-    }
   }
 }
