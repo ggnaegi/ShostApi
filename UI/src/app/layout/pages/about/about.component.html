@@ -1,4 +1,4 @@
-<ng-container *ngIf="data">
+@if (data(); as data) {
   <div class="floating-menu">
     <a
       routerLink="."
@@ -7,9 +7,10 @@
       [matTooltip]="isMobile ? data.BandTitle : null"
       [class.active]="activeSection === 'band'">
       <i class="fa-solid fa-users menu-icon"></i>
-      <span *ngIf="!isMobile">{{ data.BandTitle }}</span>
+      @if (!isMobile) {
+        <span>{{ data.BandTitle }}</span>
+      }
     </a>
-
     <a
       routerLink="."
       fragment="committee"
@@ -17,18 +18,20 @@
       [matTooltip]="isMobile ? data.CommitteeTitle : null"
       [class.active]="activeSection === 'committee'">
       <i class="fa-solid fa-user-tie menu-icon"></i>
-      <span *ngIf="!isMobile">{{ data.CommitteeTitle }}</span>
+      @if (!isMobile) {
+        <span>{{ data.CommitteeTitle }}</span>
+      }
     </a>
   </div>
-
   <div class="about-content">
     <!-- Band Section -->
     <div id="band" class="anchor-section">
       <!-- Full-width image outside card -->
       <div class="full-viewport-image-container">
-        <img [src]="'assets/' + data.BandPicture" alt="{{ data.BandTitle }}" />
+        <img
+          [src]="'assets/' + data.BandPicture"
+          alt="{{ data.BandTitle }}" />
       </div>
-
       <!-- Card with content -->
       <mat-card class="content-card">
         <mat-card-header>
@@ -41,7 +44,6 @@
         </mat-card-content>
       </mat-card>
     </div>
-
     <!-- Committee Card -->
     <div id="committee" class="anchor-section">
       <mat-card class="content-card">
@@ -55,15 +57,15 @@
             <p [innerHTML]="data.CommitteePresentation"></p>
           </div>
           <div class="committee-members">
-            <div
-              class="member-item"
-              *ngFor="let member of data.CommitteeMembers">
-              <strong>{{ member.Function }}</strong>
-              <span>{{ member.FirstName }} {{ member.LastName }}</span>
-            </div>
+            @for (member of data.CommitteeMembers; track member) {
+              <div class="member-item">
+                <strong>{{ member.Function }}</strong>
+                <span>{{ member.FirstName }} {{ member.LastName }}</span>
+              </div>
+            }
           </div>
         </mat-card-content>
       </mat-card>
     </div>
   </div>
-</ng-container>
+}

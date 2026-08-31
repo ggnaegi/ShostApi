@@ -1,27 +1,20 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { inject, Injectable } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { spinnerActions } from '../store/spinner.actions';
+import { selectSpinnerIsLoading } from '../store/spinner.selectors';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SpinnerService {
-  private loadingCount = 0;
-
-  private loadingSubject = new BehaviorSubject<boolean>(true);
-  public isLoading$ = this.loadingSubject.asObservable();
+  private readonly store = inject(Store);
+  public readonly isLoading$ = this.store.select(selectSpinnerIsLoading);
 
   show() {
-    this.loadingCount++;
-    this.loadingSubject.next(true);
+    this.store.dispatch(spinnerActions.show());
   }
 
   hide() {
-    if (this.loadingCount > 0) {
-      this.loadingCount--;
-    }
-
-    if (this.loadingCount === 0) {
-      this.loadingSubject.next(false);
-    }
+    this.store.dispatch(spinnerActions.hide());
   }
 }

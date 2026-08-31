@@ -1,11 +1,12 @@
 import {
   Component,
-  EventEmitter,
-  Input,
+  inject,
   OnChanges,
   OnInit,
-  Output,
   SimpleChanges,
+  ChangeDetectionStrategy,
+  input,
+  output,
 } from '@angular/core';
 import { Session } from '../../../session/api/session-element';
 import {
@@ -18,7 +19,7 @@ import {
 import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
 import { MatButton, MatIconButton } from '@angular/material/button';
-import { NgForOf, NgIf } from '@angular/common';
+
 import { MatIcon } from '@angular/material/icon';
 import {
   MatDatepicker,
@@ -41,21 +42,14 @@ import {
 
 @Component({
   selector: 'app-session-admin',
-  standalone: true,
   imports: [
     MatFormField,
     MatInput,
     ReactiveFormsModule,
     MatButton,
-    NgForOf,
     MatIconButton,
     MatIcon,
-    MatDatepickerToggle,
-    MatDatepicker,
-    MatDatepickerInput,
     MatLabel,
-    MatGridList,
-    MatGridTile,
     MatSelect,
     MatOption,
     MatNativeDateModule,
@@ -63,26 +57,23 @@ import {
     MatExpansionPanel,
     MatExpansionPanelTitle,
     MatExpansionPanelHeader,
-    NgIf,
   ],
   templateUrl: './session-admin.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './session-admin.component.css',
 })
 export class SessionAdminComponent implements OnInit, OnChanges {
-  @Input()
-  sessionData: Session | null = null;
+  readonly sessionData = input<Session | null>(null);
 
-  @Output()
-  yearChanged = new EventEmitter<number>();
+  readonly yearChanged = output<number>();
 
-  @Output()
-  sessionSubmitted = new EventEmitter<Session>();
+  readonly sessionSubmitted = output<Session>();
 
   sessionForm!: FormGroup;
   years: number[] = [];
   selectedYear?: number;
 
-  constructor(private fb: FormBuilder) {}
+  private readonly fb = inject(FormBuilder);
 
   ngOnInit(): void {
     const currentYear = new Date().getFullYear();
@@ -109,8 +100,9 @@ export class SessionAdminComponent implements OnInit, OnChanges {
       Concerts: this.fb.array([]),
     });
 
-    if (this.sessionData) {
-      this.populateForm(this.sessionData);
+    const sessionData = this.sessionData();
+    if (sessionData) {
+      this.populateForm(sessionData);
     }
   }
 
@@ -127,7 +119,7 @@ export class SessionAdminComponent implements OnInit, OnChanges {
 
   updateYear(event: MatSelectChange): void {
     this.selectedYear = event.value;
-    this.yearChanged.emit(this.selectedYear);
+    this.yearChanged.emit(this.selectedYear!);
   }
 
   public get Soloists() {

@@ -1,11 +1,12 @@
 import {
   Component,
-  EventEmitter,
-  Input,
+  inject,
   OnChanges,
   OnInit,
-  Output,
   SimpleChanges,
+  ChangeDetectionStrategy,
+  input,
+  output,
 } from '@angular/core';
 import { Organisation } from '../../../about/api/organisation';
 import {
@@ -27,13 +28,12 @@ import {
   MatExpansionPanelTitle,
 } from '@angular/material/expansion';
 import { MatDivider } from '@angular/material/divider';
-import { NgForOf, NgIf } from '@angular/common';
+
 import { MatOption } from '@angular/material/core';
 import { MatSelect, MatSelectChange } from '@angular/material/select';
 
 @Component({
   selector: 'app-organisation-admin',
-  standalone: true,
   imports: [
     MatButton,
     MatIconButton,
@@ -47,30 +47,25 @@ import { MatSelect, MatSelectChange } from '@angular/material/select';
     MatExpansionPanelTitle,
     MatExpansionPanelHeader,
     MatExpansionPanel,
-    MatDivider,
-    NgForOf,
     MatOption,
     MatSelect,
-    NgIf,
   ],
   templateUrl: './organisation-admin.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './organisation-admin.component.css',
 })
 export class OrganisationAdminComponent implements OnInit, OnChanges {
-  @Input()
-  organisationData: Organisation | null = null;
+  readonly organisationData = input<Organisation | null>(null);
 
-  @Output()
-  yearChanged = new EventEmitter<number>();
+  readonly yearChanged = output<number>();
 
-  @Output()
-  organisationSubmitted = new EventEmitter<Organisation>();
+  readonly organisationSubmitted = output<Organisation>();
 
   bandForm!: FormGroup;
   years: number[] = [];
   selectedYear?: number;
 
-  constructor(private fb: FormBuilder) {}
+  private readonly fb = inject(FormBuilder);
 
   ngOnInit(): void {
     const currentYear = new Date().getFullYear();
@@ -98,16 +93,14 @@ export class OrganisationAdminComponent implements OnInit, OnChanges {
       Sponsors: this.fb.array([]),
     });
 
-    if (this.organisationData) {
-      this.populateBandForm(this.organisationData);
+    const organisationData = this.organisationData();
+    if (organisationData) {
+      this.populateBandForm(organisationData);
     }
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (
-      changes['organisationData'] &&
-      changes['organisationData'].currentValue
-    ) {
+    if (changes['organisationData']?.currentValue) {
       const currentValue = changes['organisationData'].currentValue;
       this.populateBandForm(
         currentValue === 'Organisation not found.'
@@ -119,7 +112,7 @@ export class OrganisationAdminComponent implements OnInit, OnChanges {
 
   updateYear(event: MatSelectChange): void {
     this.selectedYear = event.value;
-    this.yearChanged.emit(this.selectedYear);
+    this.yearChanged.emit(this.selectedYear!);
   }
 
   get CommitteeMembers() {

@@ -1,5 +1,5 @@
-import { DOCUMENT } from '@angular/common';
-import { Inject, Injectable } from '@angular/core';
+
+import { inject, Injectable, DOCUMENT } from '@angular/core';
 import { environment } from '../../../environments/environment';
 
 declare var grecaptcha: any;
@@ -11,7 +11,7 @@ export class RecaptchaService {
   private siteKey: string | null = null;
   private loaded: boolean = false;
 
-  constructor(@Inject(DOCUMENT) private readonly document: Document) {}
+  private readonly document = inject<Document>(DOCUMENT);
 
   public load(siteKey: string): void {
     if (this.loaded) {

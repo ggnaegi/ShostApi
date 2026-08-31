@@ -1,6 +1,8 @@
-<div *ngIf="spinnerService.isLoading$ | async" class="overlay">
-  <mat-spinner></mat-spinner>
-</div>
+@if (spinnerService.isLoading$ | async) {
+  <div class="overlay">
+    <mat-spinner></mat-spinner>
+  </div>
+}
 <!-- Top Bar with Logo, Social Icons, and Mobile Menu Button -->
 <mat-toolbar
   color="primary"
@@ -54,84 +56,86 @@
   fxLayout="row"
   fxLayoutAlign="center"
   fxHide.lt-md>
-  <div
-    class="menu-items"
-    *ngIf="!showMenu"
-    fxLayout="row"
-    fxLayoutAlign="space-around stretch"
-    fxFlexFill>
-    <a
-      mat-button
-      routerLink="/welcome"
-      routerLinkActive="active-link"
-      [routerLinkActiveOptions]="linkActiveOptions"
-      class="menu-link"
-    >Accueil</a
-    >
-    <a
-      mat-button
-      routerLink="/admin/sessions"
-      routerLinkActive="active-link"
-      [routerLinkActiveOptions]="linkActiveOptions"
-      class="menu-link"
-    >Sessions</a
-    >
-    <a
-      mat-button
-      routerLink="/admin/organisation"
-      routerLinkActive="active-link"
-      [routerLinkActiveOptions]="linkActiveOptions"
-      class="menu-link"
-    >Organisation</a
-    >
-  </div>
-  <div
-    class="menu-items"
-    *ngIf="showMenu"
-    fxLayout="row"
-    fxLayoutAlign="space-around stretch"
-    fxFlexFill>
-    <a
-      mat-button
-      routerLink="/welcome"
-      routerLinkActive="active-link"
-      [routerLinkActiveOptions]="linkActiveOptions"
-      class="menu-link"
-    >Accueil</a
-    >
-    <a
-      mat-button
-      routerLink="/about"
-      [routerLinkActiveOptions]="linkActiveOptions"
-      routerLinkActive="active-link"
-      class="menu-link"
-    >A Propos</a
-    >
-    <a
-      mat-button
-      routerLink="/session"
-      [routerLinkActiveOptions]="linkActiveOptions"
-      routerLinkActive="active-link"
-      class="menu-link"
-    >Concerts</a
-    >
-    <a
-      mat-button
-      routerLink="/contact"
-      [routerLinkActiveOptions]="linkActiveOptions"
-      routerLinkActive="active-link"
-      class="menu-link"
-    >Contact</a
-    >
-    <a
-      mat-button
-      routerLink="/sponsors"
-      [routerLinkActiveOptions]="linkActiveOptions"
-      routerLinkActive="active-link"
-      class="menu-link"
-    >Sponsors</a
-    >
-  </div>
+  @if (!showMenu) {
+    <div
+      class="menu-items"
+      fxLayout="row"
+      fxLayoutAlign="space-around stretch"
+      fxFlexFill>
+      <a
+        mat-button
+        routerLink="/welcome"
+        routerLinkActive="active-link"
+        [routerLinkActiveOptions]="linkActiveOptions"
+        class="menu-link"
+        >Accueil</a
+      >
+      <a
+        mat-button
+        routerLink="/admin/sessions"
+        routerLinkActive="active-link"
+        [routerLinkActiveOptions]="linkActiveOptions"
+        class="menu-link"
+        >Sessions</a
+      >
+      <a
+        mat-button
+        routerLink="/admin/organisation"
+        routerLinkActive="active-link"
+        [routerLinkActiveOptions]="linkActiveOptions"
+        class="menu-link"
+        >Organisation</a
+      >
+    </div>
+  }
+  @if (showMenu) {
+    <div
+      class="menu-items"
+      fxLayout="row"
+      fxLayoutAlign="space-around stretch"
+      fxFlexFill>
+      <a
+        mat-button
+        routerLink="/welcome"
+        routerLinkActive="active-link"
+        [routerLinkActiveOptions]="linkActiveOptions"
+        class="menu-link"
+        >Accueil</a
+      >
+      <a
+        mat-button
+        routerLink="/about"
+        [routerLinkActiveOptions]="linkActiveOptions"
+        routerLinkActive="active-link"
+        class="menu-link"
+        >A Propos</a
+      >
+      <a
+        mat-button
+        routerLink="/session"
+        [routerLinkActiveOptions]="linkActiveOptions"
+        routerLinkActive="active-link"
+        class="menu-link"
+        >Concerts</a
+      >
+      <a
+        mat-button
+        routerLink="/contact"
+        [routerLinkActiveOptions]="linkActiveOptions"
+        routerLinkActive="active-link"
+        class="menu-link"
+        >Contact</a
+      >
+      <a
+        mat-button
+        routerLink="/sponsors"
+        [routerLinkActiveOptions]="linkActiveOptions"
+        routerLinkActive="active-link"
+        class="menu-link"
+        >Sponsors</a
+      >
+    </div>
+  }
 </mat-toolbar>
 
 <!-- Sidenav for Mobile -->
@@ -142,96 +146,101 @@
     position="end"
     fxShow.lt-md
     class="mobile-sidenav">
-    <mat-nav-list *ngIf="!showMenu">
-      <a
-        mat-list-item
-        routerLink="/welcome"
-        routerLinkActive="active-link"
-        [routerLinkActiveOptions]="linkActiveOptions"
-        class="menu-link"
-        fragment="welcome-section"
-        (click)="sidenav.close()"
-      >Accueil</a
-      >
-      <a
-        mat-list-item
-        routerLink="/admin/sessions"
-        routerLinkActive="active-link"
-        [routerLinkActiveOptions]="linkActiveOptions"
-        class="menu-link"
-        (click)="sidenav.close()"
-      >Sessions</a
-      >
-      <a
-        mat-list-item
-        routerLink="/admin/organisation"
-        routerLinkActive="active-link"
-        [routerLinkActiveOptions]="linkActiveOptions"
-        class="menu-link"
-        (click)="sidenav.close()"
-      >Organisation</a
-      >
-    </mat-nav-list>
-    <mat-nav-list *ngIf="showMenu">
-      <a
-        mat-list-item
-        routerLink="/welcome"
-        routerLinkActive="active-link"
-        [routerLinkActiveOptions]="linkActiveOptions"
-        class="menu-link"
-        (click)="sidenav.close()"
-      >Accueil</a
-      >
-      <a
-        mat-list-item
-        routerLink="/about"
-        routerLinkActive="active-link"
-        [routerLinkActiveOptions]="linkActiveOptions"
-        class="menu-link"
-        (click)="sidenav.close()"
-      >A Propos</a
-      >
-      <a
-        mat-list-item
-        routerLink="/session"
-        routerLinkActive="active-link"
-        [routerLinkActiveOptions]="linkActiveOptions"
-        class="menu-link"
-        (click)="sidenav.close()"
-      >Concerts</a
-      >
-      <a
-        mat-list-item
-        routerLink="/contact"
-        routerLinkActive="active-link"
-        [routerLinkActiveOptions]="linkActiveOptions"
-        class="menu-link"
-        (click)="sidenav.close()"
-      >Contact</a
-      >
-      <a
-        mat-list-item
-        routerLink="/sponsors"
-        routerLinkActive="active-link"
-        [routerLinkActiveOptions]="linkActiveOptions"
-        class="menu-link"
-        (click)="sidenav.close()"
-      >Sponsors</a
-      >
-    </mat-nav-list>
+    @if (!showMenu) {
+      <mat-nav-list>
+        <a
+          mat-list-item
+          routerLink="/welcome"
+          routerLinkActive="active-link"
+          [routerLinkActiveOptions]="linkActiveOptions"
+          class="menu-link"
+          fragment="welcome-section"
+          (click)="sidenav.close()"
+          >Accueil</a
+        >
+        <a
+          mat-list-item
+          routerLink="/admin/sessions"
+          routerLinkActive="active-link"
+          [routerLinkActiveOptions]="linkActiveOptions"
+          class="menu-link"
+          (click)="sidenav.close()"
+          >Sessions</a
+        >
+        <a
+          mat-list-item
+          routerLink="/admin/organisation"
+          routerLinkActive="active-link"
+          [routerLinkActiveOptions]="linkActiveOptions"
+          class="menu-link"
+          (click)="sidenav.close()"
+          >Organisation</a
+        >
+      </mat-nav-list>
+    }
+    @if (showMenu) {
+      <mat-nav-list>
+        <a
+          mat-list-item
+          routerLink="/welcome"
+          routerLinkActive="active-link"
+          [routerLinkActiveOptions]="linkActiveOptions"
+          class="menu-link"
+          (click)="sidenav.close()"
+          >Accueil</a
+        >
+        <a
+          mat-list-item
+          routerLink="/about"
+          routerLinkActive="active-link"
+          [routerLinkActiveOptions]="linkActiveOptions"
+          class="menu-link"
+          (click)="sidenav.close()"
+          >A Propos</a
+        >
+        <a
+          mat-list-item
+          routerLink="/session"
+          routerLinkActive="active-link"
+          [routerLinkActiveOptions]="linkActiveOptions"
+          class="menu-link"
+          (click)="sidenav.close()"
+          >Concerts</a
+        >
+        <a
+          mat-list-item
+          routerLink="/contact"
+          routerLinkActive="active-link"
+          [routerLinkActiveOptions]="linkActiveOptions"
+          class="menu-link"
+          (click)="sidenav.close()"
+          >Contact</a
+        >
+        <a
+          mat-list-item
+          routerLink="/sponsors"
+          routerLinkActive="active-link"
+          [routerLinkActiveOptions]="linkActiveOptions"
+          class="menu-link"
+          (click)="sidenav.close()"
+          >Sponsors</a
+        >
+      </mat-nav-list>
+    }
   </mat-sidenav>
 
   <mat-sidenav-content>
-    <div
-      tabindex="0"
-      role="button"
-      (keyup.enter)="scrollToTop()"
-      (click)="scrollToTop()"
-      *ngIf="showBackToTop"
-      class="back-to-top"
-      aria-label="Scroll to top">
-      <i class="fas fa-arrow-up"></i>
-    </div>
+    @if (showBackToTop) {
+      <div
+        tabindex="0"
+        role="button"
+        (keyup.enter)="scrollToTop()"
+        (click)="scrollToTop()"
+        class="back-to-top"
+        aria-label="Scroll to top">
+        <i class="fas fa-arrow-up"></i>
+      </div>
+    }
     <div class="content" fxLayout="column" fxLayoutAlign="start stretch">
       <router-outlet></router-outlet>
     </div>

@@ -560,6 +560,12 @@ mat-toolbar {
   padding: 0;
 }
 
+html,
+body {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
 .mat-toolbar {
   box-sizing: border-box;
 }

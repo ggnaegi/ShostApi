@@ -1,6 +1,12 @@
-import { Component, HostListener, Input, OnInit } from '@angular/core';
+import {
+  Component,
+  HostListener,
+  OnInit,
+  ChangeDetectionStrategy,
+  input,
+} from '@angular/core';
 import { AboutPageDto } from '../../api/layout.models';
-import { NgForOf, NgIf } from '@angular/common';
+
 import {
   MatCard,
   MatCardContent,
@@ -13,24 +19,21 @@ import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-about',
-  standalone: true,
   imports: [
-    NgIf,
     MatCard,
     MatCardHeader,
     MatCardTitle,
     FlexModule,
     MatCardContent,
-    NgForOf,
     MatTooltip,
     RouterLink,
   ],
   templateUrl: './about.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './about.component.css',
 })
 export class AboutComponent implements OnInit {
-  @Input()
-  data: AboutPageDto | null = null;
+  readonly data = input<AboutPageDto | null>(null);
   activeSection: 'band' | 'committee' = 'band';
   isFloatingMenuVisible = false;
   isMobile = false;

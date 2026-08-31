@@ -2,14 +2,14 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  EventEmitter,
   HostListener,
-  Input,
+  inject,
   OnDestroy,
-  Output,
+  input,
+  output,
 } from '@angular/core';
 import { Session } from '../api/session-element';
-import { DatePipe, NgForOf, NgIf } from '@angular/common';
+import { DatePipe } from '@angular/common';
 import { ExtendedModule, FlexModule } from '@angular/flex-layout';
 import { Register, RegisterMusician } from '../api/parsed-session-element';
 import {
@@ -38,16 +38,13 @@ import { Organisation } from '../../about/api/organisation';
 
 @Component({
   selector: 'app-session',
-  standalone: true,
   imports: [
-    NgIf,
     FlexModule,
     MatCard,
     MatCardContent,
     MatCardHeader,
     MatCardSubtitle,
     MatCardTitle,
-    NgForOf,
     FaIconComponent,
     DatePipe,
     FontAwesomeModule,
@@ -63,14 +60,10 @@ import { Organisation } from '../../about/api/organisation';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SessionComponent implements OnDestroy {
-  @Input()
-  sessionData: Session | null = null;
+  sessionData = input<Session | null>(null);
+  organisationData = input<Organisation | null>(null);
 
-  @Input()
-  organisationData: Organisation | null = null;
-
-  @Output()
-  yearChanged = new EventEmitter<number>();
+  readonly yearChanged = output<number>();
 
   faTicket = faTicket;
   faCalendarAlt = faCalendarAlt;
@@ -83,7 +76,7 @@ export class SessionComponent implements OnDestroy {
 
   mobileSelectedYear = 2026;
 
-  public constructor(private cdr: ChangeDetectorRef) {}
+  private readonly cdr = inject(ChangeDetectorRef);
 
   public onYearChanged(year: number) {
     this.yearChanged.emit(year);
@@ -99,13 +92,14 @@ export class SessionComponent implements OnDestroy {
    * grouping musicians by register
    */
   public getRegisters(): Register[] {
-    if (!this.sessionData?.Musicians) {
+    const sessionData = this.sessionData();
+    if (!sessionData?.Musicians) {
       return [];
     }
 
     const registerMap: Record<string, RegisterMusician[]> = {};
 
-    this.sessionData.Musicians.forEach(musician => {
+    sessionData.Musicians.forEach(musician => {
       const { Instrument, FirstName, LastName } = musician;
       if (Instrument) {
         if (!registerMap[Instrument]) {

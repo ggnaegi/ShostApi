@@ -1,14 +1,14 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  EventEmitter,
-  Input,
+  inject,
   OnChanges,
-  Output,
   SimpleChanges,
+  input,
+  output,
 } from '@angular/core';
 import { GalleriesDefinition, Logo } from '../api/gallery';
-import { NgForOf, NgIf } from '@angular/common';
+
 import { MatDialog } from '@angular/material/dialog';
 import { FlexModule } from '@angular/flex-layout';
 import {
@@ -24,10 +24,7 @@ import { ImageWithLoadingComponent } from '../../common/image-with-loading.compo
 
 @Component({
   selector: 'app-gallery',
-  standalone: true,
   imports: [
-    NgForOf,
-    NgIf,
     FlexModule,
     MatCard,
     MatCardHeader,
@@ -42,16 +39,13 @@ import { ImageWithLoadingComponent } from '../../common/image-with-loading.compo
   styleUrl: './gallery.component.css',
 })
 export class GalleryComponent implements OnChanges {
-  @Input()
-  welcomeMessage = '';
-  @Input()
-  galleriesDefinitions: GalleriesDefinition | null = null;
-  @Output()
-  yearChanged = new EventEmitter<number>();
+  welcomeMessage = input('');
+  galleriesDefinitions = input<GalleriesDefinition | null>(null);
+  yearChanged = output<number>();
 
   starredLogo: Logo | undefined = undefined;
 
-  constructor(public dialog: MatDialog) {}
+  public dialog = inject(MatDialog);
 
   ngOnChanges(changes: SimpleChanges): void {
     this.setStarredGallery();
@@ -65,7 +59,7 @@ export class GalleryComponent implements OnChanges {
   }
 
   openGalleryDialog(year: number): void {
-    const gallery = this.galleriesDefinitions?.galleries.find(
+    const gallery = this.galleriesDefinitions()?.galleries.find(
       g => g.year === year
     );
 
@@ -94,12 +88,13 @@ export class GalleryComponent implements OnChanges {
   }
 
   private setStarredGallery(): void {
-    if (!this.galleriesDefinitions?.logos) {
+    const galleriesDefinitions = this.galleriesDefinitions();
+    if (!galleriesDefinitions?.logos) {
       return;
     }
 
-    this.starredLogo = this.galleriesDefinitions?.logos.reduce(
-      (prev, current) => (prev.year > current.year ? prev : current)
+    this.starredLogo = galleriesDefinitions?.logos.reduce((prev, current) =>
+      prev.year > current.year ? prev : current
     );
   }
 }

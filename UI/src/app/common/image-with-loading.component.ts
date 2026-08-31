@@ -1,27 +1,30 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  input,
+} from '@angular/core';
 import { SpinnerService } from '../spinner/services/spinner.service';
 
 @Component({
   selector: 'app-image-with-loading',
-  standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [],
   styleUrl: './image-with-loading.component.scss',
   template: `
-    <img [src]="src" [alt]="alt" [class]="class" (load)="loaded()" />
+    <img [src]="src()" [alt]="alt()" [class]="class()" (load)="loaded()" />
   `,
 })
 export class ImageWithLoadingComponent {
-  @Input()
-  public src?: string;
+  public readonly src = input<string>();
 
-  @Input()
-  public alt?: string;
+  public readonly alt = input<string>();
 
-  @Input()
-  public class?: string;
+  public readonly class = input<string>();
 
-  constructor(private readonly spinnerService: SpinnerService) {
+  private readonly spinnerService = inject(SpinnerService);
+
+  constructor() {
     this.spinnerService.show();
   }
 

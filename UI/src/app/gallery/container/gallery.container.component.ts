@@ -1,32 +1,35 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  EventEmitter,
-  Input,
-  Output,
+  inject,
+  input,
+  OnInit,
+  output,
 } from '@angular/core';
-import { AsyncPipe } from '@angular/common';
 import { GalleryComponent } from '../pages/gallery.component';
-import { AbstractGalleryService } from '../services/abstract.gallery.service';
+import { AppDataStore } from '../../store/app-data/app-data.store';
 
 @Component({
   selector: 'app-gallery-container',
-  standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [GalleryComponent, AsyncPipe],
+  imports: [GalleryComponent],
   template: `
     <app-gallery
-      [galleriesDefinitions]="galleryService.getGalleryDefinition$() | async"
-      [welcomeMessage]="welcomeMessage"
+      [galleriesDefinitions]="appDataStore.galleryDefinition()"
+      [welcomeMessage]="welcomeMessage()"
       (yearChanged)="onYearChanged($event)" />
   `,
 })
-export class GalleryContainerComponent {
-  @Input() welcomeMessage = '';
-  @Output() galleryDataLoaded = new EventEmitter<boolean>();
-  @Output() yearChanged = new EventEmitter<number>();
+export class GalleryContainerComponent implements OnInit {
+  readonly welcomeMessage = input('');
+  readonly galleryDataLoaded = output<boolean>();
+  readonly yearChanged = output<number>();
 
-  constructor(public readonly galleryService: AbstractGalleryService) {}
+  public readonly appDataStore = inject(AppDataStore);
+
+  ngOnInit(): void {
+    this.appDataStore.loadGalleryDefinition();
+  }
 
   public onYearChanged(year: number): void {
     this.yearChanged.emit(year);

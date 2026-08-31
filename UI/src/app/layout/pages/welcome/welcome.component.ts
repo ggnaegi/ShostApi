@@ -1,13 +1,6 @@
-import {
-  Component,
-  Input,
-} from '@angular/core';
+import { Component, ChangeDetectionStrategy, input } from '@angular/core';
 import { WelcomePageDto } from '../../api/layout.models';
-import {
-  DatePipe,
-  NgForOf,
-  NgIf,
-} from '@angular/common';
+import { DatePipe } from '@angular/common';
 import { ImageWithLoadingComponent } from '../../../common/image-with-loading.component';
 import {
   MatCard,
@@ -28,9 +21,7 @@ import { FbPageXfbmlComponent } from './fb.page.xml.component';
 
 @Component({
   selector: 'app-welcome',
-  standalone: true,
   imports: [
-    NgIf,
     ImageWithLoadingComponent,
     MatCard,
     MatCardHeader,
@@ -40,15 +31,14 @@ import { FbPageXfbmlComponent } from './fb.page.xml.component';
     FaIconComponent,
     MatButton,
     MatCardContent,
-    NgForOf,
     FbPageXfbmlComponent,
   ],
   templateUrl: './welcome.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './welcome.component.css',
 })
 export class WelcomeComponent {
-  @Input()
-  data: WelcomePageDto | null = null;
+  readonly data = input<WelcomePageDto | null>(null);
 
   year = 2026;
   protected readonly faCalendarAlt = faCalendarAlt;

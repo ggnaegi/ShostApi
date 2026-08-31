@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { AbstractSessionService } from './abstract.session.service';
 import { map, Observable, shareReplay, take, tap } from 'rxjs';
 import { Session, SessionContainer } from '../api/session-element';
@@ -11,7 +11,7 @@ import { statusCodeChecker } from '../../utils/StatusCodeChecker';
 })
 export class SessionService implements AbstractSessionService {
   private dataCache: Map<number, Observable<Session>> | undefined;
-  public constructor(private http: HttpClient) {}
+  private readonly http = inject(HttpClient);
 
   updateSession(session: Session): void {
     const year = session.Year;
@@ -46,9 +46,7 @@ export class SessionService implements AbstractSessionService {
   }
 
   sessionData$(year: number, adminRoute: boolean): Observable<Session> {
-    if (!this.dataCache) {
-      this.dataCache = new Map<number, Observable<Session>>();
-    }
+    this.dataCache = this.dataCache ?? new Map<number, Observable<Session>>();
 
     const requestOptions = adminRoute ? { withCredentials: true } : {};
     if (!this.dataCache.has(year)) {

@@ -1,16 +1,16 @@
-import { Component, Input } from '@angular/core';
+import { Component, ChangeDetectionStrategy, input } from '@angular/core';
 import { FlexModule } from '@angular/flex-layout';
 import { MatCard, MatCardHeader, MatCardImage } from '@angular/material/card';
-import { NgForOf, NgIf } from '@angular/common';
+
 import { Sponsor } from '../../../about/api/organisation';
 
 @Component({
   selector: 'app-sponsors',
-  standalone: true,
-  imports: [FlexModule, MatCard, MatCardHeader, MatCardImage, NgForOf, NgIf],
+  imports: [FlexModule, MatCard, MatCardHeader, MatCardImage],
   templateUrl: './sponsors.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './sponsors.component.css',
 })
 export class SponsorsComponent {
-  @Input() data: Sponsor[] | null = null;
+  data = input<Sponsor[] | null>(null);
 }

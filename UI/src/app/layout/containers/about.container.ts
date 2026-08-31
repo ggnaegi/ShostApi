@@ -1,21 +1,17 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Observable } from 'rxjs';
-import { AbstractLayoutService } from '../services/abstract.layout.service';
-import { AboutPageDto } from '../api/layout.models';
-import { AsyncPipe } from '@angular/common';
+import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { AboutComponent } from '../pages/about/about.component';
+import { AppDataStore } from '../../store/app-data/app-data.store';
 
 @Component({
   selector: 'app-about-container',
-  template: `<app-about [data]="about$ | async"></app-about>`,
-  standalone: true,
-  imports: [AsyncPipe, AboutComponent],
+  template: `<app-about [data]="appDataStore.aboutPage()"></app-about>`,
+  imports: [AboutComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AboutContainerComponent {
-  about$: Observable<AboutPageDto>;
+export class AboutContainerComponent implements OnInit {
+  public readonly appDataStore = inject(AppDataStore);
 
-  constructor(private layoutService: AbstractLayoutService) {
-    this.about$ = this.layoutService.aboutPageData$();
+  ngOnInit(): void {
+    this.appDataStore.loadAboutPage();
   }
 }

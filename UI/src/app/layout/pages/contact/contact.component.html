@@ -16,8 +16,10 @@
             (ngSubmit)="submitForm(contactForm)"
             style="display: flex; flex-direction: column; gap: 16px">
             <mat-form-field appearance="outline" class="full-width">
-              <mat-label>Prénom</mat-label>
+              <mat-label id="contact-first-name-label">Prénom</mat-label>
               <input
+                id="contact-first-name-input"
+                aria-labelledby="contact-first-name-label"
                 matInput
                 placeholder="Veuillez saisir votre prénom"
                 name="firstName"
@@ -25,8 +27,10 @@
                 required />
             </mat-form-field>
             <mat-form-field appearance="outline" class="full-width">
-              <mat-label>Nom</mat-label>
+              <mat-label id="contact-last-name-label">Nom</mat-label>
               <input
+                id="contact-last-name-input"
+                aria-labelledby="contact-last-name-label"
                 matInput
                 placeholder="Veuillez saisir votre nom"
                 name="lastName"
@@ -34,8 +38,10 @@
                 required />
             </mat-form-field>
             <mat-form-field appearance="outline" class="full-width">
-              <mat-label>Courriel</mat-label>
+              <mat-label id="contact-email-label">Courriel</mat-label>
               <input
+                id="contact-email-input"
+                aria-labelledby="contact-email-label"
                 [required]="true"
                 matInput
                 type="email"
@@ -46,8 +52,10 @@
                 email />
             </mat-form-field>
             <mat-form-field appearance="outline" class="full-width">
-              <mat-label>Téléphone</mat-label>
+              <mat-label id="contact-phone-label">Téléphone</mat-label>
               <input
+                id="contact-phone-input"
+                aria-labelledby="contact-phone-label"
                 matInput
                 type="tel"
                 placeholder="Veuillez saisir votre numéro de téléphone"
@@ -56,8 +64,10 @@
                 required />
             </mat-form-field>
             <mat-form-field appearance="outline" class="full-width">
-              <mat-label>Message</mat-label>
+              <mat-label id="contact-message-label">Message</mat-label>
               <textarea
+                id="contact-message-area"
+                aria-labelledby="contact-message-label"
                 [required]="true"
                 matInput
                 rows="6"
@@ -76,31 +86,33 @@
           </form>
         </div>
         <!-- Committee President Info -->
-        <div class="president-info" fxFlex="30%" *ngIf="data">
-          <div class="president-info-title">
-            {{ data.ContactPersonText }}
+        @if (data(); as data) {
+          <div class="president-info" fxFlex="30%">
+            <div class="president-info-title">
+              {{ data.ContactPersonText }}
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 8px">
+              <div>
+                <span
+                  >{{ data.ContactPerson?.FirstName }}
+                  {{ data.ContactPerson?.LastName }}</span
+                >
+              </div>
+              <div>Rue: {{ data.ContactPerson?.Address }}</div>
+              <div>
+                Ville: {{ data.ContactPerson?.Zip }}
+                {{ data.ContactPerson?.City }}
+              </div>
+              <div>Téléphone: {{ data.ContactPerson?.PhoneNumber }}</div>
+              <div>
+                Courriel:
+                <a href="mailto:{{ data.ContactPerson?.Email }}">{{
+                  data.ContactPerson?.Email
+                }}</a>
+              </div>
+            </div>
           </div>
-          <div style="display: flex; flex-direction: column; gap: 8px">
-            <div>
-              <span
-                >{{ data.ContactPerson?.FirstName }}
-                {{ data.ContactPerson?.LastName }}</span
-              >
-            </div>
-            <div>Rue: {{ data.ContactPerson?.Address }}</div>
-            <div>
-              Ville: {{ data.ContactPerson?.Zip }}
-              {{ data.ContactPerson?.City }}
-            </div>
-            <div>Téléphone: {{ data.ContactPerson?.PhoneNumber }}</div>
-            <div>
-              Courriel:
-              <a href="mailto:{{ data.ContactPerson?.Email }}">{{
-                data.ContactPerson?.Email
-              }}</a>
-            </div>
-          </div>
-        </div>
+        }
       </div>
     </mat-card-content>
   </mat-card>
