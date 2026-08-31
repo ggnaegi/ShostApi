@@ -51,7 +51,7 @@
   fxLayout="row"
   fxLayoutAlign="center"
   fxHide.lt-md>
-  @if (!showMenu) {
+  @if (!showMenu()) {
     <div
       class="menu-items"
       fxLayout="row"
@@ -83,7 +83,7 @@
       >
     </div>
   }
-  @if (showMenu) {
+  @if (showMenu()) {
     <div
       class="menu-items"
       fxLayout="row"
@@ -141,7 +141,7 @@
     position="end"
     fxShow.lt-md
     class="mobile-sidenav">
-    @if (!showMenu) {
+    @if (!showMenu()) {
       <mat-nav-list>
         <a
           mat-list-item
@@ -173,7 +173,7 @@
         >
       </mat-nav-list>
     }
-    @if (showMenu) {
+    @if (showMenu()) {
       <mat-nav-list>
         <a
           mat-list-item
@@ -225,7 +225,7 @@
   </mat-sidenav>
 
   <mat-sidenav-content>
-    @if (showBackToTop) {
+    @if (showBackToTop()) {
       <div
         tabindex="0"
         role="button"
