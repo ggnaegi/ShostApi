@@ -4,11 +4,11 @@
 }
 
 .custom-card {
-  margin-top: 10px;
+  margin: 16px;
   cursor: pointer;
   transition: transform 0.2s;
   border-radius: 0;
-  box-shadow: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: Adds shadow for better visibility */
 }
 
 .custom-card .mat-card-content {
@@ -38,11 +38,6 @@
 #medias-section {
   display: flex;
   justify-content: center; /* Center horizontally */
-}
-
-.custom-card {
-  margin: 16px; /* Adds margin around each card for better spacing */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: Adds shadow for better visibility */
 }
 
 .mat-card img {
@@ -96,15 +91,20 @@
   min-width: 100px;
   width: 100%;
   box-shadow: none;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease; /* Smooth transition for both movement and shadow */
+  cursor: pointer;
 }
 
 .sponsor-card img {
   width: 100%; /* Make the image expand to the full width of the card */
   height: auto; /* Maintain aspect ratio */
+  object-fit: cover; /* Ensures the image covers the designated area properly */
 }
 
 #sponsors-section h2 {
-  color: #000; /* Adjust color to fit your design */
+  color: #333; /* Dark color for headings */
   margin-bottom: 0.5em;
   font-family: 'Avenir Next Light', serif;
 }
@@ -114,23 +114,6 @@
   font-family: 'Avenir Next Light', serif;
   font-size: 16px;
   max-width: 600px;
-}
-
-#sponsors-section h2 {
-  color: #333; /* Dark color for headings */
-}
-
-.sponsor-card img {
-  width: 100%; /* Make the image expand to the full width of the card */
-  height: auto; /* Maintain aspect ratio */
-  object-fit: cover; /* Ensures the image covers the designated area properly */
-}
-
-.sponsor-card {
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease; /* Smooth transition for both movement and shadow */
-  cursor: pointer;
 }
 
 .sponsor-card:hover {
