@@ -9,6 +9,9 @@ import {
   output,
 } from '@angular/core';
 import { Session } from '../../../session/api/session-element';
+import { Image } from '../../../gallery/api/gallery';
+import { PortraitAdminService } from '../../../gallery/api/portrait-admin.service';
+import { finalize } from 'rxjs';
 import {
   FormArray,
   FormBuilder,
@@ -22,17 +25,12 @@ import { MatButton, MatIconButton } from '@angular/material/button';
 
 import { MatIcon } from '@angular/material/icon';
 import {
-  MatDatepicker,
-  MatDatepickerInput,
-  MatDatepickerToggle,
-} from '@angular/material/datepicker';
-import { MatGridList, MatGridTile } from '@angular/material/grid-list';
-import {
   MatOption,
   MatSelect,
   MatSelectChange,
 } from '@angular/material/select';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { FlexModule } from '@angular/flex-layout';
 import {
   MatExpansionPanel,
@@ -57,6 +55,7 @@ import {
     MatExpansionPanel,
     MatExpansionPanelTitle,
     MatExpansionPanelHeader,
+    MatProgressSpinner,
   ],
   templateUrl: './session-admin.component.html',
   changeDetection: ChangeDetectionStrategy.Eager,
@@ -65,15 +64,27 @@ import {
 export class SessionAdminComponent implements OnInit, OnChanges {
   readonly sessionData = input<Session | null>(null);
 
+  readonly galleryImages = input<Image[]>([]);
+
+  readonly galleryBusy = input(false);
+
   readonly yearChanged = output<number>();
 
   readonly sessionSubmitted = output<Session>();
+
+  readonly imagesUploaded = output<File[]>();
+
+  readonly imageDeleted = output<string>();
 
   sessionForm!: FormGroup;
   years: number[] = [];
   selectedYear?: number;
 
+  conductorPortraitBusy = false;
+  private readonly soloistPortraitBusy = new Set<number>();
+
   private readonly fb = inject(FormBuilder);
+  private readonly portraitService = inject(PortraitAdminService);
 
   ngOnInit(): void {
     const currentYear = new Date().getFullYear();
@@ -107,7 +118,7 @@ export class SessionAdminComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['sessionData'] && changes['sessionData'].currentValue) {
+    if (changes['sessionData']?.currentValue) {
       const currentValue = changes['sessionData'].currentValue;
       this.populateForm(
         currentValue === 'Session not found.'
@@ -184,6 +195,77 @@ export class SessionAdminComponent implements OnInit, OnChanges {
       const updatedSessionValue = this.sessionForm.value as Session;
       this.sessionSubmitted.emit(updatedSessionValue);
     }
+  }
+
+  onGalleryFilesSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    const files = input.files ? Array.from(input.files) : [];
+    if (files.length > 0) {
+      this.imagesUploaded.emit(files);
+    }
+    input.value = '';
+  }
+
+  deleteGalleryImage(url: string): void {
+    this.imageDeleted.emit(url);
+  }
+
+  isSoloistPortraitBusy(index: number): boolean {
+    return this.soloistPortraitBusy.has(index);
+  }
+
+  onConductorPortraitSelected(event: Event): void {
+    const file = this.extractFile(event);
+    const year = this.currentYear();
+    if (!file || !year) {
+      return;
+    }
+
+    const control = this.sessionForm.get('Conductor.Picture');
+    const directory = `assets/${year}/Gallery/Conductor`;
+
+    this.conductorPortraitBusy = true;
+    this.portraitService
+      .uploadPortrait(directory, file, control?.value || undefined)
+      .pipe(finalize(() => (this.conductorPortraitBusy = false)))
+      .subscribe(path => this.applyPortraitPath(control, path));
+  }
+
+  onSoloistPortraitSelected(event: Event, index: number): void {
+    const file = this.extractFile(event);
+    const year = this.currentYear();
+    if (!file || !year) {
+      return;
+    }
+
+    const control = this.Soloists.at(index).get('Picture');
+    const directory = `assets/${year}/Gallery/Soloists`;
+
+    this.soloistPortraitBusy.add(index);
+    this.portraitService
+      .uploadPortrait(directory, file, control?.value || undefined)
+      .pipe(finalize(() => this.soloistPortraitBusy.delete(index)))
+      .subscribe(path => this.applyPortraitPath(control, path));
+  }
+
+  private applyPortraitPath(
+    control: ReturnType<FormGroup['get']>,
+    path: string
+  ): void {
+    control?.setValue(path);
+    control?.markAsDirty();
+    this.sessionForm.markAsDirty();
+  }
+
+  private extractFile(event: Event): File | null {
+    const input = event.target as HTMLInputElement;
+    const file = input.files?.[0] ?? null;
+    input.value = '';
+    return file;
+  }
+
+  private currentYear(): number | null {
+    return this.sessionForm.get('Year')?.value ?? this.selectedYear ?? null;
   }
 
   private populateForm(sessionData: Session): void {

@@ -6,6 +6,8 @@ export const environment = {
   sessionEndpointUrl: 'https://shosta-flex-2026.azurewebsites.net/api/sessions',
   sessionAdminEndpointUrl: 'https://shosta-flex-2026.azurewebsites.net/api/sessions/admin',
   organisationEndpointUrl: 'https://shosta-flex-2026.azurewebsites.net/api/organisations',
+  galleryEndpointUrl: 'https://shosta-flex-2026.azurewebsites.net/api/gallery',
+  portraitEndpointUrl: 'https://shosta-flex-2026.azurewebsites.net/api/portrait',
   youtubeFeedEndpointUrl: 'https://shosta-flex-2026.azurewebsites.net/api/youtube-feed',
   recaptchaEndpointUrl: 'https://www.google.com/recaptcha/api.js?render=',
   oauth2login: 'https://shosta-flex-2026.azurewebsites.net/.auth/login/aad?post_login_redirect_uri=/api/auth/admin-redirect',

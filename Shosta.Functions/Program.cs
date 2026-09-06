@@ -33,6 +33,8 @@ var host = new HostBuilder()
         services.AddHttpClient();
         services.AddScoped<IOrganisationService, OrganisationService>();
         services.AddScoped<ISessionService, SessionService>();
+        services.AddScoped<IStorageService, SftpStorageService>();
+        services.AddScoped<IGalleryService, GalleryService>();
         services.AddSendGrid(options => { options.ApiKey = context.Configuration.GetValue<string>("SendgridKey"); });
     })
     .Build();

@@ -10,7 +10,7 @@ import {
   OrganisationContainer,
   Sponsor,
 } from '../../about/api/organisation';
-import { GalleriesDefinition } from '../../gallery/api/gallery';
+import { GalleriesDefinition, Album } from '../../gallery/api/gallery';
 import {
   AboutPageDto,
   ContactPageDto,
@@ -187,6 +187,36 @@ export const AppDataStore = signalStore(
         )
       )
     ),
+
+    /** Custom selector: the cached gallery album for a given (reactive) year. */
+    galleryAlbumForYear(year: Signal<number>): Signal<Album | null> {
+      return computed(
+        () =>
+          store.galleryDefinition()?.galleries.find(a => a.year === year()) ??
+          null
+      );
+    },
+
+    /**
+     * Replaces (or inserts) an album in the in-memory gallery definition after an admin
+     * upload/delete, so the UI reflects the change immediately. The authoritative
+     * gallery-config.json on the hosting server is updated server-side by the Azure Function.
+     */
+    setGalleryAlbum(album: Album): void {
+      const definition = store.galleryDefinition();
+      if (!definition) {
+        return;
+      }
+
+      const exists = definition.galleries.some(a => a.year === album.year);
+      const galleries = exists
+        ? definition.galleries.map(a => (a.year === album.year ? album : a))
+        : [...definition.galleries, album].sort((a, b) => a.year - b.year);
+
+      patchState(store, {
+        galleryDefinition: { ...definition, galleries },
+      });
+    },
 
     loadWelcomePage: rxMethod<void>(
       pipe(
