@@ -167,20 +167,35 @@ public sealed class SftpStorageService(IConfiguration configuration, ILoggerFact
         var privateKey = configuration.GetValue<string>("SftpPrivateKey");
         if (!string.IsNullOrWhiteSpace(privateKey))
         {
-            var passphrase = configuration.GetValue<string>("SftpPrivateKeyPassphrase");
-            using var keyStream = new MemoryStream(Encoding.UTF8.GetBytes(privateKey));
-            var keyFile = string.IsNullOrEmpty(passphrase)
-                ? new PrivateKeyFile(keyStream)
-                : new PrivateKeyFile(keyStream, passphrase);
+            try
+            {
+                var passphrase = configuration.GetValue<string>("SftpPrivateKeyPassphrase");
+                using var keyStream = new MemoryStream(Encoding.UTF8.GetBytes(privateKey));
+                var keyFile = string.IsNullOrEmpty(passphrase)
+                    ? new PrivateKeyFile(keyStream)
+                    : new PrivateKeyFile(keyStream, passphrase);
 
-            var connectionInfo = new ConnectionInfo(
-                host,
-                port,
-                username,
-                new PrivateKeyAuthenticationMethod(username, keyFile));
+                var connectionInfo = new ConnectionInfo(
+                    host,
+                    port,
+                    username,
+                    new PrivateKeyAuthenticationMethod(username, keyFile));
 
-            _logger.LogInformation("SFTP client created successfully.");
-            return new SftpClient(connectionInfo);
+                _logger.LogInformation("SFTP client created successfully.");
+                return new SftpClient(connectionInfo);
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError($"{exception.Message} {exception?.InnerException?.Message}");
+                _logger.LogError(
+                    exception,
+                    "Failed to create SFTP client for {Username}@{Host}:{Port}.",
+                    username,
+                    host,
+                    port);
+
+                throw;
+            }
         }
 
         var password = configuration.GetValue<string>("SftpPassword");
