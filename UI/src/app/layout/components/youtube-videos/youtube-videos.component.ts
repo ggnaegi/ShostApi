@@ -2,6 +2,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   inject,
+  input,
   OnInit,
   signal,
 } from '@angular/core';
@@ -10,10 +11,10 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { environment } from '../../../../environments/environment';
 
 interface YouTubeVideoSummary {
-  id: string;
-  title: string;
-  url: string;
-  thumbnail: string;
+  Id: string;
+  Title: string;
+  Url: string;
+  Thumbnail: string;
 }
 
 interface YoutubeFeedApiResponse {
@@ -39,6 +40,9 @@ export class YoutubeVideosComponent implements OnInit {
   private readonly sanitizer = inject(DomSanitizer);
   private readonly http = inject(HttpClient);
 
+  readonly vertical = input(false);
+  readonly maxThumbnails = input(MAX_THUMBNAILS);
+
   protected readonly youtubeChannelUrl = YOUTUBE_CHANNEL_URL;
   protected readonly youtubeVideos = signal<YouTubeVideoSummary[]>([]);
   protected readonly selectedVideoId = signal<string | null>(null);
@@ -57,7 +61,7 @@ export class YoutubeVideosComponent implements OnInit {
   }
 
   protected get selectedEmbedUrl(): SafeResourceUrl {
-    const videoId = this.selectedVideoId() ?? this.youtubeVideos()[0]?.id;
+    const videoId = this.selectedVideoId() ?? this.youtubeVideos()[0]?.Id;
     if (!videoId) {
       return this.fallbackEmbedUrl;
     }
@@ -72,11 +76,11 @@ export class YoutubeVideosComponent implements OnInit {
       .get<YoutubeFeedApiResponse>(environment.youtubeFeedEndpointUrl)
       .subscribe({
         next: response => {
-          const videos = (response?.items ?? []).slice(0, MAX_THUMBNAILS);
+          const videos = (response?.items ?? []).slice(0, this.maxThumbnails());
           this.youtubeVideos.set(videos);
 
           if (!this.selectedVideoId() && videos[0]) {
-            this.selectedVideoId.set(videos[0].id);
+            this.selectedVideoId.set(videos[0].Id);
           }
         },
         error: () => {

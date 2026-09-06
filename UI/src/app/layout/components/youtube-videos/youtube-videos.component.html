@@ -24,15 +24,18 @@
   </div>
 
   @if (youtubeVideos().length > 0) {
-    <div class="youtube-thumbnail-list" aria-label="Vidéos récentes">
-      @for (video of youtubeVideos(); track video.id) {
+    <div
+      class="youtube-thumbnail-list"
+      [class.is-vertical]="vertical()"
+      aria-label="Vidéos récentes">
+      @for (video of youtubeVideos(); track video.Id) {
         <button
           type="button"
           class="youtube-thumbnail-item"
-          [class.is-selected]="selectedVideoId() === video.id"
-          (click)="selectVideo(video.id)">
-          <img [src]="video.thumbnail" [alt]="video.title" loading="lazy" />
-          <span class="youtube-thumbnail-title">{{ video.title }}</span>
+          [class.is-selected]="selectedVideoId() === video.Id"
+          (click)="selectVideo(video.Id)">
+          <img [src]="video.Thumbnail" [alt]="video.Title" loading="lazy" />
+          <span class="youtube-thumbnail-title">{{ video.Title }}</span>
         </button>
       }
     </div>

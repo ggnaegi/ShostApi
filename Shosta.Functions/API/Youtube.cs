@@ -79,7 +79,7 @@ public sealed class Youtube(ILoggerFactory loggerFactory, IHttpClientFactory htt
             })
             .Where(video => video is not null)
             .Select(video => video!)
-            .Take(6)
+            .Take(9)
             .ToList();
     }
 }
