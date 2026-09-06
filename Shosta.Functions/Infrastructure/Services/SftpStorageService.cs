@@ -121,6 +121,9 @@ public sealed class SftpStorageService(IConfiguration configuration, ILoggerFact
     {
         var fullPath = CombineRemotePath(BaseDirectory, null, remotePath);
 
+        _logger.LogInformation("Attempting to delete SFTP file {RemotePath}.", remotePath);
+        _logger.LogInformation("Delete file: {FullPath}", fullPath);
+
         var client = CreateClient();
         try
         {
@@ -149,6 +152,12 @@ public sealed class SftpStorageService(IConfiguration configuration, ILoggerFact
 
     private SftpClient CreateClient()
     {
+
+        _logger.LogInformation("Creating SFTP client with host {Host}, username {Username}, port {Port}.",
+            configuration.GetValue<string>("SftpHost"),
+            configuration.GetValue<string>("SftpUsername"),
+            configuration.GetValue<int?>("SftpPort") ?? 22);
+
         var host = configuration.GetValue<string>("SftpHost")
                    ?? throw new InvalidOperationException("SftpHost is missing in the configuration.");
         var username = configuration.GetValue<string>("SftpUsername")
@@ -170,12 +179,14 @@ public sealed class SftpStorageService(IConfiguration configuration, ILoggerFact
                 username,
                 new PrivateKeyAuthenticationMethod(username, keyFile));
 
+            _logger.LogInformation("SFTP client created successfully.");
             return new SftpClient(connectionInfo);
         }
 
         var password = configuration.GetValue<string>("SftpPassword");
         if (!string.IsNullOrWhiteSpace(password))
         {
+            _logger.LogInformation("SFTP client created successfully.");
             return new SftpClient(host, port, username, password);
         }
 
@@ -188,7 +199,9 @@ public sealed class SftpStorageService(IConfiguration configuration, ILoggerFact
         {
             if (client.IsConnected)
             {
+                _logger.LogInformation("Disconnecting SFTP client.");
                 client.Disconnect();
+                _logger.LogInformation("SFTP client disconnected successfully.");
             }
         }
         catch (Exception ex)

@@ -61,12 +61,15 @@ public sealed class GalleryService(IStorageService storageService, ILoggerFactor
             .Where(url => url.Length > 0)
             .ToHashSet(StringComparer.OrdinalIgnoreCase);
 
+        _logger.LogInformation("Deleting {Count} images from the gallery for year {Year}.", urlsToDelete.Count, year);
+
         foreach (var url in urlsToDelete)
         {
+            _logger.LogInformation("Deleting gallery image {Url} from the SFTP host.", url);
             var deleted = await storageService.DeleteFileAsync(url, cancellationToken);
             if (!deleted)
             {
-                _logger.LogWarning("Could not delete gallery image {Url} from the FTP host.", url);
+                _logger.LogWarning("Could not delete gallery image {Url} from the SFTP host.", url);
             }
         }
 
@@ -81,7 +84,7 @@ public sealed class GalleryService(IStorageService storageService, ILoggerFactor
         var json = await storageService.DownloadTextAsync(GalleryConfigPath, cancellationToken);
         if (string.IsNullOrWhiteSpace(json))
         {
-            _logger.LogWarning("gallery-config.json was empty or missing on the FTP host; starting a new one.");
+            _logger.LogWarning("gallery-config.json was empty or missing on the SFTP host; starting a new one.");
             return new GalleryConfig();
         }
 
