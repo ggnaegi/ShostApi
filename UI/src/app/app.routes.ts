@@ -6,6 +6,8 @@ import { WelcomeContainerComponent } from './layout/containers/welcome.container
 import { AboutContainerComponent } from './layout/containers/about.container';
 import { ContactContainerComponent } from './layout/containers/contact.container';
 import { SponsorsContainerComponent } from './layout/containers/sponsors.container';
+import { GalleryPageComponent } from './gallery/pages/gallery-page/gallery-page.component';
+import { MediaPageComponent } from './media/pages/media-page/media-page.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/welcome', pathMatch: 'full' },
@@ -14,6 +16,8 @@ export const routes: Routes = [
   { path: 'session', component: SessionContainerComponent },
   { path: 'contact', component: ContactContainerComponent },
   { path: 'sponsors', component: SponsorsContainerComponent },
+  { path: 'media', component: MediaPageComponent },
+  { path: 'gallery/:year', component: GalleryPageComponent },
   { path: 'admin', redirectTo: '/admin/sessions', pathMatch: 'full' },
   { path: 'admin/sessions', component: SessionAdminContainerComponent },
   {

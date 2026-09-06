@@ -67,46 +67,7 @@
       </mat-card>
     </div>
     <div class="right-section">
-      <div class="youtube-widget-container">
-        <div class="youtube-widget-header">
-          <div class="youtube-widget-title">Dernières vidéos</div>
-          <a
-            class="youtube-widget-link"
-            [href]="youtubeChannelUrl"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Voir la chaîne YouTube">
-            Voir la chaîne
-          </a>
-        </div>
-
-        <div class="youtube-widget-frame">
-          <iframe
-            class="youtube-widget-iframe"
-            [src]="selectedEmbedUrl"
-            title="Dernières vidéos YouTube"
-            loading="lazy"
-            referrerpolicy="strict-origin-when-cross-origin"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowfullscreen>
-          </iframe>
-        </div>
-
-        @if (youtubeVideos.length > 0) {
-          <div class="youtube-thumbnail-list" aria-label="Vidéos récentes">
-            @for (video of youtubeVideos; track video.id) {
-              <button
-                type="button"
-                class="youtube-thumbnail-item"
-                [class.is-selected]="selectedVideoId === video.id"
-                (click)="selectVideo(video.id)">
-                <img [src]="video.thumbnail" [alt]="video.title" loading="lazy" />
-                <span class="youtube-thumbnail-title">{{ video.title }}</span>
-              </button>
-            }
-          </div>
-        }
-      </div>
+      <app-youtube-videos />
     </div>
   </div>
 } @else {

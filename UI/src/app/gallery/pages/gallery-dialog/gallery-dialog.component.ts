@@ -1,65 +1,84 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   HostListener,
+  computed,
   inject,
-  ViewChild,
-  AfterViewInit,
-  ChangeDetectionStrategy,
+  signal,
 } from '@angular/core';
 import {
   MAT_DIALOG_DATA,
-  MatDialogActions,
   MatDialogClose,
   MatDialogContent,
   MatDialogTitle,
 } from '@angular/material/dialog';
 import { Album } from '../../api/gallery';
 
-import { MatButton } from '@angular/material/button';
-import { MatPaginator } from '@angular/material/paginator';
-
 @Component({
   selector: 'app-gallery-dialog',
   templateUrl: './gallery-dialog.component.html',
-  imports: [
-    MatDialogActions,
-    MatDialogContent,
-    MatDialogTitle,
-    MatButton,
-    MatDialogClose,
-    MatPaginator,
-  ],
-  changeDetection: ChangeDetectionStrategy.Eager,
+  imports: [MatDialogContent, MatDialogTitle, MatDialogClose],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./gallery-dialog.component.css'],
 })
-export class GalleryDialogComponent implements AfterViewInit {
-  @ViewChild(MatPaginator) paginator: MatPaginator | null = null;
-  currentIndex = 0;
-  isMobile = false;
+export class GalleryDialogComponent {
+  readonly data = inject<Album>(MAT_DIALOG_DATA);
+  readonly isMobile = signal(false);
+  readonly currentIndex = signal(0);
+  readonly thumbnailLimit = computed(() => (this.isMobile() ? 5 : 10));
+  readonly visibleImages = computed(() => {
+    const images = this.data.images;
+    const limit = Math.min(this.thumbnailLimit(), images.length);
 
-  public data = inject<Album>(MAT_DIALOG_DATA);
+    if (!images.length) {
+      return [];
+    }
+
+    const start = Math.max(
+      0,
+      Math.min(this.currentIndex() - Math.floor(limit / 2), images.length - limit)
+    );
+
+    return images.slice(start, start + limit);
+  });
+  readonly currentImage = computed(
+    () => this.data.images[this.currentIndex()] ?? this.data.images[0]
+  );
+  readonly hasMultipleImages = computed(() => this.data.images.length > 1);
 
   constructor() {
-    this.checkScreenWidth();
+    this.updateIsMobile();
   }
-  ngAfterViewInit() {
-    if (!this.paginator) {
+
+  @HostListener('window:resize')
+  onResize(): void {
+    this.updateIsMobile();
+  }
+
+  nextImage(): void {
+    if (this.data.images.length === 0) {
       return;
     }
 
-    this.paginator.page.subscribe({
-      next: () => {
-        this.currentIndex = this.paginator ? this.paginator.pageIndex : 0; // Update the current index on page change
-      },
-    });
+    this.currentIndex.set((this.currentIndex() + 1) % this.data.images.length);
   }
 
-  @HostListener('window:resize', [])
-  onResize(): void {
-    this.checkScreenWidth();
+  previousImage(): void {
+    if (this.data.images.length === 0) {
+      return;
+    }
+
+    const nextIndex = this.currentIndex() - 1;
+    this.currentIndex.set(nextIndex < 0 ? this.data.images.length - 1 : nextIndex);
   }
 
-  checkScreenWidth(): void {
-    this.isMobile = window.innerWidth < 768; // Check if the screen width is less than 768px
+  selectImage(index: number): void {
+    if (index >= 0 && index < this.data.images.length) {
+      this.currentIndex.set(index);
+    }
+  }
+
+  private updateIsMobile(): void {
+    this.isMobile.set(window.innerWidth < 768);
   }
 }

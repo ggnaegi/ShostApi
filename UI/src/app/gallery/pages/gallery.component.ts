@@ -1,16 +1,15 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  computed,
   inject,
-  OnChanges,
-  SimpleChanges,
   input,
   output,
 } from '@angular/core';
 import { GalleriesDefinition, Logo } from '../api/gallery';
-
 import { MatDialog } from '@angular/material/dialog';
 import { FlexModule } from '@angular/flex-layout';
+import { Router } from '@angular/router';
 import {
   MatCard,
   MatCardActions,
@@ -38,20 +37,39 @@ import { ImageWithLoadingComponent } from '../../common/image-with-loading.compo
   templateUrl: './gallery.component.html',
   styleUrl: './gallery.component.css',
 })
-export class GalleryComponent implements OnChanges {
-  welcomeMessage = input('');
-  galleriesDefinitions = input<GalleriesDefinition | null>(null);
-  yearChanged = output<number>();
+export class GalleryComponent {
+  readonly welcomeMessage = input('');
+  readonly galleriesDefinitions = input<GalleriesDefinition | null>(null);
+  readonly mediaMode = input(false);
+  readonly yearChanged = output<number>();
 
-  starredLogo: Logo | undefined = undefined;
+  readonly displayedLogos = computed<Logo[]>(() => {
+    const definitions = this.galleriesDefinitions();
+    if (!definitions?.logos?.length) {
+      return [];
+    }
 
-  public dialog = inject(MatDialog);
+    const logos = definitions.logos.filter(logo => logo.year >= 2020);
+    return this.mediaMode()
+      ? logos.filter(logo => logo.showGallery)
+      : logos;
+  });
 
-  ngOnChanges(changes: SimpleChanges): void {
-    this.setStarredGallery();
+  readonly dialog = inject(MatDialog);
+  private readonly router = inject(Router);
+
+  onCardClick(logo: Logo): void {
+    if (this.mediaMode()) {
+      if (logo.showGallery) {
+        this.openGalleryDialog(logo.year);
+      }
+      return;
+    }
+
+    this.onYearClick(logo.showPage, logo.year);
   }
 
-  onYearClick(showPage: boolean, year: number) {
+  onYearClick(showPage: boolean, year: number): void {
     if (!showPage) {
       return;
     }
@@ -67,34 +85,22 @@ export class GalleryComponent implements OnChanges {
       return;
     }
 
-    this.dialog.open(GalleryDialogComponent, {
-      panelClass: 'fullscreen-dialog',
-      disableClose: false,
-      autoFocus: false,
-      data: gallery,
-    });
-  }
+    const isMobile = window.innerWidth < 768;
 
-  selectedLogo: Logo | undefined;
-
-  // call this on card click to mark selection
-  selectLogo(logo: Logo): void {
-    this.selectedLogo = logo;
-  }
-
-  // helper used by template
-  isSelected(logo: Logo): boolean {
-    return logo === this.selectedLogo || logo === this.starredLogo;
-  }
-
-  private setStarredGallery(): void {
-    const galleriesDefinitions = this.galleriesDefinitions();
-    if (!galleriesDefinitions?.logos) {
+    if (isMobile) {
+      this.router.navigate(['/gallery', year]);
       return;
     }
 
-    this.starredLogo = galleriesDefinitions?.logos.reduce((prev, current) =>
-      prev.year > current.year ? prev : current
-    );
+    this.dialog.open(GalleryDialogComponent, {
+      panelClass: 'responsive-gallery-dialog',
+      disableClose: false,
+      autoFocus: false,
+      maxWidth: '100vw',
+      width: 'min(1200px, 92vw)',
+      height: 'min(85vh, 820px)',
+      maxHeight: '85vh',
+      data: gallery,
+    });
   }
 }

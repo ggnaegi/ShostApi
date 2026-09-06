@@ -1,0 +1,58 @@
+@if (gallery(); as gallery) {
+  <div class="gallery-page-shell">
+    <header class="gallery-page-header">
+      <button type="button" class="back-button" (click)="goBack()" aria-label="Retour">←</button>
+      <h1>Galerie {{ gallery.year }}</h1>
+      <button type="button" class="close-button" (click)="goBack()" aria-label="Fermer">×</button>
+    </header>
+
+    <main class="gallery-page-content">
+      @if (currentImage(); as currentImage) {
+        <div class="gallery-stage">
+          <button
+            type="button"
+            class="gallery-nav-button"
+            aria-label="Image précédente"
+            (click)="previousImage()"
+            [disabled]="!hasMultipleImages()">
+            ‹
+          </button>
+
+          <div class="gallery-image-wrapper">
+            <img
+              [src]="currentImage.url"
+              [alt]="currentImage.alt"
+              class="gallery-image" />
+          </div>
+
+          <button
+            type="button"
+            class="gallery-nav-button"
+            aria-label="Image suivante"
+            (click)="nextImage()"
+            [disabled]="!hasMultipleImages()">
+            ›
+          </button>
+        </div>
+      }
+
+      @if (hasMultipleImages()) {
+        <div class="gallery-thumbnails" aria-label="Sélection d'image">
+          @for (image of visibleImages(); track image.url;) {
+            <button
+              type="button"
+              class="gallery-thumbnail"
+              [class.is-active]="gallery.images.indexOf(image) === currentIndex()"
+              (click)="selectImage(gallery.images.indexOf(image))">
+              <img [src]="image.url" [alt]="image.alt" loading="lazy" />
+            </button>
+          }
+        </div>
+      }
+    </main>
+  </div>
+} @else {
+  <div class="gallery-page-shell empty-state">
+    <p>Chargement de la galerie…</p>
+  </div>
+}

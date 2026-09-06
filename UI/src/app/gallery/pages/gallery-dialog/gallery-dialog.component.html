@@ -1,39 +1,57 @@
 <div class="custom-gallery">
-  <h2 mat-dialog-title>Galerie {{ data.year }}</h2>
+  <div class="gallery-header">
+    <h2 mat-dialog-title>Galerie {{ data.year }}</h2>
+    <button
+      type="button"
+      class="gallery-close-button"
+      mat-dialog-close
+      aria-label="Fermer la galerie">
+      ×
+    </button>
+  </div>
+
   <mat-dialog-content class="custom-gallery-content">
-    <!-- Conditional display based on screen size -->
-    @if (isMobile) {
-      <div class="gallery-slider">
-        @if (data.images[currentIndex]) {
-          <div class="gallery-image-wrapper">
-            <img
-              [src]="data.images[currentIndex].url"
-              [alt]="data.images[currentIndex].alt"
-              class="gallery-image" />
-          </div>
-        }
+    @if (currentImage(); as currentImage) {
+      <div class="gallery-stage">
+        <button
+          type="button"
+          class="gallery-nav-button gallery-nav-button-prev"
+          aria-label="Image précédente"
+          (click)="previousImage()"
+          [disabled]="!hasMultipleImages()">
+          ‹
+        </button>
+
+        <div class="gallery-image-wrapper">
+          <img
+            [src]="currentImage.url"
+            [alt]="currentImage.alt"
+            class="gallery-image" />
+        </div>
+
+        <button
+          type="button"
+          class="gallery-nav-button gallery-nav-button-next"
+          aria-label="Image suivante"
+          (click)="nextImage()"
+          [disabled]="!hasMultipleImages()">
+          ›
+        </button>
       </div>
     }
 
-    @if (!isMobile) {
-      <div class="gallery-vertical">
-        @if (data.images[currentIndex]) {
-          <div class="gallery-image-wrapper">
-            <img
-              [src]="data.images[currentIndex].url"
-              [alt]="data.images[currentIndex].alt"
-              class="gallery-image" />
-          </div>
+    @if (hasMultipleImages()) {
+      <div class="gallery-thumbnails" aria-label="Sélection d'image">
+        @for (image of visibleImages(); track image.url;) {
+          <button
+            type="button"
+            class="gallery-thumbnail"
+            [class.is-active]="data.images.indexOf(image) === currentIndex()"
+            (click)="selectImage(data.images.indexOf(image))">
+            <img [src]="image.url" [alt]="image.alt" loading="lazy" />
+          </button>
         }
       </div>
     }
   </mat-dialog-content>
-  <mat-dialog-actions>
-    <button mat-button mat-dialog-close>Fermer</button>
-    <mat-paginator
-      [hidePageSize]="true"
-      [length]="data.images.length"
-      [pageSize]="1"
-      [showFirstLastButtons]="true"></mat-paginator>
-  </mat-dialog-actions>
 </div>

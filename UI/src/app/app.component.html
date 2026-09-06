@@ -115,6 +115,14 @@
       >
       <a
         mat-button
+        routerLink="/media"
+        [routerLinkActiveOptions]="linkActiveOptions"
+        routerLinkActive="active-link"
+        class="menu-link"
+        >Media</a
+      >
+      <a
+        mat-button
         routerLink="/contact"
         [routerLinkActiveOptions]="linkActiveOptions"
         routerLinkActive="active-link"
@@ -201,6 +209,15 @@
           class="menu-link"
           (click)="sidenav.close()"
           >Concerts</a
+        >
+        <a
+          mat-list-item
+          routerLink="/media"
+          routerLinkActive="active-link"
+          [routerLinkActiveOptions]="linkActiveOptions"
+          class="menu-link"
+          (click)="sidenav.close()"
+          >Media</a
         >
         <a
           mat-list-item

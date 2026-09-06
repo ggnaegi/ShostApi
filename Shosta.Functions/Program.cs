@@ -30,6 +30,7 @@ var host = new HostBuilder()
         );
         
         services.AddSingleton<IMemoryCache, MemoryCache>();
+        services.AddHttpClient();
         services.AddScoped<IOrganisationService, OrganisationService>();
         services.AddScoped<ISessionService, SessionService>();
         services.AddSendGrid(options => { options.ApiKey = context.Configuration.GetValue<string>("SendgridKey"); });

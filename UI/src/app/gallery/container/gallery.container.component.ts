@@ -17,11 +17,13 @@ import { AppDataStore } from '../../store/app-data/app-data.store';
     <app-gallery
       [galleriesDefinitions]="galleryDefinition()"
       [welcomeMessage]="welcomeMessage()"
+      [mediaMode]="mediaMode()"
       (yearChanged)="onYearChanged($event)" />
   `,
 })
 export class GalleryContainerComponent implements OnInit {
   readonly welcomeMessage = input('');
+  readonly mediaMode = input(false);
   readonly galleryDataLoaded = output<boolean>();
   readonly yearChanged = output<number>();
 

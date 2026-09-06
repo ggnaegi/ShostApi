@@ -1,34 +1,32 @@
-@if (galleriesDefinitions(); as galleriesDefinitions) {
+@if (galleriesDefinitions()) {
   <div class="card-container" id="medias-section">
     <!-- Iterate over galleries, displaying a card for each year -->
-    @for (logo of galleriesDefinitions.logos; track logo) {
+    @for (logo of displayedLogos(); track logo) {
       <div class="year-card-wrapper">
-        @if (logo.year >= 2020) {
-          <mat-card
-            class="year-card"
-            (click)="onYearClick(logo.showPage, logo.year)"
-            (keydown)="onYearClick(logo.showPage, logo.year)">
-            <mat-card-header>
-              <mat-card-title>{{ logo.year }}</mat-card-title>
-            </mat-card-header>
-            <app-image-with-loading
-              [src]="logo.url"
-              [alt]="logo.alt"
-              class="card-logo" />
-            @if (logo.showGallery) {
-              <mat-card-actions>
-                <button
-                  mat-icon-button
-                  (click)="
-                    $event.stopPropagation(); openGalleryDialog(logo.year)
-                  ">
-                  <mat-icon>photo_library</mat-icon>
-                  <!-- Gallery Icon -->
-                </button>
-              </mat-card-actions>
-            }
-          </mat-card>
-        }
+        <mat-card
+          class="year-card"
+          [class.is-clickable]="!mediaMode() || logo.showGallery"
+          (click)="onCardClick(logo)"
+          (keydown.enter)="onCardClick(logo)"
+          tabindex="0">
+          <mat-card-header>
+            <mat-card-title>{{ logo.year }}</mat-card-title>
+          </mat-card-header>
+          <app-image-with-loading
+            [src]="logo.url"
+            [alt]="logo.alt"
+            class="card-logo" />
+          @if (!mediaMode() && logo.showGallery) {
+            <mat-card-actions>
+              <button
+                mat-icon-button
+                (click)="$event.stopPropagation(); openGalleryDialog(logo.year)">
+                <mat-icon>photo_library</mat-icon>
+                <!-- Gallery Icon -->
+              </button>
+            </mat-card-actions>
+          }
+        </mat-card>
       </div>
     }
   </div>
