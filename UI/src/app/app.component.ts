@@ -1,6 +1,7 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  DestroyRef,
   HostListener,
   inject,
   OnInit,
@@ -72,6 +73,7 @@ export class AppComponent implements OnInit {
   showFooter = signal(false);
 
   private readonly router = inject(Router);
+  private readonly destroyRef = inject(DestroyRef);
 
   @HostListener('window:scroll', [])
   onWindowScroll() {
@@ -89,7 +91,7 @@ export class AppComponent implements OnInit {
     this.router.events
       .pipe(
         filter(event => event instanceof NavigationEnd),
-        takeUntilDestroyed()
+        takeUntilDestroyed(this.destroyRef)
       )
       .subscribe(() => {
         const url = this.router.url;
