@@ -38,7 +38,7 @@ import { YoutubeVideosComponent } from '../../components/youtube-videos/youtube-
     YoutubeVideosComponent,
   ],
   templateUrl: './welcome.component.html',
-  changeDetection: ChangeDetectionStrategy.Eager,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrl: './welcome.component.css',
 })
 export class WelcomeComponent {

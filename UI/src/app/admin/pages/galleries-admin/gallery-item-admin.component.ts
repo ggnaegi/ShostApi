@@ -1,19 +1,12 @@
 import {
   Component,
   inject,
-  OnChanges,
-  OnInit,
-  SimpleChanges,
   ChangeDetectionStrategy,
   input,
   output,
+  effect,
 } from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
 import { MatButton, MatIconButton } from '@angular/material/button';
@@ -40,47 +33,42 @@ import { GalleryLogoInput } from '../../../gallery/api/gallery-admin.service';
     FlexModule,
   ],
   templateUrl: './gallery-item-admin.component.html',
-  styleUrl: './gallery-item-admin.component.css',
-  changeDetection: ChangeDetectionStrategy.Default,
+  styleUrls: ['./gallery-item-admin.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class GalleryItemAdminComponent implements OnInit, OnChanges {
+export class GalleryItemAdminComponent {
   readonly item = input.required<GalleryAdminItem>();
-
   readonly busy = input(false);
 
   readonly logoSaved = output<GalleryLogoInput>();
-
   readonly flyerSelected = output<File>();
-
   readonly imagesSelected = output<File[]>();
-
   readonly imageDeleted = output<string>();
 
   readonly pageSize = 10;
   pageIndex = 0;
 
-  metaForm!: FormGroup;
-
   private readonly fb = inject(FormBuilder);
 
-  ngOnInit(): void {
-    this.metaForm = this.fb.group({
-      Alt: ['', [Validators.maxLength(255)]],
-      Teaser: [''],
-      ShowPage: [false],
-      ShowGallery: [false],
-    });
-    this.populateForm();
-  }
+  readonly metaForm = this.fb.nonNullable.group({
+    Alt: ['', [Validators.maxLength(255)]],
+    Teaser: [''],
+    ShowPage: [false],
+    ShowGallery: [false],
+  });
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['item']?.currentValue) {
-      this.clampPageIndex();
-      if (this.metaForm) {
-        this.populateForm();
-      }
-    }
-  }
+  private readonly itemEffect = effect(() => {
+    const item = this.item();
+
+    this.clampPageIndex(item.album?.images.length ?? 0);
+
+    this.metaForm.patchValue({
+      Alt: item.logo.alt ?? '',
+      Teaser: item.logo.teaser ?? '',
+      ShowPage: item.logo.showPage ?? false,
+      ShowGallery: item.logo.showGallery ?? false,
+    });
+  });
 
   get year(): number {
     return this.item().logo.year;
@@ -105,33 +93,40 @@ export class GalleryItemAdminComponent implements OnInit, OnChanges {
   }
 
   onSave(): void {
-    if (this.metaForm.valid) {
-      const value = this.metaForm.value;
-      this.logoSaved.emit({
-        year: this.year,
-        alt: value.Alt ?? '',
-        teaser: value.Teaser ?? '',
-        showPage: !!value.ShowPage,
-        showGallery: !!value.ShowGallery,
-      });
+    if (this.metaForm.invalid) {
+      return;
     }
+
+    const value = this.metaForm.getRawValue();
+
+    this.logoSaved.emit({
+      year: this.year,
+      alt: value.Alt,
+      teaser: value.Teaser,
+      showPage: value.ShowPage,
+      showGallery: value.ShowGallery,
+    });
   }
 
   onFlyerSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
     const file = input.files?.[0] ?? null;
+
     if (file) {
       this.flyerSelected.emit(file);
     }
+
     input.value = '';
   }
 
   onImagesSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
     const files = input.files ? Array.from(input.files) : [];
+
     if (files.length > 0) {
       this.imagesSelected.emit(files);
     }
+
     input.value = '';
   }
 
@@ -140,20 +135,11 @@ export class GalleryItemAdminComponent implements OnInit, OnChanges {
   }
 
   /** Keeps the current page valid after images are added or removed. */
-  private clampPageIndex(): void {
-    const lastPage = Math.max(0, Math.ceil(this.images.length / this.pageSize) - 1);
+  private clampPageIndex(imageCount: number): void {
+    const lastPage = Math.max(0, Math.ceil(imageCount / this.pageSize) - 1);
+
     if (this.pageIndex > lastPage) {
       this.pageIndex = lastPage;
     }
-  }
-
-  private populateForm(): void {
-    const logo = this.item().logo;
-    this.metaForm.patchValue({
-      Alt: logo.alt ?? '',
-      Teaser: logo.teaser ?? '',
-      ShowPage: logo.showPage,
-      ShowGallery: logo.showGallery,
-    });
   }
 }
