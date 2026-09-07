@@ -164,13 +164,18 @@ public sealed class SftpStorageService(IConfiguration configuration, ILoggerFact
                        ?? throw new InvalidOperationException("SftpUsername is missing in the configuration.");
         var port = configuration.GetValue<int?>("SftpPort") ?? 22;
 
-        var privateKey = configuration.GetValue<string>("SftpPrivateKey");
-        if (!string.IsNullOrWhiteSpace(privateKey))
+        // using base64-encoded private key for SFTP authentication
+        var privateKeyBase64 = configuration.GetValue<string>("SftpPrivateKey")
+            ?? throw new InvalidOperationException("SftpPrivateKey is missing.");
+
+        if (!string.IsNullOrWhiteSpace(privateKeyBase64))
         {
             try
             {
+                var privateKeyBytes = Convert.FromBase64String(privateKeyBase64);
+
                 var passphrase = configuration.GetValue<string>("SftpPrivateKeyPassphrase");
-                using var keyStream = new MemoryStream(Encoding.UTF8.GetBytes(privateKey));
+                using var keyStream = new MemoryStream(privateKeyBytes);
                 var keyFile = string.IsNullOrEmpty(passphrase)
                     ? new PrivateKeyFile(keyStream)
                     : new PrivateKeyFile(keyStream, passphrase);
