@@ -1,0 +1,47 @@
+<nav class="media-navigation" aria-label="Navigation des médias">
+  <div class="desktop-navigation">
+    @for (year of years(); track year) {
+      @let yearString = year.toString();
+
+      <button
+        type="button"
+        class="navigation-link"
+        [class.active]="activeSection() === yearString"
+        [attr.aria-current]="activeSection() === yearString ? 'location' : null"
+        (click)="navigate.emit(yearString)">
+        {{ year }}
+      </button>
+    }
+
+    <button
+      type="button"
+      class="navigation-link youtube-link"
+      [class.active]="activeSection() === 'youtube'"
+      [attr.aria-current]="activeSection() === 'youtube' ? 'location' : null"
+      (click)="navigate.emit('youtube')">
+      <mat-icon>smart_display</mat-icon>
+      <span>YouTube</span>
+    </button>
+  </div>
+
+  <div class="mobile-navigation">
+    <label for="media-section-select" class="visually-hidden">
+      Accéder à une section
+    </label>
+
+    <div class="select-wrapper">
+      <select
+        id="media-section-select"
+        [value]="activeSection()"
+        (change)="onSelect($event)">
+        @for (year of years(); track year) {
+          <option [value]="year">{{ year }}</option>
+        }
+
+        <option value="youtube">YouTube</option>
+      </select>
+
+      <mat-icon aria-hidden="true">expand_more</mat-icon>
+    </div>
+  </div>
+</nav>
