@@ -7,6 +7,7 @@ export const environment = {
   sessionAdminEndpointUrl: 'https://localhost:7227/api/sessions/admin',
   organisationEndpointUrl: 'http://localhost:7227/api/organisations',
   galleryEndpointUrl: 'http://localhost:7227/api/gallery',
+  sponsorsEndpointUrl: 'http://localhost:7227/api/sponsors',
   portraitEndpointUrl: 'http://localhost:7227/api/portrait',
   youtubeFeedEndpointUrl: 'http://localhost:7227/api/youtube-feed',
   recaptchaEndpointUrl: 'https://www.google.com/recaptcha/api.js?render=',

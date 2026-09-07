@@ -35,6 +35,14 @@ export interface Sponsor {
   alt: string;
 }
 
+export interface SponsorsConfig {
+  benefactorsTitle: string;
+  benefactorsBody: string;
+  sponsorsTitle: string;
+  sponsorsBody: string;
+  sponsorsLogos: Sponsor[];
+}
+
 export interface EmailData {
   RecaptchaResponse?: string;
   FirstName?: string;

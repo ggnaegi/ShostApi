@@ -1,0 +1,64 @@
+.form-container {
+  padding: 20px;
+}
+
+.form-expansion-panel {
+  margin-bottom: 20px;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.gallery-admin {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.gallery-thumbs {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 10px;
+  max-height: 360px;
+  overflow-y: auto;
+}
+
+.gallery-thumb {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  background: #eee;
+}
+
+.gallery-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.gallery-thumb-delete {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  background: rgba(255, 255, 255, 0.85);
+  transform: scale(0.8);
+}
+
+.gallery-empty {
+  color: #777;
+  margin: 0;
+}
+
+.gallery-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.gallery-status {
+  color: #803357;
+  font-size: 0.9rem;
+}

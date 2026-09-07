@@ -81,6 +81,14 @@
         class="menu-link"
         >Organisation</a
       >
+      <a
+        mat-button
+        routerLink="/admin/sponsors"
+        routerLinkActive="active-link"
+        [routerLinkActiveOptions]="linkActiveOptions"
+        class="menu-link"
+        >Sponsors</a
+      >
     </div>
   }
   @if (showMenu()) {
@@ -178,6 +186,15 @@
           class="menu-link"
           (click)="sidenav.close()"
           >Organisation</a
+        >
+        <a
+          mat-list-item
+          routerLink="/admin/sponsors"
+          routerLinkActive="active-link"
+          [routerLinkActiveOptions]="linkActiveOptions"
+          class="menu-link"
+          (click)="sidenav.close()"
+          >Sponsors</a
         >
       </mat-nav-list>
     }

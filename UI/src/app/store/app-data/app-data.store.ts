@@ -8,7 +8,7 @@ import {
   EmailSendResult,
   Organisation,
   OrganisationContainer,
-  Sponsor,
+  SponsorsConfig,
 } from '../../about/api/organisation';
 import { GalleriesDefinition, Album } from '../../gallery/api/gallery';
 import {
@@ -25,7 +25,7 @@ const EMAIL_RESULT_DISPLAY_DURATION_MS = 2000;
 export interface AppDataState {
   organisation: Organisation | null;
   organisationsByYear: Record<number, Organisation>;
-  sponsors: Sponsor[] | null;
+  sponsorsConfig: SponsorsConfig | null;
   galleryDefinition: GalleriesDefinition | null;
   welcomePage: WelcomePageDto | null;
   aboutPage: AboutPageDto | null;
@@ -37,7 +37,7 @@ export interface AppDataState {
 const initialState: AppDataState = {
   organisation: null,
   organisationsByYear: {},
-  sponsors: null,
+  sponsorsConfig: null,
   galleryDefinition: null,
   welcomePage: null,
   aboutPage: null,
@@ -132,15 +132,24 @@ export const AppDataStore = signalStore(
 
     loadSponsors: rxMethod<void>(
       pipe(
-        filter(() => !store.sponsors()),
+        filter(() => !store.sponsorsConfig()),
         switchMap(() =>
-          http.get<Sponsor[]>(sponsorsUrl).pipe(
-            tap(sponsors => patchState(store, { sponsors })),
+          http.get<SponsorsConfig>(sponsorsUrl).pipe(
+            tap(sponsorsConfig => patchState(store, { sponsorsConfig })),
             catchError(() => EMPTY)
           )
         )
       )
     ),
+
+    /**
+     * Replaces the in-memory sponsors configuration after an admin text edit or logo
+     * upload/delete, so the UI reflects the change immediately. The authoritative
+     * sponsors-config.json on the hosting server is updated server-side by the Azure Function.
+     */
+    setSponsorsConfig(sponsorsConfig: SponsorsConfig): void {
+      patchState(store, { sponsorsConfig });
+    },
 
     /** Sends the contact email and exposes a transient success/error result to the caller. */
     sendEmail: rxMethod<EmailData>(

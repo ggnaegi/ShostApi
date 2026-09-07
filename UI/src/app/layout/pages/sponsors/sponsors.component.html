@@ -1,15 +1,23 @@
-@if (data()) {
+@if (data(); as config) {
   <div id="sponsors-section" style="margin: 20px">
-    <!-- Introduction for Sponsors -->
-    <div style="margin-bottom: 20px">
-      <h2>Sponsors</h2>
-      <p>
-        Nous remercions infiniment nos sponsors pour leur soutien en 2024 et
-        vous les recommandons vivement !
-      </p>
-    </div>
+    <!-- Benefactors -->
+    @if (config.benefactorsTitle) {
+      <h2>{{ config.benefactorsTitle }}</h2>
+    }
+    @if (config.benefactorsBody) {
+      <div class="sponsors-body" [innerHTML]="config.benefactorsBody"></div>
+    }
+
+    <!-- Sponsors -->
+    @if (config.sponsorsTitle) {
+      <h2>{{ config.sponsorsTitle }}</h2>
+    }
+    @if (config.sponsorsBody) {
+      <div class="sponsors-body" [innerHTML]="config.sponsorsBody"></div>
+    }
+
     <div fxLayout="row wrap" fxLayoutGap="10px" fxLayoutAlign="start center">
-      @for (sponsor of data(); track sponsor) {
+      @for (sponsor of config.sponsorsLogos; track sponsor.filename) {
         <mat-card
           class="sponsor-card"
           fxFlex="20%"

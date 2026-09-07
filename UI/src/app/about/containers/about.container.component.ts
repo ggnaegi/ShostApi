@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, OnInit } from '@angular/core';
 import { AboutComponent } from '../pages/about.component';
 import { RecaptchaService } from '../services/recaptcha.service';
 import { EmailData } from '../api/organisation';
@@ -24,7 +24,9 @@ export class AboutContainerComponent implements OnInit {
   private readonly recaptchaService = inject(RecaptchaService);
 
   protected readonly organisation = this.appDataStore.organisation;
-  protected readonly sponsors = this.appDataStore.sponsors;
+  protected readonly sponsors = computed(
+    () => this.appDataStore.sponsorsConfig()?.sponsorsLogos ?? null
+  );
   protected readonly emailSendResult = this.appDataStore.emailSendResult;
 
   ngOnInit(): void {

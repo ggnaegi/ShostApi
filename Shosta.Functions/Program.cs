@@ -34,6 +34,7 @@ var host = new HostBuilder()
         services.AddScoped<ISessionService, SessionService>();
         services.AddScoped<IStorageService, SftpStorageService>();
         services.AddScoped<IGalleryService, GalleryService>();
+        services.AddScoped<ISponsorsService, SponsorsService>();
         services.AddSendGrid(options => { options.ApiKey = context.Configuration.GetValue<string>("SendgridKey"); });
     })
     .Build();

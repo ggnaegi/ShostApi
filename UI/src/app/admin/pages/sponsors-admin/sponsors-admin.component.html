@@ -1,0 +1,97 @@
+@if (sponsorsConfig()) {
+  <div class="form-container">
+    <!-- Texts Section -->
+    <form [formGroup]="textsForm" (ngSubmit)="onSubmit()">
+      <mat-expansion-panel class="form-expansion-panel" expanded>
+        <mat-expansion-panel-header>
+          <mat-panel-title> Textes </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div fxLayout="column">
+          <mat-form-field appearance="outline">
+            <mat-label>Titre bienfaiteurs</mat-label>
+            <input matInput formControlName="BenefactorsTitle" />
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Texte bienfaiteurs (HTML autorisé)</mat-label>
+            <textarea
+              matInput
+              formControlName="BenefactorsBody"
+              rows="6"></textarea>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Titre sponsors</mat-label>
+            <input matInput formControlName="SponsorsTitle" />
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Texte sponsors (HTML autorisé)</mat-label>
+            <textarea
+              matInput
+              formControlName="SponsorsBody"
+              rows="6"></textarea>
+          </mat-form-field>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start stretch">
+          <button
+            mat-raised-button
+            color="primary"
+            type="submit"
+            [disabled]="textsForm.invalid">
+            Enregistrer les textes
+          </button>
+        </div>
+      </mat-expansion-panel>
+    </form>
+
+    <!-- Logos Section -->
+    <mat-expansion-panel class="form-expansion-panel" expanded>
+      <mat-expansion-panel-header>
+        <mat-panel-title> Logos </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="gallery-admin">
+        @if (logos.length > 0) {
+          <div class="gallery-thumbs">
+            @for (logo of logos; track logo.filename) {
+              <div class="gallery-thumb">
+                <img
+                  [src]="'/assets/sponsors/' + logo.filename"
+                  [alt]="logo.alt"
+                  loading="lazy" />
+                <button
+                  mat-icon-button
+                  color="warn"
+                  type="button"
+                  class="gallery-thumb-delete"
+                  [disabled]="logosBusy()"
+                  (click)="deleteLogo(logo.filename)">
+                  <mat-icon>close</mat-icon>
+                </button>
+              </div>
+            }
+          </div>
+        } @else {
+          <p class="gallery-empty">Aucun logo pour le moment.</p>
+        }
+        <div class="gallery-actions">
+          <input
+            #logoFileInput
+            type="file"
+            accept="image/*"
+            multiple
+            hidden
+            (change)="onLogoFilesSelected($event)" />
+          <button
+            mat-raised-button
+            color="primary"
+            type="button"
+            [disabled]="logosBusy()"
+            (click)="logoFileInput.click()">
+            Ajouter des logos
+          </button>
+          @if (logosBusy()) {
+            <span class="gallery-status">Téléversement en cours…</span>
+          }
+        </div>
+      </div>
+    </mat-expansion-panel>
+  </div>
+}
