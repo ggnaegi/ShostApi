@@ -2,6 +2,9 @@ using System.Text.Json;
 using Microsoft.Extensions.Logging;
 using Shosta.Functions.Domain.Dtos.Media;
 using Shosta.Functions.Domain.Interfaces;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Formats.Jpeg;
+using SixLabors.ImageSharp.Processing;
 
 namespace Shosta.Functions.Infrastructure.Services;
 
@@ -11,6 +14,9 @@ public sealed class SponsorsService(IStorageService storageService, ILoggerFacto
 
     private const string SponsorsDirectory = "assets/sponsors";
     private const string SponsorsConfigPath = "assets/sponsors/sponsors-config.json";
+
+    /// <summary>The fixed square size (in pixels) every sponsor logo is resized/cropped to.</summary>
+    private const int LogoSize = 600;
 
     public async Task<SponsorsConfig> UpdateTextsAsync(
         SponsorsTextsDto texts,
@@ -31,30 +37,46 @@ public sealed class SponsorsService(IStorageService storageService, ILoggerFacto
         IReadOnlyCollection<StorageFileUpload> files,
         CancellationToken cancellationToken = default)
     {
-        var uploadResult = await storageService.UploadFilesAsync(files, SponsorsDirectory, cancellationToken);
-
-        var config = await LoadConfigAsync(cancellationToken);
-
-        var existingFilenames = config.SponsorsLogos
-            .Select(logo => logo.Filename)
-            .ToHashSet(StringComparer.OrdinalIgnoreCase);
-
-        foreach (var uploaded in uploadResult.Files.Where(f => f.Success))
+        var processed = new List<StorageFileUpload>(files.Count);
+        try
         {
-            if (!existingFilenames.Add(uploaded.FileName))
+            foreach (var file in files)
             {
-                continue;
+                processed.Add(await ResizeToSquareAsync(file, cancellationToken));
             }
 
-            config.SponsorsLogos.Add(new SponsorLogo
-            {
-                Filename = uploaded.FileName,
-                Alt = BuildAlt(uploaded.FileName)
-            });
-        }
+            var uploadResult = await storageService.UploadFilesAsync(processed, SponsorsDirectory, cancellationToken);
 
-        await SaveConfigAsync(config, cancellationToken);
-        return config;
+            var config = await LoadConfigAsync(cancellationToken);
+
+            var existingFilenames = config.SponsorsLogos
+                .Select(logo => logo.Filename)
+                .ToHashSet(StringComparer.OrdinalIgnoreCase);
+
+            foreach (var uploaded in uploadResult.Files.Where(f => f.Success))
+            {
+                if (!existingFilenames.Add(uploaded.FileName))
+                {
+                    continue;
+                }
+
+                config.SponsorsLogos.Add(new SponsorLogo
+                {
+                    Filename = uploaded.FileName,
+                    Alt = BuildAlt(uploaded.FileName)
+                });
+            }
+
+            await SaveConfigAsync(config, cancellationToken);
+            return config;
+        }
+        finally
+        {
+            foreach (var file in processed)
+            {
+                await file.Content.DisposeAsync();
+            }
+        }
     }
 
     public async Task<SponsorsConfig> DeleteLogosAsync(
@@ -111,6 +133,35 @@ public sealed class SponsorsService(IStorageService storageService, ILoggerFacto
     {
         var json = JsonSerializer.Serialize(config, SponsorsConfig.SerializerOptions);
         await storageService.UploadTextAsync(SponsorsConfigPath, json, cancellationToken);
+    }
+
+    /// <summary>
+    /// Resizes and centre-crops the uploaded image to a fixed <see cref="LogoSize"/>x<see cref="LogoSize"/>
+    /// square and re-encodes it as JPEG. The returned upload owns a fresh stream that the caller disposes.
+    /// </summary>
+    private async Task<StorageFileUpload> ResizeToSquareAsync(
+        StorageFileUpload file,
+        CancellationToken cancellationToken)
+    {
+        file.Content.Position = 0;
+
+        using var image = await Image.LoadAsync(file.Content, cancellationToken);
+
+        image.Mutate(ctx => ctx.Resize(new ResizeOptions
+        {
+            Size = new Size(LogoSize, LogoSize),
+            Mode = ResizeMode.Crop,
+            Position = AnchorPositionMode.Center
+        }));
+
+        var output = new MemoryStream();
+        await image.SaveAsJpegAsync(output, new JpegEncoder { Quality = 90 }, cancellationToken);
+        output.Position = 0;
+
+        var fileName = $"{Path.GetFileNameWithoutExtension(file.FileName)}.jpg";
+        _logger.LogInformation("Resized sponsor logo {FileName} to {Size}px square.", fileName, LogoSize);
+
+        return new StorageFileUpload(fileName, output);
     }
 
     /// <summary>
