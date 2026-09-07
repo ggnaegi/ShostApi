@@ -1,6 +1,7 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  effect,
   inject,
   input,
   OnInit,
@@ -26,9 +27,19 @@ export class GalleryContainerComponent implements OnInit {
   readonly mediaMode = input(false);
   readonly galleryDataLoaded = output<boolean>();
   readonly yearChanged = output<number>();
+  readonly knownYears = output<number[]>();
 
   private readonly appDataStore = inject(AppDataStore);
   protected readonly galleryDefinition = this.appDataStore.galleryDefinition;
+
+  private readonly knownYearsEffect = effect(() => {
+    const years = (this.galleryDefinition()?.logos ?? [])
+      .filter(logo => logo.showGallery)
+      .map(logo => logo.year)
+      .sort((a, b) => b - a);
+
+    this.knownYears.emit(years);
+  });
 
   ngOnInit(): void {
     this.appDataStore.loadGalleryDefinition();

@@ -5,6 +5,7 @@
       @for (logo of displayedLogos(); track logo) {
         <mat-card
           class="gallery-row"
+          [id]="'media-' + logo.year"
           [class.is-clickable]="logo.showGallery"
           (click)="onCardClick(logo)"
           (keydown.enter)="onCardClick(logo)"

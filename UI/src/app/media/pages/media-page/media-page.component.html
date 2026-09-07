@@ -6,15 +6,32 @@
     </p>
   </header>
 
-  <section class="media-section" aria-labelledby="media-galleries-title">
-    <h2 id="media-galleries-title" class="media-section-title">Galeries par année</h2>
-    <app-gallery-container [mediaMode]="true" />
-  </section>
+  <div class="media-page-layout">
+    <aside class="media-sidebar">
+      <app-media-navigation
+        [years]="years()"
+        [activeSection]="activeSection()"
+        (navigate)="scrollToSection($event)"
+      />
+    </aside>
 
-  <section class="media-section" aria-labelledby="media-videos-title">
-    <h2 id="media-videos-title" class="media-section-title">Vidéos</h2>
-    <div class="media-videos">
-      <app-youtube-videos [maxThumbnails]="9" />
-    </div>
-  </section>
+    <main class="media-content">
+      <section class="media-section" aria-label="Archives photographiques">
+        <app-gallery-container
+          [mediaMode]="true"
+          (knownYears)="years.set($event)"
+        />
+      </section>
+
+      <section
+        id="youtube"
+        class="media-section"
+        aria-label="Vidéos YouTube"
+      >
+        <div class="media-videos">
+          <app-youtube-videos [maxThumbnails]="9" />
+        </div>
+      </section>
+    </main>
+  </div>
 </div>

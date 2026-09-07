@@ -22,28 +22,66 @@
   font-size: 0.95rem;
 }
 
+.media-page-layout {
+  display: grid;
+  grid-template-columns: 180px minmax(0, 1fr);
+  gap: 2.5rem;
+  align-items: stretch;
+}
+
+.media-sidebar {
+  min-width: 0;
+  align-self: stretch;
+  /* Important : aucun overflow ici */
+}
+
+.media-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  min-width: 0;
+}
+
 .media-section {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
-}
-
-.media-section-title {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 1.25rem;
-  font-weight: 700;
-  margin: 0;
-  color: #333;
+  scroll-margin-top: 1.5rem;
 }
 
 .media-videos {
   width: 100%;
+  min-width: 0;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .media-page {
     padding: 1.25rem 1rem 2.5rem;
     gap: 1.25rem;
+  }
+
+  .media-page-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .media-sidebar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    align-self: stretch;
+    width: 100%;
+    background: white;
+  }
+
+  .media-content {
+    width: 100%;
+    gap: 1.5rem;
+  }
+
+  .media-section {
+    scroll-margin-top: 100px;
   }
 
   .media-videos {

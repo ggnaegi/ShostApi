@@ -67,6 +67,10 @@
     max-width: 80%;
     margin: 0 auto;
   }
+
+  .gallery-row {
+    scroll-margin-top: 100px;
+  }
 }
 
 mat-grid-tile {
@@ -149,6 +153,7 @@ mat-grid-tile {
   border-radius: 0;
   box-shadow: none;
   transition: box-shadow 160ms ease;
+  scroll-margin-top: 24px;
 }
 
 .gallery-row.is-clickable {
