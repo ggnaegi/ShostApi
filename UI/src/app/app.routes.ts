@@ -18,7 +18,7 @@ export const routes: Routes = [
   { path: 'session', component: SessionContainerComponent },
   { path: 'contact', component: ContactContainerComponent },
   { path: 'sponsors', component: SponsorsContainerComponent },
-  { path: 'media', component: MediaPageComponent },
+  { path: 'archives', component: MediaPageComponent },
   { path: 'gallery/:year', component: GalleryPageComponent },
   { path: 'admin', redirectTo: '/admin/sessions', pathMatch: 'full' },
   { path: 'admin/sessions', component: SessionAdminContainerComponent },
