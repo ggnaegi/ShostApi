@@ -29,16 +29,24 @@ public class Gallery(
         int year,
         FunctionContext executionContext)
     {
+
+        _logger.LogInformation("Uploading gallery images for year {Year}.", year);
+
         var authError = CheckAdmin(req);
+
         if (authError is not null)
         {
             return await Error(req, authError.Value.Status, authError.Value.Message);
         }
 
+        _logger.LogInformation("Verifying that the request is multipart/form-data for year {Year}.", year);
+
         if (!req.IsMultipartFormData())
         {
             return await Error(req, HttpStatusCode.BadRequest, "Request must be multipart/form-data.");
         }
+
+        _logger.LogInformation("Reading multipart/form-data request for year {Year}.", year);
 
         var form = await req.ReadMultipartFormAsync(executionContext.CancellationToken);
         if (form is null)
@@ -52,6 +60,8 @@ public class Gallery(
             {
                 return await Error(req, HttpStatusCode.BadRequest, "No files were provided in the request.");
             }
+
+            _logger.LogInformation("Adding images to gallery for year {Year}.", year);
 
             var album = await galleryService.AddImagesAsync(year, form.Files, executionContext.CancellationToken);
 
