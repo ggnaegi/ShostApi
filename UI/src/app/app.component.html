@@ -1,221 +1,242 @@
-<!-- Top Bar with Logo, Social Icons, and Mobile Menu Button -->
-<mat-toolbar
-  color="primary"
-  class="top-bar"
-  fxLayout="row"
-  fxLayoutAlign="space-between center">
-  <!-- Left Side Logo -->
-  <div fxLayout="row" fxLayoutAlign="start center" class="logo-container">
-    <img src="../assets/shosta_logo.png" alt="Brand Logo" class="logo-image" />
-  </div>
+<!-- Top Bar -->
+<mat-toolbar color="primary" class="top-bar">
+  <a
+    class="logo-container"
+    routerLink="/welcome"
+    aria-label="Harmonie Shostakovich - Accueil">
+    <img
+      src="../assets/shosta_logo.png"
+      alt="Harmonie Shostakovich"
+      class="logo-image" />
+  </a>
 
-  <!-- Right Side Social Icons and Mobile Menu Button -->
-  <div fxLayout="row" fxLayoutAlign="end center" class="right-section">
-    <!-- Social Icons - Hidden on mobile -->
+  <div class="right-section">
+    <!-- Social icons: desktop -->
     <a
       mat-icon-button
+      class="social-link"
       href="https://www.facebook.com/harmonieshosta"
       target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Facebook"
       fxHide.lt-md>
       <i class="fa-brands fa-facebook"></i>
     </a>
+
     <a
       mat-icon-button
+      class="social-link"
       href="https://www.instagram.com/harmonie_shostakovich/?igsh=OGQ5ZDc2ODk2ZA"
       target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Instagram"
       fxHide.lt-md>
       <i class="fa-brands fa-instagram"></i>
     </a>
+
     <a
       mat-icon-button
-      href="https://m.youtube.com/@harmonieshostakovich8006"
+      class="social-link"
+      href="https://www.youtube.com/@harmonieshostakovich8006"
       target="_blank"
+      rel="noopener noreferrer"
+      aria-label="YouTube"
       fxHide.lt-md>
       <i class="fa-brands fa-youtube"></i>
     </a>
 
-    <!-- Mobile Menu Button, shown only when width < 768px -->
+    <!-- Mobile menu button -->
     <button
       mat-icon-button
-      (click)="sidenav.toggle()"
+      type="button"
       class="menu-toggle-button"
+      aria-label="Ouvrir le menu"
+      (click)="sidenav.toggle()"
       fxShow.lt-md>
       <mat-icon>menu</mat-icon>
     </button>
   </div>
 </mat-toolbar>
-<!-- Navbar with Logo and Menu Items (hidden on mobile) -->
-<mat-toolbar
-  color="white"
-  class="navbar"
-  fxLayout="row"
-  fxLayoutAlign="center"
-  fxHide.lt-md>
-  @if (!showMenu()) {
-    <div
-      class="menu-items"
-      fxLayout="row"
-      fxLayoutAlign="space-around stretch"
-      fxFlexFill>
+
+<!-- Desktop navigation -->
+<mat-toolbar class="navbar" fxHide.lt-md>
+  <nav class="menu-items" aria-label="Navigation principale">
+    @if (!showMenu()) {
       <a
         mat-button
         routerLink="/welcome"
         routerLinkActive="active-link"
         [routerLinkActiveOptions]="linkActiveOptions"
-        class="menu-link"
-        >Accueil</a
-      >
+        class="menu-link">
+        Accueil
+      </a>
+
       <a
         mat-button
         routerLink="/admin/sessions"
         routerLinkActive="active-link"
         [routerLinkActiveOptions]="linkActiveOptions"
-        class="menu-link"
-        >Sessions</a
-      >
+        class="menu-link">
+        Sessions
+      </a>
+
       <a
         mat-button
         routerLink="/admin/organisation"
         routerLinkActive="active-link"
         [routerLinkActiveOptions]="linkActiveOptions"
-        class="menu-link"
-        >Organisation</a
-      >
+        class="menu-link">
+        Organisation
+      </a>
+
       <a
         mat-button
         routerLink="/admin/sponsors"
         routerLinkActive="active-link"
         [routerLinkActiveOptions]="linkActiveOptions"
-        class="menu-link"
-        >Sponsors</a
-      >
+        class="menu-link">
+        Sponsors
+      </a>
+
       <a
         mat-button
         routerLink="/admin/galleries"
         routerLinkActive="active-link"
         [routerLinkActiveOptions]="linkActiveOptions"
-        class="menu-link"
-        >Galeries</a
-      >
-    </div>
-  }
-  @if (showMenu()) {
-    <div
-      class="menu-items"
-      fxLayout="row"
-      fxLayoutAlign="space-around stretch"
-      fxFlexFill>
+        class="menu-link">
+        Galeries
+      </a>
+    } @else {
       <a
         mat-button
         routerLink="/welcome"
         routerLinkActive="active-link"
         [routerLinkActiveOptions]="linkActiveOptions"
-        class="menu-link"
-        >Accueil</a
-      >
+        class="menu-link">
+        Accueil
+      </a>
+
       <a
         mat-button
         routerLink="/about"
-        [routerLinkActiveOptions]="linkActiveOptions"
         routerLinkActive="active-link"
-        class="menu-link"
-        >A Propos</a
-      >
+        [routerLinkActiveOptions]="linkActiveOptions"
+        class="menu-link">
+        À propos
+      </a>
+
       <a
         mat-button
         routerLink="/session"
-        [routerLinkActiveOptions]="linkActiveOptions"
         routerLinkActive="active-link"
-        class="menu-link"
-        >Concerts</a
-      >
+        [routerLinkActiveOptions]="linkActiveOptions"
+        class="menu-link">
+        Concerts
+      </a>
+
       <a
         mat-button
         routerLink="/media"
-        [routerLinkActiveOptions]="linkActiveOptions"
         routerLinkActive="active-link"
-        class="menu-link"
-        >Media</a
-      >
+        [routerLinkActiveOptions]="linkActiveOptions"
+        class="menu-link">
+        Media
+      </a>
+
       <a
         mat-button
         routerLink="/contact"
-        [routerLinkActiveOptions]="linkActiveOptions"
         routerLinkActive="active-link"
-        class="menu-link"
-        >Contact</a
-      >
+        [routerLinkActiveOptions]="linkActiveOptions"
+        class="menu-link">
+        Contact
+      </a>
+
       <a
         mat-button
         routerLink="/sponsors"
-        [routerLinkActiveOptions]="linkActiveOptions"
         routerLinkActive="active-link"
-        class="menu-link"
-        >Sponsors</a
-      >
-    </div>
-  }
+        [routerLinkActiveOptions]="linkActiveOptions"
+        class="menu-link">
+        Sponsors
+      </a>
+    }
+  </nav>
 </mat-toolbar>
 
-<!-- Sidenav for Mobile -->
+<!-- Mobile sidenav and page content -->
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav
     #sidenav
     mode="over"
     position="end"
-    fxShow.lt-md
-    class="mobile-sidenav">
+    class="mobile-sidenav"
+    fxShow.lt-md>
+    <div class="mobile-menu-header">
+      <span>Navigation</span>
+      <button
+        mat-icon-button
+        type="button"
+        aria-label="Fermer le menu"
+        (click)="sidenav.close()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+
     @if (!showMenu()) {
       <mat-nav-list>
         <a
           mat-list-item
           routerLink="/welcome"
+          fragment="welcome-section"
           routerLinkActive="active-link"
           [routerLinkActiveOptions]="linkActiveOptions"
           class="menu-link"
-          fragment="welcome-section"
-          (click)="sidenav.close()"
-          >Accueil</a
-        >
+          (click)="sidenav.close()">
+          Accueil
+        </a>
+
         <a
           mat-list-item
           routerLink="/admin/sessions"
           routerLinkActive="active-link"
           [routerLinkActiveOptions]="linkActiveOptions"
           class="menu-link"
-          (click)="sidenav.close()"
-          >Sessions</a
-        >
+          (click)="sidenav.close()">
+          Sessions
+        </a>
+
         <a
           mat-list-item
           routerLink="/admin/organisation"
           routerLinkActive="active-link"
           [routerLinkActiveOptions]="linkActiveOptions"
           class="menu-link"
-          (click)="sidenav.close()"
-          >Organisation</a
-        >
+          (click)="sidenav.close()">
+          Organisation
+        </a>
+
         <a
           mat-list-item
           routerLink="/admin/sponsors"
           routerLinkActive="active-link"
           [routerLinkActiveOptions]="linkActiveOptions"
           class="menu-link"
-          (click)="sidenav.close()"
-          >Sponsors</a
-        >
+          (click)="sidenav.close()">
+          Sponsors
+        </a>
+
         <a
           mat-list-item
           routerLink="/admin/galleries"
           routerLinkActive="active-link"
           [routerLinkActiveOptions]="linkActiveOptions"
           class="menu-link"
-          (click)="sidenav.close()"
-          >Galeries</a
-        >
+          (click)="sidenav.close()">
+          Galeries
+        </a>
       </mat-nav-list>
-    }
-    @if (showMenu()) {
+    } @else {
       <mat-nav-list>
         <a
           mat-list-item
@@ -223,116 +244,123 @@
           routerLinkActive="active-link"
           [routerLinkActiveOptions]="linkActiveOptions"
           class="menu-link"
-          (click)="sidenav.close()"
-          >Accueil</a
-        >
+          (click)="sidenav.close()">
+          Accueil
+        </a>
+
         <a
           mat-list-item
           routerLink="/about"
           routerLinkActive="active-link"
           [routerLinkActiveOptions]="linkActiveOptions"
           class="menu-link"
-          (click)="sidenav.close()"
-          >A Propos</a
-        >
+          (click)="sidenav.close()">
+          À propos
+        </a>
+
         <a
           mat-list-item
           routerLink="/session"
           routerLinkActive="active-link"
           [routerLinkActiveOptions]="linkActiveOptions"
           class="menu-link"
-          (click)="sidenav.close()"
-          >Concerts</a
-        >
+          (click)="sidenav.close()">
+          Concerts
+        </a>
+
         <a
           mat-list-item
           routerLink="/media"
           routerLinkActive="active-link"
           [routerLinkActiveOptions]="linkActiveOptions"
           class="menu-link"
-          (click)="sidenav.close()"
-          >Media</a
-        >
+          (click)="sidenav.close()">
+          Media
+        </a>
+
         <a
           mat-list-item
           routerLink="/contact"
           routerLinkActive="active-link"
           [routerLinkActiveOptions]="linkActiveOptions"
           class="menu-link"
-          (click)="sidenav.close()"
-          >Contact</a
-        >
+          (click)="sidenav.close()">
+          Contact
+        </a>
+
         <a
           mat-list-item
           routerLink="/sponsors"
           routerLinkActive="active-link"
           [routerLinkActiveOptions]="linkActiveOptions"
           class="menu-link"
-          (click)="sidenav.close()"
-          >Sponsors</a
-        >
+          (click)="sidenav.close()">
+          Sponsors
+        </a>
       </mat-nav-list>
     }
   </mat-sidenav>
 
   <mat-sidenav-content>
     @if (showBackToTop()) {
-      <div
-        tabindex="0"
-        role="button"
-        (keyup.enter)="scrollToTop()"
-        (click)="scrollToTop()"
+      <button
+        type="button"
         class="back-to-top"
-        aria-label="Scroll to top">
+        (click)="scrollToTop()"
+        aria-label="Retour en haut de page">
         <i class="fas fa-arrow-up"></i>
-      </div>
+      </button>
     }
+
     <div class="content" fxLayout="column" fxLayoutAlign="start stretch">
       <router-outlet></router-outlet>
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>
 
-<mat-toolbar color="secondary" class="footer">
-  <div
-    fxLayout="row"
-    fxLayoutAlign="space-between center"
-    fxFlexFill
-    fxLayoutGap="10px">
-    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
-      <!-- GitHub Link -->
+<!-- Footer -->
+<mat-toolbar class="footer">
+  <div class="footer-content">
+    <div class="footer-left">
       <a
         href="https://github.com/ggnaegi/ShostApi"
         target="_blank"
+        rel="noopener noreferrer"
         mat-icon-button
         aria-label="GitHub Repository">
         <i class="fa-brands fa-github"></i>
       </a>
+
       <a
         mat-icon-button
         href="https://www.facebook.com/harmonieshosta"
         target="_blank"
+        rel="noopener noreferrer"
         aria-label="Facebook"
         fxHide.gt-sm>
         <i class="fa-brands fa-facebook"></i>
       </a>
+
       <a
         mat-icon-button
         href="https://www.instagram.com/harmonie_shostakovich/?igsh=OGQ5ZDc2ODk2ZA"
         target="_blank"
+        rel="noopener noreferrer"
         aria-label="Instagram"
         fxHide.gt-sm>
         <i class="fa-brands fa-instagram"></i>
       </a>
+
       <a
         mat-icon-button
-        href="https://m.youtube.com/@harmonieshostakovich8006"
+        href="https://www.youtube.com/@harmonieshostakovich8006"
         target="_blank"
+        rel="noopener noreferrer"
         aria-label="YouTube"
         fxHide.gt-sm>
         <i class="fa-brands fa-youtube"></i>
       </a>
-      <!-- Copyright Notice -->
+
       <span class="footer-text">© 2026 Harmonie Shostakovich</span>
     </div>
   </div>

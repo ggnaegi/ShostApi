@@ -197,15 +197,6 @@ export const AppDataStore = signalStore(
       )
     ),
 
-    /** Custom selector: the cached gallery album for a given (reactive) year. */
-    galleryAlbumForYear(year: Signal<number>): Signal<Album | null> {
-      return computed(
-        () =>
-          store.galleryDefinition()?.galleries.find(a => a.year === year()) ??
-          null
-      );
-    },
-
     /**
      * Replaces (or inserts) an album in the in-memory gallery definition after an admin
      * upload/delete, so the UI reflects the change immediately. The authoritative

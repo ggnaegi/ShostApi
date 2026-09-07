@@ -109,7 +109,7 @@ export class GalleryComponent {
     const isMobile = window.innerWidth < 768;
 
     if (isMobile) {
-      this.router.navigate(['/gallery', year]);
+      void this.router.navigate(['/gallery', year]);
       return;
     }
 

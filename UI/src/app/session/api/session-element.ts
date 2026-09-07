@@ -44,9 +44,3 @@ export interface Concert {
   City?: string;
   Tickets?: string;
 }
-
-export interface SessionSummary {
-  Year: number;
-  Title?: string;
-  Picture?: string;
-}

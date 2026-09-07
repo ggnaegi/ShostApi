@@ -72,7 +72,7 @@ export class AboutComponent implements OnInit, OnChanges {
     });
   }
 
-  ngOnChanges(changes: SimpleChanges) {
+  ngOnChanges(_changes: SimpleChanges) {
     this.setPresident();
   }
 

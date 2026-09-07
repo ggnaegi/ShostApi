@@ -44,7 +44,7 @@ import { SponsorsTexts } from '../../api/sponsors-admin.service';
     MatExpansionPanelHeader,
   ],
   templateUrl: './sponsors-admin.component.html',
-  changeDetection: ChangeDetectionStrategy.Default,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrl: './sponsors-admin.component.css',
 })
 export class SponsorsAdminComponent implements OnInit, OnChanges {
