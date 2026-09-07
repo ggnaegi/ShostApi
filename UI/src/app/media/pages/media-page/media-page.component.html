@@ -1,0 +1,20 @@
+<div class="media-page">
+  <header class="media-page-header">
+    <h1>Media</h1>
+    <p class="media-page-subtitle">
+      Galeries photos par année et dernières vidéos de l'Harmonie Shostakovich.
+    </p>
+  </header>
+
+  <section class="media-section" aria-labelledby="media-galleries-title">
+    <h2 id="media-galleries-title" class="media-section-title">Galeries par année</h2>
+    <app-gallery-container [mediaMode]="true" />
+  </section>
+
+  <section class="media-section" aria-labelledby="media-videos-title">
+    <h2 id="media-videos-title" class="media-section-title">Vidéos</h2>
+    <div class="media-videos">
+      <app-youtube-videos [maxThumbnails]="9" />
+    </div>
+  </section>
+</div>
