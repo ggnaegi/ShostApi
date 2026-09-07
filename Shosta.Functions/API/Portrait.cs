@@ -68,7 +68,7 @@ public class Portrait(
             var file = form.Files[0];
             var result = await storageService.UploadFilesAsync(
                 [file],
-                directory,
+                $"assets/{directory}",
                 executionContext.CancellationToken);
 
             var uploaded = result.Files.FirstOrDefault();
@@ -77,13 +77,15 @@ public class Portrait(
                 return await Error(req, HttpStatusCode.BadGateway, "Failed to upload the portrait.");
             }
 
+            // The stored reference is kept without the "assets/" prefix (see legacy data and the public
+            // session page, which prepends "assets/" when rendering). The file itself lives under assets/.
             var newPath = $"{directory}/{uploaded.FileName}";
 
             var oldPath = NormalizePath(form.Fields.GetValueOrDefault("oldPath"));
             if (!string.IsNullOrEmpty(oldPath) &&
                 !string.Equals(oldPath, newPath, StringComparison.OrdinalIgnoreCase))
             {
-                var deleted = await storageService.DeleteFileAsync(oldPath, executionContext.CancellationToken);
+                var deleted = await storageService.DeleteFileAsync($"assets/{oldPath}", executionContext.CancellationToken);
                 if (!deleted)
                 {
                     _logger.LogWarning("Could not delete the previous portrait {OldPath}.", oldPath);

@@ -116,7 +116,7 @@
           <div class="portrait-preview-row">
             <img
               class="portrait-preview"
-              [src]="sessionForm.get('Conductor.Picture')?.value"
+              [src]="'assets/' + sessionForm.get('Conductor.Picture')?.value"
               alt="Portrait du directeur" />
           </div>
         }
@@ -219,7 +219,7 @@
                 <div class="portrait-preview-row">
                   <img
                     class="portrait-preview"
-                    [src]="soloist.get('Picture')?.value"
+                    [src]="'assets/' + soloist.get('Picture')?.value"
                     alt="Portrait du soliste" />
                 </div>
               }

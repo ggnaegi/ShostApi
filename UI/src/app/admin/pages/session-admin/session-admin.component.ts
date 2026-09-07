@@ -19,7 +19,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { MatFormField, MatLabel } from '@angular/material/form-field';
+import { MatFormField, MatLabel, MatSuffix } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
 import { MatButton, MatIconButton } from '@angular/material/button';
 
@@ -42,6 +42,7 @@ import {
   selector: 'app-session-admin',
   imports: [
     MatFormField,
+    MatSuffix,
     MatInput,
     ReactiveFormsModule,
     MatButton,
@@ -58,7 +59,7 @@ import {
     MatProgressSpinner,
   ],
   templateUrl: './session-admin.component.html',
-  changeDetection: ChangeDetectionStrategy.Eager,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrl: './session-admin.component.css',
 })
 export class SessionAdminComponent implements OnInit, OnChanges {
@@ -222,7 +223,7 @@ export class SessionAdminComponent implements OnInit, OnChanges {
     }
 
     const control = this.sessionForm.get('Conductor.Picture');
-    const directory = `assets/${year}/Gallery/Conductor`;
+    const directory = `${year}/Gallery/Conductor`;
 
     this.conductorPortraitBusy = true;
     this.portraitService
@@ -239,7 +240,7 @@ export class SessionAdminComponent implements OnInit, OnChanges {
     }
 
     const control = this.Soloists.at(index).get('Picture');
-    const directory = `assets/${year}/Gallery/Soloists`;
+    const directory = `${year}/Gallery/Soloists`;
 
     this.soloistPortraitBusy.add(index);
     this.portraitService

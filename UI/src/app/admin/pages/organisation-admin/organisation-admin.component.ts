@@ -27,7 +27,6 @@ import {
   MatExpansionPanelHeader,
   MatExpansionPanelTitle,
 } from '@angular/material/expansion';
-import { MatDivider } from '@angular/material/divider';
 
 import { MatOption } from '@angular/material/core';
 import { MatSelect, MatSelectChange } from '@angular/material/select';
@@ -51,7 +50,7 @@ import { MatSelect, MatSelectChange } from '@angular/material/select';
     MatSelect,
   ],
   templateUrl: './organisation-admin.component.html',
-  changeDetection: ChangeDetectionStrategy.Eager,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrl: './organisation-admin.component.css',
 })
 export class OrganisationAdminComponent implements OnInit, OnChanges {

@@ -6,7 +6,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using SendGrid.Extensions.DependencyInjection;
-using Shosta.Functions.API;
 using Shosta.Functions.Domain.Interfaces;
 using Shosta.Functions.Infrastructure;
 using Shosta.Functions.Infrastructure.Services;
