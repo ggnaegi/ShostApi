@@ -1,0 +1,33 @@
+<div class="galleries-admin-container">
+  <div class="add-gallery">
+    <mat-form-field appearance="outline">
+      <mat-label>Nouvelle année</mat-label>
+      <input
+        matInput
+        type="number"
+        [ngModel]="newYear()"
+        (ngModelChange)="newYear.set($event)"
+        placeholder="ex. 2027" />
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="button" (click)="addGallery()">
+      Ajouter une galerie
+    </button>
+  </div>
+
+  @for (item of items(); track item.logo.year) {
+    <mat-expansion-panel class="form-expansion-panel">
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ item.logo.year }}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <app-gallery-item-admin
+        [item]="item"
+        [busy]="isBusy(item.logo.year)"
+        (logoSaved)="logoSaved.emit($event)"
+        (flyerSelected)="onFlyerSelected(item.logo.year, $event)"
+        (imagesSelected)="onImagesSelected(item.logo.year, $event)"
+        (imageDeleted)="onImageDeleted(item.logo.year, $event)" />
+    </mat-expansion-panel>
+  } @empty {
+    <p class="galleries-empty">Aucune galerie pour le moment.</p>
+  }
+</div>

@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
-import { Album } from './gallery';
+import { Album, Logo } from './gallery';
 import { environment } from '../../../environments/environment';
 
 /** PascalCase shape returned by the Azure Function (matches the C# GalleryAlbum DTO). */
@@ -10,9 +10,51 @@ interface AlbumResponse {
   Images: { Url: string; Alt: string }[];
 }
 
+/** PascalCase shape returned by the Azure Function (matches the C# GalleryLogo DTO). */
+interface LogoResponse {
+  Year: number;
+  Url: string;
+  Alt: string;
+  ShowGallery: boolean;
+  ShowPage: boolean;
+  Teaser: string;
+}
+
+/** Editable metadata of a gallery year sent to the API. */
+export interface GalleryLogoInput {
+  year: number;
+  alt: string;
+  showGallery: boolean;
+  showPage: boolean;
+  teaser: string;
+}
+
 @Injectable({ providedIn: 'root' })
 export class GalleryAdminService {
   private readonly http = inject(HttpClient);
+
+  /** Inserts or updates the metadata of a gallery year and returns the updated logo. */
+  saveLogo(logo: GalleryLogoInput): Observable<Logo> {
+    return this.http
+      .post<LogoResponse>(`${environment.galleryEndpointUrl}/logo`, logo, {
+        withCredentials: true,
+      })
+      .pipe(map(response => this.toLogo(response)));
+  }
+
+  /** Uploads a flyer image (stored as assets/flyers/{year}.jpg) and returns the updated logo. */
+  uploadFlyer(year: number, file: File): Observable<Logo> {
+    const form = new FormData();
+    form.append('files', file, file.name);
+
+    return this.http
+      .post<LogoResponse>(
+        `${environment.galleryEndpointUrl}/${year}/flyer`,
+        form,
+        { withCredentials: true }
+      )
+      .pipe(map(response => this.toLogo(response)));
+  }
 
   /** Uploads images to assets/galleries/{year}/ and returns the updated album. */
   uploadImages(year: number, files: File[]): Observable<Album> {
@@ -45,6 +87,18 @@ export class GalleryAdminService {
         url: image.Url,
         alt: image.Alt,
       })),
+    };
+  }
+
+  /** Maps the PascalCase API response to the camelCase Logo model used across the app. */
+  private toLogo(response: LogoResponse): Logo {
+    return {
+      year: response.Year,
+      url: response.Url,
+      alt: response.Alt,
+      showGallery: response.ShowGallery,
+      showPage: response.ShowPage,
+      teaser: response.Teaser,
     };
   }
 }

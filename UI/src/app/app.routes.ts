@@ -3,6 +3,7 @@ import { SessionContainerComponent } from './session/containers/session.containe
 import { SessionAdminContainerComponent } from './admin/containers/session-admin.container.component';
 import { OrganisationAdminContainerComponent } from './admin/containers/organisation-admin.container.component';
 import { SponsorsAdminContainerComponent } from './admin/containers/sponsors-admin.container.component';
+import { GalleriesAdminContainerComponent } from './admin/containers/galleries-admin.container.component';
 import { WelcomeContainerComponent } from './layout/containers/welcome.container';
 import { AboutContainerComponent } from './layout/containers/about.container';
 import { ContactContainerComponent } from './layout/containers/contact.container';
@@ -26,6 +27,7 @@ export const routes: Routes = [
     component: OrganisationAdminContainerComponent,
   },
   { path: 'admin/sponsors', component: SponsorsAdminContainerComponent },
+  { path: 'admin/galleries', component: GalleriesAdminContainerComponent },
   { path: '', redirectTo: '/', pathMatch: 'full' },
   { path: '**', redirectTo: '/' },
 ];

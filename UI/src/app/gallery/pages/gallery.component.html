@@ -1,33 +1,60 @@
 @if (galleriesDefinitions()) {
-  <div class="card-container" id="medias-section">
-    <!-- Iterate over galleries, displaying a card for each year -->
-    @for (logo of displayedLogos(); track logo) {
-      <div class="year-card-wrapper">
+  @if (mediaMode()) {
+    <!-- Gallery page: image with a short teaser description on the right -->
+    <div class="gallery-list" id="medias-section">
+      @for (logo of displayedLogos(); track logo) {
         <mat-card
-          class="year-card"
-          [class.is-clickable]="!mediaMode() || logo.showGallery"
+          class="gallery-row"
+          [class.is-clickable]="logo.showGallery"
           (click)="onCardClick(logo)"
           (keydown.enter)="onCardClick(logo)"
           tabindex="0">
-          <mat-card-header>
-            <mat-card-title>{{ logo.year }}</mat-card-title>
-          </mat-card-header>
-          <app-image-with-loading
-            [src]="logo.url"
-            [alt]="logo.alt"
-            class="card-logo" />
-          @if (!mediaMode() && logo.showGallery) {
-            <mat-card-actions>
-              <button
-                mat-icon-button
-                (click)="$event.stopPropagation(); openGalleryDialog(logo.year)">
-                <mat-icon>photo_library</mat-icon>
-                <!-- Gallery Icon -->
-              </button>
-            </mat-card-actions>
-          }
+          <div class="gallery-row-image">
+            <app-image-with-loading
+              [src]="logo.url"
+              [alt]="logo.alt"
+              class="card-logo" />
+          </div>
+          <div class="gallery-row-info">
+            <h3 class="gallery-row-year">{{ logo.year }}</h3>
+            @if (logo.teaser) {
+              <p class="gallery-row-teaser" [innerHTML]="logo.teaser"></p>
+            }
+          </div>
         </mat-card>
-      </div>
-    }
-  </div>
+      }
+    </div>
+  } @else {
+    <!-- Session page: compact horizontal row of the most recent years -->
+    <div class="card-container" id="medias-section">
+      @for (logo of displayedLogos(); track logo) {
+        <div class="year-card-wrapper">
+          <mat-card
+            class="year-card"
+            [class.is-clickable]="logo.showPage"
+            (click)="onCardClick(logo)"
+            (keydown.enter)="onCardClick(logo)"
+            tabindex="0">
+            <mat-card-header>
+              <mat-card-title>{{ logo.year }}</mat-card-title>
+            </mat-card-header>
+            <app-image-with-loading
+              [src]="logo.url"
+              [alt]="logo.alt"
+              class="card-logo" />
+            @if (logo.showGallery) {
+              <mat-card-actions>
+                <button
+                  mat-icon-button
+                  (click)="$event.stopPropagation(); openGalleryDialog(logo.year)">
+                  <mat-icon>photo_library</mat-icon>
+                  <!-- Gallery Icon -->
+                </button>
+              </mat-card-actions>
+            }
+          </mat-card>
+        </div>
+      }
+    </div>
+  }
 }

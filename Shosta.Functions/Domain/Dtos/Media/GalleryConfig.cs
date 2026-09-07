@@ -43,3 +43,15 @@ public sealed class GalleryImage
     public string Url { get; set; } = string.Empty;
     public string Alt { get; set; } = string.Empty;
 }
+
+/// <summary>
+/// The editable metadata of a gallery year (the <c>logos</c> entry), excluding the images themselves.
+/// </summary>
+public sealed class GalleryLogoDto
+{
+    public int Year { get; set; }
+    public string Alt { get; set; } = string.Empty;
+    public bool ShowGallery { get; set; }
+    public bool ShowPage { get; set; }
+    public string Teaser { get; set; } = string.Empty;
+}

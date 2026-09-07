@@ -2,6 +2,8 @@ using System.Text.Json;
 using Microsoft.Extensions.Logging;
 using Shosta.Functions.Domain.Dtos.Media;
 using Shosta.Functions.Domain.Interfaces;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Formats.Jpeg;
 
 namespace Shosta.Functions.Infrastructure.Services;
 
@@ -10,6 +12,58 @@ public sealed class GalleryService(IStorageService storageService, ILoggerFactor
     private readonly ILogger _logger = loggerFactory.CreateLogger<GalleryService>();
 
     private const string GalleryConfigPath = "assets/galleries/gallery-config.json";
+    private const string FlyersDirectory = "assets/flyers";
+
+    public async Task<GalleryLogo> UpsertLogoAsync(
+        GalleryLogoDto dto,
+        CancellationToken cancellationToken = default)
+    {
+        var config = await LoadConfigAsync(cancellationToken);
+        var logo = GetOrCreateLogo(config, dto.Year);
+
+        logo.Alt = string.IsNullOrWhiteSpace(dto.Alt) ? $"logo-{dto.Year}" : dto.Alt;
+        logo.ShowGallery = dto.ShowGallery;
+        logo.ShowPage = dto.ShowPage;
+        logo.Teaser = dto.Teaser;
+
+        // Ensure a matching album exists so images can be added later.
+        GetOrCreateAlbum(config, dto.Year);
+
+        await SaveConfigAsync(config, cancellationToken);
+        return logo;
+    }
+
+    public async Task<GalleryLogo> UploadFlyerAsync(
+        int year,
+        StorageFileUpload file,
+        CancellationToken cancellationToken = default)
+    {
+        // Normalise the flyer to a JPEG named {year}.jpg so it overwrites any previous flyer for the year.
+        file.Content.Position = 0;
+        using var image = await Image.LoadAsync(file.Content, cancellationToken);
+
+        using var jpeg = new MemoryStream();
+        await image.SaveAsJpegAsync(jpeg, new JpegEncoder { Quality = 90 }, cancellationToken);
+        jpeg.Position = 0;
+
+        var upload = new StorageFileUpload($"{year}.jpg", jpeg);
+        var uploadResult = await storageService.UploadFilesAsync([upload], FlyersDirectory, cancellationToken);
+
+        var uploaded = uploadResult.Files.FirstOrDefault();
+        if (uploaded is null || !uploaded.Success)
+        {
+            throw new InvalidOperationException($"Failed to upload the flyer for year {year}.");
+        }
+
+        var config = await LoadConfigAsync(cancellationToken);
+        var logo = GetOrCreateLogo(config, year);
+        logo.Url = $"{FlyersDirectory}/{year}.jpg";
+
+        GetOrCreateAlbum(config, year);
+
+        await SaveConfigAsync(config, cancellationToken);
+        return logo;
+    }
 
     public async Task<GalleryAlbum> AddImagesAsync(
         int year,
@@ -109,5 +163,19 @@ public sealed class GalleryService(IStorageService storageService, ILoggerFactor
         config.Galleries.Add(album);
         config.Galleries.Sort((a, b) => a.Year.CompareTo(b.Year));
         return album;
+    }
+
+    private static GalleryLogo GetOrCreateLogo(GalleryConfig config, int year)
+    {
+        var logo = config.Logos.FirstOrDefault(l => l.Year == year);
+        if (logo is not null)
+        {
+            return logo;
+        }
+
+        logo = new GalleryLogo { Year = year, Alt = $"logo-{year}" };
+        config.Logos.Add(logo);
+        config.Logos.Sort((a, b) => b.Year.CompareTo(a.Year));
+        return logo;
     }
 }

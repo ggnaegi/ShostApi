@@ -89,6 +89,14 @@
         class="menu-link"
         >Sponsors</a
       >
+      <a
+        mat-button
+        routerLink="/admin/galleries"
+        routerLinkActive="active-link"
+        [routerLinkActiveOptions]="linkActiveOptions"
+        class="menu-link"
+        >Galeries</a
+      >
     </div>
   }
   @if (showMenu()) {
@@ -195,6 +203,15 @@
           class="menu-link"
           (click)="sidenav.close()"
           >Sponsors</a
+        >
+        <a
+          mat-list-item
+          routerLink="/admin/galleries"
+          routerLinkActive="active-link"
+          [routerLinkActiveOptions]="linkActiveOptions"
+          class="menu-link"
+          (click)="sidenav.close()"
+          >Galeries</a
         >
       </mat-nav-list>
     }

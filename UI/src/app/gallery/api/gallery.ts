@@ -21,3 +21,9 @@ export interface GalleriesDefinition {
   logos: Logo[];
   galleries: Album[];
 }
+
+/** A gallery year for the admin view: its metadata (logo) plus its album images. */
+export interface GalleryAdminItem {
+  logo: Logo;
+  album: Album | null;
+}

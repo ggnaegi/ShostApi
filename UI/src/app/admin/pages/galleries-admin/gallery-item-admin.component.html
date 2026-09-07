@@ -1,0 +1,98 @@
+<form [formGroup]="metaForm" (ngSubmit)="onSave()">
+  <div class="item-grid">
+    <!-- Flyer column -->
+    <div class="flyer-col">
+      @if (flyerUrl) {
+        <img class="flyer-preview" [src]="flyerUrl" [alt]="item().logo.alt" />
+      } @else {
+        <div class="flyer-empty">Aucune affiche</div>
+      }
+      <input
+        #flyerInput
+        type="file"
+        accept="image/*"
+        hidden
+        (change)="onFlyerSelected($event)" />
+      <button
+        mat-stroked-button
+        type="button"
+        [disabled]="busy()"
+        (click)="flyerInput.click()">
+        {{ flyerUrl ? "Remplacer l'affiche" : "Ajouter une affiche" }}
+      </button>
+    </div>
+
+    <!-- Metadata column -->
+    <div class="meta-col">
+      <mat-form-field appearance="outline">
+        <mat-label>Texte alternatif</mat-label>
+        <input matInput formControlName="Alt" />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Description / teaser (HTML autorisé)</mat-label>
+        <textarea matInput formControlName="Teaser" rows="6"></textarea>
+      </mat-form-field>
+      <div class="toggles">
+        <mat-slide-toggle formControlName="ShowPage"
+          >Afficher sur la page</mat-slide-toggle
+        >
+        <mat-slide-toggle formControlName="ShowGallery"
+          >Activer la galerie photos</mat-slide-toggle
+        >
+      </div>
+      <div>
+        <button
+          mat-raised-button
+          color="primary"
+          type="submit"
+          [disabled]="busy() || metaForm.invalid">
+          Enregistrer
+        </button>
+      </div>
+    </div>
+  </div>
+</form>
+
+<!-- Images grid -->
+<div class="gallery-admin">
+  @if (images.length > 0) {
+    <div class="gallery-thumbs">
+      @for (image of images; track image.url) {
+        <div class="gallery-thumb">
+          <img [src]="image.url" [alt]="image.alt" loading="lazy" />
+          <button
+            mat-icon-button
+            color="warn"
+            type="button"
+            class="gallery-thumb-delete"
+            [disabled]="busy()"
+            (click)="deleteImage(image.url)">
+            <mat-icon>close</mat-icon>
+          </button>
+        </div>
+      }
+    </div>
+  } @else {
+    <p class="gallery-empty">Aucune image pour cette année.</p>
+  }
+  <div class="gallery-actions">
+    <input
+      #imagesInput
+      type="file"
+      accept="image/*"
+      multiple
+      hidden
+      (change)="onImagesSelected($event)" />
+    <button
+      mat-raised-button
+      color="primary"
+      type="button"
+      [disabled]="busy()"
+      (click)="imagesInput.click()">
+      Ajouter des images
+    </button>
+    @if (busy()) {
+      <span class="gallery-status">Traitement en cours…</span>
+    }
+  </div>
+</div>

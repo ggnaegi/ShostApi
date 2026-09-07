@@ -9,7 +9,6 @@ import {
   output,
 } from '@angular/core';
 import { Session } from '../../../session/api/session-element';
-import { Image } from '../../../gallery/api/gallery';
 import { PortraitAdminService } from '../../../gallery/api/portrait-admin.service';
 import { finalize } from 'rxjs';
 import {
@@ -65,17 +64,9 @@ import {
 export class SessionAdminComponent implements OnInit, OnChanges {
   readonly sessionData = input<Session | null>(null);
 
-  readonly galleryImages = input<Image[]>([]);
-
-  readonly galleryBusy = input(false);
-
   readonly yearChanged = output<number>();
 
   readonly sessionSubmitted = output<Session>();
-
-  readonly imagesUploaded = output<File[]>();
-
-  readonly imageDeleted = output<string>();
 
   sessionForm!: FormGroup;
   years: number[] = [];
@@ -196,19 +187,6 @@ export class SessionAdminComponent implements OnInit, OnChanges {
       const updatedSessionValue = this.sessionForm.value as Session;
       this.sessionSubmitted.emit(updatedSessionValue);
     }
-  }
-
-  onGalleryFilesSelected(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    const files = input.files ? Array.from(input.files) : [];
-    if (files.length > 0) {
-      this.imagesUploaded.emit(files);
-    }
-    input.value = '';
-  }
-
-  deleteGalleryImage(url: string): void {
-    this.imageDeleted.emit(url);
   }
 
   isSoloistPortraitBusy(index: number): boolean {

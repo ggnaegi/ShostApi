@@ -10,7 +10,7 @@ import {
   OrganisationContainer,
   SponsorsConfig,
 } from '../../about/api/organisation';
-import { GalleriesDefinition, Album } from '../../gallery/api/gallery';
+import { GalleriesDefinition, Album, Logo } from '../../gallery/api/gallery';
 import {
   AboutPageDto,
   ContactPageDto,
@@ -224,6 +224,33 @@ export const AppDataStore = signalStore(
 
       patchState(store, {
         galleryDefinition: { ...definition, galleries },
+      });
+    },
+
+    /**
+     * Replaces (or inserts) a logo entry in the in-memory gallery definition after an admin
+     * metadata edit, flyer upload, or new-gallery creation.
+     */
+    setGalleryLogo(logo: Logo): void {
+      const definition = store.galleryDefinition();
+      if (!definition) {
+        return;
+      }
+
+      const exists = definition.logos.some(l => l.year === logo.year);
+      const logos = exists
+        ? definition.logos.map(l => (l.year === logo.year ? logo : l))
+        : [...definition.logos, logo].sort((a, b) => b.year - a.year);
+
+      // Ensure an album exists locally so a freshly created gallery can receive images.
+      const galleries = definition.galleries.some(a => a.year === logo.year)
+        ? definition.galleries
+        : [...definition.galleries, { year: logo.year, images: [] }].sort(
+            (a, b) => a.year - b.year
+          );
+
+      patchState(store, {
+        galleryDefinition: { ...definition, logos, galleries },
       });
     },
 

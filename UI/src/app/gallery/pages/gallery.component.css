@@ -2,6 +2,7 @@
 .card-container {
   display: flex;
   flex-wrap: nowrap;
+  justify-content: center; /* Center the year cards on the session page */
   overflow-x: auto;
   padding-bottom: 10px; /* Optional: space below for scroll visibility */
   margin-bottom: 16px; /* Space at the bottom */
@@ -119,11 +120,91 @@ mat-grid-tile {
 }
 
 #medias-section {
-  display: flex;
-  justify-content: center; /* Center the cards horizontally */
-  flex-wrap: wrap;
   padding-bottom: 10px;
   margin-bottom: 16px;
+}
+
+.card-container::-webkit-scrollbar {
+  height: 10px;
+}
+
+.card-container::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+}
+
+/* Gallery page: vertical list of image + teaser rows */
+.gallery-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.gallery-list .gallery-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+  padding: 12px;
+  border-radius: 0;
+  box-shadow: none;
+  transition: box-shadow 160ms ease;
+}
+
+.gallery-row.is-clickable {
+  cursor: pointer;
+}
+
+.gallery-row.is-clickable:hover {
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.12);
+}
+
+.gallery-list .gallery-row-image {
+  flex: 0 0 140px;
+  width: 140px;
+  max-width: 140px;
+}
+
+.gallery-row-image app-image-with-loading {
+  display: block;
+  width: 100%;
+}
+
+.gallery-row-image app-image-with-loading img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+.gallery-row-info {
+  flex: 1 1 auto;
+}
+
+.gallery-row-year {
+  margin: 0 0 8px;
+  font-size: 1.4rem;
+  color: #803357;
+}
+
+.gallery-row-teaser {
+  margin: 0;
+  color: #333;
+  font-family: 'Avenir Next Light', serif;
+  line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+  .gallery-list .gallery-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .gallery-list .gallery-row-image {
+    flex-basis: auto;
+    max-width: 140px;
+    width: 140px;
+  }
 }
 
 /* Main section styling */

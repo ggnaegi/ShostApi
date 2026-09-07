@@ -22,6 +22,92 @@ public class Gallery(
         PropertyNameCaseInsensitive = true
     };
 
+    [Function(nameof(UpsertGalleryLogo))]
+    public async Task<HttpResponseData> UpsertGalleryLogo(
+        [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "gallery/logo")]
+        HttpRequestData req,
+        FunctionContext executionContext)
+    {
+        var authError = CheckAdmin(req);
+        if (authError is not null)
+        {
+            return await Error(req, authError.Value.Status, authError.Value.Message);
+        }
+
+        Domain.Dtos.Media.GalleryLogoDto? logo;
+        try
+        {
+            var requestBody = await new StreamReader(req.Body).ReadToEndAsync(executionContext.CancellationToken);
+            logo = JsonSerializer.Deserialize<Domain.Dtos.Media.GalleryLogoDto>(requestBody, JsonOptions);
+        }
+        catch (JsonException ex)
+        {
+            _logger.LogError(ex, "Invalid gallery logo request body.");
+            return await Error(req, HttpStatusCode.BadRequest, "Invalid request body.");
+        }
+
+        if (logo is null || logo.Year <= 0)
+        {
+            return await Error(req, HttpStatusCode.BadRequest, "A valid year is required.");
+        }
+
+        try
+        {
+            var updated = await galleryService.UpsertLogoAsync(logo, executionContext.CancellationToken);
+            return await WriteLogo(req, updated);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Failed to save gallery logo for year {Year}.", logo.Year);
+            return await Error(req, HttpStatusCode.InternalServerError, "Failed to save the gallery.");
+        }
+    }
+
+    [Function(nameof(UploadGalleryFlyer))]
+    public async Task<HttpResponseData> UploadGalleryFlyer(
+        [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "gallery/{year:int}/flyer")]
+        HttpRequestData req,
+        int year,
+        FunctionContext executionContext)
+    {
+        var authError = CheckAdmin(req);
+        if (authError is not null)
+        {
+            return await Error(req, authError.Value.Status, authError.Value.Message);
+        }
+
+        if (!req.IsMultipartFormData())
+        {
+            return await Error(req, HttpStatusCode.BadRequest, "Request must be multipart/form-data.");
+        }
+
+        var form = await req.ReadMultipartFormAsync(executionContext.CancellationToken);
+        if (form is null)
+        {
+            return await Error(req, HttpStatusCode.BadRequest, "Malformed multipart/form-data request.");
+        }
+
+        try
+        {
+            if (form.Files.Count == 0)
+            {
+                return await Error(req, HttpStatusCode.BadRequest, "No file was provided in the request.");
+            }
+
+            var logo = await galleryService.UploadFlyerAsync(year, form.Files[0], executionContext.CancellationToken);
+            return await WriteLogo(req, logo);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Flyer upload failed for year {Year}.", year);
+            return await Error(req, HttpStatusCode.InternalServerError, "Failed to upload the flyer.");
+        }
+        finally
+        {
+            await form.DisposeFilesAsync();
+        }
+    }
+
     [Function(nameof(UploadGalleryImages))]
     public async Task<HttpResponseData> UploadGalleryImages(
         [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "gallery/{year:int}")]
@@ -144,6 +230,14 @@ public class Gallery(
     {
         var response = req.CreateResponse(HttpStatusCode.OK);
         await response.WriteAsJsonAsync(album);
+        response.StatusCode = HttpStatusCode.OK;
+        return response;
+    }
+
+    private static async Task<HttpResponseData> WriteLogo(HttpRequestData req, Domain.Dtos.Media.GalleryLogo logo)
+    {
+        var response = req.CreateResponse(HttpStatusCode.OK);
+        await response.WriteAsJsonAsync(logo);
         response.StatusCode = HttpStatusCode.OK;
         return response;
     }

@@ -49,10 +49,14 @@ export class GalleryComponent {
       return [];
     }
 
-    const logos = definitions.logos.filter(logo => logo.year >= 2020);
-    return this.mediaMode()
-      ? logos.filter(logo => logo.showGallery)
-      : logos;
+    const logos = [...definitions.logos].sort((a, b) => b.year - a.year);
+
+    if (this.mediaMode()) {
+      return logos.filter(logo => logo.showGallery);
+    }
+
+    // Session page: only surface the most recent years.
+    return logos.slice(0, 6);
   });
 
   readonly dialog = inject(MatDialog);

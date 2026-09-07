@@ -384,54 +384,6 @@
           Ajouter concert
         </button>
       </mat-expansion-panel>
-      <!-- Gallery Section -->
-      <mat-expansion-panel class="form-expansion-panel">
-        <mat-expansion-panel-header>
-          <mat-panel-title> Galerie </mat-panel-title>
-        </mat-expansion-panel-header>
-        <div class="gallery-admin">
-          @if (galleryImages().length > 0) {
-            <div class="gallery-thumbs">
-              @for (image of galleryImages(); track image.url) {
-                <div class="gallery-thumb">
-                  <img [src]="image.url" [alt]="image.alt" loading="lazy" />
-                  <button
-                    mat-icon-button
-                    color="warn"
-                    type="button"
-                    class="gallery-thumb-delete"
-                    [disabled]="galleryBusy()"
-                    (click)="deleteGalleryImage(image.url)">
-                    <mat-icon>close</mat-icon>
-                  </button>
-                </div>
-              }
-            </div>
-          } @else {
-            <p class="gallery-empty">Aucune image pour cette année.</p>
-          }
-          <div class="gallery-actions">
-            <input
-              #galleryFileInput
-              type="file"
-              accept="image/*"
-              multiple
-              hidden
-              (change)="onGalleryFilesSelected($event)" />
-            <button
-              mat-raised-button
-              color="primary"
-              type="button"
-              [disabled]="galleryBusy()"
-              (click)="galleryFileInput.click()">
-              Ajouter des images
-            </button>
-            @if (galleryBusy()) {
-              <span class="gallery-status">Téléversement en cours…</span>
-            }
-          </div>
-        </div>
-      </mat-expansion-panel>
       <!-- Submit Button -->
       <div fxLayout="row" fxLayoutAlign="start stretch">
         <button
