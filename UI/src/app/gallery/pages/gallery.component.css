@@ -143,7 +143,7 @@ mat-grid-tile {
 .gallery-list .gallery-row {
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: flex-start;
   gap: 20px;
   padding: 12px;
   border-radius: 0;
@@ -160,9 +160,9 @@ mat-grid-tile {
 }
 
 .gallery-list .gallery-row-image {
-  flex: 0 0 140px;
-  width: 140px;
-  max-width: 140px;
+  flex: 0 0 200px;
+  width: 200px;
+  max-width: 200px;
 }
 
 .gallery-row-image app-image-with-loading {
@@ -190,7 +190,7 @@ mat-grid-tile {
 .gallery-row-teaser {
   margin: 0;
   color: #333;
-  font-family: 'Avenir Next Light', serif;
+  font-family: 'Montserrat', sans-serif;
   line-height: 1.5;
 }
 
@@ -202,8 +202,8 @@ mat-grid-tile {
 
   .gallery-list .gallery-row-image {
     flex-basis: auto;
-    max-width: 140px;
     width: 140px;
+    max-width: 140px;
   }
 }
 
@@ -213,7 +213,7 @@ mat-grid-tile {
   justify-content: left;
   align-items: flex-start;
   position: relative;
-  font-family: "Avenir Next Light", serif;
+  font-family: 'Montserrat', sans-serif;
 }
 
 /* Wrapper for image and text */

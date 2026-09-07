@@ -19,9 +19,10 @@ import { MatInput } from '@angular/material/input';
 import { MatButton, MatIconButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { MatSlideToggle } from '@angular/material/slide-toggle';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { FlexModule } from '@angular/flex-layout';
 
-import { GalleryAdminItem } from '../../../gallery/api/gallery';
+import { GalleryAdminItem, Image } from '../../../gallery/api/gallery';
 import { GalleryLogoInput } from '../../../gallery/api/gallery-admin.service';
 
 @Component({
@@ -35,6 +36,7 @@ import { GalleryLogoInput } from '../../../gallery/api/gallery-admin.service';
     MatIconButton,
     MatIcon,
     MatSlideToggle,
+    MatPaginator,
     FlexModule,
   ],
   templateUrl: './gallery-item-admin.component.html',
@@ -54,6 +56,9 @@ export class GalleryItemAdminComponent implements OnInit, OnChanges {
 
   readonly imageDeleted = output<string>();
 
+  readonly pageSize = 10;
+  pageIndex = 0;
+
   metaForm!: FormGroup;
 
   private readonly fb = inject(FormBuilder);
@@ -69,8 +74,11 @@ export class GalleryItemAdminComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['item']?.currentValue && this.metaForm) {
-      this.populateForm();
+    if (changes['item']?.currentValue) {
+      this.clampPageIndex();
+      if (this.metaForm) {
+        this.populateForm();
+      }
     }
   }
 
@@ -82,8 +90,18 @@ export class GalleryItemAdminComponent implements OnInit, OnChanges {
     return this.item().logo.url;
   }
 
-  get images() {
+  get images(): Image[] {
     return this.item().album?.images ?? [];
+  }
+
+  /** Only the thumbnails for the current page, to keep the DOM light. */
+  get pagedImages(): Image[] {
+    const start = this.pageIndex * this.pageSize;
+    return this.images.slice(start, start + this.pageSize);
+  }
+
+  onPageChange(event: PageEvent): void {
+    this.pageIndex = event.pageIndex;
   }
 
   onSave(): void {
@@ -119,6 +137,14 @@ export class GalleryItemAdminComponent implements OnInit, OnChanges {
 
   deleteImage(url: string): void {
     this.imageDeleted.emit(url);
+  }
+
+  /** Keeps the current page valid after images are added or removed. */
+  private clampPageIndex(): void {
+    const lastPage = Math.max(0, Math.ceil(this.images.length / this.pageSize) - 1);
+    if (this.pageIndex > lastPage) {
+      this.pageIndex = lastPage;
+    }
   }
 
   private populateForm(): void {

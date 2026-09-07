@@ -40,7 +40,7 @@ import { EmailSendResult } from '../api/organisation';
       }
 
       span {
-        font-family: 'Avenir Next Light', serif;
+        font-family: 'Montserrat', sans-serif;
         font-size: 12px;
         color: white;
       }

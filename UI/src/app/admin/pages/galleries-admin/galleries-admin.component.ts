@@ -13,6 +13,8 @@ import {
   MatExpansionPanel,
   MatExpansionPanelHeader,
   MatExpansionPanelTitle,
+  MatAccordion,
+  MatExpansionPanelContent,
 } from '@angular/material/expansion';
 
 import { GalleryAdminItem } from '../../../gallery/api/gallery';
@@ -27,9 +29,11 @@ import { GalleryItemAdminComponent } from './gallery-item-admin.component';
     MatLabel,
     MatInput,
     MatButton,
+    MatAccordion,
     MatExpansionPanel,
     MatExpansionPanelTitle,
     MatExpansionPanelHeader,
+    MatExpansionPanelContent,
     GalleryItemAdminComponent,
   ],
   templateUrl: './galleries-admin.component.html',

@@ -57,7 +57,7 @@
 <div class="gallery-admin">
   @if (images.length > 0) {
     <div class="gallery-thumbs">
-      @for (image of images; track image.url) {
+      @for (image of pagedImages; track image.url) {
         <div class="gallery-thumb">
           <img [src]="image.url" [alt]="image.alt" loading="lazy" />
           <button
@@ -72,6 +72,14 @@
         </div>
       }
     </div>
+    @if (images.length > pageSize) {
+      <mat-paginator
+        [length]="images.length"
+        [pageSize]="pageSize"
+        [pageIndex]="pageIndex"
+        [hidePageSize]="true"
+        (page)="onPageChange($event)" />
+    }
   } @else {
     <p class="gallery-empty">Aucune image pour cette année.</p>
   }

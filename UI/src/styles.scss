@@ -32,13 +32,6 @@
   font-display: swap;
 }
 
-@font-face {
-  font-family: "Avenir Next Light";
-  src: url("/assets/fonts/avenir-next-light.ttf") format("truetype");
-  font-weight: 300;
-  font-style: normal;
-}
-
 html,
 body {
   font-family: "Montserrat", sans-serif;
@@ -274,7 +267,7 @@ $dark-theme: mat.m2-define-dark-theme(
 }
 
 .mat-badge-content {
-  font-family: "Avenir Next Light", sans-serif;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .cdk-overlay-container,

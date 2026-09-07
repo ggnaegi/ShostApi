@@ -18,6 +18,8 @@ import {
 } from '@angular/material/card';
 import { MatIcon } from '@angular/material/icon';
 import { MatIconButton } from '@angular/material/button';
+import { MatIconRegistry } from '@angular/material/icon';
+import { DomSanitizer } from '@angular/platform-browser';
 import { GalleryDialogComponent } from './gallery-dialog/gallery-dialog.component';
 import { ImageWithLoadingComponent } from '../../common/image-with-loading.component';
 
@@ -42,6 +44,21 @@ export class GalleryComponent {
   readonly galleriesDefinitions = input<GalleriesDefinition | null>(null);
   readonly mediaMode = input(false);
   readonly yearChanged = output<number>();
+
+  constructor() {
+    // The self-hosted "Material Icons Outlined" font is a subset that lacks the
+    // photo_library glyph, so register it as an SVG icon to guarantee it renders.
+    const iconRegistry = inject(MatIconRegistry);
+    const sanitizer = inject(DomSanitizer);
+    iconRegistry.addSvgIconLiteral(
+      'photo-library',
+      sanitizer.bypassSecurityTrustHtml(
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">' +
+          '<path d="M22 16V4c0-1.1-.9-2-2-2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2zm-11-4l2.03 2.71L16 11l4 5H8l3-4zM2 6v14c0 1.1.9 2 2 2h14v-2H4V6H2z"/>' +
+          '</svg>'
+      )
+    );
+  }
 
   readonly displayedLogos = computed<Logo[]>(() => {
     const definitions = this.galleriesDefinitions();

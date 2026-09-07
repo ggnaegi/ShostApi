@@ -14,20 +14,24 @@
     </button>
   </div>
 
-  @for (item of items(); track item.logo.year) {
-    <mat-expansion-panel class="form-expansion-panel">
-      <mat-expansion-panel-header>
-        <mat-panel-title>{{ item.logo.year }}</mat-panel-title>
-      </mat-expansion-panel-header>
-      <app-gallery-item-admin
-        [item]="item"
-        [busy]="isBusy(item.logo.year)"
-        (logoSaved)="logoSaved.emit($event)"
-        (flyerSelected)="onFlyerSelected(item.logo.year, $event)"
-        (imagesSelected)="onImagesSelected(item.logo.year, $event)"
-        (imageDeleted)="onImageDeleted(item.logo.year, $event)" />
-    </mat-expansion-panel>
-  } @empty {
-    <p class="galleries-empty">Aucune galerie pour le moment.</p>
-  }
+  <mat-accordion class="galleries-accordion">
+    @for (item of items(); track item.logo.year) {
+      <mat-expansion-panel class="form-expansion-panel">
+        <mat-expansion-panel-header>
+          <mat-panel-title>{{ item.logo.year }}</mat-panel-title>
+        </mat-expansion-panel-header>
+        <ng-template matExpansionPanelContent>
+          <app-gallery-item-admin
+            [item]="item"
+            [busy]="isBusy(item.logo.year)"
+            (logoSaved)="logoSaved.emit($event)"
+            (flyerSelected)="onFlyerSelected(item.logo.year, $event)"
+            (imagesSelected)="onImagesSelected(item.logo.year, $event)"
+            (imageDeleted)="onImageDeleted(item.logo.year, $event)" />
+        </ng-template>
+      </mat-expansion-panel>
+    } @empty {
+      <p class="galleries-empty">Aucune galerie pour le moment.</p>
+    }
+  </mat-accordion>
 </div>

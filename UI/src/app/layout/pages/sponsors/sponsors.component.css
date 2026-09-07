@@ -18,12 +18,12 @@
 #sponsors-section h2 {
   color: #333; /* Dark color for headings */
   margin-bottom: 0.5em;
-  font-family: 'Avenir Next Light', serif;
+  font-family: 'Montserrat', sans-serif;
 }
 
 #sponsors-section p {
   color: #000;
-  font-family: 'Avenir Next Light', serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 16px;
   max-width: 600px;
 }
@@ -39,7 +39,7 @@
 
 .sponsors-body {
   color: #000;
-  font-family: 'Avenir Next Light', serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 16px;
   max-width: 600px;
   margin-bottom: 20px;

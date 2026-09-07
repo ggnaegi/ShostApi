@@ -25,7 +25,7 @@
   transition: all 0.3s ease;
   cursor: pointer;
   white-space: nowrap;
-  font-family: 'Avenir Next Light', serif;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .menu-item:hover {
@@ -94,7 +94,7 @@
 }
 
 .content-card mat-card-title {
-  font-family: 'Avenir Next Light', serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 28px;
   color: #803357;
 }
@@ -104,7 +104,7 @@
 }
 
 .content-text {
-  font-family: 'Avenir Next Light', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   line-height: 1.6;
   color: #333;
 }
@@ -116,7 +116,7 @@
 .member-item {
   padding: 12px 0;
   border-bottom: 1px solid #f0f0f0;
-  font-family: 'Avenir Next Light', sans-serif;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .member-item:last-child {
