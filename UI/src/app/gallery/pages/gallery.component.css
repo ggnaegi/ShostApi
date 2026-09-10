@@ -208,20 +208,20 @@ mat-grid-tile {
   gap: 6px;
   margin-top: auto;
   padding-top: 16px;
-  color: #f00;
+  color: inherit;
   font-weight: 700;
   text-decoration: none;
 }
 
 .gallery-row-video-link:hover {
-  color: #c00;
   text-decoration: underline;
 }
 
-.youtube-icon {
+.gallery-row-video-link mat-icon {
   width: 1.25rem;
   height: 1.25rem;
-  fill: currentColor;
+  color: #e62117;
+  font-size: 1.25rem;
 }
 
 @media (max-width: 768px) {
