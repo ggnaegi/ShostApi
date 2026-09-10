@@ -55,6 +55,19 @@
 .year-card-wrapper {
   flex: 0 0 auto;
   margin-right: 16px;
+  padding-top: 2rem;
+  position: relative;
+}
+
+.year-card-title {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.5;
+  white-space: nowrap;
 }
 
 .year-card {

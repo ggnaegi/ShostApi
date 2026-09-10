@@ -7,10 +7,10 @@
       <div class="welcome-current-session">
         <div class="content-wrapper">
           <div class="year-card-wrapper">
+            <div class="year-card-title">
+              {{ data.Year }}{{ data.Title ? ' ' + data.Title : '' }}
+            </div>
             <mat-card class="year-card" [routerLink]="['/session']">
-              <mat-card-header>
-                <mat-card-title>{{ data.Year }}{{ data.Title ? ' ' + data.Title : '' }}</mat-card-title>
-              </mat-card-header>
               <app-image-with-loading
                 [src]="'assets/' + data.Picture"
                 [class]="'card-logo'" />
