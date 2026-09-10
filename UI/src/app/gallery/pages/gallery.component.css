@@ -46,13 +46,21 @@
 }
 
 .year-card mat-card-actions {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   align-items: center;
-  justify-content: space-between;
-  gap: 8px;
+  min-height: 48px;
+  padding: 8px;
+}
+
+.session-gallery-link {
+  grid-column: 1;
+  justify-self: start;
 }
 
 .session-video-link {
+  grid-column: 2;
+  justify-self: end;
   display: inline-flex;
   align-items: center;
   color: inherit;

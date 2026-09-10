@@ -73,11 +73,11 @@
 
       <a
         mat-button
-        routerLink="/admin/sessions"
+        routerLink="/admin/galleries"
         routerLinkActive="active-link"
         [routerLinkActiveOptions]="linkActiveOptions"
         class="menu-link">
-        Sessions
+        Config et Galeries
       </a>
 
       <a
@@ -100,11 +100,11 @@
 
       <a
         mat-button
-        routerLink="/admin/galleries"
+        routerLink="/admin/sessions"
         routerLinkActive="active-link"
         [routerLinkActiveOptions]="linkActiveOptions"
         class="menu-link">
-        Config et Galeries
+        Sessions
       </a>
     } @else {
       <a
@@ -198,12 +198,12 @@
 
         <a
           mat-list-item
-          routerLink="/admin/sessions"
+          routerLink="/admin/galleries"
           routerLinkActive="active-link"
           [routerLinkActiveOptions]="linkActiveOptions"
           class="menu-link"
           (click)="sidenav.close()">
-          Sessions
+          Config et Galeries
         </a>
 
         <a
@@ -228,12 +228,12 @@
 
         <a
           mat-list-item
-          routerLink="/admin/galleries"
+          routerLink="/admin/sessions"
           routerLinkActive="active-link"
           [routerLinkActiveOptions]="linkActiveOptions"
           class="menu-link"
           (click)="sidenav.close()">
-          Config et Galeries
+          Sessions
         </a>
       </mat-nav-list>
     } @else {

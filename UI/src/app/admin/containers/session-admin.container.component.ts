@@ -1,6 +1,8 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  computed,
+  effect,
   inject,
   OnInit,
   signal,
@@ -16,19 +18,34 @@ import { Session } from '../../session/api/session-element';
     template: `
     <app-session-admin
       [sessionData]="sessionData()"
+      [years]="years()"
       (yearChanged)="updateYear($event)"
       (sessionSubmitted)="updateSession($event)"></app-session-admin>
   `
 })
 export class SessionAdminContainerComponent implements OnInit {
-  protected readonly year = signal(2026);
+  protected readonly year = signal<number | null>(null);
 
   private readonly appDataStore = inject(AppDataStore);
 
-  protected readonly sessionData = this.appDataStore.sessionForYear(this.year);
+  protected readonly years = computed(() =>
+    (this.appDataStore.galleryDefinition()?.logos ?? [])
+      .map(logo => logo.year)
+      .sort((a, b) => b - a)
+  );
+  protected readonly sessionData = this.appDataStore.sessionForYear(
+    computed(() => this.year() ?? 0)
+  );
+
+  private readonly initialSessionEffect = effect(() => {
+    const [firstYear] = this.years();
+    if (firstYear && this.year() === null) {
+      this.updateYear(firstYear);
+    }
+  });
 
   ngOnInit(): void {
-    this.appDataStore.loadSession({ year: this.year(), adminRoute: true });
+    this.appDataStore.loadGalleryDefinition();
   }
 
   public updateYear(year: number): void {

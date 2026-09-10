@@ -8,7 +8,16 @@
   flex-direction: column;
   gap: 8px;
   margin-bottom: 24px;
-  max-width: 600px;
+}
+
+.media-text-fields {
+  display: grid;
+  grid-template-columns: minmax(220px, 1fr) minmax(320px, 2fr);
+  gap: 16px;
+}
+
+.media-text-fields mat-form-field {
+  width: 100%;
 }
 
 .add-gallery {
@@ -20,7 +29,7 @@
 
 /* Keep the year field compact so it doesn't dwarf the button next to it. */
 .add-gallery mat-form-field {
-  width: 120px;
+  width: 220px;
 }
 
 /* Material's form-field infix defaults to 180px; shrink it so the field is truly narrow. */
@@ -44,4 +53,14 @@
 
 .galleries-empty {
   color: #777;
+}
+
+@media (max-width: 768px) {
+  .add-gallery {
+    flex-wrap: wrap;
+  }
+
+  .media-text-fields {
+    grid-template-columns: 1fr;
+  }
 }

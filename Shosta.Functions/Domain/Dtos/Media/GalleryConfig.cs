@@ -34,6 +34,12 @@ public sealed class GalleryMediaTextsDto
     public string MediaPageDescription { get; set; } = string.Empty;
 }
 
+public sealed class GallerySessionDto
+{
+    public int Year { get; set; }
+    public string Title { get; set; } = string.Empty;
+}
+
 public sealed class GalleryLogo
 {
     public int Year { get; set; }

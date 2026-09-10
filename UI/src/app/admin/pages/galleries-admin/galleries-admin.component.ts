@@ -55,13 +55,14 @@ export class GalleriesAdminComponent implements OnChanges {
 
   readonly imageDeleted = output<{ year: number; url: string }>();
 
-  readonly galleryAdded = output<number>();
+  readonly sessionAdded = output<{ year: number; title: string }>();
   readonly mediaTextsSaved = output<{
     mediaPageTitle: string;
     mediaPageDescription: string;
   }>();
 
   protected readonly newYear = signal<number | null>(null);
+  protected newSessionTitle = '';
   protected mediaPageTitle = '';
   protected mediaPageDescription = '';
 
@@ -96,15 +97,17 @@ export class GalleriesAdminComponent implements OnChanges {
     this.imageDeleted.emit({ year, url });
   }
 
-  addGallery(): void {
+  addSession(): void {
     const year = this.newYear();
-    if (!year || year < 1900 || year > 3000) {
+    const title = this.newSessionTitle.trim();
+    if (!year || year < 1900 || year > 3000 || !title) {
       return;
     }
     if (this.items().some(item => item.logo.year === year)) {
       return;
     }
-    this.galleryAdded.emit(year);
+    this.sessionAdded.emit({ year, title });
     this.newYear.set(null);
+    this.newSessionTitle = '';
   }
 }

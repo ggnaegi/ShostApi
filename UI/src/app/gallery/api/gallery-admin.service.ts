@@ -38,6 +38,11 @@ export interface GalleryMediaTexts {
   mediaPageDescription: string;
 }
 
+export interface GallerySessionInput {
+  year: number;
+  title: string;
+}
+
 @Injectable({ providedIn: 'root' })
 export class GalleryAdminService {
   private readonly http = inject(HttpClient);
@@ -49,6 +54,14 @@ export class GalleryAdminService {
       texts,
       { withCredentials: true }
     );
+  }
+
+  createSession(input: GallerySessionInput): Observable<Logo> {
+    return this.http
+      .post<LogoResponse>(`${environment.galleryEndpointUrl}/session`, input, {
+        withCredentials: true,
+      })
+      .pipe(map(response => this.toLogo(response)));
   }
 
   /** Inserts or updates the metadata of a gallery year and returns the updated logo. */

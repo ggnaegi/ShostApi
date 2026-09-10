@@ -63,15 +63,13 @@ import {
 })
 export class SessionAdminComponent implements OnInit, OnChanges {
   readonly sessionData = input<Session | null>(null);
+  readonly years = input<readonly number[]>([]);
 
   readonly yearChanged = output<number>();
 
   readonly sessionSubmitted = output<Session>();
 
   sessionForm!: FormGroup;
-  years: number[] = [];
-  selectedYear?: number;
-
   conductorPortraitBusy = false;
   private readonly soloistPortraitBusy = new Set<number>();
 
@@ -79,11 +77,6 @@ export class SessionAdminComponent implements OnInit, OnChanges {
   private readonly portraitService = inject(PortraitAdminService);
 
   ngOnInit(): void {
-    const currentYear = new Date().getFullYear();
-    for (let year = 1999; year <= currentYear + 1; year++) {
-      this.years.push(year);
-    }
-
     this.sessionForm = this.fb.group({
       Year: ['', Validators.required],
       Title: ['', [Validators.required, Validators.maxLength(100)]],
@@ -112,17 +105,12 @@ export class SessionAdminComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['sessionData']?.currentValue) {
       const currentValue = changes['sessionData'].currentValue;
-      this.populateForm(
-        currentValue === 'Session not found.'
-          ? ({ Year: this.selectedYear } as Session)
-          : (currentValue as Session)
-      );
+      this.populateForm(currentValue as Session);
     }
   }
 
   updateYear(event: MatSelectChange): void {
-    this.selectedYear = event.value;
-    this.yearChanged.emit(this.selectedYear!);
+    this.yearChanged.emit(event.value);
   }
 
   public get Soloists() {
@@ -244,7 +232,7 @@ export class SessionAdminComponent implements OnInit, OnChanges {
   }
 
   private currentYear(): number | null {
-    return this.sessionForm.get('Year')?.value ?? this.selectedYear ?? null;
+    return this.sessionForm.get('Year')?.value ?? null;
   }
 
   private populateForm(sessionData: Session): void {

@@ -5,6 +5,7 @@ using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Shosta.Functions.Auth;
+using Shosta.Functions.Domain.Dtos.Session;
 using Shosta.Functions.Domain.Interfaces;
 using Shosta.Functions.Infrastructure.Extensions;
 
@@ -13,7 +14,8 @@ namespace Shosta.Functions.API;
 public class Gallery(
     IConfiguration configuration,
     ILoggerFactory loggerFactory,
-    IGalleryService galleryService)
+    IGalleryService galleryService,
+    ISessionService sessionService)
 {
     private readonly ILogger _logger = loggerFactory.CreateLogger<Gallery>();
 
@@ -21,6 +23,61 @@ public class Gallery(
     {
         PropertyNameCaseInsensitive = true
     };
+
+    [Function(nameof(CreateGallerySession))]
+    public async Task<HttpResponseData> CreateGallerySession(
+        [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "gallery/session")]
+        HttpRequestData req,
+        FunctionContext executionContext)
+    {
+        var authError = CheckAdmin(req);
+        if (authError is not null)
+        {
+            return await Error(req, authError.Value.Status, authError.Value.Message);
+        }
+
+        Domain.Dtos.Media.GallerySessionDto? request;
+        try
+        {
+            var requestBody = await new StreamReader(req.Body).ReadToEndAsync(executionContext.CancellationToken);
+            request = JsonSerializer.Deserialize<Domain.Dtos.Media.GallerySessionDto>(requestBody, JsonOptions);
+        }
+        catch (JsonException ex)
+        {
+            _logger.LogError(ex, "Invalid gallery session request body.");
+            return await Error(req, HttpStatusCode.BadRequest, "Invalid request body.");
+        }
+
+        if (request is null || request.Year <= 0 || string.IsNullOrWhiteSpace(request.Title))
+        {
+            return await Error(req, HttpStatusCode.BadRequest, "A valid year and title are required.");
+        }
+
+        try
+        {
+            await sessionService.UpdateOrCreateSessionAsync(
+                new SessionDto { Year = request.Year, Title = request.Title },
+                overwrite: false);
+            var logo = await galleryService.UpsertLogoAsync(
+                new Domain.Dtos.Media.GalleryLogoDto
+                {
+                    Year = request.Year,
+                    Alt = $"logo-{request.Year}",
+                },
+                executionContext.CancellationToken);
+            return await WriteLogo(req, logo);
+        }
+        catch (InvalidOperationException ex)
+        {
+            _logger.LogWarning(ex, "Gallery session already exists for year {Year}.", request.Year);
+            return await Error(req, HttpStatusCode.Conflict, "A session already exists for this year.");
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Failed to create gallery session for year {Year}.", request.Year);
+            return await Error(req, HttpStatusCode.InternalServerError, "Failed to create the session.");
+        }
+    }
 
     [Function(nameof(UpdateGalleryMediaTexts))]
     public async Task<HttpResponseData> UpdateGalleryMediaTexts(

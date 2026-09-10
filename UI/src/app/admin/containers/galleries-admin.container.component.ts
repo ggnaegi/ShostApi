@@ -12,6 +12,7 @@ import { AppDataStore } from '../../store/app-data/app-data.store';
 import {
   GalleryAdminService,
   GalleryLogoInput,
+  GallerySessionInput,
 } from '../../gallery/api/gallery-admin.service';
 import { GalleryAdminItem } from '../../gallery/api/gallery';
 
@@ -29,7 +30,7 @@ import { GalleryAdminItem } from '../../gallery/api/gallery';
       (flyerSelected)="uploadFlyer($event)"
       (imagesSelected)="uploadImages($event)"
       (imageDeleted)="deleteImage($event)"
-      (galleryAdded)="addGallery($event)" />
+      (sessionAdded)="addSession($event)" />
   `,
 })
 export class GalleriesAdminContainerComponent implements OnInit {
@@ -100,19 +101,11 @@ export class GalleriesAdminContainerComponent implements OnInit {
       .subscribe(album => this.appDataStore.setGalleryAlbum(album));
   }
 
-  public addGallery(year: number): void {
-    this.setBusy(year, true);
+  public addSession(input: GallerySessionInput): void {
+    this.setBusy(input.year, true);
     this.galleryAdminService
-      .saveLogo({
-        year,
-        alt: `logo-${year}`,
-        teaser: '',
-        showPage: false,
-        showGallery: false,
-        showOnWelcomePage: false,
-        videoUrl: '',
-      })
-      .pipe(finalize(() => this.setBusy(year, false)))
+      .createSession(input)
+      .pipe(finalize(() => this.setBusy(input.year, false)))
       .subscribe(updated => this.appDataStore.setGalleryLogo(updated));
   }
 

@@ -1,25 +1,7 @@
 <div class="galleries-admin-container">
-  <form class="media-texts-form" (ngSubmit)="saveMediaTexts()">
-    <mat-form-field appearance="outline">
-      <mat-label>Titre de la page Médias</mat-label>
-      <input matInput name="mediaPageTitle" [(ngModel)]="mediaPageTitle" />
-    </mat-form-field>
-    <mat-form-field appearance="outline">
-      <mat-label>Description de la page Médias (HTML autorisé)</mat-label>
-      <textarea
-        matInput
-        name="mediaPageDescription"
-        [(ngModel)]="mediaPageDescription"
-        rows="4"></textarea>
-    </mat-form-field>
-    <button mat-raised-button color="primary" type="submit">
-      Enregistrer les textes
-    </button>
-  </form>
-
   <div class="add-gallery">
     <mat-form-field appearance="outline">
-      <mat-label>Nouvelle année</mat-label>
+      <mat-label>Année</mat-label>
       <input
         matInput
         type="number"
@@ -27,10 +9,34 @@
         (ngModelChange)="newYear.set($event)"
         placeholder="ex. 2027" />
     </mat-form-field>
-    <button mat-raised-button color="primary" type="button" (click)="addGallery()">
-      Ajouter une galerie
+    <mat-form-field appearance="outline">
+      <mat-label>Titre de la session</mat-label>
+      <input matInput name="newSessionTitle" [(ngModel)]="newSessionTitle" />
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="button" (click)="addSession()">
+      Créer une session
     </button>
   </div>
+
+  <form class="media-texts-form" (ngSubmit)="saveMediaTexts()">
+    <div class="media-text-fields">
+      <mat-form-field appearance="outline">
+        <mat-label>Titre de la page Médias</mat-label>
+        <input matInput name="mediaPageTitle" [(ngModel)]="mediaPageTitle" />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Description de la page Médias (HTML autorisé)</mat-label>
+        <textarea
+          matInput
+          name="mediaPageDescription"
+          [(ngModel)]="mediaPageDescription"
+          rows="4"></textarea>
+      </mat-form-field>
+    </div>
+    <button mat-raised-button color="primary" type="submit">
+      Enregistrer les textes
+    </button>
+  </form>
 
   <mat-accordion class="galleries-accordion">
     @for (item of items(); track item.logo.year) {

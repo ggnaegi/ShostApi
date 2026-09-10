@@ -9,7 +9,7 @@
             formControlName="Year"
             required
             (selectionChange)="updateYear($event)">
-            @for (year of years; track year) {
+            @for (year of years(); track year) {
               <mat-option [value]="year">{{ year }}</mat-option>
             }
           </mat-select>

@@ -59,6 +59,7 @@
                 @if (logo.showGallery) {
                   <button
                     mat-icon-button
+                    class="session-gallery-link"
                     aria-label="Voir la galerie"
                     (click)="$event.stopPropagation(); openGalleryDialog(logo.year)">
                     <mat-icon svgIcon="photo-library"></mat-icon>
