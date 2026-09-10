@@ -5,6 +5,13 @@ namespace Shosta.Functions.Domain.Interfaces;
 public interface IGalleryService
 {
     /// <summary>
+    /// Updates the editable media page texts in <c>gallery-config.json</c>.
+    /// </summary>
+    Task<GalleryConfig> UpdateMediaTextsAsync(
+        GalleryMediaTextsDto texts,
+        CancellationToken cancellationToken = default);
+
+    /// <summary>
     /// Inserts or updates the metadata (<c>logos</c> entry) for a gallery year in <c>gallery-config.json</c>
     /// and returns the resulting logo. A matching album is created when one does not yet exist.
     /// </summary>

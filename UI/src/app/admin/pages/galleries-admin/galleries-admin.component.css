@@ -3,6 +3,14 @@
   font-family: 'Montserrat', sans-serif;
 }
 
+.media-texts-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 24px;
+  max-width: 600px;
+}
+
 .add-gallery {
   display: flex;
   align-items: center;

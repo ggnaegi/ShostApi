@@ -14,6 +14,18 @@ public sealed class GalleryService(IStorageService storageService, ILoggerFactor
     private const string GalleryConfigPath = "assets/galleries/gallery-config.json";
     private const string FlyersDirectory = "assets/flyers";
 
+    public async Task<GalleryConfig> UpdateMediaTextsAsync(
+        GalleryMediaTextsDto texts,
+        CancellationToken cancellationToken = default)
+    {
+        var config = await LoadConfigAsync(cancellationToken);
+        config.MediaPageTitle = texts.MediaPageTitle;
+        config.MediaPageDescription = texts.MediaPageDescription;
+
+        await SaveConfigAsync(config, cancellationToken);
+        return config;
+    }
+
     public async Task<GalleryLogo> UpsertLogoAsync(
         GalleryLogoDto dto,
         CancellationToken cancellationToken = default)

@@ -19,6 +19,8 @@ export interface Logo {
 }
 
 export interface GalleriesDefinition {
+  mediaPageTitle: string;
+  mediaPageDescription: string;
   logos: Logo[];
   galleries: Album[];
 }

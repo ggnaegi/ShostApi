@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
-import { Album, Logo } from './gallery';
+import { Album, GalleriesDefinition, Logo } from './gallery';
 import { environment } from '../../../environments/environment';
 
 /** PascalCase shape returned by the Azure Function (matches the C# GalleryAlbum DTO). */
@@ -31,9 +31,23 @@ export interface GalleryLogoInput {
   teaser: string;
 }
 
+export interface GalleryMediaTexts {
+  mediaPageTitle: string;
+  mediaPageDescription: string;
+}
+
 @Injectable({ providedIn: 'root' })
 export class GalleryAdminService {
   private readonly http = inject(HttpClient);
+
+  /** Inserts or updates the metadata of a gallery year and returns the updated logo. */
+  saveMediaTexts(texts: GalleryMediaTexts): Observable<GalleriesDefinition> {
+    return this.http.post<GalleriesDefinition>(
+      environment.galleryEndpointUrl,
+      texts,
+      { withCredentials: true }
+    );
+  }
 
   /** Inserts or updates the metadata of a gallery year and returns the updated logo. */
   saveLogo(logo: GalleryLogoInput): Observable<Logo> {

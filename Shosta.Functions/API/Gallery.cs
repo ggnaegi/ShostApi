@@ -22,6 +22,49 @@ public class Gallery(
         PropertyNameCaseInsensitive = true
     };
 
+    [Function(nameof(UpdateGalleryMediaTexts))]
+    public async Task<HttpResponseData> UpdateGalleryMediaTexts(
+        [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "gallery")]
+        HttpRequestData req,
+        FunctionContext executionContext)
+    {
+        var authError = CheckAdmin(req);
+        if (authError is not null)
+        {
+            return await Error(req, authError.Value.Status, authError.Value.Message);
+        }
+
+        Domain.Dtos.Media.GalleryMediaTextsDto? texts;
+        try
+        {
+            var requestBody = await new StreamReader(req.Body).ReadToEndAsync(executionContext.CancellationToken);
+            texts = JsonSerializer.Deserialize<Domain.Dtos.Media.GalleryMediaTextsDto>(requestBody, JsonOptions);
+        }
+        catch (JsonException ex)
+        {
+            _logger.LogError(ex, "Invalid gallery media texts request body.");
+            return await Error(req, HttpStatusCode.BadRequest, "Invalid request body.");
+        }
+
+        if (texts is null)
+        {
+            return await Error(req, HttpStatusCode.BadRequest, "Invalid gallery media texts.");
+        }
+
+        try
+        {
+            var config = await galleryService.UpdateMediaTextsAsync(texts, executionContext.CancellationToken);
+            var response = req.CreateResponse(HttpStatusCode.OK);
+            await response.WriteAsJsonAsync(config);
+            return response;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Failed to update gallery media texts.");
+            return await Error(req, HttpStatusCode.InternalServerError, "Failed to update the gallery media texts.");
+        }
+    }
+
     [Function(nameof(UpsertGalleryLogo))]
     public async Task<HttpResponseData> UpsertGalleryLogo(
         [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "gallery/logo")]

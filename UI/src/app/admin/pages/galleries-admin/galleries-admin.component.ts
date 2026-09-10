@@ -2,6 +2,7 @@ import {
   Component,
   ChangeDetectionStrategy,
   input,
+  OnChanges,
   output,
   signal,
 } from '@angular/core';
@@ -17,7 +18,7 @@ import {
   MatExpansionPanelContent,
 } from '@angular/material/expansion';
 
-import { GalleryAdminItem } from '../../../gallery/api/gallery';
+import { GalleriesDefinition, GalleryAdminItem } from '../../../gallery/api/gallery';
 import { GalleryLogoInput } from '../../../gallery/api/gallery-admin.service';
 import { GalleryItemAdminComponent } from './gallery-item-admin.component';
 
@@ -40,8 +41,9 @@ import { GalleryItemAdminComponent } from './gallery-item-admin.component';
   styleUrl: './galleries-admin.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class GalleriesAdminComponent {
+export class GalleriesAdminComponent implements OnChanges {
   readonly items = input<GalleryAdminItem[]>([]);
+  readonly galleryDefinition = input<GalleriesDefinition | null>(null);
 
   readonly busyYears = input<number[]>([]);
 
@@ -54,8 +56,29 @@ export class GalleriesAdminComponent {
   readonly imageDeleted = output<{ year: number; url: string }>();
 
   readonly galleryAdded = output<number>();
+  readonly mediaTextsSaved = output<{
+    mediaPageTitle: string;
+    mediaPageDescription: string;
+  }>();
 
   protected readonly newYear = signal<number | null>(null);
+  protected mediaPageTitle = '';
+  protected mediaPageDescription = '';
+
+  ngOnChanges(): void {
+    const definition = this.galleryDefinition();
+    if (definition) {
+      this.mediaPageTitle = definition.mediaPageTitle ?? '';
+      this.mediaPageDescription = definition.mediaPageDescription ?? '';
+    }
+  }
+
+  saveMediaTexts(): void {
+    this.mediaTextsSaved.emit({
+      mediaPageTitle: this.mediaPageTitle,
+      mediaPageDescription: this.mediaPageDescription,
+    });
+  }
 
   isBusy(year: number): boolean {
     return this.busyYears().includes(year);

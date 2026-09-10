@@ -22,7 +22,9 @@ import { GalleryAdminItem } from '../../gallery/api/gallery';
   template: `
     <app-galleries-admin
       [items]="items()"
+      [galleryDefinition]="definition()"
       [busyYears]="busyYears()"
+      (mediaTextsSaved)="saveMediaTexts($event)"
       (logoSaved)="saveLogo($event)"
       (flyerSelected)="uploadFlyer($event)"
       (imagesSelected)="uploadImages($event)"
@@ -36,7 +38,7 @@ export class GalleriesAdminContainerComponent implements OnInit {
   private readonly appDataStore = inject(AppDataStore);
   private readonly galleryAdminService = inject(GalleryAdminService);
 
-  private readonly definition = this.appDataStore.galleryDefinition;
+  protected readonly definition = this.appDataStore.galleryDefinition;
 
   protected readonly items = computed<GalleryAdminItem[]>(() => {
     const definition = this.definition();
@@ -63,6 +65,15 @@ export class GalleriesAdminContainerComponent implements OnInit {
       .saveLogo(logo)
       .pipe(finalize(() => this.setBusy(logo.year, false)))
       .subscribe(updated => this.appDataStore.setGalleryLogo(updated));
+  }
+
+  public saveMediaTexts(texts: {
+    mediaPageTitle: string;
+    mediaPageDescription: string;
+  }): void {
+    this.galleryAdminService
+      .saveMediaTexts(texts)
+      .subscribe(config => this.appDataStore.setGalleryDefinition(config));
   }
 
   public uploadFlyer({ year, file }: { year: number; file: File }): void {

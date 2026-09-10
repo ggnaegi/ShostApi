@@ -1,9 +1,9 @@
 <div class="media-page">
   <header class="media-page-header">
-    <h1>Media</h1>
-    <p class="media-page-subtitle">
-      Galeries photos par année et dernières vidéos de l'Harmonie Shostakovich.
-    </p>
+    <h1>{{ galleryDefinition()?.mediaPageTitle ?? 'Media' }}</h1>
+    <div
+      class="media-page-subtitle"
+      [innerHTML]="galleryDefinition()?.mediaPageDescription ?? 'Galeries photos par année et dernières vidéos de l’harmonie Shostakovich'"></div>
   </header>
 
   <div class="media-page-layout">

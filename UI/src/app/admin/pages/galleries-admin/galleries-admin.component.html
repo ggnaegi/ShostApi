@@ -1,4 +1,22 @@
 <div class="galleries-admin-container">
+  <form class="media-texts-form" (ngSubmit)="saveMediaTexts()">
+    <mat-form-field appearance="outline">
+      <mat-label>Titre de la page Médias</mat-label>
+      <input matInput name="mediaPageTitle" [(ngModel)]="mediaPageTitle" />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Description de la page Médias (HTML autorisé)</mat-label>
+      <textarea
+        matInput
+        name="mediaPageDescription"
+        [(ngModel)]="mediaPageDescription"
+        rows="4"></textarea>
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit">
+      Enregistrer les textes
+    </button>
+  </form>
+
   <div class="add-gallery">
     <mat-form-field appearance="outline">
       <mat-label>Nouvelle année</mat-label>

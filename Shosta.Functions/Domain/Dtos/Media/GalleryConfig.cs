@@ -9,6 +9,9 @@ namespace Shosta.Functions.Domain.Dtos.Media;
 /// </summary>
 public sealed class GalleryConfig
 {
+    public string MediaPageTitle { get; set; } = "Media";
+    public string MediaPageDescription { get; set; } =
+        "Galeries photos par année et dernières vidéos de l'harmonie Shostakovich";
     public List<GalleryLogo> Logos { get; set; } = [];
     public List<GalleryAlbum> Galleries { get; set; } = [];
 
@@ -20,6 +23,15 @@ public sealed class GalleryConfig
         DefaultIgnoreCondition = JsonIgnoreCondition.Never,
         Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
     };
+}
+
+/// <summary>
+/// The editable media page texts stored at the root of <c>gallery-config.json</c>.
+/// </summary>
+public sealed class GalleryMediaTextsDto
+{
+    public string MediaPageTitle { get; set; } = string.Empty;
+    public string MediaPageDescription { get; set; } = string.Empty;
 }
 
 public sealed class GalleryLogo

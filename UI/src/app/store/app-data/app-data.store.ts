@@ -218,6 +218,10 @@ export const AppDataStore = signalStore(
       });
     },
 
+    setGalleryDefinition(galleryDefinition: GalleriesDefinition): void {
+      patchState(store, { galleryDefinition });
+    },
+
     /**
      * Replaces (or inserts) a logo entry in the in-memory gallery definition after an admin
      * metadata edit, flyer upload, or new-gallery creation.
