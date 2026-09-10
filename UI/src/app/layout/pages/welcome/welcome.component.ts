@@ -44,7 +44,6 @@ import { YoutubeVideosComponent } from '../../components/youtube-videos/youtube-
 export class WelcomeComponent {
   readonly data = input<WelcomePageDto | null>(null);
 
-  year = 2026;
   protected readonly faCalendarAlt = faCalendarAlt;
   protected readonly faMapMarkerAlt = faMapMarkerAlt;
   protected readonly faBuilding = faBuilding;

@@ -3,6 +3,7 @@ import { CommitteeMember } from '../../about/api/organisation';
 
 export interface WelcomePageDto {
   WelcomeText?: string;
+  Year: number;
   Title?: string;
   Teaser?: string;
   Picture?: string;

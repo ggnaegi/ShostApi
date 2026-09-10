@@ -9,7 +9,8 @@ namespace Shosta.Functions.API;
 
 public class Layout(ILoggerFactory loggerFactory,
     ISessionService sessionService,
-    IOrganisationService organisationService)
+    IOrganisationService organisationService,
+    IGalleryService galleryService)
 {
     private readonly ILogger _logger = loggerFactory.CreateLogger<Sessions>();
     
@@ -25,12 +26,21 @@ public class Layout(ILoggerFactory loggerFactory,
         HttpRequestData req,
         FunctionContext executionContext)
     {
-        var sessionDto = await sessionService.GetSessionAsync(null);
+        var welcomeLogo = await galleryService.GetWelcomePageLogoAsync(executionContext.CancellationToken);
+        var sessionDto = await sessionService.GetSessionAsync(welcomeLogo?.Year);
 
         if (sessionDto != null)
         {
             var res = req.CreateResponse(HttpStatusCode.OK);
-            await res.WriteAsJsonAsync(sessionDto.ToWelcomePageDto());
+            var welcomePage = sessionDto.ToWelcomePageDto();
+            if (welcomeLogo is not null)
+            {
+                welcomePage.Picture = welcomeLogo.Url.StartsWith("assets/", StringComparison.OrdinalIgnoreCase)
+                    ? welcomeLogo.Url["assets/".Length..]
+                    : welcomeLogo.Url;
+            }
+
+            await res.WriteAsJsonAsync(welcomePage);
             return res;
         }
 

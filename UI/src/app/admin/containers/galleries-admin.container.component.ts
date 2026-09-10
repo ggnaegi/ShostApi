@@ -98,6 +98,7 @@ export class GalleriesAdminContainerComponent implements OnInit {
         teaser: '',
         showPage: false,
         showGallery: false,
+        showOnWelcomePage: false,
       })
       .pipe(finalize(() => this.setBusy(year, false)))
       .subscribe(updated => this.appDataStore.setGalleryLogo(updated));

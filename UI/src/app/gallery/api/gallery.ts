@@ -14,6 +14,7 @@ export interface Logo {
   alt: string;
   showGallery: boolean;
   showPage: boolean;
+  showOnWelcomePage: boolean;
   teaser: string;
 }
 

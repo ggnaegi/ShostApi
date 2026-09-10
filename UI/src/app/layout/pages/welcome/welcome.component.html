@@ -9,7 +9,7 @@
           <div class="year-card-wrapper">
             <mat-card class="year-card" [routerLink]="['/session']">
               <mat-card-header>
-                <mat-card-title>{{ year }}</mat-card-title>
+                <mat-card-title>{{ data.Year }}{{ data.Title ? ' ' + data.Title : '' }}</mat-card-title>
               </mat-card-header>
               <app-image-with-loading
                 [src]="'assets/' + data.Picture"

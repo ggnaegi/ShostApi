@@ -24,6 +24,15 @@ public sealed class GalleryService(IStorageService storageService, ILoggerFactor
         logo.Alt = string.IsNullOrWhiteSpace(dto.Alt) ? $"logo-{dto.Year}" : dto.Alt;
         logo.ShowGallery = dto.ShowGallery;
         logo.ShowPage = dto.ShowPage;
+        if (dto.ShowOnWelcomePage)
+        {
+            foreach (var galleryLogo in config.Logos)
+            {
+                galleryLogo.ShowOnWelcomePage = false;
+            }
+        }
+
+        logo.ShowOnWelcomePage = dto.ShowOnWelcomePage;
         logo.Teaser = dto.Teaser;
 
         // Ensure a matching album exists so images can be added later.
@@ -31,6 +40,13 @@ public sealed class GalleryService(IStorageService storageService, ILoggerFactor
 
         await SaveConfigAsync(config, cancellationToken);
         return logo;
+    }
+
+    public async Task<GalleryLogo?> GetWelcomePageLogoAsync(
+        CancellationToken cancellationToken = default)
+    {
+        var config = await LoadConfigAsync(cancellationToken);
+        return config.Logos.FirstOrDefault(logo => logo.ShowOnWelcomePage);
     }
 
     public async Task<GalleryLogo> UploadFlyerAsync(

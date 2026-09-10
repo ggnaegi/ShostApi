@@ -13,6 +13,12 @@ public interface IGalleryService
         CancellationToken cancellationToken = default);
 
     /// <summary>
+    /// Gets the gallery configured for the welcome page, if one has been selected.
+    /// </summary>
+    Task<GalleryLogo?> GetWelcomePageLogoAsync(
+        CancellationToken cancellationToken = default);
+
+    /// <summary>
     /// Uploads (re-encoding to JPEG) a flyer image to <c>assets/flyers/{year}.jpg</c>, points the year's
     /// logo at it, and returns the updated logo.
     /// </summary>

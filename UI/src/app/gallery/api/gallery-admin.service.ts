@@ -17,6 +17,7 @@ interface LogoResponse {
   Alt: string;
   ShowGallery: boolean;
   ShowPage: boolean;
+  ShowOnWelcomePage: boolean;
   Teaser: string;
 }
 
@@ -26,6 +27,7 @@ export interface GalleryLogoInput {
   alt: string;
   showGallery: boolean;
   showPage: boolean;
+  showOnWelcomePage: boolean;
   teaser: string;
 }
 
@@ -98,6 +100,7 @@ export class GalleryAdminService {
       alt: response.Alt,
       showGallery: response.ShowGallery,
       showPage: response.ShowPage,
+      showOnWelcomePage: response.ShowOnWelcomePage,
       teaser: response.Teaser,
     };
   }

@@ -9,6 +9,7 @@ public class WelcomePageDto
     [MaxLength(255)]  public string? WelcomeText { get; set; }
     
     // current project data
+    public int Year { get; set; }
     [MaxLength(100)] public string? Title { get; set; }
     [MaxLength(3000)] public string? Teaser { get; set; }
     [MaxLength(255)] public string? Picture { get; set; }

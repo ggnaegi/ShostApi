@@ -315,6 +315,7 @@ public static class MappingExtensions
         return new WelcomePageDto
         {
             WelcomeText = dto.WelcomeText,
+            Year = dto.Year,
             Title = dto.Title,
             Teaser = dto.Teaser,
             Picture = dto.Picture,

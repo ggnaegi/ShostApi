@@ -55,6 +55,7 @@ export class GalleryItemAdminComponent {
     Teaser: [''],
     ShowPage: [false],
     ShowGallery: [false],
+    ShowOnWelcomePage: [false],
   });
 
   private readonly itemEffect = effect(() => {
@@ -67,6 +68,7 @@ export class GalleryItemAdminComponent {
       Teaser: item.logo.teaser ?? '',
       ShowPage: item.logo.showPage ?? false,
       ShowGallery: item.logo.showGallery ?? false,
+      ShowOnWelcomePage: item.logo.showOnWelcomePage ?? false,
     });
   });
 
@@ -105,6 +107,7 @@ export class GalleryItemAdminComponent {
       teaser: value.Teaser,
       showPage: value.ShowPage,
       showGallery: value.ShowGallery,
+      showOnWelcomePage: value.ShowOnWelcomePage,
     });
   }
 
