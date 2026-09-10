@@ -45,6 +45,7 @@ public sealed class GalleryService(IStorageService storageService, ILoggerFactor
         }
 
         logo.ShowOnWelcomePage = dto.ShowOnWelcomePage;
+        logo.VideoUrl = dto.VideoUrl;
         logo.Teaser = dto.Teaser;
 
         // Ensure a matching album exists so images can be added later.

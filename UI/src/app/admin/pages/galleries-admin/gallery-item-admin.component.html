@@ -32,6 +32,10 @@
         <mat-label>Description / teaser (HTML autorisé)</mat-label>
         <textarea matInput formControlName="Teaser" rows="6"></textarea>
       </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Lien YouTube</mat-label>
+        <input matInput type="url" formControlName="VideoUrl" />
+      </mat-form-field>
       <div class="toggles">
         <mat-slide-toggle formControlName="ShowPage"
           >Afficher sur la page</mat-slide-toggle

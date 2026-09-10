@@ -15,6 +15,7 @@ export interface Logo {
   showGallery: boolean;
   showPage: boolean;
   showOnWelcomePage: boolean;
+  videoUrl: string;
   teaser: string;
 }
 

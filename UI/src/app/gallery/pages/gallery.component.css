@@ -147,7 +147,7 @@ mat-grid-tile {
 .gallery-list .gallery-row {
   display: flex;
   flex-direction: row;
-  align-items: flex-start;
+  align-items: stretch;
   gap: 20px;
   padding: 12px;
   border-radius: 0;
@@ -184,6 +184,8 @@ mat-grid-tile {
 
 .gallery-row-info {
   flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
 }
 
 .gallery-row-year {
@@ -197,6 +199,29 @@ mat-grid-tile {
   color: #333;
   font-family: 'Montserrat', sans-serif;
   line-height: 1.5;
+}
+
+.gallery-row-video-link {
+  align-self: flex-end;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: auto;
+  padding-top: 16px;
+  color: #f00;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.gallery-row-video-link:hover {
+  color: #c00;
+  text-decoration: underline;
+}
+
+.youtube-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  fill: currentColor;
 }
 
 @media (max-width: 768px) {

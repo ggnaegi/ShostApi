@@ -110,6 +110,7 @@ export class GalleriesAdminContainerComponent implements OnInit {
         showPage: false,
         showGallery: false,
         showOnWelcomePage: false,
+        videoUrl: '',
       })
       .pipe(finalize(() => this.setBusy(year, false)))
       .subscribe(updated => this.appDataStore.setGalleryLogo(updated));

@@ -53,6 +53,7 @@ export class GalleryItemAdminComponent {
   readonly metaForm = this.fb.nonNullable.group({
     Alt: ['', [Validators.maxLength(255)]],
     Teaser: [''],
+    VideoUrl: ['', [Validators.maxLength(2048), Validators.pattern(/^https?:\/\/.+/)]],
     ShowPage: [false],
     ShowGallery: [false],
     ShowOnWelcomePage: [false],
@@ -66,6 +67,7 @@ export class GalleryItemAdminComponent {
     this.metaForm.patchValue({
       Alt: item.logo.alt ?? '',
       Teaser: item.logo.teaser ?? '',
+      VideoUrl: item.logo.videoUrl ?? '',
       ShowPage: item.logo.showPage ?? false,
       ShowGallery: item.logo.showGallery ?? false,
       ShowOnWelcomePage: item.logo.showOnWelcomePage ?? false,
@@ -105,6 +107,7 @@ export class GalleryItemAdminComponent {
       year: this.year,
       alt: value.Alt,
       teaser: value.Teaser,
+      videoUrl: value.VideoUrl,
       showPage: value.ShowPage,
       showGallery: value.ShowGallery,
       showOnWelcomePage: value.ShowOnWelcomePage,
