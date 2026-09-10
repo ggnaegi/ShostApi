@@ -34,7 +34,7 @@ export class GalleryContainerComponent implements OnInit {
 
   private readonly knownYearsEffect = effect(() => {
     const years = (this.galleryDefinition()?.logos ?? [])
-      .filter(logo => logo.showGallery)
+      .filter(logo => (this.mediaMode() ? logo.showGallery : logo.showPage))
       .map(logo => logo.year)
       .sort((a, b) => b - a);
 

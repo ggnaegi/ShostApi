@@ -62,6 +62,7 @@ import { Organisation } from '../../about/api/organisation';
 export class SessionComponent implements OnDestroy {
   sessionData = input<Session | null>(null);
   organisationData = input<Organisation | null>(null);
+  availableYears = input<readonly number[]>([]);
 
   readonly yearChanged = output<number>();
 
@@ -74,17 +75,17 @@ export class SessionComponent implements OnDestroy {
   isFloatingMenuVisible = false; // Controls the visibility of the menu
   private scrollTimeout: any;
 
-  mobileSelectedYear = 2026;
-
   private readonly cdr = inject(ChangeDetectorRef);
 
   public onYearChanged(year: number) {
     this.yearChanged.emit(year);
   }
 
-  public onMobileSelectedYear(year: number) {
-    this.mobileSelectedYear = year;
-    this.yearChanged.emit(year);
+  public onSelectedYearChanged(event: Event): void {
+    const year = Number((event.target as HTMLSelectElement).value);
+    if (Number.isInteger(year) && year > 0) {
+      this.yearChanged.emit(year);
+    }
   }
 
   /**

@@ -1,14 +1,14 @@
-@if (isMobile && organisationData()) {
-  <div class="session-floating-menu">
-    @for (year of [2026, 2025, 2024]; track year) {
-      <a
-        routerLink="."
-        class="session-menu-item"
-        [class.active]="mobileSelectedYear === year"
-        (click)="onMobileSelectedYear(year)">
-        <span>{{ year }}</span>
-      </a>
-    }
+@if (isMobile && availableYears().length > 0) {
+  <div class="session-year-selector">
+    <label for="session-year-select">Année</label>
+    <select
+      id="session-year-select"
+      [value]="sessionData()?.Year"
+      (change)="onSelectedYearChanged($event)">
+      @for (year of availableYears(); track year) {
+        <option [value]="year">{{ year }}</option>
+      }
+    </select>
   </div>
 }
 

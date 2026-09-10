@@ -45,6 +45,36 @@
   transform: scale(1.05);
 }
 
+.year-card mat-card-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.session-video-link {
+  display: inline-flex;
+  align-items: center;
+  color: inherit;
+  text-decoration: none;
+}
+
+.session-video-link:hover {
+  text-decoration: underline;
+}
+
+.session-video-link mat-icon {
+  width: 24px;
+  height: 24px;
+  color: #e62117;
+  font-size: 24px;
+  transition: transform 160ms ease;
+}
+
+.session-video-link:active mat-icon {
+  transform: scale(0.8);
+}
+
 /* Media query for screens smaller than 768px */
 @media (max-width: 768px) {
   .card-container {

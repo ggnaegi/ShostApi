@@ -15,7 +15,8 @@ export const routes: Routes = [
   { path: '', redirectTo: '/welcome', pathMatch: 'full' },
   { path: 'welcome', component: WelcomeContainerComponent }, // Main route for the AboutComponent
   { path: 'about', component: AboutContainerComponent },
-  { path: 'session', component: SessionContainerComponent },
+  { path: 'session', component: SessionContainerComponent, pathMatch: 'full' },
+  { path: 'session/:year', component: SessionContainerComponent },
   { path: 'contact', component: ContactContainerComponent },
   { path: 'sponsors', component: SponsorsContainerComponent },
   { path: 'archives', component: MediaPageComponent },

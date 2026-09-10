@@ -54,14 +54,27 @@
               [src]="logo.url"
               [alt]="logo.alt"
               class="card-logo" />
-            @if (logo.showGallery) {
+            @if (logo.showGallery || logo.videoUrl) {
               <mat-card-actions>
-                <button
-                  mat-icon-button
-                  aria-label="Voir la galerie"
-                  (click)="$event.stopPropagation(); openGalleryDialog(logo.year)">
-                  <mat-icon svgIcon="photo-library"></mat-icon>
-                </button>
+                @if (logo.showGallery) {
+                  <button
+                    mat-icon-button
+                    aria-label="Voir la galerie"
+                    (click)="$event.stopPropagation(); openGalleryDialog(logo.year)">
+                    <mat-icon svgIcon="photo-library"></mat-icon>
+                  </button>
+                }
+                @if (logo.videoUrl) {
+                  <a
+                    class="session-video-link"
+                    [href]="logo.videoUrl"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Voir les vidéos"
+                    (click)="$event.stopPropagation()">
+                    <mat-icon aria-hidden="true">smart_display</mat-icon>
+                  </a>
+                }
               </mat-card-actions>
             }
           </mat-card>
