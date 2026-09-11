@@ -38,11 +38,13 @@
     </button>
   </form>
 
-  <mat-accordion class="galleries-accordion">
+  <section class="session-configurations">
+    <h2>Configuration et galeries par session</h2>
+    <mat-accordion class="galleries-accordion">
     @for (item of items(); track item.logo.year) {
       <mat-expansion-panel class="form-expansion-panel">
         <mat-expansion-panel-header>
-          <mat-panel-title>{{ item.logo.year }}</mat-panel-title>
+          <mat-panel-title>Session {{ item.logo.year }}</mat-panel-title>
         </mat-expansion-panel-header>
         <ng-template matExpansionPanelContent>
           <app-gallery-item-admin
@@ -57,5 +59,6 @@
     } @empty {
       <p class="galleries-empty">Aucune galerie pour le moment.</p>
     }
-  </mat-accordion>
+    </mat-accordion>
+  </section>
 </div>

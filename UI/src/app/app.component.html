@@ -82,6 +82,15 @@
 
       <a
         mat-button
+        routerLink="/admin/sessions"
+        routerLinkActive="active-link"
+        [routerLinkActiveOptions]="linkActiveOptions"
+        class="menu-link">
+        Sessions
+      </a>
+
+      <a
+        mat-button
         routerLink="/admin/organisation"
         routerLinkActive="active-link"
         [routerLinkActiveOptions]="linkActiveOptions"
@@ -96,15 +105,6 @@
         [routerLinkActiveOptions]="linkActiveOptions"
         class="menu-link">
         Sponsors
-      </a>
-
-      <a
-        mat-button
-        routerLink="/admin/sessions"
-        routerLinkActive="active-link"
-        [routerLinkActiveOptions]="linkActiveOptions"
-        class="menu-link">
-        Sessions
       </a>
     } @else {
       <a
@@ -208,6 +208,16 @@
 
         <a
           mat-list-item
+          routerLink="/admin/sessions"
+          routerLinkActive="active-link"
+          [routerLinkActiveOptions]="linkActiveOptions"
+          class="menu-link"
+          (click)="sidenav.close()">
+          Sessions
+        </a>
+
+        <a
+          mat-list-item
           routerLink="/admin/organisation"
           routerLinkActive="active-link"
           [routerLinkActiveOptions]="linkActiveOptions"
@@ -224,16 +234,6 @@
           class="menu-link"
           (click)="sidenav.close()">
           Sponsors
-        </a>
-
-        <a
-          mat-list-item
-          routerLink="/admin/sessions"
-          routerLinkActive="active-link"
-          [routerLinkActiveOptions]="linkActiveOptions"
-          class="menu-link"
-          (click)="sidenav.close()">
-          Sessions
         </a>
       </mat-nav-list>
     } @else {

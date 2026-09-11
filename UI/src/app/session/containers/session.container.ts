@@ -22,6 +22,7 @@ import { environment } from '../../../environments/environment';
       [sessionData]="sessionData()"
       [organisationData]="organisation()"
       [availableYears]="availableYears()"
+      [flyerUrl]="flyerUrl()"
       (yearChanged)="onYearChanged($event)" />
   `,
 })
@@ -36,6 +37,12 @@ export class SessionContainerComponent implements OnInit {
 
   protected readonly organisation = this.appDataStore.organisation;
   protected readonly sessionData = this.appDataStore.sessionForYear(this.year);
+  protected readonly flyerUrl = computed(
+    () =>
+      this.appDataStore
+        .galleryDefinition()
+        ?.logos.find(logo => logo.year === this.year())?.url ?? ''
+  );
   protected readonly availableYears = computed(() =>
     (this.appDataStore.galleryDefinition()?.logos ?? [])
       .filter(logo => logo.showPage)
