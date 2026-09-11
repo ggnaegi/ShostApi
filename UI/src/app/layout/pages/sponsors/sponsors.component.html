@@ -16,7 +16,7 @@
       <div class="sponsors-body" [innerHTML]="config.sponsorsBody"></div>
     }
 
-    <div fxLayout="row wrap" fxLayoutGap="10px" fxLayoutAlign="start center">
+    <div fxLayout="row wrap" fxLayoutGap="10px" fxLayoutAlign="center center">
       @for (sponsor of config.sponsorsLogos; track sponsor.filename) {
         <mat-card
           class="sponsor-card"
@@ -38,7 +38,9 @@
     <!-- Skeleton: introduction block -->
     <div style="margin-bottom: 20px">
       <div class="skeleton-shimmer skeleton-title" style="width: 180px"></div>
-      <div class="skeleton-shimmer skeleton-line" style="width: 60%; margin-top: 12px"></div>
+      <div
+        class="skeleton-shimmer skeleton-line"
+        style="width: 60%; margin-top: 12px"></div>
     </div>
     <!-- Skeleton: sponsor grid block -->
     <div fxLayout="row wrap" fxLayoutGap="10px" fxLayoutAlign="start center">
