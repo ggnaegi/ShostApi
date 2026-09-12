@@ -188,6 +188,18 @@
 
   .year-card-wrapper {
     margin: 0 0 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding-top: 0;
+  }
+
+  .year-card-title {
+    position: static;
+    width: 100%;
+    margin-bottom: 8px;
+    text-align: center;
   }
 
   .concerts-card {

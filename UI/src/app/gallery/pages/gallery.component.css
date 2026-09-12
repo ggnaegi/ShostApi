@@ -281,14 +281,30 @@ mat-grid-tile {
 }
 
 .session-presentation-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 10px;
+  border: 1px solid #803357;
+  border-radius: 4px;
+  background: #fff;
   color: #803357;
   font-family: 'Montserrat', sans-serif;
+  font-size: 0.85rem;
   font-weight: 600;
   text-decoration: none;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 .session-presentation-link:hover {
-  text-decoration: underline;
+  background: #803357;
+  color: #fff;
+}
+
+.session-presentation-link mat-icon {
+  width: 18px;
+  height: 18px;
+  font-size: 18px;
 }
 
 .gallery-row-teaser {
