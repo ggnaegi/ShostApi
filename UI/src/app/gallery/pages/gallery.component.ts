@@ -5,11 +5,12 @@ import {
   inject,
   input,
   output,
+  signal,
 } from '@angular/core';
 import { GalleriesDefinition, Logo } from '../api/gallery';
 import { MatDialog } from '@angular/material/dialog';
 import { FlexModule } from '@angular/flex-layout';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import {
   MatCard,
   MatCardActions,
@@ -33,6 +34,7 @@ import { ImageWithLoadingComponent } from '../../common/image-with-loading.compo
     MatCardActions,
     MatIcon,
     MatIconButton,
+    RouterLink,
     ImageWithLoadingComponent,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -43,7 +45,10 @@ export class GalleryComponent {
   readonly welcomeMessage = input('');
   readonly galleriesDefinitions = input<GalleriesDefinition | null>(null);
   readonly mediaMode = input(false);
+  readonly carouselMode = input(false);
   readonly yearChanged = output<number>();
+  private readonly carouselPage = signal(0);
+  private readonly carouselPageSize = 6;
 
   constructor() {
     // The self-hosted "Material Icons Outlined" font is a subset that lacks the
@@ -72,12 +77,42 @@ export class GalleryComponent {
       return logos.filter(logo => logo.showGallery);
     }
 
-    // Session page: only surface the most recent years.
-    return logos.slice(0, 6);
+    if (this.carouselMode()) {
+      const start = this.activeCarouselPage() * this.carouselPageSize;
+      return logos.slice(start, start + this.carouselPageSize);
+    }
+
+    return logos.slice(0, this.carouselPageSize);
+  });
+
+  readonly hasPreviousCarouselPage = computed(() => this.carouselPage() > 0);
+  readonly hasNextCarouselPage = computed(() => {
+    const totalLogos = this.galleriesDefinitions()?.logos.length ?? 0;
+    return (
+      (this.activeCarouselPage() + 1) * this.carouselPageSize < totalLogos
+    );
   });
 
   readonly dialog = inject(MatDialog);
   private readonly router = inject(Router);
+
+  previousCarouselPage(): void {
+    this.carouselPage.update(page => Math.max(0, page - 1));
+  }
+
+  nextCarouselPage(): void {
+    if (this.hasNextCarouselPage()) {
+      this.carouselPage.update(page => page + 1);
+    }
+  }
+
+  private activeCarouselPage(): number {
+    const totalLogos = this.galleriesDefinitions()?.logos.length ?? 0;
+    return Math.min(
+      this.carouselPage(),
+      Math.max(0, Math.ceil(totalLogos / this.carouselPageSize) - 1)
+    );
+  }
 
   onCardClick(logo: Logo): void {
     if (this.mediaMode()) {

@@ -20,4 +20,35 @@ describe('GalleryComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('paginates gallery logos by six', () => {
+    fixture.componentRef.setInput('carouselMode', true);
+    fixture.componentRef.setInput('galleriesDefinitions', {
+      mediaPageTitle: '',
+      mediaPageDescription: '',
+      logos: Array.from({ length: 9 }, (_, index) => ({
+        year: 2026 - index,
+        url: '',
+        alt: '',
+        showGallery: false,
+        showPage: index % 2 === 0,
+        showOnWelcomePage: false,
+        videoUrl: '',
+        teaser: '',
+      })),
+      galleries: [],
+    });
+    fixture.detectChanges();
+
+    expect(component.displayedLogos()).toHaveLength(6);
+    expect(component.displayedLogos().map(logo => logo.year)).toEqual([
+      2026, 2025, 2024, 2023, 2022, 2021,
+    ]);
+
+    component.nextCarouselPage();
+
+    expect(component.displayedLogos().map(logo => logo.year)).toEqual([
+      2020, 2019, 2018,
+    ]);
+  });
 });

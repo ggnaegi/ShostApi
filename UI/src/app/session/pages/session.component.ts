@@ -64,6 +64,7 @@ export class SessionComponent implements OnDestroy {
   organisationData = input<Organisation | null>(null);
   availableYears = input<readonly number[]>([]);
   flyerUrl = input('');
+  hasPublishedGallery = input(false);
 
   readonly yearChanged = output<number>();
 

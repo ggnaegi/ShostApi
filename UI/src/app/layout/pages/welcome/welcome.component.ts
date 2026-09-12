@@ -21,7 +21,7 @@ import {
   faMapMarkerAlt,
   faTicket,
 } from '@fortawesome/free-solid-svg-icons';
-import { YoutubeVideosComponent } from '../../components/youtube-videos/youtube-videos.component';
+import { FacebookFeedComponent } from '../../components/facebook-feed/facebook-feed.component';
 
 @Component({
   selector: 'app-welcome',
@@ -35,7 +35,7 @@ import { YoutubeVideosComponent } from '../../components/youtube-videos/youtube-
     FaIconComponent,
     MatButton,
     MatCardContent,
-    YoutubeVideosComponent,
+    FacebookFeedComponent,
   ],
   templateUrl: './welcome.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,

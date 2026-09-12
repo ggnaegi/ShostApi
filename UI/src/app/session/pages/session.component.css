@@ -99,6 +99,17 @@
   border-radius: 0;
 }
 
+.archives-link {
+  margin: 0 0 16px;
+  font-family: 'Montserrat', sans-serif;
+  line-height: 1.6;
+}
+
+.archives-link a {
+  color: #803357;
+  font-weight: 600;
+}
+
 mat-card {
   border-radius: 0 !important;
 }

@@ -17,7 +17,18 @@
               class="card-logo" />
           </div>
           <div class="gallery-row-info">
-            <h3 class="gallery-row-year">{{ logo.year }}</h3>
+            <div class="gallery-row-header">
+              <h3 class="gallery-row-year">{{ logo.year }}</h3>
+              @if (logo.showPage) {
+                <a
+                  class="session-presentation-link"
+                  [routerLink]="['/session', logo.year]"
+                  (click)="$event.stopPropagation()"
+                  (keydown.enter)="$event.stopPropagation()">
+                  Présentation de la session
+                </a>
+              }
+            </div>
             @if (logo.teaser) {
               <p class="gallery-row-teaser" [innerHTML]="logo.teaser"></p>
             }
@@ -37,49 +48,72 @@
       }
     </div>
   } @else {
-    <!-- Session page: compact horizontal row of the most recent years -->
-    <div class="card-container" id="medias-section">
-      @for (logo of displayedLogos(); track logo) {
-        <div class="year-card-wrapper">
-          <mat-card
-            class="year-card"
-            [class.is-clickable]="logo.showPage"
-            (click)="onCardClick(logo)"
-            (keydown.enter)="onCardClick(logo)"
-            tabindex="0">
-            <mat-card-header>
-              <mat-card-title>{{ logo.year }}</mat-card-title>
-            </mat-card-header>
-            <app-image-with-loading
-              [src]="logo.url"
-              [alt]="logo.alt"
-              class="card-logo" />
-            @if (logo.showGallery || logo.videoUrl) {
-              <mat-card-actions>
-                @if (logo.showGallery) {
-                  <button
-                    mat-icon-button
-                    class="session-gallery-link"
-                    aria-label="Voir la galerie"
-                    (click)="$event.stopPropagation(); openGalleryDialog(logo.year)">
-                    <mat-icon svgIcon="photo-library"></mat-icon>
-                  </button>
-                }
-                @if (logo.videoUrl) {
-                  <a
-                    class="session-video-link"
-                    [href]="logo.videoUrl"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="Voir les vidéos"
-                    (click)="$event.stopPropagation()">
-                    <mat-icon aria-hidden="true">smart_display</mat-icon>
-                  </a>
-                }
-              </mat-card-actions>
-            }
-          </mat-card>
-        </div>
+    <div class="gallery-carousel" [class.is-carousel]="carouselMode()">
+      @if (carouselMode()) {
+        <button
+          mat-icon-button
+          type="button"
+          class="carousel-button"
+          aria-label="Voir les concerts précédents"
+          [disabled]="!hasPreviousCarouselPage()"
+          (click)="previousCarouselPage()">
+          <mat-icon>chevron_left</mat-icon>
+        </button>
+      }
+      <div class="card-container" id="medias-section">
+        @for (logo of displayedLogos(); track logo) {
+          <div class="year-card-wrapper">
+            <mat-card
+              class="year-card"
+              [class.is-clickable]="logo.showPage"
+              (click)="onCardClick(logo)"
+              (keydown.enter)="onCardClick(logo)"
+              tabindex="0">
+              <mat-card-header>
+                <mat-card-title>{{ logo.year }}</mat-card-title>
+              </mat-card-header>
+              <app-image-with-loading
+                [src]="logo.url"
+                [alt]="logo.alt"
+                class="card-logo" />
+              @if (logo.showGallery || logo.videoUrl) {
+                <mat-card-actions>
+                  @if (logo.showGallery) {
+                    <button
+                      mat-icon-button
+                      class="session-gallery-link"
+                      aria-label="Voir la galerie"
+                      (click)="$event.stopPropagation(); openGalleryDialog(logo.year)">
+                      <mat-icon svgIcon="photo-library"></mat-icon>
+                    </button>
+                  }
+                  @if (logo.videoUrl) {
+                    <a
+                      class="session-video-link"
+                      [href]="logo.videoUrl"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="Voir les vidéos"
+                      (click)="$event.stopPropagation()">
+                      <mat-icon aria-hidden="true">smart_display</mat-icon>
+                    </a>
+                  }
+                </mat-card-actions>
+              }
+            </mat-card>
+          </div>
+        }
+      </div>
+      @if (carouselMode()) {
+        <button
+          mat-icon-button
+          type="button"
+          class="carousel-button"
+          aria-label="Voir les concerts suivants"
+          [disabled]="!hasNextCarouselPage()"
+          (click)="nextCarouselPage()">
+          <mat-icon>chevron_right</mat-icon>
+        </button>
       }
     </div>
   }

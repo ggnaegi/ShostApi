@@ -1,0 +1,46 @@
+.facebook-feed {
+  width: 100%;
+  padding: 1rem;
+  border: 1px solid rgba(128, 51, 87, 0.12);
+  border-radius: 16px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.96),
+    rgba(243, 244, 246, 0.96)
+  );
+  box-shadow: 0 12px 30px rgba(10, 24, 48, 0.08);
+  box-sizing: border-box;
+}
+
+.facebook-feed-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.facebook-feed-header h2 {
+  margin: 0;
+  color: #333;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.1rem;
+}
+
+.facebook-feed-header a {
+  color: #803357;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.facebook-feed-header a:hover {
+  color: #be3d59;
+}
+
+.facebook-feed-frame {
+  display: block;
+  width: 100%;
+  height: 700px;
+  border: 0;
+}

@@ -10,6 +10,47 @@
   margin-top: -128px;
 }
 
+.gallery-carousel.is-carousel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.gallery-carousel.is-carousel .card-container {
+  flex: 0 0 auto;
+  width: max-content;
+  overflow: visible;
+  justify-content: flex-start;
+  padding-top: 0;
+  margin-top: 0;
+}
+
+.gallery-carousel.is-carousel .year-card-wrapper:last-child {
+  margin-right: 0;
+}
+
+.gallery-carousel.is-carousel .year-card {
+  width: 140px;
+}
+
+.carousel-button {
+  position: static;
+  flex: 0 0 48px;
+  width: 48px;
+  height: 48px;
+  z-index: 1;
+  transform: translateY(-28px);
+}
+
+.carousel-button mat-icon {
+  width: 36px;
+  height: 36px;
+  font-size: 36px;
+}
+
 .card-container::-webkit-scrollbar {
   height: 10px; /* Show a horizontal scrollbar */
 }
@@ -226,10 +267,28 @@ mat-grid-tile {
   flex-direction: column;
 }
 
+.gallery-row-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
 .gallery-row-year {
   margin: 0 0 8px;
   font-size: 1.4rem;
   color: #803357;
+}
+
+.session-presentation-link {
+  color: #803357;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.session-presentation-link:hover {
+  text-decoration: underline;
 }
 
 .gallery-row-teaser {
@@ -272,6 +331,11 @@ mat-grid-tile {
     flex-basis: auto;
     width: 140px;
     max-width: 140px;
+  }
+
+  .gallery-row-header {
+    flex-direction: column;
+    gap: 0;
   }
 }
 

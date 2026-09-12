@@ -19,12 +19,14 @@ import { AppDataStore } from '../../store/app-data/app-data.store';
       [galleriesDefinitions]="galleryDefinition()"
       [welcomeMessage]="welcomeMessage()"
       [mediaMode]="mediaMode()"
+      [carouselMode]="carouselMode()"
       (yearChanged)="onYearChanged($event)" />
   `,
 })
 export class GalleryContainerComponent implements OnInit {
   readonly welcomeMessage = input('');
   readonly mediaMode = input(false);
+  readonly carouselMode = input(false);
   readonly galleryDataLoaded = output<boolean>();
   readonly yearChanged = output<number>();
   readonly knownYears = output<number[]>();

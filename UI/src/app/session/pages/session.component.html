@@ -18,6 +18,7 @@
       @if (organisationData(); as organisationData) {
         <app-gallery-container
           [welcomeMessage]="organisationData.WelcomeText"
+          [carouselMode]="true"
           (yearChanged)="onYearChanged($event)">
         </app-gallery-container>
       }
@@ -80,6 +81,18 @@
           }
         </a>
       }
+      @if (hasPublishedGallery()) {
+        <a
+          routerLink="/archives"
+          [fragment]="'media-' + sessionData.Year"
+          class="menu-item"
+          [matTooltip]="isMobile ? 'Médias' : null">
+          <i class="fa-solid fa-photo-film menu-icon"></i>
+          @if (!isMobile) {
+            <span>Médias</span>
+          }
+        </a>
+      }
     </div>
   }
   <div
@@ -100,6 +113,14 @@
             [class]="'responsive-image'" />
         </mat-card-content>
       </mat-card>
+      @if (isMobile) {
+        <p class="archives-link">
+          <a routerLink="/archives"
+            >Retrouvez nos autres concerts dans la partie Médias &amp;
+            Archives.</a
+          >
+        </p>
+      }
       @if (sessionData.Concerts?.length) {
         <mat-card appearance="outlined" class="right-column-card">
           <mat-card-header>

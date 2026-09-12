@@ -23,6 +23,7 @@ import { environment } from '../../../environments/environment';
       [organisationData]="organisation()"
       [availableYears]="availableYears()"
       [flyerUrl]="flyerUrl()"
+      [hasPublishedGallery]="hasPublishedGallery()"
       (yearChanged)="onYearChanged($event)" />
   `,
 })
@@ -48,6 +49,14 @@ export class SessionContainerComponent implements OnInit {
       .filter(logo => logo.showPage)
       .map(logo => logo.year)
       .sort((a, b) => b - a)
+  );
+  protected readonly hasPublishedGallery = computed(
+    () =>
+      this.appDataStore
+        .galleryDefinition()
+        ?.logos.some(
+          logo => logo.year === this.year() && logo.showGallery
+        ) ?? false
   );
 
   ngOnInit(): void {

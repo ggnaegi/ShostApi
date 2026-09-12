@@ -67,7 +67,7 @@
       </mat-card>
     </div>
     <div class="right-section">
-      <app-youtube-videos [vertical]="true" />
+      <app-facebook-feed />
     </div>
   </div>
 } @else {
@@ -131,8 +131,10 @@
       </mat-card>
     </div>
     <div class="right-section">
-      <div class="skeleton-shimmer skeleton-line" style="width: 160px; height: 20px; margin-bottom: 8px"></div>
-      <div class="skeleton-shimmer skeleton-youtube-widget"></div>
+      <div
+        class="skeleton-shimmer skeleton-line"
+        style="width: 160px; height: 20px; margin-bottom: 8px"></div>
+      <div class="skeleton-shimmer skeleton-facebook-widget"></div>
     </div>
   </div>
 }
