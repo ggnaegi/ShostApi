@@ -1,6 +1,6 @@
 # Harmonie Shostakovich
 
-Website and content-management API for Harmonie Shostakovich, a non-profit association. The project aims to keep annual operating costs near USD 100 and is not intended for commercial use.
+Website and content-management API for Harmonie Shostakovich, a non-profit association. The project aims to keep annual operating costs low and is not intended for commercial use.
 
 The repository contains:
 
