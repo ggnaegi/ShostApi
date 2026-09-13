@@ -36,6 +36,7 @@ public sealed class GalleryService(IStorageService storageService, ILoggerFactor
         logo.Alt = string.IsNullOrWhiteSpace(dto.Alt) ? $"logo-{dto.Year}" : dto.Alt;
         logo.ShowGallery = dto.ShowGallery;
         logo.ShowPage = dto.ShowPage;
+        logo.ShowOnCarousel = dto.ShowOnCarousel;
         if (dto.ShowOnWelcomePage)
         {
             foreach (var galleryLogo in config.Logos)

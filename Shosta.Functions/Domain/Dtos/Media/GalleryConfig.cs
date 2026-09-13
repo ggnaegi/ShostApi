@@ -48,6 +48,7 @@ public sealed class GalleryLogo
     public bool ShowGallery { get; set; }
     public bool ShowPage { get; set; }
     public bool ShowOnWelcomePage { get; set; }
+    public bool ShowOnCarousel { get; set; } = true;
     public string VideoUrl { get; set; } = string.Empty;
     public string Teaser { get; set; } = string.Empty;
 }
@@ -74,6 +75,7 @@ public sealed class GalleryLogoDto
     public bool ShowGallery { get; set; }
     public bool ShowPage { get; set; }
     public bool ShowOnWelcomePage { get; set; }
+    public bool ShowOnCarousel { get; set; } = true;
     public string VideoUrl { get; set; } = string.Empty;
     public string Teaser { get; set; } = string.Empty;
 }

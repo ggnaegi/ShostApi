@@ -18,6 +18,7 @@ interface LogoResponse {
   ShowGallery: boolean;
   ShowPage: boolean;
   ShowOnWelcomePage: boolean;
+  ShowOnCarousel: boolean;
   VideoUrl: string;
   Teaser: string;
 }
@@ -29,6 +30,7 @@ export interface GalleryLogoInput {
   showGallery: boolean;
   showPage: boolean;
   showOnWelcomePage: boolean;
+  showOnCarousel: boolean;
   videoUrl: string;
   teaser: string;
 }
@@ -130,6 +132,7 @@ export class GalleryAdminService {
       showGallery: response.ShowGallery,
       showPage: response.ShowPage,
       showOnWelcomePage: response.ShowOnWelcomePage,
+      showOnCarousel: response.ShowOnCarousel,
       videoUrl: response.VideoUrl,
       teaser: response.Teaser,
     };

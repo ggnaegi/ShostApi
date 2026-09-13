@@ -71,7 +71,9 @@ export class GalleryComponent {
       return [];
     }
 
-    const logos = [...definitions.logos].sort((a, b) => b.year - a.year);
+    const logos = [...definitions.logos]
+      .filter(logo => !this.carouselMode() || logo.showOnCarousel)
+      .sort((a, b) => b.year - a.year);
 
     if (this.mediaMode()) {
       return logos.filter(logo => logo.showGallery);
@@ -87,7 +89,7 @@ export class GalleryComponent {
 
   readonly hasPreviousCarouselPage = computed(() => this.carouselPage() > 0);
   readonly hasNextCarouselPage = computed(() => {
-    const totalLogos = this.galleriesDefinitions()?.logos.length ?? 0;
+    const totalLogos = this.carouselLogos().length;
     return (
       (this.activeCarouselPage() + 1) * this.carouselPageSize < totalLogos
     );
@@ -107,10 +109,16 @@ export class GalleryComponent {
   }
 
   private activeCarouselPage(): number {
-    const totalLogos = this.galleriesDefinitions()?.logos.length ?? 0;
+    const totalLogos = this.carouselLogos().length;
     return Math.min(
       this.carouselPage(),
       Math.max(0, Math.ceil(totalLogos / this.carouselPageSize) - 1)
+    );
+  }
+
+  private carouselLogos(): Logo[] {
+    return (this.galleriesDefinitions()?.logos ?? []).filter(
+      logo => logo.showOnCarousel
     );
   }
 

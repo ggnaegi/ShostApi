@@ -49,6 +49,19 @@ const initialState: AppDataState = {
 const sponsorsUrl = 'assets/sponsors/sponsors-config.json';
 const galleryConfigUrl = 'assets/galleries/gallery-config.json';
 
+/** Defaults carousel visibility for gallery configs saved before this field existed. */
+function normalizeGalleryDefinition(
+  galleryDefinition: GalleriesDefinition
+): GalleriesDefinition {
+  return {
+    ...galleryDefinition,
+    logos: galleryDefinition.logos.map(logo => ({
+      ...logo,
+      showOnCarousel: logo.showOnCarousel ?? true,
+    })),
+  };
+}
+
 export const AppDataStore = signalStore(
   { providedIn: 'root' },
   withState(initialState),
@@ -190,7 +203,11 @@ export const AppDataStore = signalStore(
         filter(() => !store.galleryDefinition()),
         switchMap(() =>
           http.get<GalleriesDefinition>(galleryConfigUrl).pipe(
-            tap(galleryDefinition => patchState(store, { galleryDefinition })),
+            tap(galleryDefinition =>
+              patchState(store, {
+                galleryDefinition: normalizeGalleryDefinition(galleryDefinition),
+              })
+            ),
             catchError(() => EMPTY)
           )
         )
@@ -219,7 +236,9 @@ export const AppDataStore = signalStore(
     },
 
     setGalleryDefinition(galleryDefinition: GalleriesDefinition): void {
-      patchState(store, { galleryDefinition });
+      patchState(store, {
+        galleryDefinition: normalizeGalleryDefinition(galleryDefinition),
+      });
     },
 
     /**

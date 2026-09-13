@@ -57,6 +57,7 @@ export class GalleryItemAdminComponent {
     ShowPage: [false],
     ShowGallery: [false],
     ShowOnWelcomePage: [false],
+    ShowOnCarousel: [true],
   });
 
   private readonly itemEffect = effect(() => {
@@ -71,6 +72,7 @@ export class GalleryItemAdminComponent {
       ShowPage: item.logo.showPage ?? false,
       ShowGallery: item.logo.showGallery ?? false,
       ShowOnWelcomePage: item.logo.showOnWelcomePage ?? false,
+      ShowOnCarousel: item.logo.showOnCarousel ?? true,
     });
   });
 
@@ -111,6 +113,7 @@ export class GalleryItemAdminComponent {
       showPage: value.ShowPage,
       showGallery: value.ShowGallery,
       showOnWelcomePage: value.ShowOnWelcomePage,
+      showOnCarousel: value.ShowOnCarousel,
     });
   }
 

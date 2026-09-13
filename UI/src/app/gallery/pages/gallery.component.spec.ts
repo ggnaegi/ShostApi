@@ -33,6 +33,7 @@ describe('GalleryComponent', () => {
         showGallery: false,
         showPage: index % 2 === 0,
         showOnWelcomePage: false,
+        showOnCarousel: true,
         videoUrl: '',
         teaser: '',
       })),
@@ -50,5 +51,41 @@ describe('GalleryComponent', () => {
     expect(component.displayedLogos().map(logo => logo.year)).toEqual([
       2020, 2019, 2018,
     ]);
+  });
+
+  it('excludes logos hidden from the carousel', () => {
+    fixture.componentRef.setInput('carouselMode', true);
+    fixture.componentRef.setInput('galleriesDefinitions', {
+      mediaPageTitle: '',
+      mediaPageDescription: '',
+      logos: [
+        {
+          year: 2026,
+          url: '',
+          alt: '',
+          showGallery: true,
+          showPage: true,
+          showOnWelcomePage: false,
+          showOnCarousel: false,
+          videoUrl: 'https://example.com/video',
+          teaser: '',
+        },
+        {
+          year: 2025,
+          url: '',
+          alt: '',
+          showGallery: true,
+          showPage: true,
+          showOnWelcomePage: false,
+          showOnCarousel: true,
+          videoUrl: 'https://example.com/video',
+          teaser: '',
+        },
+      ],
+      galleries: [],
+    });
+    fixture.detectChanges();
+
+    expect(component.displayedLogos().map(logo => logo.year)).toEqual([2025]);
   });
 });
